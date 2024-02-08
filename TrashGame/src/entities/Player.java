@@ -6,12 +6,17 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import input.Controller;
-import simplePhysic.Area;
-import simplePhysic.RigidBody;
+import main.Game;
+import simplePhysics.Area;
+import simplePhysics.RigidBody;
 @SuppressWarnings("unused")
 public class Player extends RigidBody implements Controller{
 
+    protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
     private boolean Left, Right, Up, Down;
+    private float jumpForce = 2.5f*Game.SCALE;
+    private float maxSpeed = 0.75f*Game.SCALE;
+
     public Player(Area hitbox) {
         super(hitbox);
     }
@@ -33,12 +38,12 @@ public class Player extends RigidBody implements Controller{
         // g2d.fill(getBoundsY());
         
         
-        g2d.setColor(Color.white);
-        g2d.fill(this.hitbox);
+        g2d.setColor(Color.blue);
+        g2d.draw(this.hitbox);
 
     }
-    private void move(){
-
+    @Override
+    protected void move(){
         hitbox.x += velX;
         hitbox.y += velY;
         
@@ -46,11 +51,11 @@ public class Player extends RigidBody implements Controller{
         else if(Right) velX += _acc;
         else if(!Left && !Right){
             if(velX > 0)
-                if(velX - _dcc <= 0) velX = 0;
-                else velX -= _dcc;
+            if(velX - _dcc <= 0) velX = 0;
+            else velX -= _dcc;
             else if(velX < 0) 
-                if(velX + _dcc >= 0) velX = 0;
-                else velX += _dcc;
+            if(velX + _dcc >= 0) velX = 0;
+            else velX += _dcc;
             velX = 0;
             
         }
@@ -62,10 +67,12 @@ public class Player extends RigidBody implements Controller{
             else if(velY < 0) velY += _dcc;
             velY = 0;
         }
-        ObjectCollision();
-        AreasCollision();
+
+        objectCollision();
+
         velX = clamp(velX, -maxSpeed, maxSpeed);
         velY = clamp(velY, -maxSpeed, maxSpeed);
+
     }
 
     @Override

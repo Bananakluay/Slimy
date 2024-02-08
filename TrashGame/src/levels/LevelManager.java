@@ -1,9 +1,11 @@
 package levels;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import gameData.Data;
 import inputImage.Sprite;
+import simplePhysics.Area;
 
 public class LevelManager {
     private Level level;
@@ -21,6 +23,10 @@ public class LevelManager {
 
     public Level getLevel() {
         return level;
+    }
+
+    public ArrayList<Area> getTiles(){
+        return level.getTiles();
     }
 
 }

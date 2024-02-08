@@ -1,4 +1,4 @@
-package simplePhysic;
+package simplePhysics;
 
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
