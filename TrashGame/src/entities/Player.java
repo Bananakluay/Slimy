@@ -24,16 +24,16 @@ public class Player extends RigidBody implements Controller{
     public void draw(Graphics g){
         Graphics2D g2d = (Graphics2D)g;
         
-        // g2d.setColor(Color.white);
         // g2d.draw((int)hitbox.x, (int)hitbox.y, (int)100, (int)100);
-
+        
         // g2d.setColor(Color.red);
         // g2d.fill(getBoundsX());
         
         // g2d.setColor(Color.blue);
         // g2d.fill(getBoundsY());
         
-
+        
+        g2d.setColor(Color.white);
         g2d.fill(this.hitbox);
 
     }
