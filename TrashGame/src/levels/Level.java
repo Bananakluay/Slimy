@@ -9,7 +9,7 @@ import java.util.Arrays;
 import inputImage.Sprite;
 import main.Game;
 import simplePhysic.Area;
-import TileMap.Tile;
+import TileMap.TileBlock;
 import gameData.*;
 
 @SuppressWarnings("unused")
@@ -19,26 +19,20 @@ public class Level {
 
 	private BufferedImage imgLvlData;
 	private BufferedImage[] TileSet = Sprite.loadSpriteAsList(Data.TileData.TILESET);
-	private ArrayList<Tile> tiles = new ArrayList<>();
+	private ArrayList<Area> tiles = new ArrayList<>();
 
 	public Level(BufferedImage imgLvlData) {
 		this.imgLvlData = imgLvlData;
 		generateLevelData();
-		loadBoxdata();
-		System.out.println(TileSet.length);
+		loadTileBlockData();
 	}
 
 	public void update(){
-		for (Tile tile : tiles) {
-			tile.update();
-		}
+		
 	}
 
 	public void draw(Graphics g){
-		// g.drawImage(TileSet[0], 100, 100, null);
-		for (Tile tile : tiles) {
-			tile.draw(g);
-		}
+		for (Area tile : tiles) {tile.draw(g);}
 	}
 
 
@@ -52,18 +46,24 @@ public class Level {
 		}
 
 	}
-	public void loadBoxdata(){
+	public void loadTileBlockData(){
 			for(int row=0;row<imgLvlData.getHeight();row++){
 				for(int col=0;col<imgLvlData.getWidth();col++){
 					Color color = new Color(imgLvlData.getRGB(col, row));
 					int value = color.getRed();
 					if(value != 255){
-						//Tile tile = new ...
-						//tiles.add(tile);
+						TileBlock tile = new TileBlock(col * Game.TILES_SIZE, row * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE,TileSet[value]);
+						tiles.add(tile);
 					}
 				}
 			}
 	}
+
+	public ArrayList<Area> getTiles() {
+		return tiles;
+	}
+
+	
 
 
 
