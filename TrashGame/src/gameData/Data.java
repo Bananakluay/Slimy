@@ -7,7 +7,9 @@ public class Data {
     public enum ID {
         BLOCK, PLAYER, RIGIBODY, AREA
     }
-
+    public class PlayerData {
+        public static String PLAYERSET = "Slime.png";
+    }
 
     public class TileData {
         public static String TILESET = "TempTileSetV3.png";

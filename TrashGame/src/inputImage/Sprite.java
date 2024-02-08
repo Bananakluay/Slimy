@@ -14,12 +14,12 @@ public class Sprite {
     public static BufferedImage loadSprite(String file) {
         BufferedImage sprite = null;
         try {
-            sprite = ImageIO.read(new File("res/" + file));
+            sprite = ImageIO.read(new File("TrashGame/res/" + file));
 
             if(sprite == null) 
-                System.out.println("res/"+ file +" not found");
+                System.out.println("TrashGame/res/"+ file +" not found");
             else
-                System.out.println("GET Img : "+"res/"+ file + " Success");
+                System.out.println("GET Img : "+"src/res/"+ file + " Success");
         } catch (IOException e) {
             System.out.println("GET Img : "+"res/"+ file + " fail");
             e.printStackTrace();

@@ -3,6 +3,7 @@ package simplePhysic;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import TileMap.Block;
 import main.Game;
 
 
@@ -11,12 +12,17 @@ public class RigidBody {
     protected float _dcc = 0.5f * Game.SCALE;
     protected float velX = 0, velY = 0;
     protected float mass = 1*Game.SCALE;
-    protected Area hitbox;
+
+    protected Area hitbox
+    
+    ;
     protected float COR = 1*Game.SCALE;
     protected float maxSpeed = 1f*Game.SCALE;
-    public static ArrayList<Area> areas = new ArrayList<Area>();
-    public static ArrayList<RigidBody> objs = new ArrayList<RigidBody>();
+    public static ArrayList<Area> areas = new ArrayList<>();
+    public static ArrayList<RigidBody> objs = new ArrayList<>();
+    public static ArrayList<Block> blocks = new ArrayList<>();
     public String name;
+
     public RigidBody(Area hitbox){
         this.hitbox = hitbox;
     }
@@ -26,6 +32,7 @@ public class RigidBody {
 
     public void update(){
         AreasCollision();
+        BlockCollision();
     }
     protected void AreasCollision(){
         for(int i=0;i<areas.size();i++){
@@ -42,7 +49,7 @@ public class RigidBody {
                 }
             }
 
-            if(getBoundsY().intersects(unKnowArea)){
+            else if(getBoundsY().intersects(unKnowArea)){
                 if(velY>0){// down
                     velY = 0;
                     hitbox.y = unKnowArea.y - hitbox.height;
@@ -55,7 +62,32 @@ public class RigidBody {
         }
     }
 
+    protected void BlockCollision(){
+        for(int i=0;i<blocks.size();i++){
+            Area unKnowblock = blocks.get(i);
+            if(getBoundsX().intersects(unKnowblock) || hitbox.intersects(unKnowblock)){
 
+                if(velX>0){ //right
+                    velX = 0;
+                    hitbox.x = unKnowblock.x - unKnowblock.width;
+                }
+                else if(velX<0){//left
+                    velX = 0;
+                    hitbox.x = unKnowblock.x + unKnowblock.width + 1;
+                }
+            }
+            else if(getBoundsY().intersects(unKnowblock)){
+                if(velY>0){// down
+                    velY = 0;
+                    hitbox.y = unKnowblock.y - hitbox.height;
+                }
+                else if(velY<0){ //up
+                    velY = 0;
+                    hitbox.y = unKnowblock.y + unKnowblock.height + 1;
+                }
+            }
+        }
+    }
     protected void ObjectCollision(){
         for(int i=0;i<objs.size();i++){
             if(objs.get(i).hashCode() == this.hashCode()){
@@ -131,7 +163,7 @@ public class RigidBody {
         float bw = hitbox.width;
         float bh = hitbox.height - 4*Game.SCALE;
 
-        return new Rectangle((int)bx, (int)by, (int)bw, (int)bh);
+        return new Rectangle((int)bx, (int)by, (int)(bw), (int)(bh));
     }
 
     protected Rectangle getBoundsY(){
@@ -140,7 +172,7 @@ public class RigidBody {
         float bw = hitbox.width - 4*Game.SCALE;
         float bh = hitbox.height;
 
-        return new Rectangle((int)bx, (int)by, (int)bw, (int)bh);
+        return new Rectangle((int)(bx), (int)(by), (int)(bw), (int)(bh));
     }
 
     protected float clamp(float val, float min, float max) {
@@ -166,6 +198,9 @@ public class RigidBody {
         objs.addAll(obj);
     }
 
+    public static void setBlocksInterection(ArrayList<Block> block){
+        blocks.addAll(block);
+    }
 
     public Area getHitbox() {
         return hitbox;

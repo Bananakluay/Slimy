@@ -23,4 +23,9 @@ public class LevelManager {
         return level;
     }
 
+    public Level getCurrentLevel(){
+        return level;
+    }
+    
+
 }
