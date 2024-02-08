@@ -34,7 +34,7 @@ public class Player extends RigidBody implements Controller{
         // g2d.fill(getBoundsY());
         
 
-        g2d.draw(this.hitbox);
+        g2d.fill(this.hitbox);
 
     }
     private void move(){
