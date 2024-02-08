@@ -1,6 +1,8 @@
 package gameState;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -8,13 +10,14 @@ import java.util.ArrayList;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
-import simplePhysic.Area;
-import simplePhysic.RigidBody;
+import simplePhysics.Area;
+import simplePhysics.RigidBody;
 
 public class PlayingState extends GameState{
 
     private Player player;
     private LevelManager level;
+    private RigidBody box;
     public PlayingState(){
         scene();
     }
@@ -22,8 +25,8 @@ public class PlayingState extends GameState{
         level = new LevelManager();
         player = new Player(new Area(5*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         RigidBody.setAreasInterection(level.getTiles());
-        System.out.println(RigidBody.areas.size());
-        
+        box = new RigidBody(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        RigidBody.setInterection(box);
         
     }
 
@@ -31,12 +34,19 @@ public class PlayingState extends GameState{
     public void update() {
         player.update();
         level.update();
+        box.update();
     }
 
     @Override
     public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
         level.draw(g);
         player.draw(g);
+
+        g2d.setColor(Color.red);
+        g2d.draw(box.getHitbox());
+     
+
     }
 
     @Override

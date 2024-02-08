@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import inputImage.Sprite;
 import main.Game;
-import simplePhysic.Area;
+import simplePhysics.Area;
 import TileMap.TileBlock;
 import gameData.*;
 

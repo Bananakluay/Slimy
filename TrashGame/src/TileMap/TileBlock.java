@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import gameData.Data;
 import main.Game;
-import simplePhysic.Area;
+import simplePhysics.Area;
 
 import static gameData.Data.TileData.*;
 @SuppressWarnings("unused")

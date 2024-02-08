@@ -1,3 +1,4 @@
+package simplePhysics;
     // protected void ObjectCollision(ArrayList<RigidBody> objs){
     //     for(int i=0;i<objs.size();i++){
     //         RigidBody obj = objs.get(i);

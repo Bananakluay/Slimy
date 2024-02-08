@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import gameData.Data;
 import inputImage.Sprite;
-import simplePhysic.Area;
+import simplePhysics.Area;
 
 public class LevelManager {
     private Level level;

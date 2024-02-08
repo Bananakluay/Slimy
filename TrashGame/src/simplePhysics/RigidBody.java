@@ -1,4 +1,4 @@
-package simplePhysic;
+package simplePhysics;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -10,10 +10,7 @@ public class RigidBody {
     protected float velX = 0, velY = 0;
     
     protected float mass = 1*Game.SCALE;
-    protected float COR = 1 * Game.SCALE;
-
-    protected float gravityForce = 0.2f* mass;
-    protected boolean isColliding;
+    protected float COR = 0.5f * Game.SCALE;
 
     protected Area hitbox;
     public static ArrayList<Area> areas = new ArrayList<Area>();
@@ -23,38 +20,40 @@ public class RigidBody {
     }
    
     public void update(){
-        // System.out.println(isOnFloor());
-        // if(!isOnFloor())
-            // gravity();
         areasCollision();
+        move();
     }
-    protected void gravity(){
-        velY += gravityForce;
+    
+    protected void move(){
+        hitbox.x += velX;
+        hitbox.y += velY;
+        velX *= Game.SCALE*0.025;
+        velY *= Game.SCALE*0.025;
     }
     protected void areasCollision(){
         for(int i=0;i<areas.size();i++){
             Area unKnowArea = areas.get(i);
 
-
+            
             if(getBoundsX().intersects(unKnowArea)){
-                if(velX>0){ //right
+                if(velX<0){// hit left
+                    velX = 0;
+                    hitbox.x = unKnowArea.x + unKnowArea.width;
+                }
+                else if(velX>0){ //right right
                     velX = 0;
                     hitbox.x = unKnowArea.x - hitbox.width;
-                }
-                else if(velX<0){//left
-                    velX = 0;
-                    hitbox.x = unKnowArea.x + unKnowArea.width + 1;
                 }
             }
             
             if(getBoundsY().intersects(unKnowArea)){
-                if(velY>0){// down
+                if(velY<0){ //hit up
+                    velY = 0;
+                    hitbox.y = unKnowArea.y + unKnowArea.height;
+                }
+                else if(velY>0){//hit down
                     velY = 0;
                     hitbox.y = unKnowArea.y - hitbox.height;
-                }
-                else if(velY<0){ //up
-                    velY = 0;
-                    hitbox.y = unKnowArea.y + unKnowArea.height + 1;
                 }
             }
         }
@@ -63,43 +62,37 @@ public class RigidBody {
  
     protected void objectCollision(){
         for(int i=0;i<objs.size();i++){
-            if(objs.get(i).hashCode() == this.hashCode()){
+            if(objs.get(i).hashCode() == this.hashCode())
                 continue;
-            }
-
+            
             RigidBody obj = objs.get(i);
             
-            
             if(getBoundsX().intersects(obj.getHitbox()) ){
-                obj.velX = 0;      
                 
-                if(hitbox.intersects(obj.getHitbox())){
-                    inElasticCollisionX(obj);
-                }
-                
+                inElasticCollisionX(obj);
+                     
                 if(velX>0){ //right
                     
                     hitbox.x = obj.hitbox.x - hitbox.width;
                 }
                 else if(velX<0){//left
-                    hitbox.x = obj.hitbox.x + obj.hitbox.width + 1;
+                    hitbox.x = obj.hitbox.x + obj.hitbox.width;
                 }
                 else if(velX == 0){
                     if(hitbox.x < obj.hitbox.x + obj.hitbox.width/2) hitbox.x = obj.hitbox.x - hitbox.width;
                     else if(hitbox.x > obj.hitbox.x + obj.hitbox.width/2) hitbox.x = obj.hitbox.x + obj.hitbox.width ;
                 } 
             }
+
             if(getBoundsY().intersects(obj.getHitbox())){
-                obj.velY = 0;      
                 
-                if(hitbox.intersects(obj.getHitbox())){
-                    inElasticCollisionY(obj);
-                }
+                inElasticCollisionY(obj);
+         
                 if(velY>0){ 
                     hitbox.y = obj.hitbox.y - hitbox.height;
                 }
                 else if(velY<0){
-                    hitbox.y = obj.hitbox.y + obj.hitbox.height + 1;
+                    hitbox.y = obj.hitbox.y + obj.hitbox.height;
                 }
                 else if(velY == 0){
                     if(hitbox.y < obj.hitbox.y + obj.hitbox.height/2) hitbox.y = obj.hitbox.y - hitbox.height;
@@ -117,6 +110,7 @@ public class RigidBody {
     protected void inElasticCollisionX(RigidBody obj){
         float combinedMass = mass + obj.getMass();
         float newVelX = ((velX * mass) + (obj.velX * obj.mass) * COR) / combinedMass;
+        System.out.println(velX);
         obj.velX = newVelX;
         
     }
@@ -128,7 +122,7 @@ public class RigidBody {
         
     }
     
-    protected Rectangle getBoundsX(){
+    public Rectangle getBoundsX(){
         float bx = hitbox.x + velX;
         float by = hitbox.y + 2*Game.SCALE;
         float bw = hitbox.width;
@@ -137,7 +131,7 @@ public class RigidBody {
         return new Rectangle((int)bx, (int)by, (int)bw, (int)bh);
     }
 
-    protected Rectangle getBoundsY(){
+    public Rectangle getBoundsY(){
         float bx = hitbox.x + 2*Game.SCALE;
         float by = hitbox.y + velY;
         float bw = hitbox.width - 4*Game.SCALE;
