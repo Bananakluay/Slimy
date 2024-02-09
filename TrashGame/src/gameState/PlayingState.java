@@ -29,6 +29,8 @@ public class PlayingState extends GameState{
         box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         RigidBody.setInterection(box);
         RigidBody.setInterection(box2);
+
+        System.out.println(player instanceof Box);
         
     }
 

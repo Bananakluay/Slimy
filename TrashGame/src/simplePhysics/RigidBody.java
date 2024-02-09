@@ -21,17 +21,19 @@ public class RigidBody {
     }
    
     public void update(){
-        move();
         areasCollision();
         objectCollision();
         
     }
     
     protected void move(){
+        // System.out.println(String.format("box velX: %f", velX));
+        // velX = 10;
         hitbox.x += velX;
         hitbox.y += velY;
         velX *= Game.SCALE*0.025;
         velY *= Game.SCALE*0.025;
+        
     }
     protected void areasCollision(){
         for(int i=0;i<areas.size();i++){
@@ -67,9 +69,10 @@ public class RigidBody {
     protected void objectCollision(){
         for(int i=0;i<objs.size();i++){
             if(objs.get(i).hashCode() == this.hashCode())
-                continue;
+            continue;
             
             RigidBody obj = objs.get(i);
+            
             
             if(getBoundsX().intersects(obj.getBoundsX()))
                 System.out.println("boundsX intersects");
@@ -92,11 +95,11 @@ public class RigidBody {
                 // inElasticCollisionX(obj);
 
                      
-                if(velX>0 && isOnLeft){ //hit right
+                if(velX>0){ //right
                     
                     hitbox.x = obj.hitbox.x - hitbox.width;
                 }
-                else if(velX<0 && isOnRight){//left
+                else if(velX<0){//left
                     hitbox.x = obj.hitbox.x + obj.hitbox.width;
                 }
                 else if(velX == 0){
