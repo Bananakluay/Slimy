@@ -9,6 +9,7 @@ import java.util.Arrays;
 import inputImage.Sprite;
 import main.Game;
 import simplePhysics.Area;
+import simplePhysics.RigidBody;
 import TileMap.TileBlock;
 import gameData.*;
 
@@ -25,6 +26,7 @@ public class Level {
 		this.imgLvlData = imgLvlData;
 		generateLevelData();
 		loadTileBlockData();
+		RigidBody.setAreasInterection(tiles);
 	}
 
 	public void update(){
