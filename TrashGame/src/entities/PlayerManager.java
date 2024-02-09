@@ -28,6 +28,7 @@ public class PlayerManager {
 
         RigidBody.setInterection(greenSlime);
         RigidBody.setInterection(yellowSlime);
+
     }
 
     public void update(){

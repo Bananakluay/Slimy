@@ -16,7 +16,7 @@ public class Player extends RigidBody implements Controller{
     protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
     private boolean Left, Right, Up, Down;
     private float jumpForce = 2.5f*Game.SCALE;
-    private float maxSpeed = 0.75f*Game.SCALE;
+    private float maxSpeed = 0.75f*Game.SCALE;//75
 
     private Color colorPlayer = Color.white; // for debug
     public Player(Area hitbox) {
@@ -53,12 +53,11 @@ public class Player extends RigidBody implements Controller{
         else if(Right) velX += _acc;
         else if(!Left && !Right){
             if(velX > 0)
-            if(velX - _dcc <= 0) velX = 0;
-            else velX -= _dcc;
+                if(velX - _dcc <= 0) velX = 0;
+                else velX -= _dcc;
             else if(velX < 0) 
-            if(velX + _dcc >= 0) velX = 0;
-            else velX += _dcc;
-            velX = 0;
+                if(velX + _dcc >= 0) velX = 0;
+                else velX += _dcc;
             
         }
         
@@ -67,14 +66,11 @@ public class Player extends RigidBody implements Controller{
         else if(!Up && !Down){
             if(velY > 0) velY -= _dcc;
             else if(velY < 0) velY += _dcc;
-            velY = 0;
         }
-
-        objectCollision();
 
         velX = clamp(velX, -maxSpeed, maxSpeed);
         velY = clamp(velY, -maxSpeed, maxSpeed);
-
+        System.out.println(velX);
     }
 
     public void setColor(Color color){
