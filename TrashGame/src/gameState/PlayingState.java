@@ -22,9 +22,11 @@ public class PlayingState extends GameState{
     public void scene(){
         level = new LevelManager();
         player = new Player(new Area(5*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
-        RigidBody.setAreasInterection(level.getTiles());
+        
         box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        
+        RigidBody.setAreasInterection(level.getTiles());
         RigidBody.setInterection(box);
         RigidBody.setInterection(box2);
 
