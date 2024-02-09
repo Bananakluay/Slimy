@@ -3,25 +3,30 @@ package simplePhysics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import entities.Player;
 import main.Game;
 
 
 public class RigidBody {
     protected float velX = 0, velY = 0;
     
-    protected float mass = 1*Game.SCALE;
-    protected float COR = 0.5f * Game.SCALE;
+    protected float mass;
+    protected float COR = 1f * Game.SCALE;
 
     protected Area hitbox;
     public static ArrayList<Area> areas = new ArrayList<Area>();
     public static ArrayList<RigidBody> objs = new ArrayList<RigidBody>();
+
     public RigidBody(Area hitbox){
         this.hitbox = hitbox;
+        mass = hitbox.width * hitbox.height;
     }
    
     public void update(){
-        areasCollision();
         move();
+        objectCollision();
+        areasCollision();
+        
     }
     
     protected void move(){
@@ -31,93 +36,109 @@ public class RigidBody {
         velY *= Game.SCALE*0.025;
     }
     protected void areasCollision(){
-        for(int i=0;i<areas.size();i++){
-            Area unKnowArea = areas.get(i);
 
-            
-            if(getBoundsX().intersects(unKnowArea)){
-                if(velX<0){// hit left
+        for(int i=0;i<areas.size();i++){
+            Area thatArea = areas.get(i);
+
+            boolean isOnLeft = hitbox.x < thatArea.x + thatArea.width/2;
+            boolean isOnRight = hitbox.x > thatArea.x + thatArea.width/2;
+            boolean isOnTop = hitbox.y < thatArea.y + thatArea.height/2;
+            boolean isOnDown = hitbox.y > thatArea.y + thatArea.height/2;
+
+            if(getBoundsX().intersects(thatArea)){
+                if(velX<0 && isOnRight || velX<0 && hitbox.intersects(thatArea)){//go left and is on is on right of that area
                     velX = 0;
-                    hitbox.x = unKnowArea.x + unKnowArea.width;
+                    hitbox.x = thatArea.x + thatArea.width;
                 }
-                else if(velX>0){ //right right
+                else if(velX>0 && isOnLeft|| velX>0 && hitbox.intersects(thatArea)){//go right and is on left of that area
                     velX = 0;
-                    hitbox.x = unKnowArea.x - hitbox.width;
+                    hitbox.x = thatArea.x - hitbox.width;
                 }
             }
             
-            if(getBoundsY().intersects(unKnowArea)){
-                if(velY<0){ //hit up
+            if(getBoundsY().intersects(thatArea)){
+                if(velY<0 && isOnDown || velY<0 && hitbox.intersects(thatArea)){ //go up and is on down of that area
                     velY = 0;
-                    hitbox.y = unKnowArea.y + unKnowArea.height;
+                    hitbox.y = thatArea.y + thatArea.height;
                 }
-                else if(velY>0){//hit down
+                else if(velY>0 && isOnTop || velY>0 && hitbox.intersects(thatArea)){//go down and is on top of that area
                     velY = 0;
-                    hitbox.y = unKnowArea.y - hitbox.height;
+                    hitbox.y = thatArea.y - hitbox.height;
                 }
-            }
+            }       
         }
     }
 
- 
     protected void objectCollision(){
+
+ 
         for(int i=0;i<objs.size();i++){
             if(objs.get(i).hashCode() == this.hashCode())
                 continue;
             
             RigidBody obj = objs.get(i);
+
+            boolean isOnLeft = hitbox.x < obj.hitbox.x + obj.hitbox.width/2;
+            boolean isOnRight = hitbox.x > obj.hitbox.x + obj.hitbox.width/2;
+            boolean isOnTop = hitbox.y < obj.hitbox.y + obj.hitbox.height/2;
+            boolean isOnDown = hitbox.y > obj.hitbox.y + obj.hitbox.height/2;
             
-            if(getBoundsX().intersects(obj.getHitbox()) ){
-                
-                inElasticCollisionX(obj);
-                     
-                if(velX>0){ //right
-                    
-                    hitbox.x = obj.hitbox.x - hitbox.width;
+            // System.out.println(String.format("isOnLeft:%b isOnRight:%b isOnTop:%b isOnDown:%b", isOnLeft,isOnRight,isOnTop,isOnDown));
+            if(getBoundsX().intersects(obj.hitbox)){
+
+                if(hitbox.intersects(obj.hitbox)){
+                    if(this instanceof Player)
+                        inElasticCollisionX(obj); 
+                    else 
+                        obj.velX = 0;  
                 }
-                else if(velX<0){//left
+
+                if(velX<0 && isOnRight){//go left and is on right of Object
+
                     hitbox.x = obj.hitbox.x + obj.hitbox.width;
                 }
-                else if(velX == 0){
-                    if(hitbox.x < obj.hitbox.x + obj.hitbox.width/2) hitbox.x = obj.hitbox.x - hitbox.width;
-                    else if(hitbox.x > obj.hitbox.x + obj.hitbox.width/2) hitbox.x = obj.hitbox.x + obj.hitbox.width ;
+                else if(velX>0 && isOnLeft){//go right and is on left of Object
+                    hitbox.x = obj.hitbox.x - hitbox.width;
+                }
+                else if(velX == 0 && !isOnTop ||  velX == 0 && !isOnDown){// avoid bug
+                    if(isOnLeft) hitbox.x = obj.hitbox.x - hitbox.width;
+                    else if(isOnRight) hitbox.x = obj.hitbox.x + obj.hitbox.width ;
                 } 
             }
 
-            if(getBoundsY().intersects(obj.getHitbox())){
-                
-                inElasticCollisionY(obj);
-         
-                if(velY>0){ 
-                    hitbox.y = obj.hitbox.y - hitbox.height;
+            if(getBoundsY().intersects(obj.hitbox)){
+
+                if(hitbox.intersects(obj.hitbox)){
+                    if(this instanceof Player)
+                        inElasticCollisionY(obj);
+                    else
+                        obj.velY = 0;          
                 }
-                else if(velY<0){
+         
+                if(velY<0 && isOnDown){// go up and is on down of Object
                     hitbox.y = obj.hitbox.y + obj.hitbox.height;
                 }
-                else if(velY == 0){
-                    if(hitbox.y < obj.hitbox.y + obj.hitbox.height/2) hitbox.y = obj.hitbox.y - hitbox.height;
-                    else if(hitbox.y > obj.hitbox.y + obj.hitbox.height/2) hitbox.y = obj.hitbox.y + obj.hitbox.height ;
+                else if(velY>0 && isOnTop){// go down and is on top of Object
+                    hitbox.y = obj.hitbox.y - hitbox.height;
+                }
+                else if(velY == 0 && !isOnRight || velY == 0 && !isOnLeft){// avoid bug
+                    if(isOnTop) hitbox.y = obj.hitbox.y - hitbox.height;
+                    else if(isOnDown) hitbox.y = obj.hitbox.y + obj.hitbox.height;
                 } 
-            }
-
-           
-            
-
-            
+            }  
         }
     }
 
     protected void inElasticCollisionX(RigidBody obj){
-        float combinedMass = mass + obj.getMass();
+        float combinedMass = mass + obj.mass;
         float newVelX = ((velX * mass) + (obj.velX * obj.mass) * COR) / combinedMass;
-        System.out.println(velX);
         obj.velX = newVelX;
         
     }
 
     protected void inElasticCollisionY(RigidBody obj){
-        float combinedMass = mass + obj.getMass();
-        float newVelY = ((velY * mass) + (obj.velY * obj.getMass()) * COR) / combinedMass;
+        float combinedMass = mass + obj.mass;
+        float newVelY = ((velY * mass) + (obj.velY * obj.mass) * COR) / combinedMass;
         obj.velY = newVelY;
         
     }
@@ -146,7 +167,6 @@ public class RigidBody {
 
     
     public static void setInterection(Area area){
-        System.out.println("add area");
         areas.add(area);
     }
     public static void setInterection(RigidBody obj){
@@ -163,14 +183,4 @@ public class RigidBody {
     public Area getHitbox() {
         return hitbox;
     }
-
-    public float getMass(){
-        return mass;
-    }
-
-    public void setVelX(float velX){
-        this.velX = velX;
-    }
-
-   
 }
