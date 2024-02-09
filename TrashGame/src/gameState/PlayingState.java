@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import entities.Box;
 import entities.Player;
+import entities.PlayerManager;
 import levels.LevelManager;
 import main.Game;
 import simplePhysics.Area;
@@ -13,23 +14,22 @@ import simplePhysics.RigidBody;
 
 public class PlayingState extends GameState{
 
-    private Player player;
+    private PlayerManager player;
     private LevelManager level;
     private Box box, box2;
     public PlayingState(){
         scene();
     }
     public void scene(){
+
         level = new LevelManager();
-        player = new Player(new Area(5*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        player = new PlayerManager();
         
         box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         
-        RigidBody.setAreasInterection(level.getTiles());
         RigidBody.setInterection(box);
         RigidBody.setInterection(box2);
-
       
     }
 

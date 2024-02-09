@@ -129,6 +129,15 @@ public class RigidBody {
         }
     }
 
+    protected class inElasticCollisionSystem {
+        float combinedMass;
+        float momentum;
+        float newVelX;
+        ArrayList<RigidBody> objects = new ArrayList<>();
+        public void inElasticCollisionX(){
+            
+        }
+    }
     protected void inElasticCollisionX(RigidBody obj){
         float combinedMass = mass + obj.mass;
         float newVelX = ((velX * mass) + (obj.velX * obj.mass) * COR) / combinedMass;

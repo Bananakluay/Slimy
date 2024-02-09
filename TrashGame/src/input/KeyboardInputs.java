@@ -15,7 +15,9 @@ public class KeyboardInputs extends KeyAdapter{
 
     @Override
     public void keyPressed(KeyEvent e) {
+
         gsm.getCurrentState().keyPressed(e);
+         
     }
     
     @Override
