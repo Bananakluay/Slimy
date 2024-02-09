@@ -22,8 +22,8 @@ public class Player extends RigidBody implements Controller{
     }
 
     public void update(){
-        super.update();
         move();
+        super.update();
     }
 
     public void draw(Graphics g){
@@ -31,15 +31,15 @@ public class Player extends RigidBody implements Controller{
         
         // g2d.draw((int)hitbox.x, (int)hitbox.y, (int)100, (int)100);
         
-        // g2d.setColor(Color.red);
-        // g2d.fill(getBoundsX());
-        
-        // g2d.setColor(Color.blue);
-        // g2d.fill(getBoundsY());
-        
+        g2d.setColor(Color.white);
+        g2d.fill(this.hitbox);
+
+        g2d.setColor(Color.red);
+        g2d.draw(getBoundsX());
         
         g2d.setColor(Color.blue);
-        g2d.draw(this.hitbox);
+        g2d.draw(getBoundsY());
+        
 
     }
     @Override

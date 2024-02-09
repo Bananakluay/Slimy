@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
+import entities.Box;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
@@ -17,7 +17,7 @@ public class PlayingState extends GameState{
 
     private Player player;
     private LevelManager level;
-    private RigidBody box;
+    private Box box, box2;
     public PlayingState(){
         scene();
     }
@@ -25,26 +25,28 @@ public class PlayingState extends GameState{
         level = new LevelManager();
         player = new Player(new Area(5*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         RigidBody.setAreasInterection(level.getTiles());
-        box = new RigidBody(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         RigidBody.setInterection(box);
+        RigidBody.setInterection(box2);
         
     }
 
     @Override
     public void update() {
-        player.update();
         level.update();
         box.update();
+        box2.update();
+        player.update();
     }
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
         level.draw(g);
+        box.draw(g);
+        box2.draw(g);
         player.draw(g);
 
-        g2d.setColor(Color.red);
-        g2d.draw(box.getHitbox());
      
 
     }
