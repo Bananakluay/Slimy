@@ -1,8 +1,6 @@
 package gameState;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -30,8 +28,7 @@ public class PlayingState extends GameState{
         RigidBody.setInterection(box);
         RigidBody.setInterection(box2);
 
-        System.out.println(player instanceof Box);
-        
+      
     }
 
     @Override

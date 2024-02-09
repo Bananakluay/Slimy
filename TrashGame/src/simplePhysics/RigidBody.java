@@ -21,6 +21,7 @@ public class RigidBody {
     }
    
     public void update(){
+        move();
         areasCollision();
         objectCollision();
         
@@ -38,8 +39,6 @@ public class RigidBody {
     protected void areasCollision(){
         for(int i=0;i<areas.size();i++){
             Area unKnowArea = areas.get(i);
-
-    
             
             if(getBoundsX().intersects(unKnowArea)){
                 if(velX<0){// hit left obj
@@ -69,7 +68,7 @@ public class RigidBody {
     protected void objectCollision(){
         for(int i=0;i<objs.size();i++){
             if(objs.get(i).hashCode() == this.hashCode())
-            continue;
+                continue;
             
             RigidBody obj = objs.get(i);
             
@@ -79,7 +78,7 @@ public class RigidBody {
             if(getBoundsY().intersects(obj.getBoundsY()))
                 System.out.println("boundsY indtersects");
 
-            if(getBoundsX().intersects(obj.getHitbox()) || hitbox.intersects(obj.getHitbox())){
+            if(getBoundsX().intersects(obj.getHitbox())){
                 System.out.println("here");
                 boolean isOnLeft = hitbox.x < obj.hitbox.x + obj.hitbox.width/2;
                 boolean isOnRight = hitbox.x > obj.hitbox.x + obj.hitbox.width/2;
@@ -95,11 +94,11 @@ public class RigidBody {
                 // inElasticCollisionX(obj);
 
                      
-                if(velX>0){ //right
+                if(velX>0 && isOnLeft){ //right
                     
                     hitbox.x = obj.hitbox.x - hitbox.width;
                 }
-                else if(velX<0){//left
+                else if(velX<0 && isOnRight){//left
                     hitbox.x = obj.hitbox.x + obj.hitbox.width;
                 }
                 else if(velX == 0){
@@ -108,7 +107,7 @@ public class RigidBody {
                 } 
             }
 
-            if(getBoundsY().intersects(obj.getHitbox()) || hitbox.intersects(obj.getHitbox())){
+            else if(getBoundsY().intersects(obj.getHitbox())){
 
                 boolean isOnTop = hitbox.y < obj.hitbox.y + obj.hitbox.height/2;
                 boolean isOnDown = hitbox.y > obj.hitbox.y + obj.hitbox.height/2;
