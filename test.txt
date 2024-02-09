@@ -1,2 +1,2 @@
-t
-testttt
+rigidbody วัตถุที่ต้องใช้ฟีสิกส์
+area มีhitbox
