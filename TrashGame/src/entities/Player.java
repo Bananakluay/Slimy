@@ -26,6 +26,8 @@ public class Player extends RigidBody implements Controller{
     public void update(){
         move();
         super.update();
+        // System.out.println(String.format("Player velX:%f velY:%f", velX, velY));
+        // System.out.println(this.getBoundsX().x - this.hitbox.x);
     }
 
     public void draw(Graphics g){

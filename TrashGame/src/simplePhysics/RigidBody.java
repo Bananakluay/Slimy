@@ -24,8 +24,8 @@ public class RigidBody {
    
     public void update(){
         move();
-        objectCollision();
         areasCollision();
+        objectCollision();
         
     }
     
@@ -46,6 +46,7 @@ public class RigidBody {
             boolean isOnDown = hitbox.y + hitbox.height/2 > thatArea.y + thatArea.height/2;
 
             if(getBoundsX().intersects(thatArea)){
+                // System.out.println("collision x");
                 if(velX<0 && isOnRight){//go left and is on is on right of that area
                     velX = 0;
                     hitbox.x = thatArea.x + thatArea.width;
@@ -87,10 +88,15 @@ public class RigidBody {
             boolean isOnRight = hitbox.x  > obj.hitbox.x + obj.hitbox.width/2;
             boolean isOnTop = hitbox.y + hitbox.height/2 < obj.hitbox.y + obj.hitbox.height/2;
             boolean isOnDown = hitbox.y  > obj.hitbox.y + obj.hitbox.height/2;
+
+            // if(this instanceof Player)
+                // System.out.println(String.format("Left:%b, RIght:%b, Top:%b, Down:%b",isOnLeft, isOnRight, isOnTop, isOnDown));
+
             
             // System.out.println(String.format("isOnLeft:%b isOnRight:%b isOnTop:%b isOnDown:%b", isOnLeft,isOnRight,isOnTop,isOnDown));
             if(getBoundsX().intersects(obj.hitbox)){
-                System.out.println("collision x");
+                if(this instanceof Player)
+                    System.out.println("collision x");
                 if(hitbox.intersects(obj.hitbox)){
                     if(this instanceof Player)
                         inElasticCollisionX(obj); 
@@ -99,20 +105,21 @@ public class RigidBody {
                 }
 
                 if(velX < 0 && isOnRight){//go left and is on right of Object
-                    hitbox.x = obj.hitbox.x + obj.hitbox.width +1; //อยู่ด้านขวา
+                    hitbox.x = obj.hitbox.x + obj.hitbox.width; //อยู่ด้านขวา
                 }
                 else if(velX > 0 && isOnLeft){//go right and is on left of Object
-                    hitbox.x = obj.hitbox.x - hitbox.width -1; //อยู่ด้านซ้าย
+                    hitbox.x = obj.hitbox.x - hitbox.width; //อยู่ด้านซ้าย
                 }
-                // else if(velX == 0 && !isOnTop){// avoid bug
-                //     System.out.println("here");
-                //     if(isOnLeft) hitbox.x = obj.hitbox.x - hitbox.width;
-                //     else if(isOnRight) hitbox.x = obj.hitbox.x + obj.hitbox.width;
-                // } 
+                else if(velX == 0 && !isOnTop){// avoid bug
+                    if(isOnLeft) hitbox.x = obj.hitbox.x - hitbox.width;
+                    else if(isOnRight) hitbox.x = obj.hitbox.x + obj.hitbox.width;
+                } 
             }
+           
 
             if(getBoundsY().intersects(obj.hitbox)){
-                // System.out.println("collision y");
+                if(this instanceof Player)
+                    System.out.println("collision y");
                 if(hitbox.intersects(obj.hitbox)){
                     if(this instanceof Player)
                         inElasticCollisionY(obj);
@@ -130,7 +137,7 @@ public class RigidBody {
                     if(isOnTop) hitbox.y = obj.hitbox.y - hitbox.height;
                     else if(isOnDown) hitbox.y = obj.hitbox.y + obj.hitbox.height;
                 } 
-            }  
+            }                  
         }
     }
 
@@ -144,8 +151,12 @@ public class RigidBody {
     //     }
     // }
     protected void inElasticCollisionX(RigidBody obj){
+        
+        
         float combinedMass = mass + obj.mass;
         float newVelX = ((velX * mass) + (obj.velX * obj.mass) * COR) / combinedMass;
+        if(this instanceof Player)
+            System.out.println(newVelX);
         obj.velX = newVelX;
         
     }
@@ -158,18 +169,20 @@ public class RigidBody {
     }
     
     public Rectangle getBoundsX(){
+        // if(this instanceof Player)
+            // System.out.println(String.format("%f", velX));
         float bx = hitbox.x + velX;
-        float by = hitbox.y + 2;
+        float by = hitbox.y + 4;
         float bw = hitbox.width;
-        float bh = hitbox.height - 4;
-
+        float bh = hitbox.height - 8;
+            
         return new Rectangle((int)bx, (int)by, (int)bw, (int)bh);
     }
 
     public Rectangle getBoundsY(){
-        float bx = hitbox.x + 2;
+        float bx = hitbox.x + 4;
         float by = hitbox.y + velY;
-        float bw = hitbox.width - 4;
+        float bw = hitbox.width - 8;
         float bh = hitbox.height;
 
         return new Rectangle((int)bx, (int)by, (int)bw, (int)bh);
@@ -179,7 +192,6 @@ public class RigidBody {
         return Math.max(min, Math.min(max, val));
     }
 
-    
     public static void setInterection(Area area){
         areas.add(area);
     }

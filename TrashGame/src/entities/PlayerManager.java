@@ -49,10 +49,11 @@ public class PlayerManager {
             currentPlayer = greenSlime;
             yellowSlime.reset();      
         }
+
     }
     public void keyPressed(KeyEvent e){
-        if(e.getKeyCode() == KeyEvent.VK_Q)
-            switchPlayer();
+        // if(e.getKeyCode() == KeyEvent.VK_R)
+        //     switchPlayer();
         currentPlayer.keyPressed(e);
     };
 	public void keyReleased(KeyEvent e){

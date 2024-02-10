@@ -47,9 +47,6 @@ public class PlayingState extends GameState{
         box.draw(g);
         // box2.draw(g);
         player.draw(g);
-
-     
-
     }
 
     @Override
