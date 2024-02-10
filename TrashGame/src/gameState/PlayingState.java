@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 
 import entities.Player;
 import gameData.Data;
+import inputImage.Ani;
 import inputImage.Sprite;
 import levels.LevelManager;
 import main.Game;
@@ -20,7 +21,9 @@ public class PlayingState extends GameState{
 
     private Player player;
     private LevelManager levelmg;
-    private BufferedImage img = Sprite.loadSprite(Data.PlayerData.PLAYERSET);
+    private Ani animation = new Ani();
+    private BufferedImage[] aniLeft = animation.getAniLeft() ;
+    private BufferedImage[] aniRight = animation.getAniRight() ;
     public PlayingState(){
         scene();
     }
@@ -41,10 +44,8 @@ public class PlayingState extends GameState{
 
     @Override
     public void draw(Graphics g) {
-
-        player.draw(g);
-        //levelmg.draw(g);
-        // g.drawImage(img, 300, 300, (int)(img.getWidth()*Game.SCALE),(int)(img.getHeight()*Game.SCALE),null);
+        player.draw(g,aniLeft, aniRight);
+        
     }
 
     @Override

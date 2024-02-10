@@ -4,14 +4,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import input.Controller;
+import inputImage.Ani;
 import simplePhysic.Area;
 import simplePhysic.RigidBody;
 @SuppressWarnings("unused")
 public class Player extends RigidBody implements Controller{
 
     private boolean Left, Right, Up, Down;
+    private Ani animation = new Ani();
+    private int x,y;
+    
     public Player(Area hitbox) {
         super(hitbox);
     }
@@ -20,23 +25,36 @@ public class Player extends RigidBody implements Controller{
         super.update();
         move();
     }
-
-    public void draw(Graphics g){
-        Graphics2D g2d = (Graphics2D)g;
-        
-        // g2d.draw((int)hitbox.x, (int)hitbox.y, (int)100, (int)100);
-        
-        g2d.setColor(Color.white);
-        g2d.fill(this.hitbox);
-        
-        g2d.setColor(Color.red);
-        g2d.fill(getBoundsX());
-        
-        g2d.setColor(Color.blue);
-        g2d.fill(getBoundsY());
-        
-
+    public void changeX(int value){
+        this.x += value;
     }
+
+    public void changeY(int value){
+        this.y += value;
+    }
+
+    public void draw(Graphics g, BufferedImage[] aniLeft, BufferedImage[] aniRight ){
+        
+        if(!Left && ! Right){
+            g.drawImage(aniLeft[animation.aniIndex()], 100+x, 100+y, null);
+        }
+        if(Left){
+            g.drawImage(aniLeft[animation.aniIndex()], 100+x, 100+y, null);
+        }
+        if(Right){
+            
+            g.drawImage(aniRight[animation.aniIndex()], 100+x, 100+y, null);
+
+        }
+    
+    
+    
+    }
+
+
+
+
+
     private void move(){
 
         hitbox.x += velX;
@@ -73,16 +91,24 @@ public class Player extends RigidBody implements Controller{
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
-                Up = true; break;
+                Up = true;
+                changeY(-5);
+                break;
             case KeyEvent.VK_LEFT: 
             case KeyEvent.VK_A:
-                Left = true; break;
+                Left = true; 
+                changeX(-5);
+                break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
-                Down = true; break;
+                Down = true; 
+                changeY(5);
+                break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                Right = true; break;
+                Right = true; 
+                changeX(5);
+                break;
             default: break;
         }
     }
@@ -103,7 +129,7 @@ public class Player extends RigidBody implements Controller{
             case KeyEvent.VK_D:
                 Right = false; break;
             default: break;
-        }
+        }  
     }
     
 }

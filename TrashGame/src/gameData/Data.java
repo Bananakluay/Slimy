@@ -8,13 +8,14 @@ public class Data {
         BLOCK, PLAYER, RIGIBODY, AREA
     }
     public class PlayerData {
-        public static String PLAYERSET = "Slime.png";
+        public static String player_left = "blueslime_Left.png";
+        public static String player_right = "blueslime_Right.png";
     }
 
     public class TileData {
-        public static String TILESET = "TempTileSetV3.png";
-        public static String TEST_MAP = "testmapv4.png";
-        public static int BLOCK_HITBOX_WIDTH = Game.TILES_SIZE;
-        public static int BLOCK_HITBOX_HEIGHT = Game.TILES_SIZE;
+        //public static String TILESET = "TempTileSetV3.png";
+        //public static String TEST_MAP = "testmapv4.png";
+        //public static int BLOCK_HITBOX_WIDTH = Game.TILES_SIZE;
+        //public static int BLOCK_HITBOX_HEIGHT = Game.TILES_SIZE;
     }
 }
