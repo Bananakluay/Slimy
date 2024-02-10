@@ -24,7 +24,7 @@ public class RigidBody {
    
     public void update(){
         move();
-        objectCollision();
+        // objectCollision();
         areasCollision();
         
     }
@@ -98,10 +98,10 @@ public class RigidBody {
                         obj.velX = 0;  
                 }
 
-                if(velX < 0 && isOnRight){//go left and is on right of Object
+                if(velX < 0 && isOnRight && !isOnTop && isOnDown){//go left and is on right of Object
                     hitbox.x = obj.hitbox.x + obj.hitbox.width +1; //อยู่ด้านขวา
                 }
-                else if(velX > 0 && isOnLeft){//go right and is on left of Object
+                else if(velX > 0 && isOnLeft  && !isOnTop && isOnDown){//go right and is on left of Object
                     hitbox.x = obj.hitbox.x - hitbox.width -1; //อยู่ด้านซ้าย
                 }
                 // else if(velX == 0 && !isOnTop){// avoid bug
@@ -120,10 +120,10 @@ public class RigidBody {
                         obj.velY = 0;          
                 }
          
-                if(velY<0 && isOnDown){// go up and is on down of Object
+                if(velY<0 && isOnDown && !isOnLeft && !isOnRight){// go up and is on down of Object
                     hitbox.y = obj.hitbox.y + obj.hitbox.height;
                 }
-                else if(velY > 0 && isOnTop){// go down and is on top of Object
+                else if(velY > 0 && isOnTop ){// go down and is on top of Object
                     hitbox.y = obj.hitbox.y - hitbox.height;
                 }
                 else if(velY == 0){// avoid bug

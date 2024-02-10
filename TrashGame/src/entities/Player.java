@@ -24,6 +24,7 @@ public class Player extends RigidBody implements Controller{
     }
 
     public void update(){
+        objectCollision();
         move();
         super.update();
     }
