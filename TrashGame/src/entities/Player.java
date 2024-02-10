@@ -70,7 +70,6 @@ public class Player extends RigidBody implements Controller{
 
         velX = clamp(velX, -maxSpeed, maxSpeed);
         velY = clamp(velY, -maxSpeed, maxSpeed);
-        System.out.println(velX);
     }
 
     public void setColor(Color color){
