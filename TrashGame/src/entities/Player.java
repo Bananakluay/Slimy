@@ -6,66 +6,143 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import input.Controller;
+import main.Game;
 import simplePhysic.Area;
 import simplePhysic.RigidBody;
-@SuppressWarnings("unused")
-public class Player extends RigidBody implements Controller{
+import static simplePhysic.Help.*;
 
-    private boolean Left, Right, Up, Down;
+@SuppressWarnings("unused")
+public class Player extends RigidBody implements Controller {
+
+    private boolean Left, Right, Up, Down, Jump;
+
     public Player(Area hitbox) {
         super(hitbox);
     }
 
-    public void update(){
+    public void update() {
         super.update();
         move();
     }
 
-    public void draw(Graphics g){
-        Graphics2D g2d = (Graphics2D)g;
-        
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
         // g2d.draw((int)hitbox.x, (int)hitbox.y, (int)100, (int)100);
-        
+
         // g2d.setColor(Color.red);
         // g2d.fill(getBoundsX());
-        
+
         // g2d.setColor(Color.blue);
         // g2d.fill(getBoundsY());
-        
-        
+
         g2d.setColor(Color.white);
         g2d.fill(this.hitbox);
 
     }
-    private void move(){
 
+    private void max_frame() {
+        if (hitbox.x < 0)
+            hitbox.x = 0;
+        if (hitbox.y < 0)
+            hitbox.y = 0;
+        if (hitbox.x + hitbox.width > Game.GAME_WIDTH)
+            hitbox.x = Game.GAME_WIDTH - hitbox.width;
+        if (hitbox.y + hitbox.height > Game.GAME_HEIGHT)
+            hitbox.y = Game.GAME_HEIGHT - hitbox.height;
+    }
+
+    private void move() {
         hitbox.x += velX;
         hitbox.y += velY;
-        
-        if(Left) velX -= _acc;
-        else if(Right) velX += _acc;
-        else if(!Left && !Right){
-            if(velX > 0)
-                if(velX - _dcc <= 0) velX = 0;
-                else velX -= _dcc;
-            else if(velX < 0) 
-                if(velX + _dcc >= 0) velX = 0;
-                else velX += _dcc;
+
+        if (Jump)
+            jump();
+        if (Left)
+            velX -= _acc;
+        if (Right)
+            velX += _acc;
+        else if (!Left && !Right && !inAir) {
+            if (velX > 0)
+                if (velX - _dcc <= 0)
+                    velX = 0;
+                else
+                    velX -= _dcc;
+            else if (velX < 0)
+                if (velX + _dcc >= 0)
+                    velX = 0;
+                else
+                    velX += _dcc;
             velX = 0;
-            
+
         }
-        
-        if(Up) velY -= _acc;
-        else if(Down) velY += _acc;
-        else if(!Up && !Down){
-            if(velY > 0) velY -= _dcc;
-            else if(velY < 0) velY += _dcc;
-            velY = 0;
+        if (!inAir) {
+            if (!IsEntityOnFloor(hitbox, lvlData)) {
+                inAir = true;
+            }
         }
+
+        if (inAir) {
+            if (CanMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
+                hitbox.y += airSpeed;
+                airSpeed += gravity;
+                updateX(velX);
+            } else {
+                hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, airSpeed);
+                if (airSpeed > 0)
+                    resetInAir();
+                else
+                    airSpeed = fallSpeedAfterCollision;
+                updateX(velX);
+            }
+        } else {
+            updateX(velX);
+        }
+        /*
+         * if (Up)
+         * velY -= _acc;
+         * else if (Down)
+         * velY += _acc;
+         * else if (!Up && !Down) {
+         * if (velY > 0)
+         * velY -= _dcc;
+         * else if (velY < 0)
+         * velY += _dcc;
+         * velY = 0;
+         * }
+         */
+        max_frame();
         ObjectCollision();
         AreasCollision();
         velX = clamp(velX, -maxSpeed, maxSpeed);
         velY = clamp(velY, -maxSpeed, maxSpeed);
+    }
+
+    private void jump() {
+        if (inAir)
+            return;
+        inAir = true;
+        airSpeed = jumpSpeed;
+    }
+
+    private void resetInAir() {
+        inAir = false;
+        airSpeed = 0;
+    }
+
+    private void updateX(float velX) {
+        if (CanMoveHere(hitbox.x + velX, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
+            hitbox.x += velX;
+        } else {
+            hitbox.x = GetEntityXPosNextToWall(hitbox, velX);
+        }
+
+    }
+
+    public void loadlvldata(int[][] lvlData) {
+        this.lvlData = lvlData;
+        if (!IsEntityOnFloor(hitbox, lvlData))
+            inAir = true;
     }
 
     @Override
@@ -73,17 +150,22 @@ public class Player extends RigidBody implements Controller{
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
-                Up = true; break;
-            case KeyEvent.VK_LEFT: 
+                Jump = true;
+                break;
+            case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
-                Left = true; break;
+                Left = true;
+                break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
-                Down = true; break;
+                Down = true;
+                break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                Right = true; break;
-            default: break;
+                Right = true;
+                break;
+            default:
+                break;
         }
     }
 
@@ -92,18 +174,23 @@ public class Player extends RigidBody implements Controller{
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
-                Up = false; break;
-            case KeyEvent.VK_LEFT: 
+                Jump = false;
+                break;
+            case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
-                Left = false; break;
+                Left = false;
+                break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
-                Down = false; break;
+                Down = false;
+                break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                Right = false; break;
-            default: break;
+                Right = false;
+                break;
+            default:
+                break;
         }
     }
-    
+
 }
