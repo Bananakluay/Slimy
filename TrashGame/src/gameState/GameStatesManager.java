@@ -1,29 +1,17 @@
 package gameState;
-@SuppressWarnings("unused")
-public class GameStatesManager {
 
-    private MenuState menu;
-    private PlayingState playing;
-    private PausedState paused;
+public enum GameStatesManager {
+	
+	PLAYING, MENU;
+	
+	public static GameStatesManager state = MENU;
 
-    private GameState currenState;
-
-    public GameStatesManager(){
-        playing = new PlayingState();
-        setState(playing);
-
-        
-    }
-
-    public void setState(GameState state){
-        currenState = state;
-    }
-    public GameState getCurrentState(){
-        return currenState;
-    }
-
-    public GameStatesManager getGameStatesManager(){
-        return this;
+    public Object getGame() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getGame'");
     }
 
 }
+
+
+

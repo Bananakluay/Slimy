@@ -9,24 +9,40 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import static main.Game.GAME_HEIGHT;
+import static main.Game.GAME_WIDTH;;
+
 public class GamePanel extends JPanel{
+
+    private MouseInputs mouseInputs;
     private Game game;
+    
     public GamePanel(Game game){
+        mouseInputs = new MouseInputs(this);
         this.game = game;
 
-        setPreferredSize(new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT));
-        setBackground(Color.BLACK);
-        addKeyListener(new KeyboardInputs(game.getGameStatesManager()));
-        addMouseListener(new MouseInputs(game.getGameStatesManager()));
-
-
+        setPanelSize();
+        addKeyListener(new KeyboardInputs(this));
+		addMouseListener(mouseInputs);
+		addMouseMotionListener(mouseInputs);
     }
+    
+
+    private void setPanelSize() {
+		Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
+		setPreferredSize(size);
+	}
 
 
     @Override
     public void paintComponent(Graphics g){
+<<<<<<< Updated upstream
         super.paintComponent(g); //
         // drawGrid(g);
+=======
+        super.paintComponent(g);
+        drawGrid(g);
+>>>>>>> Stashed changes
         game.render(g);
     }
 
@@ -40,4 +56,10 @@ public class GamePanel extends JPanel{
             g.setColor(Color.RED);
         
     }
+
+    public Game getGame() {
+		return game;
+	}
+
+
 }

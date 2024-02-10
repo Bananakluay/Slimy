@@ -1,13 +1,23 @@
 package main;
 
 import java.awt.Graphics;
-import gameState.GameStatesManager;
+import java.awt.event.KeyListener;
 
-@SuppressWarnings("unused")
+import gameState.GameStatesManager;
+import gameState.MenuState;
+import gameState.PlayingState;
+
 public class Game implements Runnable{
 
+	@SuppressWarnings("unused")
+	private GameWindow gameWindow;
+    private GamePanel gamePanel;
+    private Thread gameThread;
     private final int FPS_SET = 120;
     private final int UPS_SET = 200;
+
+	private PlayingState playing;
+	private MenuState menu;
 
     public final static int TILES_DEFAULT_SIZE = 16;
     public final static float SCALE = 4f;
@@ -17,39 +27,52 @@ public class Game implements Runnable{
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 
-	private GameStatesManager gsm;
-	
-    private GameWindow gameWindow;
-    private GamePanel gamePanel;
-
-
-    private Thread gameThread;
-
     public Game(){
-		gsm = new GameStatesManager();
+		initClasses();
+
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
+
         startGameLoop();
     }
 
-    public void ready(){
+	private void initClasses() {
+		menu = new MenuState(this);
+		playing = new PlayingState(this);
+	}
 
-    }
-    public void update(){
-		gsm.getCurrentState().update();
-    }
-
-    public void render(Graphics g){
-		//playing 
-		//
-		gsm.getCurrentState().draw(g);
-    }
-    
-    private void startGameLoop() {
+	private void startGameLoop() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
+
+    public void update(){
+		switch (GameStatesManager.state) {
+		case MENU:
+			menu.update();
+			break;
+		case PLAYING:
+			playing.update();
+			break;
+		default:
+			break;
+		}
+    }
+
+    public void render(Graphics g){
+		switch (GameStatesManager.state) {
+			case MENU:
+				menu.draw(g);
+				break;
+			case PLAYING:
+				playing.draw(g);
+				break;
+			default:
+				break;
+		}
+	}
+    
 
 	@Override
 	public void run() {
@@ -87,7 +110,7 @@ public class Game implements Runnable{
 
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
-				// System.out.println("FPS: " + frames + " | UPS: " + ticks);
+				System.out.println("FPS: " + frames + " | UPS: " + ticks);
 				frames = 0;
 				ticks = 0;
 
@@ -96,8 +119,22 @@ public class Game implements Runnable{
 
 	}
 
-	public GameStatesManager getGameStatesManager(){
-		return gsm;
+	public void windowFocusLost() {
+		if (GameStatesManager.state == GameStatesManager.PLAYING)
+			playing.getPlayer().resetDirBooleans();
+	}
+
+	public MenuState getMenu() {
+		return menu;
+	}
+
+	public PlayingState getPlaying() {
+		return playing;
+	}
+
+	public KeyListener PlayingState() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'PlayingState'");
 	}
 
 

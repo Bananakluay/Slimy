@@ -1,45 +1,63 @@
 package input;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import gameState.GameStatesManager;
+import main.GamePanel;
 
 // @SuppressWarnings("unused")
-public class MouseInputs extends MouseAdapter{
-    private GameStatesManager gsm;
-    public MouseInputs(GameStatesManager gsm){
-        this.gsm = gsm;
+public class MouseInputs implements MouseListener, MouseMotionListener{
+    private GamePanel GamePanel;
+
+    public MouseInputs(main.GamePanel GamePanel){
+        this.GamePanel = GamePanel;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        gsm.getCurrentState().mouseClicked(e);
+        switch (GameStatesManager.state) {
+            case MENU:
+                GamePanel.getGame().getMenu().mouseClicked(e);
+                break;
+            case PLAYING:
+                GamePanel.getGame().getPlaying().mouseClicked(e);
+                break;
+            default:
+                break;
+    
+            }
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        gsm.getCurrentState().mouseDragged(e);
+       
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        gsm.getCurrentState().mousePressed(e);
+       
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        gsm.getCurrentState().mouseReleased(e);
+       
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        gsm.getCurrentState().mouseEntered(e);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        gsm.getCurrentState().mouseExited(e);
+       
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseMoved'");
     }
 
 
