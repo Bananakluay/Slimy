@@ -26,11 +26,10 @@ public class GamePanel extends JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g); //
-        // drawGrid(g);
         game.render(g);
     }
 
-    public void drawGrid(Graphics g){
+    /* public void drawGrid(Graphics g){
         g.setColor(Color.GRAY);
         for(int col=0;col<Game.GAME_WIDTH;col++)
             g.drawLine(col*Game.TILES_SIZE, 0, col*Game.TILES_SIZE, Game.GAME_HEIGHT);
@@ -39,5 +38,5 @@ public class GamePanel extends JPanel{
             g.drawLine(0, rol*Game.TILES_SIZE, Game.GAME_WIDTH, rol*Game.TILES_SIZE);
             g.setColor(Color.RED);
         
-    }
+    } */
 }

@@ -20,15 +20,14 @@ public class PlayingState extends GameState{
 
     private Player player;
     private LevelManager levelmg;
-    Area a = new Area(10, 100, 100, 100);
+    private BufferedImage img = Sprite.loadSprite(Data.PlayerData.PLAYERSET);
     public PlayingState(){
         scene();
     }
-    BufferedImage[] img = Sprite.loadSpriteAsList(Data.PlayerData.PLAYERSET);
     public void scene(){
         levelmg = new LevelManager();
         player = new Player(new Area(300, 300, (int)(Game.TILES_SIZE), (int)(Game.TILES_SIZE)));
-        RigidBody.setBlocksInterection(levelmg.getLevel().getBlocks());
+        //RigidBody.setBlocksInterection(levelmg.getLevel().getBlocks());
 
 
     }
@@ -36,7 +35,7 @@ public class PlayingState extends GameState{
     @Override
     public void update() {
         player.update();
-        levelmg.update();
+        //levelmg.update();
     
     }   
 
@@ -44,9 +43,8 @@ public class PlayingState extends GameState{
     public void draw(Graphics g) {
 
         player.draw(g);
-        levelmg.draw(g);
-        g.drawImage(img[0], 300, 300, (int)(img[0].getWidth()*Game.SCALE),(int)(img[0].getHeight()*Game.SCALE),null);
-        g.drawImage(img[1], 300, 400, (int)(img[1].getWidth()*Game.SCALE),(int)(img[1].getHeight()*Game.SCALE),null);
+        //levelmg.draw(g);
+        // g.drawImage(img, 300, 300, (int)(img.getWidth()*Game.SCALE),(int)(img.getHeight()*Game.SCALE),null);
     }
 
     @Override

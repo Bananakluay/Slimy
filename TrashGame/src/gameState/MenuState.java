@@ -6,8 +6,7 @@ import java.awt.event.MouseEvent;
 public class MenuState extends GameState{
     @Override
     public void draw(Graphics g) {
-        //asdfasdfasdfasdfasfasfa
-        //asdfasdfasdfasdfasdfasdf
+        
     }
 
     @Override

@@ -16,7 +16,7 @@ import gameData.*;
 @SuppressWarnings("unused")
 public class Level {
 
-	private int[][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
+	/* private int[][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
 
 	private BufferedImage imgLvlData;
 	private BufferedImage[] TileSet = Sprite.loadSpriteAsList(Data.TileData.TILESET);
@@ -69,7 +69,7 @@ public class Level {
 
 	public ArrayList<Block> getBlocks() {
 		return blocks;
-	}
+	} */
 
 	
 

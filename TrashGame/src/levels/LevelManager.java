@@ -6,7 +6,7 @@ import gameData.Data;
 import inputImage.Sprite;
 
 public class LevelManager {
-    private Level level;
+    /* private Level level;
     public LevelManager(){
         level = new Level(Sprite.loadSprite(Data.TileData.TEST_MAP));
     }
@@ -27,5 +27,5 @@ public class LevelManager {
         return level;
     }
     
-
+ */
 }

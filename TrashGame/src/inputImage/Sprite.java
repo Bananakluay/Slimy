@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 
 @SuppressWarnings("unused")
 public class Sprite {
-    private final static int TILE_SIZE = 16;
+    private final static int TILE_SIZE = 32;
     
     public static BufferedImage loadSprite(String file) {
         BufferedImage sprite = null;
