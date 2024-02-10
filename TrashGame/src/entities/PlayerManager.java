@@ -21,25 +21,26 @@ public class PlayerManager {
         greenSlime = new Player(new Area(5*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         greenSlime.setColor(Color.green);
 
-        // yellowSlime = new Player(new Area(10*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
-        // yellowSlime.setColor(Color.yellow);
+        yellowSlime = new Player(new Area(10*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        yellowSlime.setColor(Color.yellow);
         
         currentPlayer = greenSlime;
 
         RigidBody.setInterection(greenSlime);
-        // RigidBody.setInterection(yellowSlime);
+        RigidBody.setInterection(yellowSlime);
 
     }
 
     public void update(){
         greenSlime.update();
-        // yellowSlime.update();
+        yellowSlime.update();
     }
 
     public void draw(Graphics g){
         greenSlime.draw(g);
-        // yellowSlime.draw(g);
+        yellowSlime.draw(g);
     }
+    
     public void switchPlayer(){
         if(currentPlayer == greenSlime){
             currentPlayer = yellowSlime;

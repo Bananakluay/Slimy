@@ -85,59 +85,48 @@ public class RigidBody {
             // boolean isOnDown = hitbox.y  > obj.hitbox.y + obj.hitbox.height;
 
             boolean isOnLeft = hitbox.x + hitbox.width/2 < obj.hitbox.x + obj.hitbox.width/2;
-            boolean isOnRight = hitbox.x  > obj.hitbox.x + obj.hitbox.width/2;
+            boolean isOnRight = hitbox.x + hitbox.width/2 > obj.hitbox.x + obj.hitbox.width/2;
             boolean isOnTop = hitbox.y + hitbox.height/2 < obj.hitbox.y + obj.hitbox.height/2;
-            boolean isOnDown = hitbox.y  > obj.hitbox.y + obj.hitbox.height/2;
+            boolean isOnDown = hitbox.y + hitbox.height/2 > obj.hitbox.y + obj.hitbox.height/2;
 
             // if(this instanceof Player)
                 // System.out.println(String.format("Left:%b, RIght:%b, Top:%b, Down:%b",isOnLeft, isOnRight, isOnTop, isOnDown));
 
-            
             // System.out.println(String.format("isOnLeft:%b isOnRight:%b isOnTop:%b isOnDown:%b", isOnLeft,isOnRight,isOnTop,isOnDown));
             if(getBoundsX().intersects(obj.hitbox)){
-                if(this instanceof Player)
-                    System.out.println("collision x");
-                if(hitbox.intersects(obj.hitbox)){
-                    if(this instanceof Player)
-                        inElasticCollisionX(obj); 
-                    else 
-                        obj.velX = 0;  
+                if(velX<0 && isOnRight){//go left and is on is on right of that area
+                    if(hitbox.intersects(obj.hitbox))
+                        inElasticCollisionX(obj);
+                    else
+                        velX = 0;
+                    hitbox.x = obj.hitbox.x + obj.hitbox.width;
                 }
-
-                if(velX < 0 && isOnRight){//go left and is on right of Object
-                    hitbox.x = obj.hitbox.x + obj.hitbox.width; //อยู่ด้านขวา
+                else if(velX>0 && isOnLeft){//go right and is on left of that area
+                    if(hitbox.intersects(obj.hitbox))
+                        inElasticCollisionX(obj);
+                    else
+                        velX = 0;
+                    hitbox.x = obj.hitbox.x - hitbox.width;
                 }
-                else if(velX > 0 && isOnLeft){//go right and is on left of Object
-                    hitbox.x = obj.hitbox.x - hitbox.width; //อยู่ด้านซ้าย
-                }
-                else if(velX == 0 && !isOnTop){// avoid bug
-                    if(isOnLeft) hitbox.x = obj.hitbox.x - hitbox.width;
-                    else if(isOnRight) hitbox.x = obj.hitbox.x + obj.hitbox.width;
-                } 
             }
-           
-
+            
             if(getBoundsY().intersects(obj.hitbox)){
-                if(this instanceof Player)
-                    System.out.println("collision y");
-                if(hitbox.intersects(obj.hitbox)){
-                    if(this instanceof Player)
+                if(velY<0 && isOnDown){ //go up and is on down of that area
+                    if(hitbox.intersects(obj.hitbox))
                         inElasticCollisionY(obj);
                     else
-                        obj.velY = 0;          
-                }
-         
-                if(velY<0 && isOnDown){// go up and is on down of Object
+                    velY = 0;
                     hitbox.y = obj.hitbox.y + obj.hitbox.height;
                 }
-                else if(velY > 0 && isOnTop){// go down and is on top of Object
+                else if(velY>0 && isOnTop){//go down and is on top of that area
+                    if(hitbox.intersects(obj.hitbox))
+                        inElasticCollisionY(obj);
+                    else
+                    velY = 0;
                     hitbox.y = obj.hitbox.y - hitbox.height;
                 }
-                else if(velY == 0){// avoid bug
-                    if(isOnTop) hitbox.y = obj.hitbox.y - hitbox.height;
-                    else if(isOnDown) hitbox.y = obj.hitbox.y + obj.hitbox.height;
-                } 
-            }                  
+            }       
+                                 
         }
     }
 
@@ -155,9 +144,8 @@ public class RigidBody {
         
         float combinedMass = mass + obj.mass;
         float newVelX = ((velX * mass) + (obj.velX * obj.mass) * COR) / combinedMass;
-        if(this instanceof Player)
-            System.out.println(newVelX);
         obj.velX = newVelX;
+        // return newVelX;
         
     }
 
