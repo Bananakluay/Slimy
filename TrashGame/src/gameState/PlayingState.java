@@ -5,12 +5,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import entities.Player;
-<<<<<<< Updated upstream
-import simplePhysic.Area;
-=======
 import level.LevelManager;
 import main.Game;
->>>>>>> Stashed changes
 
 public class PlayingState extends State implements Statemethods{
 
@@ -23,40 +19,23 @@ public class PlayingState extends State implements Statemethods{
 	}
 
 
-<<<<<<< Updated upstream
-    private Player player;
-
-    public PlayingState(){
-        scene();
-    }
-    public void scene(){
-        player = new Player(new Area(50, 50, 50, 50));
-=======
     public void scene(){
         levelManager = new LevelManager(game);
         player = new Player(200, 200, (int) (64 * Game.SCALE), (int) (40 * Game.SCALE));
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
->>>>>>> Stashed changes
     }
 
     @Override
     public void update() {
-<<<<<<< Updated upstream
-=======
         levelManager.update();
->>>>>>> Stashed changes
         player.update();
     }
 
     @Override
     public void draw(Graphics g) {
-<<<<<<< Updated upstream
-        player.draw(g);
-=======
         levelManager.draw(g);
         player.render(g);
 
->>>>>>> Stashed changes
     }
 
     @Override

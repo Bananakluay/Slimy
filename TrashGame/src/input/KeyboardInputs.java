@@ -17,9 +17,6 @@ public class KeyboardInputs implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-<<<<<<< Updated upstream
-        gsm.getCurrentState().keyPressed(e);
-=======
         switch (GameStatesManager.state) {
             case MENU:
                 ((main.GamePanel) GamePanel).getGame().getMenu().keyPressed(e);
@@ -30,7 +27,6 @@ public class KeyboardInputs implements KeyListener{
             default:
                 break;
             }
->>>>>>> Stashed changes
     }
     
     @Override

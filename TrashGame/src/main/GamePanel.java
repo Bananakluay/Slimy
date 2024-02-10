@@ -36,13 +36,8 @@ public class GamePanel extends JPanel{
 
     @Override
     public void paintComponent(Graphics g){
-<<<<<<< Updated upstream
-        super.paintComponent(g); //
-        // drawGrid(g);
-=======
         super.paintComponent(g);
         drawGrid(g);
->>>>>>> Stashed changes
         game.render(g);
     }
 
