@@ -32,8 +32,7 @@ public class PlayerManager {
     }
 
     public void update(){
-        greenSlime.update();
-        yellowSlime.update();
+        currentPlayer.update();
     }
 
     public void draw(Graphics g){

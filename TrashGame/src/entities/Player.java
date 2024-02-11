@@ -17,14 +17,14 @@ public class Player extends RigidBody implements Controller{
     private boolean Left, Right, Up, Down;
     private float jumpForce = 2.5f*Game.SCALE;
     private float maxSpeed = 0.75f*Game.SCALE;//75
-
     private Color colorPlayer = Color.white; // for debug
     public Player(Area hitbox) {
         super(hitbox);
     }
 
+    @Override
     public void update(){
-        move();
+        updateMove();
         super.update();
         // System.out.println(String.format("Player velX:%f velY:%f", velX, velY));
         // System.out.println(this.getBoundsX().x - this.hitbox.x);
@@ -38,41 +38,44 @@ public class Player extends RigidBody implements Controller{
         g2d.setColor(colorPlayer);
         g2d.fill(this.hitbox);
 
+        // g2d.setColor(Color.red);
+        // g2d.draw(getBoundsX());
+        
+        // g2d.setColor(Color.blue);
+        // g2d.draw(getBoundsY());
         g2d.setColor(Color.red);
-        g2d.draw(getBoundsX());
-        
-        g2d.setColor(Color.blue);
-        g2d.draw(getBoundsY());
-        
+        g2d.draw(getFloorHitbox());
 
     }
-    @Override
-    protected void move(){
-        hitbox.x += velX;
-        hitbox.y += velY;
+
+    private void updateMove(){  
         
-        if(Left) velX -= _acc;
-        else if(Right) velX += _acc;
-        else if(!Left && !Right){
-            if(velX > 0)
-                if(velX - _dcc <= 0) velX = 0;
-                else velX -= _dcc;
-            else if(velX < 0) 
-                if(velX + _dcc >= 0) velX = 0;
-                else velX += _dcc;
-            
+        if(Left && Right || !Left && !Right)
+            velX*= 0.5;
+        else if(Left && !Right)
+            velX--;
+        else if(Right && !Left)
+            velX++;
+
+        if(velX > 0 && velX < 0.75)
+            velX = 0;
+        if(velX > -0.75 && velX < 0)    
+            velX = 0;
+       
+        if(Up){
+            for(Area area : areas){
+                if(area.intersects(getFloorHitbox())){
+                    velY -= 0.3;
+                }
+            }
         }
-        
-        if(Up) velY -= _acc;
-        else if(Down) velY += _acc;
-        else if(!Up && !Down){
-            if(velY > 0) velY -= _dcc;
-            else if(velY < 0) velY += _dcc;
-        }
+
+
 
         velX = clamp(velX, -maxSpeed, maxSpeed);
-        velY = clamp(velY, -maxSpeed, maxSpeed);
+        // velY = clamp(velY, -maxSpeed, maxSpeed);
     }
+
 
     public void setColor(Color color){
         colorPlayer = color;
