@@ -12,7 +12,8 @@ public class RigidBody {
     
     protected float mass;
     protected float COR = 0.25f * Game.SCALE;
-    
+    protected float gravity = 0.04f * Game.SCALE;
+    protected float friction_box = 0.27f * Game.SCALE;
     protected Area hitbox;
     
     public static ArrayList<Area> areas = new ArrayList<Area>();
@@ -42,16 +43,16 @@ public class RigidBody {
 
         
         if(!isOnFloor)
-            velY += 0.1; //gravity
+            velY += gravity; //gravity
         
         hitbox.x += velX;
         hitbox.y += velY;
 
         //แรงเสียดทาน
-        velX *= 0.8;
-        if(velX>0 && velX<0.1)
+        velX *= friction_box;
+        if(velX>0 && velX<gravity)
             velX = 0;
-        if(velX>-0.1 && velX<0)
+        if(velX>-gravity && velX<0)
             velX = 0;
     }
 

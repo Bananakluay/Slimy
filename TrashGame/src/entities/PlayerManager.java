@@ -69,8 +69,19 @@ public class PlayerManager {
     private void simulateMovementKey() {
         if (lastPlayer.Left) {
             currentPlayer.Left = true;
-        } else if (lastPlayer.Right) {
+            currentPlayer.Right = false;
+        }
+        if (lastPlayer.Up) {
+            currentPlayer.Up = true;
+            currentPlayer.Down = false;
+        }
+        if (lastPlayer.Down) {
+            currentPlayer.Down = true;
+            currentPlayer.Up = false;
+        }
+        if (lastPlayer.Right) {
             currentPlayer.Right = true;
+            currentPlayer.Left = false;
         }
     }
 }

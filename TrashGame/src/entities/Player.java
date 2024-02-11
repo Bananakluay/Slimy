@@ -21,7 +21,6 @@ public class Player extends RigidBody implements Controller {
 
     private float jumpForce = 1.5f * Game.SCALE;
     private float downForce = 1.6f * Game.SCALE;
-
     private boolean isCurrentPlayer;
 
     private Color colorPlayer = Color.white; // for debug
