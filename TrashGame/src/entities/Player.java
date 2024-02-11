@@ -16,11 +16,16 @@ public class Player extends RigidBody implements Controller {
     // protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
     protected boolean Left, Right, Up, Down;
 
-    private float minVelX = -0.75f * Game.SCALE;
-    private float maxVelX = 0.75f * Game.SCALE;
+    private float accelerate = 0.33f * Game.SCALE;
+    private long pressStartTime = 0;
+    private boolean isTiming = false;
 
+    private float minVelX = -0.7f * Game.SCALE;
+    private float maxVelX = 0.7f * Game.SCALE;
+    private float jumpacc = 0.37f * Game.SCALE;
     private float jumpForce = 1.5f * Game.SCALE;
     private float downForce = 1.6f * Game.SCALE;
+    private int count = 0;
     private boolean isCurrentPlayer;
 
     private Color colorPlayer = Color.white; // for debug
@@ -61,7 +66,7 @@ public class Player extends RigidBody implements Controller {
 
         movement();
         jumping();
-
+        Timingjump();
         velX = clamp(velX, minVelX, maxVelX);
         velY = clamp(velY, -jumpForce, downForce);
     }
@@ -70,9 +75,9 @@ public class Player extends RigidBody implements Controller {
         if (Left && Right || !Left && !Right)
             velX *= 0.5;
         else if (Left && !Right)
-            velX--;
+            velX -= accelerate;
         else if (Right && !Left)
-            velX++;
+            velX += accelerate;
 
         if (velX > 0 && velX < 0.75)
             velX = 0;
@@ -81,8 +86,9 @@ public class Player extends RigidBody implements Controller {
     }
 
     private void jumping() {
-        if (Up && isOnFloor)
-            velY -= jumpForce;
+        if (Up && isOnFloor) {
+            velY -= jumpacc;
+        }
     }
 
     public void setColor(Color color) {
@@ -101,6 +107,27 @@ public class Player extends RigidBody implements Controller {
         isCurrentPlayer = true;
     }
 
+    public void Timingjump() {
+        if (isTiming) {
+            long elapsedTime = System.currentTimeMillis() - pressStartTime;
+            // Do something with elapsedTime:
+            System.out.println("Time since key press: " + elapsedTime + " milliseconds");
+            count++;
+            if (count == 2) {
+                if (elapsedTime < 50) {
+                    velY -= jumpacc * (50 * 0.00115f);
+                    count = 0;
+                } else {
+                    velY -= jumpacc * (elapsedTime * 0.001f);
+                    count = 0;
+                }
+            }
+            if (elapsedTime > 205)
+                isTiming = false;
+
+        }
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -108,6 +135,8 @@ public class Player extends RigidBody implements Controller {
             case KeyEvent.VK_W:
                 Up = true;
                 Down = false; // for smooth switch direction
+                pressStartTime = System.currentTimeMillis();
+                isTiming = true;
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
@@ -135,6 +164,8 @@ public class Player extends RigidBody implements Controller {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
                 Up = false;
+                isTiming = false;
+                pressStartTime = 0;
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
