@@ -12,7 +12,7 @@ import simplePhysics.RigidBody;
 @SuppressWarnings("unused")
 public class Player extends RigidBody implements Controller{
 
-    protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
+    // protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
     private boolean Left, Right, Up, Down;
 
     private float minVelX = -0.75f*Game.SCALE;
@@ -31,8 +31,10 @@ public class Player extends RigidBody implements Controller{
 
     @Override
     public void update(){
-        if(isCurrentPlayer)
+        //velx = 0
+        if(isCurrentPlayer) 
             updateVelocity();
+        //velX = -12
         super.update();
     }
 
@@ -50,8 +52,8 @@ public class Player extends RigidBody implements Controller{
         // g2d.setColor(Color.blue);
         // g2d.draw(getBoundsY());
         
-        // g2d.setColor(Color.red);
-        // g2d.draw(getFloorHitbox());
+        g2d.setColor(Color.red);
+        g2d.draw(getFloorHitbox());
 
     }
 

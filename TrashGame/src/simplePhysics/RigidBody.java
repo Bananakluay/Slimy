@@ -16,6 +16,7 @@ public class RigidBody {
     protected Area hitbox;
     
     public static ArrayList<Area> areas = new ArrayList<Area>();
+    
     public static ArrayList<RigidBody> objs = new ArrayList<RigidBody>();
 
     protected boolean isOnFloor = false;
@@ -23,31 +24,35 @@ public class RigidBody {
     public RigidBody(Area hitbox){
         this.hitbox = hitbox;
         mass = hitbox.width * hitbox.height;
+
         areas.add(this.hitbox);
+
         objs.add(this);
     }
    
     public void update(){
-        objectCollision();
-        areasCollision();
-        checkIsOnFloor();
+        objectCollision();// เช็ตการชนของ obj
+        areasCollision();//เช็คการชนของ กำแพง
+        checkIsOnFloor();//อยู่พิ้น?
         move();
         
     }
     
     protected void move(){
 
+        
+        if(!isOnFloor)
+            velY += 0.1; //gravity
+        
+        hitbox.x += velX;
+        hitbox.y += velY;
+
+        //แรงเสียดทาน
         velX *= 0.8;
         if(velX>0 && velX<0.1)
             velX = 0;
         if(velX>-0.1 && velX<0)
             velX = 0;
-
-        if(!isOnFloor)
-            velY += 0.1;
-
-        hitbox.x += velX;
-        hitbox.y += velY;
     }
 
     protected void checkIsOnFloor(){
@@ -142,18 +147,18 @@ public class RigidBody {
         }
     }
 
-    protected void inElasticCollisionX(RigidBody obj){
-        float combinedMass = mass + obj.mass;
-        float newVelX = ((velX * mass) + (obj.velX * obj.mass) * COR) / combinedMass;
-        obj.velX = newVelX;
+    // protected void inElasticCollisionX(RigidBody obj){
+    //     float combinedMass = mass + obj.mass;
+    //     float newVelX = ((velX * mass) + (obj.velX * obj.mass) * COR) / combinedMass;
+    //     obj.velX = newVelX;
         
-    }
+    // }
 
-    protected void inElasticCollisionY(RigidBody obj){
-        float combinedMass = mass + obj.mass;
-        float newVelY = ((velY * mass) + (obj.velY * obj.mass) * COR) / combinedMass;
-        obj.velY = newVelY;    
-    }
+    // protected void inElasticCollisionY(RigidBody obj){
+    //     float combinedMass = mass + obj.mass;
+    //     float newVelY = ((velY * mass) + (obj.velY * obj.mass) * COR) / combinedMass;
+    //     obj.velY = newVelY;    
+    // }
 
 
 
