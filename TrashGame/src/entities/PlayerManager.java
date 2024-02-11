@@ -22,8 +22,10 @@ public class PlayerManager {
 
         yellowSlime = new Player(new Area(15*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         yellowSlime.setColor(Color.yellow);
-        
+
         currentPlayer = greenSlime;
+        currentPlayer.setIsCurrentPlayer();
+        
     }
 
     public void update(){
@@ -39,10 +41,13 @@ public class PlayerManager {
     public void switchPlayer(){
         if(currentPlayer == greenSlime){
             currentPlayer = yellowSlime;
+            currentPlayer.setIsCurrentPlayer();
             greenSlime.reset();
+            
         }
         else if(currentPlayer == yellowSlime){
             currentPlayer = greenSlime;
+            currentPlayer.setIsCurrentPlayer();
             yellowSlime.reset();      
         }
 

@@ -7,16 +7,19 @@ import main.Game;
 
 
 public class RigidBody {
+    
     protected float velX = 0, velY = 0;
     
     protected float mass;
     protected float COR = 0.25f * Game.SCALE;
-
+    
     protected Area hitbox;
+    
     public static ArrayList<Area> areas = new ArrayList<Area>();
     public static ArrayList<RigidBody> objs = new ArrayList<RigidBody>();
 
     protected boolean isOnFloor = false;
+
     public RigidBody(Area hitbox){
         this.hitbox = hitbox;
         mass = hitbox.width * hitbox.height;
@@ -33,8 +36,16 @@ public class RigidBody {
     }
     
     protected void move(){
+
+        velX *= 0.8;
+        if(velX>0 && velX<0.1)
+            velX = 0;
+        if(velX>-0.1 && velX<0)
+            velX = 0;
+
         if(!isOnFloor)
             velY += 0.1;
+
         hitbox.x += velX;
         hitbox.y += velY;
     }
@@ -123,7 +134,7 @@ public class RigidBody {
                     if(hitbox.x + hitbox.width == obj.hitbox.x){
                         obj.velX = (velX*mass + obj.velX*obj.mass*COR) / (obj.mass + mass);
                         velX = 0;
-                        hitbox.x = obj.hitbox.x - obj.hitbox.width;
+                        hitbox.x = obj.hitbox.x - hitbox.width;
                     }
                 }
             }

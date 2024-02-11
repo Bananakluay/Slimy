@@ -21,7 +21,7 @@ public class Player extends RigidBody implements Controller{
     private float jumpForce = 1.5f*Game.SCALE;
     private float downForce = 1.6f*Game.SCALE;
 
-
+    private boolean isCurrentPlayer;
 
 
     private Color colorPlayer = Color.white; // for debug
@@ -31,7 +31,8 @@ public class Player extends RigidBody implements Controller{
 
     @Override
     public void update(){
-        updateVelocity();
+        if(isCurrentPlayer)
+            updateVelocity();
         super.update();
     }
 
@@ -48,8 +49,9 @@ public class Player extends RigidBody implements Controller{
         
         // g2d.setColor(Color.blue);
         // g2d.draw(getBoundsY());
-        g2d.setColor(Color.red);
-        g2d.draw(getFloorHitbox());
+        
+        // g2d.setColor(Color.red);
+        // g2d.draw(getFloorHitbox());
 
     }
 
@@ -90,8 +92,11 @@ public class Player extends RigidBody implements Controller{
         Right = false;
         Up = false;
         Down =false;
+        isCurrentPlayer = false;
     }
-
+    public void setIsCurrentPlayer(){
+        isCurrentPlayer = true;
+    }
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {

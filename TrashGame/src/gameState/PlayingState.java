@@ -14,7 +14,9 @@ public class PlayingState extends GameState{
 
     private PlayerManager player;
     private LevelManager level;
-    private Box box, box2;
+
+    private Box box, box2; // test
+
     public PlayingState(){
         scene();
     }
@@ -23,8 +25,8 @@ public class PlayingState extends GameState{
         level = new LevelManager();
         player = new PlayerManager();
         
-        box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
-        // box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, 2*Game.TILES_SIZE, 2*Game.TILES_SIZE));
+        box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         
       
     }
@@ -32,18 +34,19 @@ public class PlayingState extends GameState{
     @Override
     public void update() {
         level.update();
-        box.update();
-        // System.out.println(box.getVelX());
-        // box2.update();
         player.update();
+
+        box.update();
+        box2.update();
     }
 
     @Override
     public void draw(Graphics g) {
         level.draw(g);
-        box.draw(g);
-        // box2.draw(g);
         player.draw(g);
+        
+        box.draw(g);
+        box2.draw(g);
     }
 
     @Override

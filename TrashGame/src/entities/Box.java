@@ -12,15 +12,15 @@ public class Box extends RigidBody{
     public Box(Area hitbox) {
         super(hitbox);
     }
-    @Override
-    public void update(){
-        velX *= 0.8;
-        if(velX>0 && velX<0.1)
-            velX = 0;
-        if(velX>-0.1 && velX<0)
-            velX = 0;
-        super.update();
-    }
+    // @Override
+    // public void update(){
+    //     velX *= 0.8;
+    //     if(velX>0 && velX<0.1)
+    //         velX = 0;
+    //     if(velX>-0.1 && velX<0)
+    //         velX = 0;
+    //     super.update();
+    // }
     public void draw(Graphics g){
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.white);
