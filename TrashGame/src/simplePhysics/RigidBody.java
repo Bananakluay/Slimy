@@ -27,19 +27,22 @@ public class RigidBody {
     public void update(){
         objectCollision();
         areasCollision();
-        updateIsOnFloor();
+        checkIsOnFloor();
         move();
         
     }
     
     protected void move(){
-        
-        velY += 0.1;
+        if(!isOnFloor)
+            velY += 0.1;
         hitbox.x += velX;
         hitbox.y += velY;
     }
 
-    
+    protected void checkIsOnFloor(){
+        updateIsNotOnFloor();
+        updateIsOnFloor();
+    }
 
     protected void areasCollision(){
 
@@ -52,7 +55,6 @@ public class RigidBody {
             boolean isOnDown = hitbox.y + hitbox.height/2 > area.y + area.height/2;
 
             if(getBoundsX().intersects(area)){
-                // System.out.println("collision x");
                 if(velX<0 && isOnRight){//go left and is on is on right of that area
                     velX = 0;
                     hitbox.x = area.x + area.width;
@@ -78,13 +80,11 @@ public class RigidBody {
 
     protected void objectCollision(){
 
- 
         for(int i=0;i<objs.size();i++){
-            if(objs.get(i).hashCode() == this.hashCode())
+            if(objs.get(i).hashCode() == this.hashCode())//ป้องกันกัน เป็นเช็คตัวเอง
                 continue;
             
             RigidBody obj = objs.get(i);
-
 
             boolean isOnLeft = hitbox.x + hitbox.width/2 < obj.hitbox.x + obj.hitbox.width/2;
             boolean isOnRight = hitbox.x + hitbox.width/2 > obj.hitbox.x + obj.hitbox.width/2;
@@ -96,7 +96,6 @@ public class RigidBody {
                         obj.velX = (velX*mass + obj.velX*obj.mass*COR) / (obj.mass + mass);
                         velX = 0;
                         hitbox.x = obj.hitbox.x + obj.hitbox.width;
-                        System.out.println("collide right" + obj.velX);
                     }
                 }
                 else if(velX>0 && isOnLeft){//go right and is on left of that area
@@ -105,41 +104,26 @@ public class RigidBody {
                         obj.velX = (velX*mass + obj.velX*obj.mass*COR) / (obj.mass + mass);
                         velX = 0;
                         hitbox.x = obj.hitbox.x - obj.hitbox.width;
-                        System.out.println("collide left" + obj.velX);
                     }
                 }
             }
-           
-            
-            // if(getBoundsY().intersects(obj.hitbox)){
-            //     if(velY<0 && isOnDown){ //go up and is on down of that area
-            //         hitbox.y = obj.hitbox.y + obj.hitbox.height;
-            //     }
-            //     else if(velY>0 && isOnTop){//go down and is on top of that area
-            //         hitbox.y = obj.hitbox.y - hitbox.height;
-            //     }
-            // }       
                                  
         }
     }
 
     protected void inElasticCollisionX(RigidBody obj){
-        
-        
         float combinedMass = mass + obj.mass;
         float newVelX = ((velX * mass) + (obj.velX * obj.mass) * COR) / combinedMass;
         obj.velX = newVelX;
-        // return newVelX;
         
     }
 
     protected void inElasticCollisionY(RigidBody obj){
         float combinedMass = mass + obj.mass;
         float newVelY = ((velY * mass) + (obj.velY * obj.mass) * COR) / combinedMass;
-        obj.velY = newVelY;
-        
+        obj.velY = newVelY;    
     }
-  
+
     public Rectangle getBoundsX(){
 
         float bx = hitbox.x + velX;
@@ -163,16 +147,24 @@ public class RigidBody {
             if(this.hitbox != area && area.intersects(getFloorHitbox())){
                 isOnFloor = true;
             }
+           
+        }
+    }
+    public void updateIsNotOnFloor(){
+        for(Area area : areas){
+            if(this.hitbox != area && !area.intersects(getFloorHitbox())){
+                isOnFloor = false;
+            }
         }
     }
     public Area getFloorHitbox(){
-        float floorHitboxWidth = hitbox.width * 0.5f; 
+        float floorHitboxWidth = hitbox.width * 0.8f; 
         float floorHitboxHeight = 4; 
 
         float floorHitboxX = hitbox.x + (hitbox.width - floorHitboxWidth) / 2;
         float floorHitboxY = hitbox.y + hitbox.height - floorHitboxHeight;
 
-        return new Area(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight+2);
+        return new Area(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight);
     }
 
 
@@ -180,18 +172,13 @@ public class RigidBody {
         return Math.max(min, Math.min(max, val));
     }
 
-    public static void setInterection(Area area){
+    public static void setAreaInterection(Area area){
         areas.add(area);
     }
-    public static void setInterection(RigidBody obj){
-        objs.add(obj);
-    }
+
     public static void setAreasInterection(ArrayList<Area> area){
         areas.addAll(area);
     }  
-    public static void setObjectListInterection(ArrayList<RigidBody> obj){
-        objs.addAll(obj);
-    }
 
 
     public Area getHitbox() {

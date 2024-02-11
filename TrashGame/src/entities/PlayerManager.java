@@ -25,10 +25,6 @@ public class PlayerManager {
         yellowSlime.setColor(Color.yellow);
         
         currentPlayer = greenSlime;
-
-        RigidBody.setInterection(greenSlime);
-        RigidBody.setInterection(yellowSlime);
-
     }
 
     public void update(){

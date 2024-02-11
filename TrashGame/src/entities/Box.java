@@ -21,10 +21,10 @@ public class Box extends RigidBody{
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.white);
         g2d.fill(hitbox);
-        g2d.setColor(Color.red);
-        g2d.draw(getBoundsX());
-        g2d.setColor(Color.blue);
-        g2d.draw(getBoundsY());
+        // g2d.setColor(Color.red);
+        // g2d.draw(getBoundsX());
+        // g2d.setColor(Color.blue);
+        // g2d.draw(getBoundsY());
 
     }
     
