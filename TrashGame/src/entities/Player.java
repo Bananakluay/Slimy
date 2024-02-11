@@ -26,8 +26,6 @@ public class Player extends RigidBody implements Controller{
     public void update(){
         updateMove();
         super.update();
-        // System.out.println(String.format("Player velX:%f velY:%f", velX, velY));
-        // System.out.println(this.getBoundsX().x - this.hitbox.x);
     }
 
     public void draw(Graphics g){
@@ -61,19 +59,16 @@ public class Player extends RigidBody implements Controller{
             velX = 0;
         if(velX > -0.75 && velX < 0)    
             velX = 0;
-       
-        if(Up){
-            for(Area area : areas){
-                if(area.intersects(getFloorHitbox())){
-                    velY -= 0.3;
-                }
-            }
+        
+        if(Up && isOnFloor){
+            velY -= 3;
+            isOnFloor = false;
         }
 
 
 
         velX = clamp(velX, -maxSpeed, maxSpeed);
-        // velY = clamp(velY, -maxSpeed, maxSpeed);
+        velY = clamp(velY, -6, 4);
     }
 
 

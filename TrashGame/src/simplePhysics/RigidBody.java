@@ -2,6 +2,7 @@ package simplePhysics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import entities.Player;
 import main.Game;
 
 
@@ -26,6 +27,7 @@ public class RigidBody {
     public void update(){
         objectCollision();
         areasCollision();
+        updateIsOnFloor();
         move();
         
     }
@@ -33,7 +35,6 @@ public class RigidBody {
     protected void move(){
         
         velY += 0.1;
-        
         hitbox.x += velX;
         hitbox.y += velY;
     }
@@ -87,14 +88,12 @@ public class RigidBody {
 
             boolean isOnLeft = hitbox.x + hitbox.width/2 < obj.hitbox.x + obj.hitbox.width/2;
             boolean isOnRight = hitbox.x + hitbox.width/2 > obj.hitbox.x + obj.hitbox.width/2;
-            boolean isOnTop = hitbox.y + hitbox.height/2 < obj.hitbox.y + obj.hitbox.height/2;
-            boolean isOnDown = hitbox.y + hitbox.height/2 > obj.hitbox.y + obj.hitbox.height/2;
 
             if(getBoundsX().intersects(obj.hitbox)){
                 if(velX<0 && isOnRight){//go left and is on is on right of that area
                     hitbox.x = obj.hitbox.x + obj.hitbox.width;
                     if(hitbox.x == obj.hitbox.x + obj.hitbox.width ){
-                        obj.velX = (velX*mass + obj.velX*obj.mass) / (obj.mass + mass);
+                        obj.velX = (velX*mass + obj.velX*obj.mass*COR) / (obj.mass + mass);
                         velX = 0;
                         hitbox.x = obj.hitbox.x + obj.hitbox.width;
                         System.out.println("collide right" + obj.velX);
@@ -103,22 +102,23 @@ public class RigidBody {
                 else if(velX>0 && isOnLeft){//go right and is on left of that area
                     hitbox.x = obj.hitbox.x - hitbox.width;
                     if(hitbox.x + hitbox.width == obj.hitbox.x){
-                        obj.velX = (velX*mass + obj.velX*obj.mass) / (obj.mass + mass);
+                        obj.velX = (velX*mass + obj.velX*obj.mass*COR) / (obj.mass + mass);
                         velX = 0;
                         hitbox.x = obj.hitbox.x - obj.hitbox.width;
                         System.out.println("collide left" + obj.velX);
                     }
                 }
             }
+           
             
-            if(getBoundsY().intersects(obj.hitbox)){
-                if(velY<0 && isOnDown){ //go up and is on down of that area
-                    hitbox.y = obj.hitbox.y + obj.hitbox.height;
-                }
-                else if(velY>0 && isOnTop){//go down and is on top of that area
-                    hitbox.y = obj.hitbox.y - hitbox.height;
-                }
-            }       
+            // if(getBoundsY().intersects(obj.hitbox)){
+            //     if(velY<0 && isOnDown){ //go up and is on down of that area
+            //         hitbox.y = obj.hitbox.y + obj.hitbox.height;
+            //     }
+            //     else if(velY>0 && isOnTop){//go down and is on top of that area
+            //         hitbox.y = obj.hitbox.y - hitbox.height;
+            //     }
+            // }       
                                  
         }
     }
@@ -158,25 +158,24 @@ public class RigidBody {
 
         return new Rectangle((int)bx, (int)by, (int)bw, (int)bh);
     }
-
+    public void updateIsOnFloor(){
+        for(Area area : areas){
+            if(this.hitbox != area && area.intersects(getFloorHitbox())){
+                isOnFloor = true;
+            }
+        }
+    }
     public Area getFloorHitbox(){
-        float floorHitboxWidth = hitbox.width * 0.8f; 
+        float floorHitboxWidth = hitbox.width * 0.5f; 
         float floorHitboxHeight = 4; 
 
         float floorHitboxX = hitbox.x + (hitbox.width - floorHitboxWidth) / 2;
         float floorHitboxY = hitbox.y + hitbox.height - floorHitboxHeight;
 
-        return new Area(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight+4);
+        return new Area(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight+2);
     }
 
-    public void updateIsOnFloor() {
-        // Check for collision with solid objects below the player
-        for (Area area : areas) {
-            if (area.intersects(getFloorHitbox())) {
-                isOnFloor = true;
-            }
-        }
-    }
+
     protected float clamp(float val, float min, float max) {
         return Math.max(min, Math.min(max, val));
     }
