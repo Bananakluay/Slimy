@@ -6,8 +6,8 @@ import java.awt.geom.Rectangle2D;
 import gameData.Data.ID;
 public class Area extends Rectangle2D.Float{
     
-    protected boolean isActive = false;
-    protected boolean isMovable = false;
+    
+
     public ID id = ID.AREA;
     public Area(float x, float y, float width, float height){
         super(x, y, width, height);

@@ -116,6 +116,8 @@ public class RigidBody {
 
         for (int i = 0; i < objs.size(); i++) {
             if (objs.get(i).hashCode() == this.hashCode())// ป้องกันกัน เป็นเช็คตัวเอง
+        for(int i=0;i<objs.size();i++){
+            if(objs.get(i).hashCode() == this.hashCode())//ป้องกันการ เป็นเช็คตัวเอง
                 continue;
 
             RigidBody obj = objs.get(i);
