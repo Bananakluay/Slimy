@@ -20,13 +20,13 @@ public class Level {
 
 	private BufferedImage imgLvlData;
 	private BufferedImage[] TileSet = Sprite.loadSpriteAsList(Data.TileData.TILESET);
-	private ArrayList<Area> tiles = new ArrayList<>();
 
+	private ArrayList<Area> tiles = new ArrayList<>();
 	public Level(BufferedImage imgLvlData) {
 		this.imgLvlData = imgLvlData;
 		generateLevelData();
-		loadTileBlockData();
-		RigidBody.setAreasInterection(tiles);
+		loadTileBlock();
+
 	}
 
 	public void update(){
@@ -48,17 +48,29 @@ public class Level {
 		}
 
 	}
-	public void loadTileBlockData(){
-			for(int row=0;row<imgLvlData.getHeight();row++){
-				for(int col=0;col<imgLvlData.getWidth();col++){
-					Color color = new Color(imgLvlData.getRGB(col, row));
-					int value = color.getRed();
-					if(value != 255){
-						TileBlock tile = new TileBlock(col * Game.TILES_SIZE, row * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE,TileSet[value]);
-						tiles.add(tile);
-					}
+	public void loadTileBlock(){
+		for(int row=0;row<imgLvlData.getHeight();row++){
+			for(int col=0;col<imgLvlData.getWidth();col++){
+				Color color = new Color(imgLvlData.getRGB(col, row));
+				int value = color.getRed();
+				if(value != 255){
+					TileBlock tile = new TileBlock(col * Game.TILES_SIZE, row * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE,TileSet[value]);
+					tiles.add(tile);
 				}
 			}
+		}
+		RigidBody.setAreasInterection(tiles);
+	}
+
+	public void loadTrap(){
+		for(int row=0;row<imgLvlData.getHeight();row++){
+			for(int col=0;col<imgLvlData.getWidth();col++){
+				Color color = new Color(imgLvlData.getRGB(col, row));
+				int value = color.getBlue();
+				
+				
+			}
+		}
 	}
 
 	public ArrayList<Area> getTiles() {

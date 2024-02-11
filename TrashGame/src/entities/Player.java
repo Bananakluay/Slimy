@@ -90,6 +90,9 @@ public class Player extends RigidBody implements Controller {
         colorPlayer = color;
     }
 
+    public Area getHitbox(){
+        return hitbox;
+    }
     public void reset() {
         Left = false;
         Right = false;

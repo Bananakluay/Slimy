@@ -117,7 +117,7 @@ public class RigidBody {
     protected void objectCollision(){
 
         for(int i=0;i<objs.size();i++){
-            if(objs.get(i).hashCode() == this.hashCode())//ป้องกันกัน เป็นเช็คตัวเอง
+            if(objs.get(i).hashCode() == this.hashCode())//ป้องกันการ เป็นเช็คตัวเอง
                 continue;
             
             RigidBody obj = objs.get(i);
@@ -189,9 +189,6 @@ public class RigidBody {
         float floorHitboxY = hitbox.y + hitbox.height - floorHitboxHeight;
 
         return new Area(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight+2);
-    }
-    public float getVelX(){
-        return velX;
     }
 
     public static void setAreaInterection(Area area){
