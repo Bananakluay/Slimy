@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 
 import main.Game;
 import simplePhysics.Area;
-import simplePhysics.RigidBody;
 
 public class PlayerManager {
     Player greenSlime;
@@ -21,7 +20,7 @@ public class PlayerManager {
         greenSlime = new Player(new Area(5*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         greenSlime.setColor(Color.green);
 
-        yellowSlime = new Player(new Area(10*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        yellowSlime = new Player(new Area(15*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         yellowSlime.setColor(Color.yellow);
         
         currentPlayer = greenSlime;
@@ -49,8 +48,8 @@ public class PlayerManager {
 
     }
     public void keyPressed(KeyEvent e){
-        // if(e.getKeyCode() == KeyEvent.VK_R)
-        //     switchPlayer();
+        if(e.getKeyCode() == KeyEvent.VK_R)
+            switchPlayer();
         currentPlayer.keyPressed(e);
     };
 	public void keyReleased(KeyEvent e){

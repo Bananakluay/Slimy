@@ -41,8 +41,6 @@ public class Game implements Runnable{
     }
 
     public void render(Graphics g){
-		//playing 
-		//
 		gsm.getCurrentState().draw(g);
     }
     

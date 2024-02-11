@@ -15,6 +15,10 @@ public class Box extends RigidBody{
     @Override
     public void update(){
         velX *= 0.8;
+        if(velX>0 && velX<0.1)
+            velX = 0;
+        if(velX>-0.1 && velX<0)
+            velX = 0;
         super.update();
     }
     public void draw(Graphics g){

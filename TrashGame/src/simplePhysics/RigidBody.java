@@ -2,7 +2,7 @@ package simplePhysics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import entities.Player;
+
 import main.Game;
 
 
@@ -10,7 +10,7 @@ public class RigidBody {
     protected float velX = 0, velY = 0;
     
     protected float mass;
-    protected float COR = 1f * Game.SCALE;
+    protected float COR = 0.25f * Game.SCALE;
 
     protected Area hitbox;
     public static ArrayList<Area> areas = new ArrayList<Area>();
@@ -44,6 +44,26 @@ public class RigidBody {
         updateIsOnFloor();
     }
 
+    public void updateIsOnFloor(){
+        for(Area area : areas){
+            if(this.hitbox != area && area.intersects(getFloorHitbox())){
+                isOnFloor = true;
+            }
+           
+        }
+    }
+    public void updateIsNotOnFloor(){
+        for(Area area : areas){
+            if(this.hitbox != area && !area.intersects(getFloorHitbox())){
+                isOnFloor = false;
+            }
+        }
+    }
+
+    protected float clamp(float val, float min, float max) {
+        return Math.max(min, Math.min(max, val));
+    }
+
     protected void areasCollision(){
 
         for(int i=0;i<areas.size();i++){
@@ -52,7 +72,7 @@ public class RigidBody {
             boolean isOnLeft = hitbox.x + hitbox.width/2 < area.x + area.width/2;
             boolean isOnRight = hitbox.x + hitbox.width/2 > area.x + area.width/2;
             boolean isOnTop = hitbox.y + hitbox.height/2 < area.y + area.height/2;
-            boolean isOnDown = hitbox.y + hitbox.height/2 > area.y + area.height/2;
+            boolean isOnBot = hitbox.y + hitbox.height/2 > area.y + area.height/2;
 
             if(getBoundsX().intersects(area)){
                 if(velX<0 && isOnRight){//go left and is on is on right of that area
@@ -66,7 +86,7 @@ public class RigidBody {
             }
             
             if(getBoundsY().intersects(area)){
-                if(velY<0 && isOnDown){ //go up and is on down of that area
+                if(velY<0 && isOnBot){ //go up and is on down of that area
                     velY = 0;
                     hitbox.y = area.y + area.height;
                 }
@@ -124,6 +144,8 @@ public class RigidBody {
         obj.velY = newVelY;    
     }
 
+
+
     public Rectangle getBoundsX(){
 
         float bx = hitbox.x + velX;
@@ -142,21 +164,7 @@ public class RigidBody {
 
         return new Rectangle((int)bx, (int)by, (int)bw, (int)bh);
     }
-    public void updateIsOnFloor(){
-        for(Area area : areas){
-            if(this.hitbox != area && area.intersects(getFloorHitbox())){
-                isOnFloor = true;
-            }
-           
-        }
-    }
-    public void updateIsNotOnFloor(){
-        for(Area area : areas){
-            if(this.hitbox != area && !area.intersects(getFloorHitbox())){
-                isOnFloor = false;
-            }
-        }
-    }
+    
     public Area getFloorHitbox(){
         float floorHitboxWidth = hitbox.width * 0.8f; 
         float floorHitboxHeight = 4; 
@@ -164,12 +172,10 @@ public class RigidBody {
         float floorHitboxX = hitbox.x + (hitbox.width - floorHitboxWidth) / 2;
         float floorHitboxY = hitbox.y + hitbox.height - floorHitboxHeight;
 
-        return new Area(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight);
+        return new Area(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight+2);
     }
-
-
-    protected float clamp(float val, float min, float max) {
-        return Math.max(min, Math.min(max, val));
+    public float getVelX(){
+        return velX;
     }
 
     public static void setAreaInterection(Area area){
@@ -180,8 +186,5 @@ public class RigidBody {
         areas.addAll(area);
     }  
 
-
-    public Area getHitbox() {
-        return hitbox;
-    }
+    
 }

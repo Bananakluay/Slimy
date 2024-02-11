@@ -3,7 +3,6 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 
 import input.Controller;
@@ -15,8 +14,16 @@ public class Player extends RigidBody implements Controller{
 
     protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
     private boolean Left, Right, Up, Down;
-    private float jumpForce = 2.5f*Game.SCALE;
-    private float maxSpeed = 0.75f*Game.SCALE;//75
+
+    private float minVelX = -0.75f*Game.SCALE;
+    private float maxVelX = 0.75f*Game.SCALE;
+
+    private float jumpForce = 1.5f*Game.SCALE;
+    private float downForce = 1.6f*Game.SCALE;
+
+
+
+
     private Color colorPlayer = Color.white; // for debug
     public Player(Area hitbox) {
         super(hitbox);
@@ -24,7 +31,7 @@ public class Player extends RigidBody implements Controller{
 
     @Override
     public void update(){
-        updateMove();
+        updateVelocity();
         super.update();
     }
 
@@ -46,8 +53,16 @@ public class Player extends RigidBody implements Controller{
 
     }
 
-    private void updateMove(){  
+    private void updateVelocity(){  
         
+        movement();
+        jumping();
+
+        velX = clamp(velX, minVelX, maxVelX);
+        velY = clamp(velY, -jumpForce, downForce);
+    }
+    
+    private void movement(){
         if(Left && Right || !Left && !Right)
             velX*= 0.5;
         else if(Left && !Right)
@@ -59,40 +74,22 @@ public class Player extends RigidBody implements Controller{
             velX = 0;
         if(velX > -0.75 && velX < 0)    
             velX = 0;
-        
-        if(Up && isOnFloor){
-            velY -= 3;
-            isOnFloor = false;
-        }
-
-
-
-        velX = clamp(velX, -maxSpeed, maxSpeed);
-        velY = clamp(velY, -6, 4);
     }
 
+    private void jumping(){
+        if(Up && isOnFloor)
+            velY -= jumpForce;
+    }
 
     public void setColor(Color color){
         colorPlayer = color;
     }
+
     public void reset(){
         Left = false;
         Right = false;
         Up = false;
         Down =false;
-    }
-
-    //not finish
-    public boolean getLeft() {return Left;}
-    public boolean getRight() {return Right;}
-    public boolean getUp() {return Up;}
-    public boolean getDown() {return Down;}
-    //not finish
-    public void setKeyStatus(boolean Left, boolean Right, boolean Up, boolean Down){
-        this.Left = Left;
-        this.Right = Right;
-        this.Up = Up;
-        this.Down = Down;
     }
 
     @Override

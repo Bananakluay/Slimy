@@ -5,12 +5,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import entities.Box;
-import entities.Player;
 import entities.PlayerManager;
 import levels.LevelManager;
 import main.Game;
 import simplePhysics.Area;
-import simplePhysics.RigidBody;
 
 public class PlayingState extends GameState{
 
@@ -26,7 +24,7 @@ public class PlayingState extends GameState{
         player = new PlayerManager();
         
         box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
-        box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        // box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         
       
     }
@@ -35,7 +33,8 @@ public class PlayingState extends GameState{
     public void update() {
         level.update();
         box.update();
-        box2.update();
+        // System.out.println(box.getVelX());
+        // box2.update();
         player.update();
     }
 
@@ -43,7 +42,7 @@ public class PlayingState extends GameState{
     public void draw(Graphics g) {
         level.draw(g);
         box.draw(g);
-        box2.draw(g);
+        // box2.draw(g);
         player.draw(g);
     }
 
