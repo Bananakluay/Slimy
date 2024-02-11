@@ -1,5 +1,4 @@
 package simplePhysics;
-
 import java.awt.Rectangle;
 import java.util.ArrayList;
 

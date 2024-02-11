@@ -10,7 +10,7 @@ import inputImage.Sprite;
 import main.Game;
 import simplePhysics.Area;
 import simplePhysics.RigidBody;
-import TileMap.TileBlock;
+import tileMap.TileBlock;
 import gameData.*;
 
 @SuppressWarnings("unused")
