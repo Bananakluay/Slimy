@@ -15,14 +15,14 @@ public class Trap extends Area{
     }
 
 
-    protected void activate(){
+    protected void activate(Player player){
         System.out.println("activated!!!!");
     };
 
     public void detection(){
         for (Player player : players) {
             if(player.getHitbox().intersects(this)){
-                this.activate();
+                this.activate(player);
             }
         }
     }

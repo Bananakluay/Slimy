@@ -2,9 +2,11 @@ package traps;
 
 import java.awt.image.BufferedImage;
 
-public class Thorn extends Trap{
+import entities.Player;
+
+public class Spike extends Trap{
     BufferedImage img;
-    public Thorn(float x, float y, float width, float height, BufferedImage img) {
+    public Spike(float x, float y, float width, float height, BufferedImage img) {
         super(x, y, width, height);
         this.img = img;
     }
@@ -14,7 +16,8 @@ public class Thorn extends Trap{
     }
 
     @Override
-    protected void activate(){
+    protected void activate(Player player){
+
         System.out.println("You hit thorn");
     }
     
