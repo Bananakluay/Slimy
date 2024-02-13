@@ -22,6 +22,9 @@ public class Player extends RigidBody implements Controller {
     private boolean isCoyote = false;
     private long Start_count_coyote = 0;
     private boolean Coyote_jump = false;
+    private float coyote_scale = 0.37f * Game.SCALE;
+    private float Hold_scale_L = 0.000383f * Game.SCALE;
+    private float Hold_scale_H = 0.00033f * Game.SCALE;
 
     private float minVelX = -0.7f * Game.SCALE;
     private float maxVelX = 0.7f * Game.SCALE;
@@ -95,7 +98,7 @@ public class Player extends RigidBody implements Controller {
             jump = true;
         }
         if (Coyote_jump && Up) {
-            velY -= jumpForce * 1.1;
+            velY -= jumpForce * coyote_scale;
             jump = true;
             Coyote_jump = false;
         }
@@ -126,10 +129,10 @@ public class Player extends RigidBody implements Controller {
             if (jump = true) {
                 if (count == 2) {
                     if (elapsedTime < 50) {
-                        velY -= jumpacc * (50 * 0.00115f);
+                        velY -= jumpacc * (50 * Hold_scale_L);
                         count = 0;
                     } else {
-                        velY -= jumpacc * (elapsedTime * 0.001f);
+                        velY -= jumpacc * (elapsedTime * Hold_scale_H);
                         count = 0;
                     }
                 }
