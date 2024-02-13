@@ -14,11 +14,14 @@ import simplePhysics.RigidBody;
 public class Player extends RigidBody implements Controller {
 
     // protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
-    protected boolean Left, Right, Up, Down;
+    protected boolean Left, Right, Up, Down, jump = false;
 
     private float accelerate = 0.33f * Game.SCALE;
     private long pressStartTime = 0;
     private boolean isTiming = false;
+    private boolean isCoyote = false;
+    private long Start_count_coyote = 0;
+    private boolean Coyote_jump = false;
 
     private float minVelX = -0.7f * Game.SCALE;
     private float maxVelX = 0.7f * Game.SCALE;
@@ -63,7 +66,7 @@ public class Player extends RigidBody implements Controller {
     }
 
     private void updateVelocity() {
-
+        checkfloor();
         movement();
         jumping();
         Timingjump();
@@ -86,8 +89,15 @@ public class Player extends RigidBody implements Controller {
     }
 
     private void jumping() {
+        Coyote();
         if (Up && isOnFloor) {
             velY -= jumpacc;
+            jump = true;
+        }
+        if (Coyote_jump && Up) {
+            velY -= jumpForce * 1.1;
+            jump = true;
+            Coyote_jump = false;
         }
     }
 
@@ -111,20 +121,45 @@ public class Player extends RigidBody implements Controller {
         if (isTiming) {
             long elapsedTime = System.currentTimeMillis() - pressStartTime;
             // Do something with elapsedTime:
-            System.out.println("Time since key press: " + elapsedTime + " milliseconds");
+            // System.out.println("Time since key press: " + elapsedTime + " milliseconds");
             count++;
-            if (count == 2) {
-                if (elapsedTime < 50) {
-                    velY -= jumpacc * (50 * 0.00115f);
-                    count = 0;
-                } else {
-                    velY -= jumpacc * (elapsedTime * 0.001f);
-                    count = 0;
+            if (jump = true) {
+                if (count == 2) {
+                    if (elapsedTime < 50) {
+                        velY -= jumpacc * (50 * 0.00115f);
+                        count = 0;
+                    } else {
+                        velY -= jumpacc * (elapsedTime * 0.001f);
+                        count = 0;
+                    }
                 }
             }
             if (elapsedTime > 205)
                 isTiming = false;
+        }
+    }
 
+    public void Coyote() {
+        if (isCoyote && !jump) {
+            long coyoteTime = System.currentTimeMillis() - Start_count_coyote;
+            // Do something with elapsedTime:
+            // System.out.println("Time since key press: " + elapsedTime + " milliseconds");
+
+            if (coyoteTime < 100 && Up) {
+                Coyote_jump = true;
+
+            }
+        }
+    }
+
+    private void checkfloor() {
+        if (!Up && !isOnFloor && !isCoyote && !jump) {
+            isCoyote = true;
+            Start_count_coyote = System.currentTimeMillis();
+        }
+        if (isOnFloor) {
+            isCoyote = false;
+            jump = false;
         }
     }
 
