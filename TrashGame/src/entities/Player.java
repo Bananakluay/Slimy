@@ -239,4 +239,8 @@ public class Player extends RigidBody implements Controller {
         }
     }
 
+   public void died() {
+        System.out.println("You so fucking noob, when you died");
+   }
+
 }

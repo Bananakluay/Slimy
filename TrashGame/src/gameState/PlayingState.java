@@ -22,8 +22,8 @@ public class PlayingState extends GameState{
     }
     public void scene(){
 
-        level = new LevelManager();
         player = new PlayerManager();
+        level = new LevelManager(player);
         
         box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, 2*Game.TILES_SIZE, 2*Game.TILES_SIZE));
         box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
