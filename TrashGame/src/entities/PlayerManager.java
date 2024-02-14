@@ -3,12 +3,18 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import main.Game;
 import simplePhysics.Area;
 
 public class PlayerManager {
     Player greenSlime;
     Player yellowSlime;
+
+    ArrayList<Player> allPlayer =  new ArrayList<>(); 
+
     Player currentPlayer;
     Player lastPlayer;
 
@@ -22,6 +28,9 @@ public class PlayerManager {
 
         yellowSlime = new Player(new Area(15 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         yellowSlime.setColor(Color.yellow);
+        
+        allPlayer.add(greenSlime);
+        allPlayer.add(yellowSlime);
 
         currentPlayer = greenSlime;
         currentPlayer.setIsCurrentPlayer();
@@ -65,6 +74,10 @@ public class PlayerManager {
     public void keyReleased(KeyEvent e) {
         currentPlayer.keyReleased(e);
     };
+
+    public ArrayList<Player> getPlayer() {
+        return allPlayer;
+    }
 
     private void simulateMovementKey() {
         if (lastPlayer.Left) {
