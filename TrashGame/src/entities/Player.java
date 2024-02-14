@@ -14,26 +14,20 @@ import simplePhysics.RigidBody;
 public class Player extends RigidBody implements Controller {
 
     // protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
-    protected boolean Left, Right, Up, Down, jump = false;
+    protected boolean Left, Right, Up, Down, isJumping = false;
 
     private float accelerate = 0.33f * Game.SCALE;
-    private long pressStartTime = 0;
-    private boolean isTiming = false;
-    private boolean isCoyote = false;
-    private long Start_count_coyote = 0;
-    private boolean Coyote_jump = false;
-    private float coyote_scale = 0.37f * Game.SCALE;
-    private float Hold_scale_L = 0.000383f * Game.SCALE;
-    private float Hold_scale_H = 0.00033f * Game.SCALE;
+    private float deceleration = 0.00125f * Game.SCALE;   //0.03125f
 
-    private float minVelX = -0.7f * Game.SCALE;
-    private float maxVelX = 0.7f * Game.SCALE;
-    private float jumpacc = 0.37f * Game.SCALE;
-    private float jumpForce = 1.5f * Game.SCALE;
-    private float downForce = 1.6f * Game.SCALE;
-    private int count = 0;
+    private float maxVelX = 0.3f * Game.SCALE;
+    private float minVelX = -0.3f * Game.SCALE;
+    
+    private float jumpForce = 0.5f*Game.SCALE;
+    private float downForce = 0.5f * Game.SCALE;
     private boolean isCurrentPlayer;
 
+    private float jumpDuration = 0f;
+    private float maxJumpDuration = 30f;
     private Color colorPlayer = Color.white; // for debug
 
     public Player(Area hitbox) {
@@ -42,11 +36,10 @@ public class Player extends RigidBody implements Controller {
 
     @Override
     public void update() {
-        // velx = 0
         if (isCurrentPlayer)
             updateVelocity();
-        // velX = -12
         super.update();
+        System.out.println(velX);
     }
 
     public void draw(Graphics g) {
@@ -57,8 +50,8 @@ public class Player extends RigidBody implements Controller {
         g2d.setColor(colorPlayer);
         g2d.fill(this.hitbox);
 
-        // g2d.setColor(Color.red);
-        // g2d.draw(getBoundsX());
+        g2d.setColor(Color.red);
+        g2d.draw(getBoundsX());
 
         // g2d.setColor(Color.blue);
         // g2d.draw(getBoundsY());
@@ -69,38 +62,38 @@ public class Player extends RigidBody implements Controller {
     }
 
     private void updateVelocity() {
-        checkfloor();
         movement();
         jumping();
-        Timingjump();
         velX = clamp(velX, minVelX, maxVelX);
         velY = clamp(velY, -jumpForce, downForce);
     }
 
     private void movement() {
         if (Left && Right || !Left && !Right)
-            velX *= 0.5;
+            velX *= deceleration;
+            // velX *= deceleration;
         else if (Left && !Right)
             velX -= accelerate;
         else if (Right && !Left)
             velX += accelerate;
 
-        if (velX > 0 && velX < 0.75)
-            velX = 0;
-        if (velX > -0.75 && velX < 0)
-            velX = 0;
+        // if (velX > 0 && velX < 0.75)
+        //     velX = 0;
+        // if (velX > -0.75 && velX < 0)
+        //     velX = 0;
     }
 
     private void jumping() {
-        Coyote();
         if (Up && isOnFloor) {
-            velY -= jumpacc;
-            jump = true;
-        }
-        if (Coyote_jump && Up) {
-            velY -= jumpForce * coyote_scale;
-            jump = true;
-            Coyote_jump = false;
+            velY -= jumpForce; // Initial jump impulse on key press
+            jumpDuration = 0; // Reset jump duration tracker
+            isJumping = true; // Set jumping flag
+        } else if (isJumping) {
+            jumpDuration++; // Track jump duration
+            if (jumpDuration < maxJumpDuration && Up) {
+                // Apply additional upward force while holding jump key
+                velY -= jumpForce * 0.5f; // Adjust intensity as needed
+            }
         }
     }
 
@@ -120,52 +113,9 @@ public class Player extends RigidBody implements Controller {
         isCurrentPlayer = true;
     }
 
-    public void Timingjump() {
-        if (isTiming) {
-            long elapsedTime = System.currentTimeMillis() - pressStartTime;
-            // Do something with elapsedTime:
-            // System.out.println("Time since key press: " + elapsedTime + " milliseconds");
-            count++;
-            if (jump = true) {
-                if (count == 2) {
-                    if (elapsedTime < 50) {
-                        velY -= jumpacc * (50 * Hold_scale_L);
-                        count = 0;
-                    } else {
-                        velY -= jumpacc * (elapsedTime * Hold_scale_H);
-                        count = 0;
-                    }
-                }
-            }
-            if (elapsedTime > 205)
-                isTiming = false;
-        }
-    }
+ 
 
-    public void Coyote() {
-        if (isCoyote && !jump) {
-            long coyoteTime = System.currentTimeMillis() - Start_count_coyote;
-            // Do something with elapsedTime:
-            // System.out.println("Time since key press: " + elapsedTime + " milliseconds");
-
-            if (coyoteTime < 100 && Up) {
-                Coyote_jump = true;
-
-            }
-        }
-    }
-
-    private void checkfloor() {
-        if (!Up && !isOnFloor && !isCoyote && !jump) {
-            isCoyote = true;
-            Start_count_coyote = System.currentTimeMillis();
-        }
-        if (isOnFloor) {
-            isCoyote = false;
-            jump = false;
-        }
-    }
-
+ 
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -173,8 +123,6 @@ public class Player extends RigidBody implements Controller {
             case KeyEvent.VK_W:
                 Up = true;
                 Down = false; // for smooth switch direction
-                pressStartTime = System.currentTimeMillis();
-                isTiming = true;
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
@@ -202,8 +150,7 @@ public class Player extends RigidBody implements Controller {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
                 Up = false;
-                isTiming = false;
-                pressStartTime = 0;
+                isJumping = false;
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:

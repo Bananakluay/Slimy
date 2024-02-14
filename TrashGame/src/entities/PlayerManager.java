@@ -17,7 +17,7 @@ public class PlayerManager {
     }
 
     public void setup() {
-        greenSlime = new Player(new Area(5 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        greenSlime = new Player(new Area(5 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, 1.3f*Game.TILES_SIZE, 1.3f*Game.TILES_SIZE));
         greenSlime.setColor(Color.green);
 
         yellowSlime = new Player(new Area(15 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));

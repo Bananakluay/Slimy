@@ -10,9 +10,8 @@ public class RigidBody {
     protected float velX = 0, velY = 0;
 
     protected float mass;
-    protected float COR = 0.25f * Game.SCALE;
-    protected float gravity = 0.035f * Game.SCALE;
-    protected float friction_box = 0.27f * Game.SCALE;
+    protected float COR = 0.1f * Game.SCALE;
+    protected float gravity = 0.015f * Game.SCALE;
     protected Area hitbox;
 
     public static ArrayList<Area> areas = new ArrayList<Area>();
@@ -23,7 +22,7 @@ public class RigidBody {
 
     public RigidBody(Area hitbox) {
         this.hitbox = hitbox;
-        mass = hitbox.width * hitbox.height;
+        mass = hitbox.width * hitbox.height *Game.SCALE * Game.SCALE;
 
         areas.add(this.hitbox);
 
@@ -47,11 +46,8 @@ public class RigidBody {
         hitbox.y += velY;
 
         // แรงเสียดทาน
-        velX *= friction_box;
-        if (velX > 0 && velX < gravity)
-            velX = 0;
-        if (velX > -gravity && velX < 0)
-            velX = 0;
+    
+        velX *= 0.8;
     }
 
     protected void checkIsOnFloor() {
