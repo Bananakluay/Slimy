@@ -9,8 +9,8 @@ public class Game implements Runnable{
     private final int FPS_SET = 120;
     private final int UPS_SET = 200;
 
-    public final static int TILES_DEFAULT_SIZE = 16;
-    public final static float SCALE = 3f;
+    public final static int TILES_DEFAULT_SIZE = 8;
+    public final static float SCALE = 8f;
     public final static int TILES_IN_WIDTH = 26;
     public final static int TILES_IN_HEIGHT = 14;
     public final static int TILES_SIZE = (int)(TILES_DEFAULT_SIZE * SCALE);

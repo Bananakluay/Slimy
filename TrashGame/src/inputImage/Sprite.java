@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import main.Game;
+
 @SuppressWarnings("unused")
 public class Sprite {
-    private final static int TILE_SIZE = 16;
+    private static final int TILE_SIZE = Game.TILES_DEFAULT_SIZE;
     
     public static BufferedImage loadSprite(String file) {
         BufferedImage sprite = null;
