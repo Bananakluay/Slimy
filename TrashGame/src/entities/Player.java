@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 
 import input.Controller;
 import main.Game;
-import simplePhysics.Area;
+import simplePhysics.Shape;
 import simplePhysics.RigidBody;
 
 @SuppressWarnings("unused")
@@ -26,7 +26,7 @@ public class Player extends RigidBody implements Controller {
 
     private Color colorPlayer = Color.white; // for debug
 
-    public Player(Area hitbox) {
+    public Player(Shape hitbox) {
         super(hitbox);
     }
 
@@ -90,7 +90,7 @@ public class Player extends RigidBody implements Controller {
         colorPlayer = color;
     }
 
-    public Area getHitbox(){
+    public Shape getHitbox(){
         return hitbox;
     }
     public void reset() {

@@ -13,15 +13,15 @@ public class RigidBody {
     protected float mass;
     protected float COR = 0.25f * Game.SCALE;
     
-    protected Area hitbox;
+    protected Shape hitbox;
     
-    public static ArrayList<Area> areas = new ArrayList<Area>();
+    public static ArrayList<Shape> areas = new ArrayList<Shape>();
     
     public static ArrayList<RigidBody> objs = new ArrayList<RigidBody>();
 
     protected boolean isOnFloor = false;
 
-    public RigidBody(Area hitbox){
+    public RigidBody(Shape hitbox){
         this.hitbox = hitbox;
         mass = hitbox.width * hitbox.height;
 
@@ -61,7 +61,7 @@ public class RigidBody {
     }
 
     public void updateIsOnFloor(){
-        for(Area area : areas){
+        for(Shape area : areas){
             if(this.hitbox != area && area.intersects(getFloorHitbox())){
                 isOnFloor = true;
             }
@@ -69,7 +69,7 @@ public class RigidBody {
         }
     }
     public void updateIsNotOnFloor(){
-        for(Area area : areas){
+        for(Shape area : areas){
             if(this.hitbox != area && !area.intersects(getFloorHitbox())){
                 isOnFloor = false;
             }
@@ -83,7 +83,7 @@ public class RigidBody {
     protected void areasCollision(){
 
         for(int i=0;i<areas.size();i++){
-            Area area = areas.get(i);
+            Shape area = areas.get(i);
 
             boolean isOnLeft = hitbox.x + hitbox.width/2 < area.x + area.width/2;
             boolean isOnRight = hitbox.x + hitbox.width/2 > area.x + area.width/2;
@@ -181,21 +181,21 @@ public class RigidBody {
         return new Rectangle((int)bx, (int)by, (int)bw, (int)bh);
     }
     
-    public Area getFloorHitbox(){
+    public Shape getFloorHitbox(){
         float floorHitboxWidth = hitbox.width * 0.8f; 
         float floorHitboxHeight = 4; 
 
         float floorHitboxX = hitbox.x + (hitbox.width - floorHitboxWidth) / 2;
         float floorHitboxY = hitbox.y + hitbox.height - floorHitboxHeight;
 
-        return new Area(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight+2);
+        return new Shape(floorHitboxX, floorHitboxY, floorHitboxWidth, floorHitboxHeight+2);
     }
 
-    public static void setAreaInterection(Area area){
+    public static void setAreaInterection(Shape area){
         areas.add(area);
     }
 
-    public static void setAreasInterection(ArrayList<Area> area){
+    public static void setAreasInterection(ArrayList<Shape> area){
         areas.addAll(area);
     }  
 

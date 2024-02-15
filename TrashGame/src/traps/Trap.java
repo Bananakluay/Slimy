@@ -1,11 +1,11 @@
 package traps;
 
-import simplePhysics.Area;
+import simplePhysics.Shape;
 import java.util.ArrayList;
 
 import entities.Player;
 
-public class Trap extends Area{
+public class Trap extends Shape{
     
     protected static ArrayList<Player> players = new ArrayList<>();
 

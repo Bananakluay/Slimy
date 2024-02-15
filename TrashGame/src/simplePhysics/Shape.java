@@ -4,12 +4,12 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
 import gameData.Data.ID;
-public class Area extends Rectangle2D.Float{
+public class Shape extends Rectangle2D.Float{
     
     
 
     public ID id = ID.AREA;
-    public Area(float x, float y, float width, float height){
+    public Shape(float x, float y, float width, float height){
         super(x, y, width, height);
     }
 
@@ -18,7 +18,7 @@ public class Area extends Rectangle2D.Float{
     }
     public ID getId() {return id;}
 
-    public Area getHitbox(){
+    public Shape getHitbox(){
         return this;
     }
 }

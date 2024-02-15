@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import main.Game;
-import simplePhysics.Area;
+import simplePhysics.Shape;
 
 public class PlayerManager {
     Player greenSlime;
@@ -17,10 +17,10 @@ public class PlayerManager {
     }
 
     public void setup() {
-        greenSlime = new Player(new Area(5 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        greenSlime = new Player(new Shape(5 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         greenSlime.setColor(Color.green);
 
-        yellowSlime = new Player(new Area(15 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        yellowSlime = new Player(new Shape(15 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         yellowSlime.setColor(Color.yellow);
 
         currentPlayer = greenSlime;

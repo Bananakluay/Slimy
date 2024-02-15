@@ -2,15 +2,13 @@ package gameState;
 @SuppressWarnings("unused")
 public class GameStatesManager {
 
-    private MenuState menu;
-    private PlayingState playing;
-    private PausedState paused;
 
+    private TestState testState;
     private GameState currenState;
 
     public GameStatesManager(){
-        playing = new PlayingState();
-        setState(playing);
+        testState = new TestState();
+        setState(testState);
 
         
     }

@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import simplePhysics.Area;
+import simplePhysics.Shape;
 import simplePhysics.RigidBody;
 
 public class Box extends RigidBody{
 
-    public Box(Area hitbox) {
+    public Box(Shape hitbox) {
         super(hitbox);
     }
     // @Override
