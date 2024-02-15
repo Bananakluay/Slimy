@@ -14,7 +14,7 @@ import simplePhysics.RigidBody;
 public class Player extends RigidBody implements Controller {
 
     // protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
-    protected boolean Left, Right, Up, Down, jump = false;
+    protected boolean Left, Right, Up, Down, jump = false, can_jump;
 
     private float accelerate = 0.33f * Game.SCALE;
     private long pressStartTime = 0;
@@ -22,6 +22,7 @@ public class Player extends RigidBody implements Controller {
     private boolean isCoyote = false;
     private long Start_count_coyote = 0;
     private boolean Coyote_jump = false;
+    private boolean Less_Coyote_jump = false;
     private float coyote_scale = 0.37f * Game.SCALE;
     private float Hold_scale_L = 0.000383f * Game.SCALE;
     private float Hold_scale_H = 0.00033f * Game.SCALE;
@@ -93,14 +94,17 @@ public class Player extends RigidBody implements Controller {
 
     private void jumping() {
         Coyote();
-        if (Up && isOnFloor) {
+        if (Up && isOnFloor && can_jump) {
             velY -= jumpacc;
             jump = true;
-        }
-        if (Coyote_jump && Up) {
-            velY -= jumpForce * coyote_scale;
+        } else if (Coyote_jump && Up && can_jump) {
+            velY -= (jumpForce) * coyote_scale;
             jump = true;
             Coyote_jump = false;
+        } else if (Less_Coyote_jump && Up && can_jump) {
+            velY -= (jumpForce - 0.8) * coyote_scale;
+            jump = true;
+            Less_Coyote_jump = false;
         }
     }
 
@@ -139,6 +143,8 @@ public class Player extends RigidBody implements Controller {
             }
             if (elapsedTime > 205)
                 isTiming = false;
+            if (elapsedTime > 50)
+                can_jump = false;
         }
     }
 
@@ -147,8 +153,10 @@ public class Player extends RigidBody implements Controller {
             long coyoteTime = System.currentTimeMillis() - Start_count_coyote;
             // Do something with elapsedTime:
             // System.out.println("Time since key press: " + elapsedTime + " milliseconds");
+            if (coyoteTime < 30 && Up) {
+                Less_Coyote_jump = true;
 
-            if (coyoteTime < 100 && Up) {
+            } else if (coyoteTime < 100 && Up) {
                 Coyote_jump = true;
 
             }
@@ -164,6 +172,9 @@ public class Player extends RigidBody implements Controller {
             isCoyote = false;
             jump = false;
         }
+        if (isOnFloor && !Up) {
+            can_jump = true;
+        }
     }
 
     @Override
@@ -171,10 +182,12 @@ public class Player extends RigidBody implements Controller {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
-                Up = true;
-                Down = false; // for smooth switch direction
-                pressStartTime = System.currentTimeMillis();
-                isTiming = true;
+                if (can_jump) {
+                    Up = true;
+                    Down = false; // for smooth switch direction
+                    pressStartTime = System.currentTimeMillis();
+                    isTiming = true;
+                }
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
@@ -194,6 +207,7 @@ public class Player extends RigidBody implements Controller {
             default:
                 break;
         }
+
     }
 
     @Override
@@ -204,6 +218,7 @@ public class Player extends RigidBody implements Controller {
                 Up = false;
                 isTiming = false;
                 pressStartTime = 0;
+                can_jump = true;
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A:
