@@ -136,6 +136,11 @@ public class RigidBody {
                     }
                 }
             }
+            if(getFloorHitbox().intersects(obj.hitbox)){
+                if(obj.velX != 0 || (obj.velX > 0 && obj.velX < 0.0001) || (obj.velX > -0.0001 && obj.velX < 0))
+
+                    velX = obj.velX*0.5f;
+            }
 
         }
     }
