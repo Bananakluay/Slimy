@@ -10,9 +10,9 @@ import entity.Entity;
 public abstract class Scene{
 
 	protected List<Entity> entities = new ArrayList<>();
-
+	protected Renderer renderer = new Renderer();
 	private boolean isRunning = false;
-
+	
 	public abstract void init();
 
     public abstract void update();
@@ -26,7 +26,7 @@ public abstract class Scene{
 		isRunning = true;
 	}
 
-	public void addEntity(Entity entity){
+	protected void addEntity(Entity entity){
 		if(!isRunning){
 			entities.add(entity);
 		}
@@ -36,7 +36,7 @@ public abstract class Scene{
 		}
 	}
 
-	public Entity getEntity(String name){
+	protected Entity getEntity(String name){
 		for(Entity entity : entities){
 			if(entity.getName().equals(name))
 				return entity;
@@ -52,7 +52,7 @@ public abstract class Scene{
 		return res;
 	}
 
-	public List<Entity> getAllEntities(){return entities;}
+	protected List<Entity> getAllEntities(){return entities;}
 
 
 

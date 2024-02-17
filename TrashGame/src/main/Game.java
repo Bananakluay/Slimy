@@ -12,43 +12,51 @@ import util.*;
 @SuppressWarnings("unused")
 public class Game implements Runnable{
 
-    private final int FPS_SET = 120;
-    private final int UPS_SET = 200;
+	private static Game game = null;
 
-    private Window gameWindow;
+	private Window gameWindow;
     private GamePanel gamePanel;
+	private SceneManager sceneManager;
 
 	public static MouseInputs MI;
 	public static KeyInputs KI;
-
+	
     private Thread gameThread;
 
-	private Scene currentScene;
-    public Game(){
-		currentScene = new TestScene();
-		
+    private final int FPS_SET = 120;
+    private final int UPS_SET = 200;
+ 
+    private Game(){
+		//setting scene
+		sceneManager = SceneManager.get();
+
 		//setting window
         gamePanel = GamePanel.get(this);
         gameWindow = Window.get(gamePanel);
-
+		
 		KI = new KeyInputs();
 		MI = new MouseInputs();
 		
 		gamePanel.addKeyListener(KI);
         gamePanel.addMouseListener(MI);
         gamePanel.requestFocus();
-
-		//setting scene
+		
 
         startGameLoop();
     }
 
+	public static Game get(){
+		if(game == null)
+			return new Game();
+		return game;
+	}
+
     public void update(){
-		currentScene.update();
+		sceneManager.getCurrentScene().update();
     }
 
     public void render(Graphics g){
-		currentScene.draw(g);
+		sceneManager.getCurrentScene().draw(g);
     }
     
     private void startGameLoop() {
@@ -101,5 +109,7 @@ public class Game implements Runnable{
 
 	}
 
-
+	public Scene getCurrentScene(){
+		return sceneManager.getCurrentScene();
+	}
 }

@@ -32,9 +32,9 @@ public class AssetPool {
         if(!AssetPool.hasSprite(file.getAbsolutePath())){
             AssetPool.sprites.put(file.getAbsolutePath(), sprite);
         }
-        else{
-            System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
-            System.exit(-1);
-        }
+        // else{
+        //     System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
+        //     System.exit(-1);
+        // }
     }
 }

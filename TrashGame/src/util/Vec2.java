@@ -9,5 +9,10 @@ public class Vec2 {
         this.y = y;
     }
 
+    public void add(Vec2 vec2){
+        this.x += vec2.x;
+        this.y += vec2.y;
+    }
+
     
 }

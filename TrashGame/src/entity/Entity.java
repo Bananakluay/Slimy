@@ -12,12 +12,14 @@ public class Entity {
 
     private Transform transform;
     private List<Component> components;
-
+    public int zIndex = 0;
     
-    public Entity(String name, Transform transform){
+    public Entity(String name, Transform transform, int zIndex){
         this.name = name;
         this.transform = transform;
         this.components = new ArrayList<>();
+        this.zIndex = zIndex;
+        System.out.println(this.getName() + transform.scale.x);
     }
     
     public void update(){
@@ -44,6 +46,7 @@ public class Entity {
         this.components.add(c);
         c.entity = this;
     }
+
     public <T extends Component> void removeCompnent(Class<T> componentClass){
         for(int i=0;i<components.size();i++){
             Component c = components.get(i);
@@ -74,6 +77,8 @@ public class Entity {
         }
         return null;
     }
+
+    
 
     public List<Component> getAllComponents() {return components;}
 

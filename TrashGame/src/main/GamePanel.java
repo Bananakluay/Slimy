@@ -2,6 +2,9 @@ package main;
 
 import javax.swing.JPanel;
 
+import input.KeyInputs;
+import input.MouseInputs;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
