@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
 
-import static util.Constants.*;
+import static util.Constants.Game.*;
 public class Sprite  extends Component{
     public BufferedImage img;
     public String imgFile;

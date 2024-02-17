@@ -2,8 +2,7 @@ package components;
 
 import util.Vec2;
 
-import static util.Constants.DOWN_FORCE;
-import static util.Constants.GRAVITY;
+import static util.Constants.physics.*;
 public class Physic2D extends Component {
 
     private Vec2 velocity;

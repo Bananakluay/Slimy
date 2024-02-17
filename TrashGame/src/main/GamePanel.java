@@ -2,13 +2,11 @@ package main;
 
 import javax.swing.JPanel;
 
-import input.KeyInputs;
-import input.MouseInputs;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import static util.Constants.*;
+import static util.Constants.Game.*;
 public class GamePanel extends JPanel{
 
     private static GamePanel gamePanel = null;

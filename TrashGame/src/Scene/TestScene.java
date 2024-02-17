@@ -1,10 +1,12 @@
 package Scene;
 
-import static util.Constants.TILES_SIZE;
+import static util.Constants.Game.*;
 
 import java.awt.Graphics;
 
+import Prefabs.BoxWall;
 import components.Bounds;
+import components.Controller;
 import components.Physic2D;
 import components.Rigidbody;
 import components.Spritesheet;
@@ -29,19 +31,27 @@ public class TestScene extends Scene {
             new Transform(new Vec2(5*TILES_SIZE,TILES_SIZE), new Vec2(TILES_SIZE, TILES_SIZE)),
             0);
         tE.addComponent(new Bounds());
-        tE.addComponent(new Rigidbody(TILES_SIZE));
+        tE.addComponent(new Rigidbody(-2));
         tE.addComponent(new Physic2D());
+        tE.addComponent(new Controller());
         addEntity(tE);
 
         Entity floor = new Entity(
-            "floor", 
-            new Transform(new Vec2(1*TILES_SIZE,10*TILES_SIZE), new Vec2(20*TILES_SIZE, 3*TILES_SIZE)),
+            "Test",
+            new Transform(new Vec2(TILES_SIZE*0,10*TILES_SIZE), new Vec2(TILES_SIZE*100, TILES_SIZE)),
             0);
-        floor.addComponent(new Bounds()); 
+        floor.addComponent(new Bounds());
+        floor.addComponent(new Rigidbody(-2));
         addEntity(floor);
-        
-        renderer.submit(tE);
+
+        BoxWall boxWall = new BoxWall(7,0,1,1);
+        Entity bw = boxWall.get();
+        addEntity(bw);
+
         renderer.submit(floor);
+        renderer.submit(bw);
+        renderer.submit(tE);
+       
     }
 
     
