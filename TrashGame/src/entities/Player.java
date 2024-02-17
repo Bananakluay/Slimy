@@ -3,6 +3,7 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 
 import gameState.GameStatesManager;
@@ -129,7 +130,14 @@ public class Player extends RigidBody implements Controller {
             case KeyEvent.VK_D:
                 Right = true;
                 Left = false;
-                break;            
+                break;   
+            case KeyEvent.VK_ESCAPE:
+                GameStatesManager.setState(GameStatesManager.getGameStatesManager().getMenuState());
+                System.out.println("Switching to MenuState"); 
+                break;
+            case KeyEvent.VK_P:
+                System.out.println("Swith to Pause State");
+                GameStatesManager.setState(GameStatesManager.getGameStatesManager().getPauseState());        
             default: break;
         }
     }
