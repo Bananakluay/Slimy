@@ -19,7 +19,6 @@ public class Bounds extends Component {
     private boolean DEBUG = true;
     @Override
     public void update() {
-        // System.out.println(entity.getName() + entity.getTransform().scale.x);
         Transform t = entity.getTransform();
         bounds.setRect(t.position.x, t.position.y, t.scale.x, t.scale.y);
     }

@@ -11,7 +11,7 @@ public class Constants {
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 
     //Physics
-    public final static float GRAVITY = 0.5f;
+    public final static float GRAVITY = 0.1f;
     public final static float DOWN_FORCE = 15;
 
 }

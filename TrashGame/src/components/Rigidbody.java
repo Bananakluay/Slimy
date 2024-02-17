@@ -23,7 +23,6 @@ public class Rigidbody extends Component {
 
     @Override
     public void update() {
-        // System.out.println(toString());
         boolean isCollidingY = false;
         boolean isCollidingX = false;
             

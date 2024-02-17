@@ -24,23 +24,22 @@ public class TestScene extends Scene {
 
     @Override
     public void init() {
-
         Entity tE = new Entity(
             "Test",
-            new Transform(new Vec2(2*TILES_SIZE,2*TILES_SIZE), new Vec2(120, 200)),
+            new Transform(new Vec2(5*TILES_SIZE,TILES_SIZE), new Vec2(TILES_SIZE, TILES_SIZE)),
             0);
         tE.addComponent(new Bounds());
         tE.addComponent(new Rigidbody(TILES_SIZE));
-        // tE.addComponent(new Physic2D());
+        tE.addComponent(new Physic2D());
         addEntity(tE);
 
         Entity floor = new Entity(
             "floor", 
-            new Transform(new Vec2(4*TILES_SIZE,10*TILES_SIZE), new Vec2(2, TILES_SIZE)),
+            new Transform(new Vec2(1*TILES_SIZE,10*TILES_SIZE), new Vec2(20*TILES_SIZE, 3*TILES_SIZE)),
             0);
         floor.addComponent(new Bounds()); 
         addEntity(floor);
-    
+        
         renderer.submit(tE);
         renderer.submit(floor);
     }

@@ -18,10 +18,8 @@ public class Physic2D extends Component {
 
     @Override
     public void update() {
-        if(velocity != null){
+        if(velocity != null)
             fall();
-        }
-            
         else
             return;
     }
