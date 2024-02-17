@@ -1,29 +1,36 @@
 package gameState;
-@SuppressWarnings("unused")
+
 public class GameStatesManager {
+
+    private static GameStatesManager instance;
 
     private MenuState menu;
     private PlayingState playing;
     private PausedState paused;
 
-    private GameState currenState;
+    private static GameState currentState;
 
     public GameStatesManager(){
         playing = new PlayingState();
         setState(playing);
-
-        
     }
 
-    public void setState(GameState state){
-        currenState = state;
+    public static void setState(GameState state){
+        currentState = state;
     }
+
     public GameState getCurrentState(){
-        return currenState;
+        return currentState;
     }
 
-    public GameStatesManager getGameStatesManager(){
-        return this;
+    public static GameStatesManager getGameStatesManager(){
+        if (instance == null) {
+            instance = new GameStatesManager();
+        }
+        return instance;
     }
 
+    public GameState getPlayingState() {
+        return playing;
+    }
 }
