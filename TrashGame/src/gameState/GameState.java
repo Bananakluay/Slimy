@@ -4,8 +4,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public abstract class GameState{
 
+public abstract class GameState{
     public abstract void update();
 
 	public abstract void draw(Graphics g);

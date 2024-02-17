@@ -31,5 +31,10 @@ public class Box extends RigidBody{
         // g2d.draw(getBoundsY());
 
     }
+
+    public void reset(){
+        hitbox.x = 0;
+        hitbox.y = 0;
+    }
     
 }

@@ -10,30 +10,35 @@ import levels.LevelManager;
 import main.Game;
 import simplePhysics.Area;
 
-public class PlayingState extends GameState{
-
+public class PlayingState extends GameState {
+    public static boolean change = false;
     private PlayerManager player;
     private LevelManager level;
+    private Box box, box2, box3; // test
 
-    private Box box, box2,box3; // test
-
-    public PlayingState(){
+    public PlayingState() {
         scene();
+
     }
-    public void scene(){
+
+    public void scene() {
 
         level = new LevelManager();
         player = new PlayerManager();
-        
-        box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, 2*Game.TILES_SIZE, 2*Game.TILES_SIZE));
-        box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
-        box3 = new Box(new Area(15*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
-        
-      
+
+        box = new Box(new Area(7 * Game.TILES_SIZE, 5 * Game.TILES_SIZE, 2 * Game.TILES_SIZE, 2 * Game.TILES_SIZE));
+        box2 = new Box(new Area(7 * Game.TILES_SIZE, 10 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        box3 = new Box(new Area(15 * Game.TILES_SIZE, 10 * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+
     }
 
     @Override
     public void update() {
+        if (change) {
+            reset();
+            scene();
+            change = false;
+        }
         level.update();
         player.update();
 
@@ -46,10 +51,18 @@ public class PlayingState extends GameState{
     public void draw(Graphics g) {
         level.draw(g);
         player.draw(g);
-        
+
         box.draw(g);
         box2.draw(g);
         box3.draw(g);
+    }
+
+    public void reset() {
+        level.reset();
+        box.reset();
+        box2.reset();
+        box3.reset();
+        player.reset();
     }
 
     @Override
@@ -61,24 +74,37 @@ public class PlayingState extends GameState{
     public void keyReleased(KeyEvent e) {
         player.keyReleased(e);
     }
-    @Override
-    public void mouseClicked(MouseEvent e) {}
-    @Override
-    public void mouseDragged(MouseEvent e) {}
-    @Override
-    public void mousePressed(MouseEvent e) {}
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-    @Override
-    public void mouseExited(MouseEvent e) {}
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
 
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
 
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
 
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
 
-    
-    
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    public void loadNextLevels() {
+        level.loadNextLevels();
+    }
+
+    public void loadPreviousLevels() {
+        level.loadPreviousLevels();
+    }
+
 }

@@ -5,7 +5,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
+import gameState.GameStatesManager;
+import gameState.PlayingState;
 import input.Controller;
+import levels.LevelManager;
 import main.Game;
 import simplePhysics.Area;
 import simplePhysics.RigidBody;
@@ -14,7 +17,8 @@ import simplePhysics.RigidBody;
 public class Player extends RigidBody implements Controller {
 
     // protected float _acc = 0.25f*Game.SCALE, _dcc = 0.25f*Game.SCALE;
-    protected boolean Left, Right, Up, Down, jump = false, can_jump;
+    protected boolean Left, Right, Up, Down, can_jump;
+    protected boolean jump = false, ChangeStageF = false, ChangeStageP = false;
 
     private float accelerate = 0.33f * Game.SCALE;
     private long pressStartTime = 0;
@@ -74,8 +78,20 @@ public class Player extends RigidBody implements Controller {
         movement();
         jumping();
         Timingjump();
+        NextStage();
         velX = clamp(velX, minVelX, maxVelX);
         velY = clamp(velY, -jumpForce, downForce);
+    }
+
+    private void NextStage() {
+        if (ChangeStageF) {
+            LevelManager.loadNextLevels();
+            PlayingState.change = true;
+        }
+        if (ChangeStageP) {
+            LevelManager.loadPreviousLevels();
+            PlayingState.change = true;
+        }
     }
 
     private void movement() {
@@ -112,6 +128,10 @@ public class Player extends RigidBody implements Controller {
         colorPlayer = color;
     }
 
+    public void resett(){
+        hitbox.x = 0;
+        hitbox.y = 0;
+    }
     public void reset() {
         Left = false;
         Right = false;
@@ -204,6 +224,12 @@ public class Player extends RigidBody implements Controller {
                 Right = true;
                 Left = false;
                 break;
+            case KeyEvent.VK_F:
+                ChangeStageF = true;
+                break;
+            case KeyEvent.VK_C:
+                ChangeStageP = true;
+                break;
             default:
                 break;
         }
@@ -231,6 +257,12 @@ public class Player extends RigidBody implements Controller {
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
                 Right = false;
+                break;
+            case KeyEvent.VK_F:
+                ChangeStageF = false;
+                break;
+            case KeyEvent.VK_C:
+                ChangeStageP = false;
                 break;
             default:
                 break;

@@ -28,6 +28,11 @@ public class PlayerManager {
 
     }
 
+    public void reset() {
+        yellowSlime.resett();
+        greenSlime.resett();
+    }
+
     public void update() {
         greenSlime.update();
         yellowSlime.update();
