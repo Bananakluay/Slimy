@@ -1,47 +1,54 @@
 package main;
 
 import java.awt.Graphics;
-import gameState.GameStatesManager;
+import java.awt.event.KeyEvent;
 
+import Scene.Scene;
+import Scene.SceneManager;
+import Scene.TestScene;
+import input.KeyInputs;
+import input.MouseInputs;
+import util.*;
 @SuppressWarnings("unused")
 public class Game implements Runnable{
 
     private final int FPS_SET = 120;
     private final int UPS_SET = 200;
 
-    public final static int TILES_DEFAULT_SIZE = 16;
-    public final static float SCALE = 3f;
-    public final static int TILES_IN_WIDTH = 26;
-    public final static int TILES_IN_HEIGHT = 14;
-    public final static int TILES_SIZE = (int)(TILES_DEFAULT_SIZE * SCALE);
-    public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
-    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
-
-	private GameStatesManager gsm;
-	
-    private GameWindow gameWindow;
+    private Window gameWindow;
     private GamePanel gamePanel;
 
+	public static MouseInputs MI;
+	public static KeyInputs KI;
 
     private Thread gameThread;
 
+	private Scene currentScene;
     public Game(){
-		gsm = new GameStatesManager();
-        gamePanel = new GamePanel(this);
-        gameWindow = new GameWindow(gamePanel);
+		currentScene = new TestScene();
+		
+		//setting window
+        gamePanel = GamePanel.get(this);
+        gameWindow = Window.get(gamePanel);
+
+		KI = new KeyInputs();
+		MI = new MouseInputs();
+		
+		gamePanel.addKeyListener(KI);
+        gamePanel.addMouseListener(MI);
         gamePanel.requestFocus();
+
+		//setting scene
+
         startGameLoop();
     }
 
-    public void ready(){
-
-    }
     public void update(){
-		gsm.getCurrentState().update();
+		currentScene.update();
     }
 
     public void render(Graphics g){
-		gsm.getCurrentState().draw(g);
+		currentScene.draw(g);
     }
     
     private void startGameLoop() {
@@ -92,10 +99,6 @@ public class Game implements Runnable{
 			}
 		}
 
-	}
-
-	public GameStatesManager getGameStatesManager(){
-		return gsm;
 	}
 
 

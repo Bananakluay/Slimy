@@ -2,26 +2,27 @@ package main;
 
 import javax.swing.JPanel;
 
-import input.KeyboardInputs;
-import input.MouseInputs;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-
+import static util.Constants.*;
 public class GamePanel extends JPanel{
+
+    private static GamePanel gamePanel = null;
     private Game game;
-    public GamePanel(Game game){
+    private GamePanel(Game game){
         this.game = game;
 
-        setPreferredSize(new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT));
+        setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
         setBackground(Color.BLACK);
-        addKeyListener(new KeyboardInputs(game.getGameStatesManager()));
-        addMouseListener(new MouseInputs(game.getGameStatesManager()));
-
 
     }
 
+    public static GamePanel get(Game game){
+        if(gamePanel == null)
+            gamePanel = new GamePanel(game);
+        return gamePanel;
+    }
 
     @Override
     public void paintComponent(Graphics g){
@@ -32,11 +33,11 @@ public class GamePanel extends JPanel{
 
     public void drawGrid(Graphics g){
         g.setColor(Color.GRAY);
-        for(int col=0;col<Game.GAME_WIDTH;col++)
-            g.drawLine(col*Game.TILES_SIZE, 0, col*Game.TILES_SIZE, Game.GAME_HEIGHT);
+        for(int col=0;col<GAME_WIDTH;col++)
+            g.drawLine(col*TILES_SIZE, 0, col*TILES_SIZE, GAME_HEIGHT);
 
-        for(int rol=0;rol<Game.TILES_IN_HEIGHT;rol++)
-            g.drawLine(0, rol*Game.TILES_SIZE, Game.GAME_WIDTH, rol*Game.TILES_SIZE);
+        for(int rol=0;rol<TILES_IN_HEIGHT;rol++)
+            g.drawLine(0, rol*TILES_SIZE, GAME_WIDTH, rol*TILES_SIZE);
             g.setColor(Color.RED);
         
     }
