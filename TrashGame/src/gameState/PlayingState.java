@@ -15,18 +15,19 @@ public class PlayingState extends GameState{
     private PlayerManager player;
     private LevelManager level;
 
-    private Box box, box2; // test
+    private Box box, box2,box3; // test
 
     public PlayingState(){
         scene();
     }
     public void scene(){
 
-        level = new LevelManager();
         player = new PlayerManager();
+        level = new LevelManager(player);
         
         box = new Box(new Area(7*Game.TILES_SIZE, 5*Game.TILES_SIZE, 2*Game.TILES_SIZE, 2*Game.TILES_SIZE));
         box2 = new Box(new Area(7*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
+        box3 = new Box(new Area(15*Game.TILES_SIZE, 10*Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE));
         
       
     }
@@ -38,6 +39,7 @@ public class PlayingState extends GameState{
 
         box.update();
         box2.update();
+        box3.update();
     }
 
     @Override
@@ -47,6 +49,7 @@ public class PlayingState extends GameState{
         
         box.draw(g);
         box2.draw(g);
+        box3.draw(g);
     }
 
     @Override
