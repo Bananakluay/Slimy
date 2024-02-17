@@ -205,12 +205,7 @@ public class Player extends RigidBody implements Controller {
             case KeyEvent.VK_D:
                 Right = true;
                 Left = false;
-                break;
-            
-            case KeyEvent.VK_ESCAPE: // menu state
-                GameStatesManager.getGameStatesManager().setState(new MenuState());
-                System.out.println("this is menu");
-                break;            
+                break;         
             default: break;
         }
 

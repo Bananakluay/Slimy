@@ -10,7 +10,7 @@ import main.Game;
 public class MenuState extends GameState{
     @Override
     public void draw(Graphics g) {
-        System.out.println("Drawing menu...");
+        //System.out.println("Drawing menu..."); // check drwing menu
         g.setColor(Color.white);
         g.drawString("MENU", Game.GAME_WIDTH / 2, 200);
     }

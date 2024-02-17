@@ -6,12 +6,14 @@ public class GameStatesManager {
 
     private MenuState menu;
     private PlayingState playing;
-    private PausedState paused;
+    private GameState paused;
 
     private static GameState currentState;
 
     public GameStatesManager(){
         playing = new PlayingState();
+        menu = new MenuState();
+        paused = new PausedState();
         setState(playing);
     }
 
@@ -32,5 +34,13 @@ public class GameStatesManager {
 
     public GameState getPlayingState() {
         return playing;
+    }
+
+    public GameState getMenuState() {
+        return menu;
+    }
+
+    public GameState getPauseState() {
+        return paused;
     }
 }
