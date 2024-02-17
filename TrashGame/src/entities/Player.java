@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
+import gameState.GameStatesManager;
+import gameState.MenuState;
 import input.Controller;
 import main.Game;
 import simplePhysics.Area;
@@ -204,8 +206,12 @@ public class Player extends RigidBody implements Controller {
                 Right = true;
                 Left = false;
                 break;
-            default:
-                break;
+            
+            case KeyEvent.VK_ESCAPE: // menu state
+                GameStatesManager.getGameStatesManager().setState(new MenuState());
+                System.out.println("this is menu");
+                break;            
+            default: break;
         }
 
     }
@@ -215,25 +221,23 @@ public class Player extends RigidBody implements Controller {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W:
-                Up = false;
-                isTiming = false;
-                pressStartTime = 0;
-                can_jump = true;
+                Up = false; 
                 break;
-            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_LEFT: 
             case KeyEvent.VK_A:
-                Left = false;
+                Left = false; 
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S:
-                Down = false;
+                Down = false; 
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D:
-                Right = false;
+                Right = false; 
                 break;
-            default:
+            case KeyEvent.VK_ESCAPE:
                 break;
+            default: break;
         }
     }
 

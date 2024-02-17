@@ -54,6 +54,11 @@ public class PlayingState extends GameState{
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            // Set the game state to MenuState
+            GameStatesManager.setState(new MenuState());
+            System.out.println("Switching to MenuState");
+        }
         player.keyPressed(e);
     }
 

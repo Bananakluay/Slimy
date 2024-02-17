@@ -26,7 +26,7 @@ public class Game implements Runnable{
     private Thread gameThread;
 
     public Game(){
-		gsm = new GameStatesManager();
+		gsm = GameStatesManager.getGameStatesManager();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
@@ -37,11 +37,11 @@ public class Game implements Runnable{
 
     }
     public void update(){
-		gsm.getCurrentState().update();
+		GameStatesManager.getGameStatesManager().getCurrentState().update();
     }
 
     public void render(Graphics g){
-		gsm.getCurrentState().draw(g);
+		GameStatesManager.getGameStatesManager().getCurrentState().draw(g);
     }
     
     private void startGameLoop() {
