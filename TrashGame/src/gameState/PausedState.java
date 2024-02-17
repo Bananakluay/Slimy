@@ -24,7 +24,7 @@ public class PausedState extends GameState{
     public void drawPausedScreen(Graphics g) {
         // Set font and color for the "PAUSED" text
         g.setFont(new Font("Arial", Font.BOLD, 40));
-        g.setColor(Color.RED);
+        g.setColor(Color.white);
         
         // Draw the "PAUSED" text in the center of the screen
         String pausedText = "PAUSED";
