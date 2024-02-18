@@ -29,11 +29,15 @@ public class Controller extends Component{
     private void walk(){
         if(Game.KI.isKeyPressed(KeyEvent.VK_A))
             rigidbody.moveX(-WALK_SPEED);
-  
         else if(Game.KI.isKeyPressed(KeyEvent.VK_D))
             rigidbody.moveX(WALK_SPEED);
         else
             rigidbody.moveX(0);
+
+        // if(!Game.KI.isKeyPressed(KeyEvent.VK_A))
+        //     rigidbody.addForce(new Vec2(-0.1f, 0));
+        // if(!Game.KI.isKeyPressed(KeyEvent.VK_D))
+        //     rigidbody.addForce(new Vec2(0.1f, 0));
 
 
     }
@@ -50,11 +54,11 @@ public class Controller extends Component{
     public void onCollision(Collision collision) {
         if(collision.type == BOTTOM)
             jumpCount = 0;
-        //invoke onCollision that attached to object that player collided with
-        for(Component c : collision.object.getAllComponents()){
-            if(!c.equals(this))
-                c.onCollision(collision);
-        }
+        // invoke onCollision that attached to object that player collided with
+        // for(Component c : collision.object.getAllComponents()){
+        //     if(!c.equals(this))
+        //         c.onCollision(collision);
+        // }
     }
 
     

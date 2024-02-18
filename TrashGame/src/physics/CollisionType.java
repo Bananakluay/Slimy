@@ -5,5 +5,6 @@ public enum CollisionType {
     RIGHT,
     TOP,
     BOTTOM,
+    TOUCHING,
     NONE
 }

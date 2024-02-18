@@ -13,6 +13,7 @@ import dataStructure.Transform;
 
 public class Rigidbody extends Component {
     public Vec2 velocity;
+    public int directionX;
     private List<Vec2> forces = new ArrayList<>();
     private final float friction;
 
@@ -23,16 +24,15 @@ public class Rigidbody extends Component {
 
     @Override
     public void update() {
+
         boolean isCollidingY = false;
         boolean isCollidingX = false;
-            
+        directionX = Integer.signum((int)velocity.x);
         if(entity.hasComponent(Bounds.class)){
             for(Collision cObject : entity.getComponent(Bounds.class).checkCollision(velocity)){
                 if(cObject.object.equals(this.entity))
                     continue;
-                // if(entity.getName().equals("player")){
-                //     System.out.println(cObject.type);
-                // }
+
                 Transform s = entity.getTransform();
                 Transform o = cObject.object.getTransform();
 
@@ -54,15 +54,16 @@ public class Rigidbody extends Component {
                     velocity.y = 0;
                     s.position.y = o.position.y + o.scale.y;
                     isCollidingY = true;
-                    // frictionOnX();
+                    frictionOnX();
                 }
                 else if(cObject.type == BOTTOM && velocity.y>0){
 
                     velocity.y = 0;
                     s.position.y = o.position.y - s.scale.y;
                     isCollidingY = true;
-                    // frictionOnX();
+                    frictionOnX();
                 }
+
                 //If it crashs, what will happenn?
                 for(Component c : entity.getAllComponents())
                     c.onCollision(cObject);
@@ -75,21 +76,32 @@ public class Rigidbody extends Component {
         if(Math.abs(velocity.y)< 0.1)
             velocity.y = 0;
 
+        if(!forces.isEmpty())
+            // net force
+            for(Vec2 v : forces){
+                velocity.x += v.x;
+                velocity.y += v.y;
+            }
+        forces.clear();  
+
         //if not colliding (can move)
         if(!isCollidingX)
             entity.getTransform().position.x += velocity.x;
         if(!isCollidingY)
             entity.getTransform().position.y += velocity.y;
 
-        // net force
 
-        for(Vec2 v : forces){
-            velocity.x += v.x;
-            velocity.y += v.y;
-        }
-
-        forces.clear();        
         
+    }
+
+    @Override
+    public void onCollision(Collision collision) {
+        if(collision.object.getName().equals("Box")){
+            if(collision.type == LEFT || collision.type == RIGHT){
+                System.out.println(directionX);
+                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(directionX*0.5f, 0));
+            }
+        }
     }
 
     public void addForce(Vec2 force){
@@ -97,17 +109,13 @@ public class Rigidbody extends Component {
     }
 
     private void frictionOnX(){
-        if(velocity.x<0)// go left
-            velocity.x += friction/10;
-        else if(velocity.x>0)// go right
-            velocity.x -= friction/10;
+        velocity.x -= Math.signum(velocity.x) * Math.min(Math.abs(velocity.x), friction);
+        System.out.println(velocity.x + " friction : " + friction);
     }
-    private void frictionOnY(){
-        if(velocity.y<0)// go top
-            velocity.y += 0.1*friction;
-        else if(velocity.y>0)
-            velocity.y -= 0.1*friction;
-    }
+    // private void frictionOnY(){
+
+    //     velocity.y -= Math.signum(velocity.y) * Math.min(Math.abs(velocity.y), friction);
+    // }
 
     public void moveX(float x){
         this.velocity.x = x;
@@ -115,6 +123,7 @@ public class Rigidbody extends Component {
     public void moveY(float y){
         this.velocity.y = y;
     }
+
 
     @Override
     public String toString() {

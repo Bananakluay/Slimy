@@ -18,8 +18,8 @@ public class Constants {
     }
 
     public class Player{
-        public final static float JUMP_FORCE = 5f;
-        public final static float WALK_SPEED = 1;
+        public final static float JUMP_FORCE = 6f;
+        public final static float WALK_SPEED = 4;
     }
 
 }

@@ -2,7 +2,6 @@ package physics;
 
 import dataStructure.Transform;
 import entity.Entity;
-import util.Vec2;
 
 import static physics.CollisionType.*;
 public class Collision {
@@ -10,13 +9,36 @@ public class Collision {
     public final Entity subject;
     public final Entity object;
 
+    private final float MIN_INCREMENT = 0.1f;
+    private boolean isXScaleSame = false;
+    private boolean isYScaleSame = false;
+
     public Collision(Entity subject, Entity object){
         this.subject = subject;
         this.object = object;
-        this.type = getCollisionType(subject.getTransform(), object.getTransform());
+
+        Transform s = subject.getTransform();
+        Transform o = object.getTransform();
+
+        if(s.scale.x == o.scale.x){
+            isXScaleSame = true;
+            s.scale.x += MIN_INCREMENT;
+        }
+        if(s.scale.y == o.scale.y){
+            isYScaleSame = true;
+            s.scale.y += MIN_INCREMENT;
+        }  
+
+        this.type = getCollisionType(s, o);
+
+        if(isXScaleSame)
+            s.scale.x -= MIN_INCREMENT;
+        if(isYScaleSame)
+            s.scale.y -= MIN_INCREMENT;
     }
 
-    public CollisionType getCollisionType(Transform s, Transform o){
+    public CollisionType getCollisionType(Transform s, Transform o){    
+            
         float s_left = s.position.x;
         float s_right = s_left + s.scale.x;
         float s_top = s.position.y;
@@ -33,10 +55,13 @@ public class Collision {
         float o_CenterY = o.position.y + o.scale.y/2;
         // if(subject.getName().equals("player") && !object.getName().equals("floor"))
         //     System.out.println("subject x :"+s_CenterX + "subject y :" + s_CenterY + "object x :"+ o_CenterX + "object y :" + o_CenterY);
+
+
+        
         //Q1 (Q4 in normal math graph) of subject
         if(s_CenterX < o_CenterX && s_CenterY < o_CenterY){
-            if(subject.getName().equals("player") && !object.getName().equals("floor"))
-                System.out.println("Q1");
+            // if(subject.getName().equals("player") && !object.getName().equals("floor"))
+            //     System.out.println("Q1");
             if(s_right - o_left < s_bot - o_top) //horizontal overlap < vertical overlap
                 return RIGHT;// s --> o
             else
@@ -44,8 +69,8 @@ public class Collision {
         }
         //Q2 (Q3 in normal graph) of subject
         else if(s_CenterX > o_CenterX && s_CenterY < o_CenterY){
-            if(subject.getName().equals("player") && !object.getName().equals("floor"))
-                System.out.println("Q2");
+            // if(subject.getName().equals("player") && !object.getName().equals("floor"))
+            //     System.out.println("Q2");
             if(o_right - s_left < s_bot - o_top) //horizontal overlap < vertical overlap
                 return LEFT; //o <-- s
             else    
@@ -53,8 +78,8 @@ public class Collision {
         }
         //Q3 (Q4 in normal graph) of subject
         else if(s_CenterX > o_CenterX && s_CenterY > o_CenterY){
-            if(subject.getName().equals("player") && !object.getName().equals("floor"))
-                System.out.println("Q3");
+            // if(subject.getName().equals("player") && !object.getName().equals("floor"))
+            //     System.out.println("Q3");
             if(o_right - s_left < o_bot - s_top) //horizontal overlap < vertical overlap
                 return LEFT;
             else
@@ -62,18 +87,15 @@ public class Collision {
         }
         //Q4 (Q1 in normal graph) of subject
         else if(s_CenterX < o_CenterX && s_CenterY > o_CenterY){
-            if(subject.getName().equals("player") && !object.getName().equals("floor"))
-                System.out.println("Q4");
+            // if(subject.getName().equals("player") && !object.getName().equals("floor"))
+            //     System.out.println("Q4");
             if(s_right - o_left < o_bot - s_top)
                 return RIGHT;
             else 
                 return TOP;
         }
-        else{
-            
-            Transform new_s = new Transform(new Vec2(s.position.x, s.position.y), new Vec2(s.scale.x + (float)1E-3, s.scale.y));
-            return getCollisionType(new_s, o);
-        }
+
+        return NONE;
 
     }
     

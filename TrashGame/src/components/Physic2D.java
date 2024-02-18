@@ -5,27 +5,34 @@ import util.Vec2;
 import static util.Constants.physics.*;
 public class Physic2D extends Component {
 
-    private Vec2 velocity;
+    private Rigidbody rig;
     
     @Override
     public void ready() {
         if(entity.hasComponent(Rigidbody.class))
-            velocity = entity.getComponent(Rigidbody.class).velocity;
+            rig = entity.getComponent(Rigidbody.class);
         else
             System.out.println("WARNING FROM CLASS: " +this.getClass()+ " | "+entity.getName() + "needs a Rigidbody.");
     }
 
     @Override
     public void update() {
-        if(velocity != null)
+        if(rig != null)
             fall();
         else
             return;
+        // showVelocity("player");
     }
 
     private void fall(){
-        velocity.y += GRAVITY;
-        if(velocity.y > DOWN_FORCE)
-            velocity.y = DOWN_FORCE;
+        rig.addForce(new Vec2(0,GRAVITY));
+
+        if(rig.velocity.y > DOWN_FORCE)
+            rig.velocity.y = DOWN_FORCE;
+    }
+
+    public void showVelocity(String entityName){
+        if(entity.getName().equals(entityName))
+            System.out.println("velX: " + rig.velocity.x +" velY: " + rig.velocity.y);
     }
 }
