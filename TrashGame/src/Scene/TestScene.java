@@ -44,11 +44,15 @@ public class TestScene extends Scene {
         floor.addComponent(new Rigidbody(0.1f));
         addEntity(floor);
 
-        BoxWall boxWall = new BoxWall("Box",7,0,1f,1);
+        BoxWall boxWall = new BoxWall("Box",7,5,2f,2);
         Entity bw = boxWall.get();
         addEntity(bw);
 
-        BoxWall boxWall1 = new BoxWall("Box2",12,5,1f,5);
+        BoxWall boxWall3 = new BoxWall("Box",7,8,2f,2f);
+        Entity bw3 = boxWall3.get();
+        addEntity(bw3);
+
+        BoxWall boxWall1 = new BoxWall("Box2",20,5,1f,5);
         Entity bw1 = boxWall1.get();
         bw1.removeCompnent(Physic2D.class);
         addEntity(bw1);
@@ -57,6 +61,7 @@ public class TestScene extends Scene {
         renderer.submit(bw);
         renderer.submit(bw1);
         renderer.submit(tE);
+        renderer.submit(bw3);
        
     }
 

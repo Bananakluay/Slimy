@@ -9,7 +9,7 @@ public class Collision {
     public final Entity subject;
     public final Entity object;
 
-    private final float MIN_INCREMENT = 0.1f;
+    private final float MIN_INCREMENT = 0.01f;
     private boolean isXScaleSame = false;
     private boolean isYScaleSame = false;
 
@@ -53,6 +53,14 @@ public class Collision {
         float s_CenterY = s.position.y + s.scale.y/2;
         float o_CenterX = o.position.x + o.scale.x/2;
         float o_CenterY = o.position.y + o.scale.y/2;
+
+        if(s_CenterX == o_CenterX)
+            s_CenterX += MIN_INCREMENT;
+        if(s_CenterY == o_CenterY)
+            s_CenterY += MIN_INCREMENT;
+        // if(subject.getName().equals("player") && object.getName().equals("Box2")){
+        //     System.out.println(s_CenterX +" "+ o_CenterX  + " " + s_CenterY +" "+ o_CenterY);
+        // }
         // if(subject.getName().equals("player") && !object.getName().equals("floor"))
         //     System.out.println("subject x :"+s_CenterX + "subject y :" + s_CenterY + "object x :"+ o_CenterX + "object y :" + o_CenterY);
 
@@ -94,7 +102,7 @@ public class Collision {
             else 
                 return TOP;
         }
-
+             
         return NONE;
 
     }

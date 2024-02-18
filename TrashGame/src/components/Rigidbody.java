@@ -9,11 +9,12 @@ import static util.Constants.Game.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import dataStructure.Transform;
 
 public class Rigidbody extends Component {
     public Vec2 velocity;
-    public int directionX;
+    public int directionX, directionY;
     private List<Vec2> forces = new ArrayList<>();
     private final float friction;
 
@@ -28,8 +29,13 @@ public class Rigidbody extends Component {
         boolean isCollidingY = false;
         boolean isCollidingX = false;
         directionX = Integer.signum((int)velocity.x);
+        directionY = Integer.signum((int)velocity.y);
         if(entity.hasComponent(Bounds.class)){
             for(Collision cObject : entity.getComponent(Bounds.class).checkCollision(velocity)){
+
+                // if(entity.getName().equals("player") && cObject.object.getName().equals("Box2")){
+                //     System.out.println(cObject.type);
+                // }
                 if(cObject.object.equals(this.entity))
                     continue;
 
@@ -41,13 +47,11 @@ public class Rigidbody extends Component {
                     velocity.x = 0;
                     s.position.x = o.position.x + o.scale.x;
                     isCollidingX = true;
-                    // frictionOnY();
                 }
                 else if(cObject.type == RIGHT && velocity.x>0){
-                        velocity.x = 0;
+                    velocity.x = 0;
                     s.position.x = o.position.x - s.scale.x;
                     isCollidingX = true;
-                    // frictionOnY();
                 }
 
                 if(cObject.type == TOP && velocity.y<0){
@@ -65,7 +69,7 @@ public class Rigidbody extends Component {
                 }
 
                 //If it crashs, what will happenn?
-                for(Component c : entity.getAllComponents())
+                for(Component c : this.entity.getAllComponents())
                     c.onCollision(cObject);
             }
         }
@@ -76,20 +80,24 @@ public class Rigidbody extends Component {
         if(Math.abs(velocity.y)< 0.1)
             velocity.y = 0;
 
-        if(!forces.isEmpty())
+        if(!forces.isEmpty()){
             // net force
             for(Vec2 v : forces){
                 velocity.x += v.x;
                 velocity.y += v.y;
             }
+        }
         forces.clear();  
 
-        //if not colliding (can move)
-        if(!isCollidingX)
-            entity.getTransform().position.x += velocity.x;
-        if(!isCollidingY)
+        // if(entity.getName().equals("player"))
+        //     System.out.println("X" + isCollidingX + " Y " + isCollidingY);
+        // if not colliding (can move)
+        if(!isCollidingX){
+            entity.getTransform().position.x += velocity.x;            
+        }
+        if(!isCollidingY){
             entity.getTransform().position.y += velocity.y;
-
+        }
 
         
     }
@@ -98,10 +106,18 @@ public class Rigidbody extends Component {
     public void onCollision(Collision collision) {
         if(collision.object.getName().equals("Box")){
             if(collision.type == LEFT || collision.type == RIGHT){
-                System.out.println(directionX);
-                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(directionX*0.5f, 0));
+                collision.object.getComponent(Rigidbody.class).velocity.x = directionX*1f;
+            }
+            if(collision.type == TOP || collision.type == BOTTOM){
+                collision.object.getComponent(Rigidbody.class).velocity.y = directionY*1f; //.forces.add(new Vec2(0, directionY*0.4f)); //> 0.3
             }
         }
+        if(!collision.object.getName().equals("player") && collision.type == BOTTOM){
+
+            velocity.x += collision.object.getComponent(Rigidbody.class).velocity.x*0.15;
+        }
+
+
     }
 
     public void addForce(Vec2 force){
@@ -110,12 +126,12 @@ public class Rigidbody extends Component {
 
     private void frictionOnX(){
         velocity.x -= Math.signum(velocity.x) * Math.min(Math.abs(velocity.x), friction);
-        System.out.println(velocity.x + " friction : " + friction);
+        // System.out.println(velocity.x + " friction : " + friction);
     }
-    // private void frictionOnY(){
-
-    //     velocity.y -= Math.signum(velocity.y) * Math.min(Math.abs(velocity.y), friction);
-    // }
+    private void frictionOnY() {
+        velocity.y -= Math.signum(velocity.y) * Math.min(Math.abs(velocity.y), friction);
+        // System.out.println(velocity.y + " friction : " + friction);
+    }
 
     public void moveX(float x){
         this.velocity.x = x;
