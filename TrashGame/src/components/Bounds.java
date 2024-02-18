@@ -2,7 +2,6 @@ package components;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ import util.Vec2;
 
 public class Bounds extends Component {
 
-    public Rectangle bounds = new Rectangle();
+    public Rectangle2D.Float bounds = new Rectangle2D.Float();
     private boolean DEBUG = true;
     @Override
     public void update() {
@@ -26,13 +25,16 @@ public class Bounds extends Component {
     public List<Collision> checkCollision(Vec2 velocity){
         List<Collision> res = new ArrayList<>();
 
-        Rectangle predictedBounds = new Rectangle((int)(bounds.x+velocity.x), (int)(bounds.y+velocity.y),bounds.width,bounds.height);
+        Rectangle2D.Float predictedBounds = new Rectangle2D.Float(bounds.x+velocity.x, bounds.y+velocity.y,bounds.width,bounds.height);
 
         for(Entity entity : SceneManager.getCurrentScene().getEntitiesWithComponent(Bounds.class)){
             if(entity.equals(this.entity))
                 continue;
-            if(predictedBounds.intersects(entity.getComponent(Bounds.class).bounds))
+            if(predictedBounds.intersects(entity.getComponent(Bounds.class).bounds)){
+                // if(this.entity.getName().equals("player"))
+                //     System.out.println("intersects with" + entity.getName() );
                 res.add(new Collision(this.entity, entity));    
+            }
         }
         return res;
     }

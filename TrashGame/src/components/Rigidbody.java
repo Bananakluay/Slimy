@@ -30,9 +30,9 @@ public class Rigidbody extends Component {
             for(Collision cObject : entity.getComponent(Bounds.class).checkCollision(velocity)){
                 if(cObject.object.equals(this.entity))
                     continue;
-                if(entity.getName().equals("player")){
-                    System.out.println(cObject.type);
-                }
+                // if(entity.getName().equals("player")){
+                //     System.out.println(cObject.type);
+                // }
                 Transform s = entity.getTransform();
                 Transform o = cObject.object.getTransform();
 
@@ -44,12 +44,13 @@ public class Rigidbody extends Component {
                     // frictionOnY();
                 }
                 else if(cObject.type == RIGHT && velocity.x>0){
-                    velocity.x = 0;
+                        velocity.x = 0;
                     s.position.x = o.position.x - s.scale.x;
                     isCollidingX = true;
                     // frictionOnY();
                 }
-                else if(cObject.type == TOP && velocity.y<0){
+
+                if(cObject.type == TOP && velocity.y<0){
                     velocity.y = 0;
                     s.position.y = o.position.y + o.scale.y;
                     isCollidingY = true;
