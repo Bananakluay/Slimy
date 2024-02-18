@@ -28,9 +28,9 @@ public class Controller extends Component{
 
     private void walk(){
         if(Game.KI.isKeyPressed(KeyEvent.VK_A))
-            rigidbody.moveX(-WALK_SPEED);
+            rigidbody.addForce(new Vec2(-WALK_SPEED, 0));
         else if(Game.KI.isKeyPressed(KeyEvent.VK_D))
-            rigidbody.moveX(WALK_SPEED);
+            rigidbody.addForce(new Vec2(WALK_SPEED, 0));
         else
             rigidbody.moveX(0);
 

@@ -25,7 +25,7 @@ public class BoxWall {
         Transform t = new Transform(new Vec2(x,y),new Vec2(w,h));
         entity = new Entity(name, t , 0);
         entity.addComponent(new Bounds());
-        entity.addComponent(new Rigidbody(0.1f));
+        entity.addComponent(new Rigidbody(1f));
         entity.addComponent(new Physic2D());
         return entity;
     }

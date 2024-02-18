@@ -4,8 +4,7 @@ import physics.Collision;
 import static physics.CollisionType.*;
 
 import util.Vec2;
-import static util.Constants.Game.*;
-
+import util.MiniMath;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class Rigidbody extends Component {
     private final float friction;
 
     public Rigidbody(float friction){
-        this.friction = friction * SCALE;
+        this.friction = friction;
         this.velocity = new Vec2(0,0);
     }
 
@@ -33,15 +32,16 @@ public class Rigidbody extends Component {
         if(entity.hasComponent(Bounds.class)){
             for(Collision cObject : entity.getComponent(Bounds.class).checkCollision(velocity)){
 
-                // if(entity.getName().equals("player") && cObject.object.getName().equals("Box2")){
-                //     System.out.println(cObject.type);
-                // }
+
                 if(cObject.object.equals(this.entity))
                     continue;
 
                 Transform s = entity.getTransform();
                 Transform o = cObject.object.getTransform();
-
+                
+                //If it crashs, what will happenn?
+                for(Component c : this.entity.getAllComponents())
+                    c.onCollision(cObject);
 
                 if(cObject.type == LEFT && velocity.x<0){
                     velocity.x = 0;
@@ -57,20 +57,14 @@ public class Rigidbody extends Component {
                 if(cObject.type == TOP && velocity.y<0){
                     velocity.y = 0;
                     s.position.y = o.position.y + o.scale.y;
-                    isCollidingY = true;
-                    frictionOnX();
-                }
+                    isCollidingY = true;                }
                 else if(cObject.type == BOTTOM && velocity.y>0){
-
                     velocity.y = 0;
                     s.position.y = o.position.y - s.scale.y;
                     isCollidingY = true;
-                    frictionOnX();
                 }
 
-                //If it crashs, what will happenn?
-                for(Component c : this.entity.getAllComponents())
-                    c.onCollision(cObject);
+                
             }
         }
         
@@ -79,18 +73,18 @@ public class Rigidbody extends Component {
             velocity.x = 0;
         if(Math.abs(velocity.y)< 0.1)
             velocity.y = 0;
-
+        frictionOnX();
+        // net force
         if(!forces.isEmpty()){
-            // net force
             for(Vec2 v : forces){
                 velocity.x += v.x;
                 velocity.y += v.y;
             }
         }
         forces.clear();  
+        
+        velocity.x = MiniMath.clamp(velocity.x, -3, 3);
 
-        // if(entity.getName().equals("player"))
-        //     System.out.println("X" + isCollidingX + " Y " + isCollidingY);
         // if not colliding (can move)
         if(!isCollidingX){
             entity.getTransform().position.x += velocity.x;            
@@ -99,6 +93,8 @@ public class Rigidbody extends Component {
             entity.getTransform().position.y += velocity.y;
         }
 
+
+
         
     }
 
@@ -106,15 +102,15 @@ public class Rigidbody extends Component {
     public void onCollision(Collision collision) {
         if(collision.object.getName().equals("Box")){
             if(collision.type == LEFT || collision.type == RIGHT){
-                collision.object.getComponent(Rigidbody.class).velocity.x = directionX*1f;
+                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(velocity.x*0.3f, 0));
             }
             if(collision.type == TOP || collision.type == BOTTOM){
-                collision.object.getComponent(Rigidbody.class).velocity.y = directionY*1f; //.forces.add(new Vec2(0, directionY*0.4f)); //> 0.3
+                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(0, velocity.y*0.2f)); //> 0.3
             }
         }
         if(!collision.object.getName().equals("player") && collision.type == BOTTOM){
 
-            velocity.x += collision.object.getComponent(Rigidbody.class).velocity.x*0.15;
+            entity.getComponent(Rigidbody.class).addForce(new Vec2(collision.object.getComponent(Rigidbody.class).velocity.x*0.35f, 0f));
         }
 
 

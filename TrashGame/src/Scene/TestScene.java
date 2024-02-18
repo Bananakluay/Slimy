@@ -31,7 +31,7 @@ public class TestScene extends Scene {
             new Transform(new Vec2(5*TILES_SIZE,TILES_SIZE), new Vec2(TILES_SIZE, TILES_SIZE)),
             0);
         tE.addComponent(new Bounds());
-        tE.addComponent(new Rigidbody(0.1f));
+        tE.addComponent(new Rigidbody(1f));
         tE.addComponent(new Physic2D());
         tE.addComponent(new Controller());
         addEntity(tE);
@@ -41,7 +41,7 @@ public class TestScene extends Scene {
             new Transform(new Vec2(TILES_SIZE*0,10*TILES_SIZE), new Vec2(TILES_SIZE*100, TILES_SIZE)),
             3);
         floor.addComponent(new Bounds());
-        floor.addComponent(new Rigidbody(0.1f));
+        floor.addComponent(new Rigidbody(0));
         addEntity(floor);
 
         BoxWall boxWall = new BoxWall("Box",7,5,2f,2);
@@ -52,7 +52,11 @@ public class TestScene extends Scene {
         Entity bw3 = boxWall3.get();
         addEntity(bw3);
 
-        BoxWall boxWall1 = new BoxWall("Box2",20,5,1f,5);
+        BoxWall boxWall4 = new BoxWall("Box",7,5,1,1);
+        Entity bw4 = boxWall4.get();
+        addEntity(bw4);
+
+        BoxWall boxWall1 = new BoxWall("Box2",19,5,1f,5);
         Entity bw1 = boxWall1.get();
         bw1.removeCompnent(Physic2D.class);
         addEntity(bw1);
@@ -62,6 +66,7 @@ public class TestScene extends Scene {
         renderer.submit(bw1);
         renderer.submit(tE);
         renderer.submit(bw3);
+        renderer.submit(bw4);
        
     }
 
