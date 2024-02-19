@@ -29,5 +29,11 @@ public class Spritesheet extends Component{
             }
         }
 
+
+        
+    }
+
+    public Sprite getSprites(int index) {
+        return sprites.get(index);
     }
 }

@@ -9,32 +9,37 @@ import java.util.Map;
 import entity.Entity;
 
 public class Renderer {
-    Map<Integer, List<Entity>> entities = new HashMap<>();
+    Map<Integer, List<Entity>> layers = new HashMap<>();
  
 
     public void render(Graphics g){
-        int lozIndex = Integer.MAX_VALUE;
-        int hizIndex = Integer.MIN_VALUE;
-        for(Integer i : entities.keySet()){
-            if(i<lozIndex) lozIndex = i;
-            if(i>hizIndex) hizIndex = i;
+        int lozIndex = Integer.MAX_VALUE; //0
+        int hizIndex = Integer.MIN_VALUE; //-99999999
+        // 0 5 3 2 11
+        for(Integer i : layers.keySet()){
+            if(i<lozIndex) 
+                lozIndex = i;
+            if(i>hizIndex) 
+                hizIndex = i;
         }
+        //lo = 0 hi = 11
         int currentZIndex;
         for(currentZIndex = lozIndex ; currentZIndex<=hizIndex;currentZIndex++){
-            if(entities.get(currentZIndex) == null){
+            if(layers.get(currentZIndex) == null){
                 currentZIndex++;
                 continue;
             }
-            for(Entity entity : entities.get(currentZIndex)){
+            for(Entity entity : layers.get(currentZIndex)){
                 entity.draw(g);
             }
         }
 
     }
 
+    // add to layer
     public void submit(Entity entity){
-        entities.computeIfAbsent(entity.zIndex, k-> new ArrayList<>());
-        entities.get(entity.zIndex).add(entity);
+        layers.computeIfAbsent(entity.zIndex, k-> new ArrayList<>());//0 -- > array
+        layers.get(entity.zIndex).add(entity);
     }
 
     public void submitAll(List<Entity> entities){

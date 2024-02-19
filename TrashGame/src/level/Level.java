@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import Prefabs.TileBlock;
 import components.Spritesheet;
 import dataStructure.AssetPool;
 import entity.Entity;
+import physics.Prefabs.TileBlock;
 
 import static util.Constants.Game.TILES_IN_WIDTH;
 import static util.Constants.Game.TILES_SIZE;

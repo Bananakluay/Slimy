@@ -29,6 +29,7 @@ public class Entity {
         for(Component c : components)
             c.draw(g);
     }
+    
     public void ready(){
         for(Component c : components)
             c.ready();
@@ -67,7 +68,9 @@ public class Entity {
         for(Component c : components){
             if(componentClass.isAssignableFrom(c.getClass())){
                 try{
-                    return componentClass.cast(c);
+                    return componentClass.cast(c); //Animal <---- Bird      
+                    //Animal bird = Bird()
+                    //bird = (Bird)(bird)
                 }catch (ClassCastException e){
                     e.printStackTrace();
                     System.exit(-1);

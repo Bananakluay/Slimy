@@ -29,7 +29,6 @@ public class Game implements Runnable{
     private Game(){
 		//setting scene
 		sceneManager = SceneManager.get();
-
 		//setting window
         gamePanel = GamePanel.get(this);
         gameWindow = Window.get(gamePanel);

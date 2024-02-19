@@ -18,6 +18,7 @@ public class Sprite  extends Component{
     public BufferedImage img;
     public String imgFile;
     public int width, height;
+    
     public Sprite(String imgFile){
 
         this.imgFile = imgFile;

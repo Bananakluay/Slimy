@@ -10,6 +10,7 @@ import static util.Constants.Game.*;
 public class GamePanel extends JPanel{
 
     private static GamePanel gamePanel = null;
+    
     private Game game;
     private GamePanel(Game game){
         this.game = game;

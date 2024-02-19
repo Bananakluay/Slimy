@@ -1,4 +1,4 @@
-package Prefabs;
+package physics.Prefabs;
 
 import components.Sprite;
 import dataStructure.Transform;

@@ -12,7 +12,9 @@ import java.util.List;
 import dataStructure.Transform;
 
 public class Rigidbody extends Component {
+
     public Vec2 velocity;
+
     public int directionX, directionY;
     private List<Vec2> forces = new ArrayList<>();
     private final float friction;
@@ -100,18 +102,18 @@ public class Rigidbody extends Component {
 
     @Override
     public void onCollision(Collision collision) {
-        if(collision.object.getName().equals("Box")){
-            if(collision.type == LEFT || collision.type == RIGHT){
-                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(velocity.x*0.3f, 0));
-            }
-            if(collision.type == TOP || collision.type == BOTTOM){
-                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(0, velocity.y*0.2f)); //> 0.3
-            }
-        }
-        if(!collision.object.getName().equals("player") && collision.type == BOTTOM){
+        // if(collision.object.getName().equals("Box")){
+        //     if(collision.type == LEFT || collision.type == RIGHT){
+        //         collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(velocity.x*0.3f, 0));
+        //     }
+        //     if(collision.type == TOP || collision.type == BOTTOM){
+        //         collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(0, velocity.y*0.2f)); //> 0.3
+        //     }
+        // }
+        // if(!collision.object.getName().equals("player") && collision.type == BOTTOM){
 
-            entity.getComponent(Rigidbody.class).addForce(new Vec2(collision.object.getComponent(Rigidbody.class).velocity.x*0.35f, 0f));
-        }
+        //     entity.getComponent(Rigidbody.class).addForce(new Vec2(collision.object.getComponent(Rigidbody.class).velocity.x*0.35f, 0f));
+        // }
 
 
     }

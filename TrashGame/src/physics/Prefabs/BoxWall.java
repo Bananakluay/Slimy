@@ -1,4 +1,4 @@
-package Prefabs;
+package physics.Prefabs;
 
 import static util.Constants.Game.TILES_SIZE;
 
