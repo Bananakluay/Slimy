@@ -16,17 +16,22 @@ public class SceneManager {
     }
 
     public void init(){
-        changeScene(Scenes.TEST_SCENE);
+        changeScene(Scenes.LEVEL_SCENE);
     }
     public void changeScene(Scenes scene){
         switch (scene) {
             case MENU_SCENE:
+                System.out.println("Menu Scene");
                 currentScene = new MenuScene();
                 break;
             case LEVEL_SCENE:
+                System.out.println("LEVEL Scene");
                 currentScene = new LevelScene();
+                break;
             case TEST_SCENE:
+                System.out.println("TEST Scene");
                 currentScene = new TestScene();
+                break;
             default:
                 break;
         }
