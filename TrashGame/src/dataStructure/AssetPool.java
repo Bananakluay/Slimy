@@ -19,13 +19,13 @@ public class AssetPool {
 
 
 
-    public static Sprite getSprite(String imgFile){
+    public static Sprite getSprite(String imgFile, int tileSize){
         File file = new File(imgFile);
         if(AssetPool.sprites.containsKey(imgFile)){
             return AssetPool.sprites.get(file.getAbsolutePath().toString());
         }
         else{
-            Sprite sprite = new Sprite(imgFile);
+            Sprite sprite = new Sprite(imgFile, tileSize);
             AssetPool.add(imgFile, sprite);
             return AssetPool.sprites.get(file.getAbsolutePath());
         }
@@ -54,6 +54,7 @@ public class AssetPool {
             return AssetPool.bufferImage.get(file.getAbsolutePath());
         }
     }
+    
     
     public static <T> void add(String imgFile, T asset){
         File file = new File(imgFile);

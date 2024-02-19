@@ -5,11 +5,13 @@ import static physics.CollisionType.*;
 
 import util.Vec2;
 import util.MiniMath;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 import dataStructure.Transform;
+import entity.EntityType;
 
 public class Rigidbody extends Component {
 
@@ -38,6 +40,9 @@ public class Rigidbody extends Component {
                 if(cObject.object.equals(this.entity))
                     continue;
 
+                if(entity.getName().equals("Box4") && cObject.type != BOTTOM){
+                    System.out.println(cObject.type);
+                }
                 Transform s = entity.getTransform();
                 Transform o = cObject.object.getTransform();
                 
@@ -56,27 +61,28 @@ public class Rigidbody extends Component {
                     isCollidingX = true;
                 }
 
+
                 if(cObject.type == TOP && velocity.y<0){
                     velocity.y = 0;
                     s.position.y = o.position.y + o.scale.y;
                     isCollidingY = true;                }
                 else if(cObject.type == BOTTOM && velocity.y>0){
+
                     velocity.y = 0;
                     s.position.y = o.position.y - s.scale.y;
                     isCollidingY = true;
                 }
-
                 
             }
         }
         
-        // avoid velocity --> 0.00...
+            // avoid velocity --> 0.00...
         if(Math.abs(velocity.x) < 0.1)
             velocity.x = 0;
         if(Math.abs(velocity.y)< 0.1)
             velocity.y = 0;
         frictionOnX();
-        // net force
+        //net force
         if(!forces.isEmpty()){
             for(Vec2 v : forces){
                 velocity.x += v.x;
@@ -84,32 +90,37 @@ public class Rigidbody extends Component {
             }
         }
         forces.clear();  
-        
+            
         velocity.x = MiniMath.clamp(velocity.x, -3, 3);
 
+        // System.out.println("isCollidingX: "+isCollidingX+"isColldingY: " + isCollidingY);
         // if not colliding (can move)
         if(!isCollidingX){
             entity.getTransform().position.x += velocity.x;            
         }
+        // else{
+        //     entity.getTransform().position.x -= velocity.x;   
+        // }
         if(!isCollidingY){
             entity.getTransform().position.y += velocity.y;
         }
-
-
 
         
     }
 
     @Override
     public void onCollision(Collision collision) {
-        // if(collision.object.getName().equals("Box")){
-        //     if(collision.type == LEFT || collision.type == RIGHT){
-        //         collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(velocity.x*0.3f, 0));
-        //     }
-        //     if(collision.type == TOP || collision.type == BOTTOM){
-        //         collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(0, velocity.y*0.2f)); //> 0.3
-        //     }
-        // }
+
+        if(collision.object.tag == EntityType.BOX){
+            if(collision.type == LEFT || collision.type == RIGHT){
+                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(velocity.x*0.15f, 0));
+            }
+            if(collision.type == TOP || collision.type == BOTTOM){
+                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(0, velocity.y*0.2f)); //> 0.3
+                if(collision.type == TOP)
+                    collision.subject.getComponent(Rigidbody.class).forces.add(new Vec2(0, -velocity.y*0.3f)); //> 0.3
+            }
+        }
         // if(!collision.object.getName().equals("player") && collision.type == BOTTOM){
 
         //     entity.getComponent(Rigidbody.class).addForce(new Vec2(collision.object.getComponent(Rigidbody.class).velocity.x*0.35f, 0f));

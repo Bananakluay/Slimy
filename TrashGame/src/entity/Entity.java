@@ -9,7 +9,9 @@ import dataStructure.Transform;
 public class Entity {
 
     private String name;
-
+    public int uid = -1;
+    public EntityType tag = EntityType.NONE;
+    public static int ID_COUNTER = 0;
     private Transform transform;
     private List<Component> components;
     public int zIndex = 0;
@@ -80,6 +82,11 @@ public class Entity {
         return null;
     }
 
+    public void generateId()
+    {
+        if (this.uid == -1)
+            this.uid = ID_COUNTER++;
+    }
     
 
     public List<Component> getAllComponents() {return components;}

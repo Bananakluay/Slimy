@@ -3,20 +3,14 @@ package Scene;
 import static util.Constants.Game.*;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.nio.Buffer;
-
 import components.Bounds;
 import components.Controller;
 import components.Physic2D;
 import components.Rigidbody;
-import components.Sprite;
 import components.SubSprite;
-import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
-import physics.Prefabs.BoxWall;
-import physics.Prefabs.TileBlock;
+
 import util.Vec2;
 
 public class TestScene extends Scene {
@@ -39,6 +33,7 @@ public class TestScene extends Scene {
         player.addComponent(new Rigidbody(1f));
         player.addComponent(new Physic2D());
         player.addComponent(new Controller());
+        player.addComponent(new SubSprite("TrashGame/res/Wall.png", 8).getSprites(1));
 
         addEntity(player);
 
