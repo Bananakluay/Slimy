@@ -25,7 +25,7 @@ public class Spritesheet extends Component{
 
 		for (int row = 0; row < nRow; row++){
 			for (int col = 0; col < nCol; col++){
-                sprites.add(new Sprite(sprite.img.getSubimage(col * tileWidth, row * tileHeight, tileWidth, tileHeight)));
+                sprites.add(new Sprite(sprite.img.getSubimage(col, row, tileWidth, tileHeight)));
             }
         }
 

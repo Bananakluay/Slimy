@@ -17,6 +17,8 @@ public class LevelScene extends Scene{
         LevelManager.get();
         getAllEntities().addAll(LevelManager.getCurrentLevel().getAllEntities());
         renderer.submitAll(entities);
+
+        Entity test = new Entity(null, null, 0)
     }
 
     @Override

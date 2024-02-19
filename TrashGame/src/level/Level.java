@@ -60,10 +60,8 @@ public class Level {
 					Color color = new Color(imgLvlData.getRGB(col, row));
 					int value = color.getRed();
 					if(value != 255){
-						// TileBlock tile = new TileBlock(col * Game.TILES_SIZE, row * Game.TILES_SIZE, Game.TILES_SIZE, Game.TILES_SIZE,TileSet[value]);
-						// tiles.add(tile);
 						System.out.println(col +" "+ row);
-						TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, spritesheet.sprites.get(value));
+						TileBlock tileBlock =  new TileBlock(col, row, TILES_SIZE, TILES_SIZE, spritesheet.sprites.get(value));
 						entities.add(tileBlock);
 					}
 				}
