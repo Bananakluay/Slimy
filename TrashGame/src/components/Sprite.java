@@ -24,7 +24,7 @@ public class Sprite  extends Component{
 
         try{
             File file = new File(imgFile);
-            if(AssetPool.hasSprite(imgFile))
+            if(AssetPool.sprites.containsKey(imgFile))
                 System.out.println("Asset already exitst:" + imgFile);
             this.img = ImageIO.read(file);
             this.width = img.getWidth();
@@ -49,7 +49,6 @@ public class Sprite  extends Component{
         transform.setToIdentity();
         transform.translate(entity.getTransform().position.x, entity.getTransform().position.y);
         transform.scale(SCALE, SCALE);
-
         g2d.drawImage(img, transform, null);
         Transform t = entity.getTransform();
         g2d.draw(new Rectangle((int)t.position.x,(int)t.position.y, (int)t.scale.x, (int)t.scale.y));

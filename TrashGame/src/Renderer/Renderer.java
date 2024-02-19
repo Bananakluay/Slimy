@@ -10,9 +10,7 @@ import entity.Entity;
 
 public class Renderer {
     Map<Integer, List<Entity>> entities = new HashMap<>();
-    public Renderer(){
-
-    }
+ 
 
     public void render(Graphics g){
         int lozIndex = Integer.MAX_VALUE;
@@ -37,5 +35,11 @@ public class Renderer {
     public void submit(Entity entity){
         entities.computeIfAbsent(entity.zIndex, k-> new ArrayList<>());
         entities.get(entity.zIndex).add(entity);
+    }
+
+    public void submitAll(List<Entity> entities){
+        for (Entity entity : entities) {
+            submit(entity);
+        }
     }
 }

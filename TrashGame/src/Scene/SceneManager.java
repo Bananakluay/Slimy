@@ -1,10 +1,8 @@
 package Scene;
-
 public class SceneManager {
     private static SceneManager sceneManager = null;
     
     private static Scene currentScene;
-    private Scene testScene;
 
 
     private SceneManager(){
@@ -18,10 +16,22 @@ public class SceneManager {
     }
 
     public void init(){
-        testScene = new TestScene();
-        currentScene = testScene;
+        changeScene(Scenes.LEVEL_SCENE);
     }
-    public void changeScene(){}
+    public void changeScene(Scenes scene){
+        switch (scene) {
+            case MENU_SCENE:
+                currentScene = new MenuScene();
+                break;
+            case LEVEL_SCENE:
+                currentScene = new LevelScene();
+            // case TEST_SCENE:
+            //     System.out.println("TEST_SCENE");
+            //     currentScene = new TestScene();
+            default:
+                break;
+        }
+    }
 
     public static Scene getCurrentScene(){return currentScene;}
 }

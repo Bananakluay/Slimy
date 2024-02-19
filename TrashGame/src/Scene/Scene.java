@@ -37,6 +37,7 @@ public abstract class Scene{
 		}
 	}
 
+
 	protected Entity getEntity(String name){
 		for(Entity entity : entities){
 			if(entity.getName().equals(name))

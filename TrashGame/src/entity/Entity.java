@@ -19,7 +19,6 @@ public class Entity {
         this.transform = transform;
         this.components = new ArrayList<>();
         this.zIndex = zIndex;
-        System.out.println(this.getName() + transform.scale.x);
     }
     
     public void update(){

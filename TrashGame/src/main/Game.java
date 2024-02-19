@@ -52,11 +52,11 @@ public class Game implements Runnable{
 	}
 
     public void update(){
-		sceneManager.getCurrentScene().update();
+		SceneManager.getCurrentScene().update();
     }
 
     public void render(Graphics g){
-		sceneManager.getCurrentScene().draw(g);
+		SceneManager.getCurrentScene().draw(g);
     }
     
     private void startGameLoop() {
