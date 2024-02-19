@@ -31,5 +31,11 @@ public class LevelScene extends Scene{
         renderer.render(g);
     }
 
+    @Override
+    public void onDestroy() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'onDestroy'");
+    }
+
     
 }

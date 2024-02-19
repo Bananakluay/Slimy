@@ -21,5 +21,11 @@ public class MenuScene extends Scene{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'draw'");
     }
+
+    @Override
+    public void onDestroy() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'onDestroy'");
+    }
     
 }

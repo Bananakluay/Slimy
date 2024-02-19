@@ -27,6 +27,8 @@ public abstract class Scene{
 		isRunning = true;
 	}
 
+	public abstract void onDestroy();
+
 	protected void addEntity(Entity entity){
 		if(!isRunning){
 			entities.add(entity);
@@ -55,6 +57,7 @@ public abstract class Scene{
 	}
 
 	protected List<Entity> getAllEntities(){return entities;}
+
 
 
 

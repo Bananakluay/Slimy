@@ -67,5 +67,14 @@ public class TestScene extends Scene {
 
     }
 
+
+
+    @Override
+    public void onDestroy() {
+        for (Entity entity : entities) {
+            entity.onDestroy();
+        }
+    }
+
     
 }
