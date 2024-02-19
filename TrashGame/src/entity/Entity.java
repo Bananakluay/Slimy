@@ -30,7 +30,7 @@ public class Entity {
         for(Component c : components)
             c.draw(g);
     }
-    public void init(){
+    public void ready(){
         for(Component c : components)
             c.ready();
     }

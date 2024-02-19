@@ -1,4 +1,4 @@
-package Scene;
+package Renderer;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

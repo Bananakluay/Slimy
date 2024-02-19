@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import Renderer.Renderer;
 import components.Component;
 import entity.Entity;
 
@@ -21,7 +22,7 @@ public abstract class Scene{
 
 	public void ready(){
 		for(Entity entity : entities){
-			entity.init();
+			entity.ready();
 		}
 		isRunning = true;
 	}
@@ -32,7 +33,7 @@ public abstract class Scene{
 		}
 		else{
 			entities.add(entity);
-			entity.init();
+			entity.ready();
 		}
 	}
 

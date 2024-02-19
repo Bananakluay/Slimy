@@ -1,14 +1,16 @@
 package dataStructure;
 
-import java.awt.Graphics;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import components.Sprite;
-
+@SuppressWarnings("rawtypes")
 public class AssetPool {
-    static Map<String, Sprite> sprites = new HashMap();
+    @SuppressWarnings("unchecked")
+    public static Map<String, Sprite> sprites = new HashMap();
+    //static Map(String, Level) levelsData = new HashMap(); 
+
 
     public static boolean hasSprite(String imgFile){
         return AssetPool.sprites.containsKey(imgFile);
@@ -32,9 +34,9 @@ public class AssetPool {
         if(!AssetPool.hasSprite(file.getAbsolutePath())){
             AssetPool.sprites.put(file.getAbsolutePath(), sprite);
         }
-        // else{
-        //     System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
-        //     System.exit(-1);
-        // }
+        else{
+            System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
+            System.exit(-1);
+        }
     }
 }
