@@ -18,7 +18,6 @@ public class Sprite  extends Component{
     public BufferedImage img;
     public String imgFile;
     public int width, height;
-    
     public Sprite(String imgFile){
 
         this.imgFile = imgFile;
@@ -50,7 +49,6 @@ public class Sprite  extends Component{
         transform.setToIdentity();
         transform.translate(entity.getTransform().position.x, entity.getTransform().position.y);
         transform.scale(SCALE, SCALE);
-        g2d.drawImage(img, transform, null);
         Transform t = entity.getTransform();
         g2d.draw(new Rectangle((int)t.position.x,(int)t.position.y, (int)t.scale.x, (int)t.scale.y));
 

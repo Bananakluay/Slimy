@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import components.Spritesheet;
+import components.SubSprite;
 import dataStructure.AssetPool;
 import entity.Entity;
 import physics.Prefabs.TileBlock;
@@ -25,7 +25,7 @@ public class Level {
 	private String tileSetFile;
 	
 	private BufferedImage imgLvlData;
-	private Spritesheet spritesheet;
+	// private SubSprite spritesheet;
 
 	private List<Entity> entities = new ArrayList<>();
 	public Level(String imgLvlDataFile, String tileSetFile) {
@@ -37,7 +37,7 @@ public class Level {
 	
 	public void init(){
 		imgLvlData = AssetPool.getBufferedImage(imgLvlDataFile);
-		spritesheet = new Spritesheet(tileSetFile, 16, 16);
+		// spritesheet = new SubSprite(tileSetFile, 16, 16);
 		generateLevelData();
 		loadTileBlockData();
 	}
@@ -60,8 +60,9 @@ public class Level {
 					Color color = new Color(imgLvlData.getRGB(col, row));
 					int value = color.getRed();
 					if(value != 255){
-						System.out.println(col +" "+ row);
-						TileBlock tileBlock =  new TileBlock(col, row, TILES_SIZE, TILES_SIZE, spritesheet.sprites.get(value));
+						SubSprite s = new SubSprite(tileSetFile, 8, 8);
+						TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(0));
+
 						entities.add(tileBlock);
 					}
 				}

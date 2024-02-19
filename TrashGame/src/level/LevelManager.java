@@ -13,7 +13,7 @@ public class LevelManager {
     }
 
     private void init(){
-        currentLevel = new Level("TrashGame/res/mapdataV2.png", "TrashGame/res/TempTileSetV3.png");
+        currentLevel = new Level("TrashGame/res/Tmap.png", "TrashGame/res/Wall.png");
     }
 
     public static LevelManager get(){

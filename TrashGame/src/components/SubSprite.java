@@ -5,13 +5,13 @@ import java.util.List;
 
 import dataStructure.AssetPool;
 
-public class Spritesheet extends Component{
+public class SubSprite extends Component{
     public List<Sprite> sprites;
 
     public int tileWidth;
     public int tileHeight;
 
-    public Spritesheet(String imgfile, int tileWidth, int tileHeight){
+    public SubSprite(String imgfile, int tileWidth, int tileHeight){
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         

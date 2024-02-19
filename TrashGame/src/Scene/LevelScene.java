@@ -1,9 +1,13 @@
 package Scene;
 
+import static util.Constants.Game.TILES_SIZE;
+
 import java.awt.Graphics;
 
+import components.SubSprite;
 import entity.Entity;
 import level.LevelManager;
+import physics.Prefabs.TileBlock;
 
 public class LevelScene extends Scene{
 
@@ -17,8 +21,6 @@ public class LevelScene extends Scene{
         LevelManager.get();
         getAllEntities().addAll(LevelManager.getCurrentLevel().getAllEntities());
         renderer.submitAll(entities);
-
-        Entity test = new Entity(null, null, 0)
     }
 
     @Override
@@ -35,8 +37,7 @@ public class LevelScene extends Scene{
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onDestroy'");
+
     }
 
     

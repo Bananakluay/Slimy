@@ -11,7 +11,7 @@ import components.Controller;
 import components.Physic2D;
 import components.Rigidbody;
 import components.Sprite;
-import components.Spritesheet;
+import components.SubSprite;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
