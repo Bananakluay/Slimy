@@ -36,7 +36,6 @@ public class Rigidbody extends Component {
         if(entity.hasComponent(Bounds.class)){
             for(Collision cObject : entity.getComponent(Bounds.class).checkCollision(velocity)){
 
-
                 if(cObject.object.equals(this.entity))
                     continue;
 
@@ -111,16 +110,21 @@ public class Rigidbody extends Component {
     @Override
     public void onCollision(Collision collision) {
 
-        if(collision.object.tag == EntityType.BOX){
+        if(collision.subject.hasComponent(Rigidbody.class) && collision.object.hasComponent(Rigidbody.class)){
             if(collision.type == LEFT || collision.type == RIGHT){
                 collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(velocity.x*0.15f, 0));
+                collision.subject.getComponent(Rigidbody.class).forces.add(new Vec2(-velocity.x*0.15f, 0));
             }
+    
             if(collision.type == TOP || collision.type == BOTTOM){
-                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(0, velocity.y*0.2f)); //> 0.3
-                if(collision.type == TOP)
-                    collision.subject.getComponent(Rigidbody.class).forces.add(new Vec2(0, -velocity.y*0.3f)); //> 0.3
+                collision.object.getComponent(Rigidbody.class).forces.add(new Vec2(0, velocity.y*0.12f));
+                collision.subject.getComponent(Rigidbody.class).forces.add(new Vec2(0, -velocity.y*0.12f));
+                if(collision.type == BOTTOM){
+                    collision.subject.getComponent(Rigidbody.class).forces.add(new Vec2(collision.object.getComponent(Rigidbody.class).velocity.x*0.1f, 0));
+                }
             }
         }
+  
         // if(!collision.object.getName().equals("player") && collision.type == BOTTOM){
 
         //     entity.getComponent(Rigidbody.class).addForce(new Vec2(collision.object.getComponent(Rigidbody.class).velocity.x*0.35f, 0f));
