@@ -24,6 +24,8 @@ public class Spike extends Entity implements Behavior{
             List.of(EntityType.PLAYER), 
             this);
         
+        addComponent(detector);
+        
     }
     @Override
     public void activate(Entity entity) {
