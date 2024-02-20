@@ -8,7 +8,6 @@ import dataStructure.AssetPool;
 public class SubSprite extends Component{
     public List<Sprite> sprites;
 
-<<<<<<< HEAD
     public int tileWidth;
     public int tileHeight;
 
@@ -31,25 +30,6 @@ public class SubSprite extends Component{
         }
 
 
-=======
-    public int tileSize;
-
-    public SubSprite(String imgfile, int tileSize){
-        this.tileSize = tileSize;
-        
-        Sprite sprite = AssetPool.getSprite(imgfile,tileSize);
-        sprites = new ArrayList<>();
-        
-        int nRow = sprite.getHeight()/tileSize;
-        int nCol = sprite.getWidth()/tileSize;
-
-		for (int row = 0; row < nRow; row++){
-			for (int col = 0; col < nCol; col++){
-                sprites.add(new Sprite(sprite.img.getSubimage(col*tileSize, row*tileSize, tileSize, tileSize)));
-            }
-        }
-
->>>>>>> 52604e9134d0e7315bcd971cc24bdf4234f98e66
         
     }
 

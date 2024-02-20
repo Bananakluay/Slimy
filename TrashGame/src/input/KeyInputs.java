@@ -3,8 +3,6 @@ package input;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-
-
 public class KeyInputs extends KeyAdapter{
 
     private boolean keyPressed[] = new boolean[128];
