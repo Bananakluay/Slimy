@@ -2,18 +2,21 @@ package dataStructure;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 
 import components.Sprite;
+import util.InputImage;
 @SuppressWarnings("rawtypes")
 public class AssetPool {
     @SuppressWarnings("unchecked")
     public static Map<String, Sprite> sprites = new HashMap();
     public static Map<String, BufferedImage> bufferImage = new HashMap<>();
+    @SuppressWarnings("unchecked")
+    public static Map<String, List<BufferedImage>> bufferImageList = new HashMap();
     //static Map(String, Level) levelsData = new HashMap(); 
 
 
@@ -38,21 +41,33 @@ public class AssetPool {
             return AssetPool.bufferImage.get(file.getAbsolutePath().toString());
         }
         else{
-            BufferedImage bufferImg = null;
-            try {
-                bufferImg = ImageIO.read(file);
-
-                if(bufferImg == null) 
-                    System.out.println("res/"+ file +" not found");
-                else
-                    System.out.println("GET Img : "+"res/"+ file + " Success");
-            } catch (IOException e) {
-                System.out.println("GET Img : "+"res/"+ file + " fail");
-                e.printStackTrace();
-            }
+            BufferedImage bufferImg = InputImage.loadBufferedImage(imgFile);
             AssetPool.add(imgFile, bufferImg);
             return AssetPool.bufferImage.get(file.getAbsolutePath());
         }
+    }
+
+    public static List<BufferedImage> getBufferedImageList(String imgFile, int tileSize){
+        File file = new File(imgFile);
+        if(AssetPool.bufferImageList.containsKey(imgFile)){
+            return AssetPool.bufferImageList.get(file.getAbsolutePath().toString());
+        }
+        else{
+
+            BufferedImage bufferedImage = getBufferedImage(imgFile);
+            int nRow = bufferedImage.getHeight()/tileSize;
+            int nCol = bufferedImage.getWidth()/tileSize;
+
+            List<BufferedImage> res = new ArrayList<>();
+
+		    for (int row = 0; row < nRow; row++){
+			    for (int col = 0; col < nCol; col++) 
+                    res.add(bufferedImage.getSubimage(col * tileSize, row * tileSize, tileSize, tileSize));
+			}
+
+            return res;
+        }
+        
     }
     
     

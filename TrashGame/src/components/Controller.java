@@ -12,6 +12,16 @@ public class Controller extends Component{
     private Rigidbody rigidbody;
     private int jumpCount = 0;
     private int maxJumpCount = 1;
+
+    private float walkSpeed = WALK_SPEED;
+    private float jumpForce = JUMP_FORCE;
+    public boolean isCurrentPlayer = false;
+    
+    public Controller(boolean status){
+    
+        isCurrentPlayer = status;
+    }
+
     @Override
     public void ready() {
         if(entity.hasComponent(Rigidbody.class))
@@ -22,15 +32,18 @@ public class Controller extends Component{
 
     @Override
     public void update() {
+        if(!isCurrentPlayer)
+            return;
+
         walk();
         jump();
     }
 
     private void walk(){
         if(Game.KI.isKeyPressed(KeyEvent.VK_A))
-            rigidbody.moveX(-WALK_SPEED);
+            rigidbody.moveX(-walkSpeed );
         else if(Game.KI.isKeyPressed(KeyEvent.VK_D))
-            rigidbody.moveX(WALK_SPEED);
+            rigidbody.moveX(walkSpeed);
         else
             rigidbody.moveX(0);
 
@@ -43,15 +56,10 @@ public class Controller extends Component{
     }
     private void jump(){
         if(Game.KI.isKeyPressed(KeyEvent.VK_W) && jumpCount < maxJumpCount){
-            rigidbody.addForce(new Vec2(0, -JUMP_FORCE));
+            rigidbody.addForce(new Vec2(0, -jumpForce));
             jumpCount++;
         }
-    
-
-        
     }
-
-
 
     @Override
     public void onCollision(Collision collision) {
@@ -59,13 +67,18 @@ public class Controller extends Component{
             jumpCount = 0;
 
         }
-
-        // invoke onCollision that attached to object that player collided with
-        // for(Component c : collision.object.getAllComponents()){
-        //     if(!c.equals(this))
-        //         c.onCollision(collision);
-        // }
     }
+
+    public void setCurrentPlayer(boolean isCurrentPlayer) {
+        this.isCurrentPlayer = isCurrentPlayer;
+    }
+
+    public void setMobility(float walkSpeed, float jumpForce){
+        this.walkSpeed = walkSpeed;
+        this.jumpForce = jumpForce;
+    }
+
+    
 
 
 

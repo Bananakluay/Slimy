@@ -1,4 +1,11 @@
-package Scene;
+package Manager;
+
+import Scene.LevelScene;
+import Scene.MenuScene;
+import Scene.Scene;
+import Scene.Scenes;
+import Scene.TestScene;
+
 public class SceneManager {
     private static SceneManager sceneManager = null;
     

@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import Scene.SceneManager;
+import Manager.SceneManager;
 import dataStructure.Transform;
 import entity.Entity;
 import physics.Collision;

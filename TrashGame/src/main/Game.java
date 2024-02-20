@@ -3,8 +3,8 @@ package main;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
+import Manager.SceneManager;
 import Scene.Scene;
-import Scene.SceneManager;
 import Scene.TestScene;
 import input.KeyInputs;
 import input.MouseInputs;

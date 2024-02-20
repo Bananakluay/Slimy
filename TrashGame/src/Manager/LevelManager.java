@@ -1,7 +1,6 @@
-package level;
+package Manager;
 
-
-
+import level.Level;
 
 public class LevelManager {
 
@@ -13,6 +12,8 @@ public class LevelManager {
     }
 
     private void init(){
+
+
         currentLevel = new Level("TrashGame/res/Tmap.png", "TrashGame/res/Wall.png");
     }
 

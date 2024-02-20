@@ -32,7 +32,7 @@ public class TestScene extends Scene {
         player.addComponent(new Bounds(null));
         player.addComponent(new Rigidbody(3f,1f));
         player.addComponent(new Physic2D());
-        player.addComponent(new Controller());
+        player.addComponent(new Controller(true));
         player.addComponent(new SubSprite("TrashGame/res/Wall.png", 8).getSprites(1));
 
         addEntity(player);

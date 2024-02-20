@@ -5,13 +5,15 @@ import static util.Constants.Game.TILES_SIZE;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
+import Manager.LevelManager;
+import Manager.PlayerManager;
 import components.Controller;
 
 import Prefabs.Box;
 import Prefabs.Spike;
 import entity.Entity;
 import entity.EntityType;
-import level.LevelManager;
 
 public class LevelScene extends Scene{
 
@@ -24,12 +26,13 @@ public class LevelScene extends Scene{
     public void init() {
         
         LevelManager.get();
+
         getAllEntities().addAll(LevelManager.getCurrentLevel().getAllEntities());
         renderer.submitAll(entities);
 
         Box player = new Box("Green", 10*TILES_SIZE, 6*TILES_SIZE, TILES_SIZE, TILES_SIZE,Color.GREEN,1f,2f, true);
         player.type = EntityType.PLAYER;
-        player.addComponent(new Controller());
+        player.addComponent(new Controller(true));
         addEntity(player);
         renderer.submit(player);
 

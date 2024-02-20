@@ -6,7 +6,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 import Behavior.Behavior;
-import Scene.SceneManager;
+import Manager.SceneManager;
 import entity.Entity;
 import entity.EntityType;
 
