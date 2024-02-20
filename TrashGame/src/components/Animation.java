@@ -1,5 +1,6 @@
 package components;
 
+import java.awt.Graphics;
 import java.util.HashMap;
 @SuppressWarnings("unused")
 public class Animation extends Component {
@@ -47,6 +48,11 @@ public class Animation extends Component {
         //     // Apply the current frame to the game object (replace with your rendering logic)
         //     gameObject.setTexture(textures[data.frames[frameIndex]]);
         // }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        
     }
 
     private class AnimationData {

@@ -70,9 +70,7 @@ public class Entity {
         for(Component c : components){
             if(componentClass.isAssignableFrom(c.getClass())){
                 try{
-                    return componentClass.cast(c); //Animal <---- Bird      
-                    //Animal bird = Bird()
-                    //bird = (Bird)(bird)
+                    return componentClass.cast(c); 
                 }catch (ClassCastException e){
                     e.printStackTrace();
                     System.exit(-1);

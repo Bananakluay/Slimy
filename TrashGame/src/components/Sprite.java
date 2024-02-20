@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import dataStructure.AssetPool;
 
 public class Sprite  extends Component{
+
     public BufferedImage img;
     public String imgFile;
     public int width, height;
@@ -57,8 +58,7 @@ public class Sprite  extends Component{
         int w = (int)entity.getTransform().scale.x;
         int h = (int)entity.getTransform().scale.y;
         g.drawImage(img, x,y,w,h, null);
-        // Transform t = entity.getTransform();
-        // g2d.draw(new Rectangle((int)t.position.x,(int)t.position.y, (int)t.scale.x, (int)t.scale.y));
+
 
     }
 

@@ -1,6 +1,7 @@
 package Prefabs;
 
 
+
 import components.Bounds;
 import components.Sprite;
 import dataStructure.Transform;
@@ -21,6 +22,7 @@ public class TileBlock extends Entity{
         addComponent(sprite);
         addComponent(new Bounds(null));
     }
+    
 
 
     
