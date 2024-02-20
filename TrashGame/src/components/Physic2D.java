@@ -2,7 +2,7 @@ package components;
 
 import util.Vec2;
 
-import static util.Constants.physics.*;
+import static util.Constants.Physics.*;
 public class Physic2D extends Component {
 
     private Rigidbody rig;
@@ -21,13 +21,13 @@ public class Physic2D extends Component {
             fall();
         else
             return;
-        // showVelocity("Box");
+        showVelocity("Green");
     }
 
     private void fall(){
         rig.addForce(new Vec2(0, GRAVITY));
-        if(rig.velocity.y > 15)
-            rig.velocity.y = 15;
+        if(rig.velocity.y > DOWN_FORCE)
+            rig.velocity.y = DOWN_FORCE;
     }
 
     public void showVelocity(String entityName){

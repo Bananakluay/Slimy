@@ -9,9 +9,7 @@ public class Collision {
     public final Entity subject;
     public final Entity object;
 
-    private final float MIN_INCREMENT = 0.01f;
-    private boolean isXScaleSame = false;
-    private boolean isYScaleSame = false;
+    private final float MIN_INCREMENT = 0.0001f;
 
     public Collision(Entity subject, Entity object){
         this.subject = subject;
@@ -20,21 +18,21 @@ public class Collision {
         Transform s = subject.getTransform();
         Transform o = object.getTransform();
 
-        if(s.scale.x == o.scale.x){
-            isXScaleSame = true;
-            s.scale.x += MIN_INCREMENT;
-        }
-        if(s.scale.y == o.scale.y){
-            isYScaleSame = true;
-            s.scale.y += MIN_INCREMENT;
-        }  
+        // if(s.scale.x == o.scale.x){
+        //     isXScaleSame = true;ddddaw
+        //     s.scale.x += MIN_INCREMENT;
+        // }
+        // if(s.scale.y == o.scale.y){
+        //     isYScaleSame = true;
+        //     s.scale.y += MIN_INCREMENT;
+        // }  
 
         this.type = getCollisionType(s, o);
 
-        if(isXScaleSame)
-            s.scale.x -= MIN_INCREMENT;
-        if(isYScaleSame)
-            s.scale.y -= MIN_INCREMENT;
+        // if(isXScaleSame)
+        //     s.scale.x -= MIN_INCREMENT;
+        // if(isYScaleSame)
+        //     s.scale.y -= MIN_INCREMENT;
     }
 
     public CollisionType getCollisionType(Transform s, Transform o){    
@@ -55,9 +53,9 @@ public class Collision {
         float o_CenterY = o.position.y + o.scale.y/2;
 
         if(s_CenterX == o_CenterX)
-            s_CenterX += MIN_INCREMENT;
+            o_CenterX += MIN_INCREMENT;
         if(s_CenterY == o_CenterY)
-            s_CenterY += MIN_INCREMENT;
+            o_CenterY += MIN_INCREMENT;
         // if(subject.getName().equals("player") && object.getName().equals("Box2")){
         //     System.out.println(s_CenterX +" "+ o_CenterX  + " " + s_CenterY +" "+ o_CenterY);
         // }
@@ -102,7 +100,9 @@ public class Collision {
             else 
                 return TOP;
         }
-             
+        else if(s_CenterX == o_CenterX){
+            System.out.println("here");
+        }
         return NONE;
 
     }
