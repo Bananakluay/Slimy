@@ -28,9 +28,9 @@ public class Controller extends Component{
 
     private void walk(){
         if(Game.KI.isKeyPressed(KeyEvent.VK_A))
-            rigidbody.addForce(new Vec2(-WALK_SPEED, 0));
+            rigidbody.moveX(-WALK_SPEED);
         else if(Game.KI.isKeyPressed(KeyEvent.VK_D))
-            rigidbody.addForce(new Vec2(WALK_SPEED, 0));
+            rigidbody.moveX(WALK_SPEED);
         else
             rigidbody.moveX(0);
 
@@ -42,24 +42,32 @@ public class Controller extends Component{
 
     }
     private void jump(){
-        if(Game.KI.isKeyPressed(KeyEvent.VK_W)){
-            if(jumpCount < maxJumpCount){
-                rigidbody.addForce(new Vec2(0, -JUMP_FORCE));
-                jumpCount++;
-            }
+        if(Game.KI.isKeyPressed(KeyEvent.VK_W) && jumpCount < maxJumpCount){
+            rigidbody.addForce(new Vec2(0, -JUMP_FORCE));
+            jumpCount++;
         }
+    
+
+        
     }
+
+
 
     @Override
     public void onCollision(Collision collision) {
-        if(collision.type == BOTTOM)
+        if(collision.type == BOTTOM){
             jumpCount = 0;
+
+        }
+
         // invoke onCollision that attached to object that player collided with
         // for(Component c : collision.object.getAllComponents()){
         //     if(!c.equals(this))
         //         c.onCollision(collision);
         // }
     }
+
+
 
     
 }

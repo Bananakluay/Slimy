@@ -23,6 +23,10 @@ public class KeyInputs extends KeyAdapter{
         return keyPressed[keyCode];
     }
 
+    public void setKeyPressed(int keyCode, boolean status){
+        keyPressed[keyCode] = false;
+    }
+
 
 
     
