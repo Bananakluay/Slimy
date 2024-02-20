@@ -20,7 +20,6 @@ public class Bounds extends Component {
     public Rectangle2D.Float bounds = new Rectangle2D.Float();
     public Rectangle2D.Float boundsX = new Rectangle2D.Float();
     public Rectangle2D.Float boundsY = new Rectangle2D.Float();
-    public boolean isOverlap = false;
     private boolean DEBUG = true;
 
     public Bounds(Color color){
@@ -40,7 +39,6 @@ public class Bounds extends Component {
     public List<Collision> checkCollision(Vec2 velocity){
         List<Collision> res = new ArrayList<>();
 
-        isOverlap = false;
         Rectangle2D.Float predictedBounds = new Rectangle2D.Float(bounds.x+velocity.x, bounds.y+velocity.y,bounds.width,bounds.height);
         Rectangle2D.Float predictedBoundsX = new Rectangle2D.Float(boundsX.x+velocity.x, boundsX.y,boundsX.width,boundsX.height);
         Rectangle2D.Float predictedBoundsY = new Rectangle2D.Float(boundsY.x, boundsY.y + velocity.y,boundsY.width,boundsY.height);

@@ -30,7 +30,7 @@ public class TestScene extends Scene {
             new Transform(new Vec2(5*TILES_SIZE,TILES_SIZE), new Vec2(TILES_SIZE, TILES_SIZE)),
             0);
         player.addComponent(new Bounds(null));
-        player.addComponent(new Rigidbody(1f));
+        player.addComponent(new Rigidbody(3f,1f));
         player.addComponent(new Physic2D());
         player.addComponent(new Controller());
         player.addComponent(new SubSprite("TrashGame/res/Wall.png", 8).getSprites(1));

@@ -1,5 +1,7 @@
 package util;
 
+import static util.Constants.Game.SCALE;
+
 public class Constants {
     public class Game{
         public final static int TILES_DEFAULT_SIZE = 16;
@@ -12,14 +14,13 @@ public class Constants {
     }
 
     public class Physics{
-        //Physics
-        public final static float GRAVITY = 0.1f;
-        public final static float DOWN_FORCE = 15;
+        public final static float GRAVITY = 0.025f * SCALE;
+        public final static float DOWN_FORCE = 3*SCALE;
     }
 
     public class Player{
-        public final static float JUMP_FORCE = 3f;
-        public final static float WALK_SPEED = 4;
+        public final static float JUMP_FORCE = 0.75f * SCALE;
+        public final static float WALK_SPEED = 1.3f * SCALE;
     }
-
+    
 }
