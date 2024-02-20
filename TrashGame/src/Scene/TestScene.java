@@ -7,13 +7,7 @@ import components.Bounds;
 import components.Controller;
 import components.Physic2D;
 import components.Rigidbody;
-<<<<<<< HEAD
-import components.Sprite;
 import components.SubSprite;
-import dataStructure.AssetPool;
-=======
-import components.SubSprite;
->>>>>>> 52604e9134d0e7315bcd971cc24bdf4234f98e66
 import dataStructure.Transform;
 import entity.Entity;
 

@@ -7,10 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 import Prefabs.TileBlock;
->>>>>>> 52604e9134d0e7315bcd971cc24bdf4234f98e66
 import components.SubSprite;
 import dataStructure.AssetPool;
 import entity.Entity;
@@ -63,14 +60,8 @@ public class Level {
 					Color color = new Color(imgLvlData.getRGB(col, row));
 					int value = color.getRed();
 					if(value != 255){
-<<<<<<< HEAD
-						SubSprite s = new SubSprite(tileSetFile, 8, 8);
-						TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(0));
-
-=======
 						SubSprite s = new SubSprite(tileSetFile, 8);
 						TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(value));
->>>>>>> 52604e9134d0e7315bcd971cc24bdf4234f98e66
 						entities.add(tileBlock);
 					}
 				}

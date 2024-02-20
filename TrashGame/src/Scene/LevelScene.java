@@ -1,12 +1,5 @@
 package Scene;
 
-<<<<<<< HEAD
-import static util.Constants.Game.TILES_SIZE;
-
-import java.awt.Graphics;
-
-import components.SubSprite;
-=======
 
 import static util.Constants.Game.TILES_SIZE;
 
@@ -15,11 +8,9 @@ import java.awt.Graphics;
 import components.Controller;
 
 import Prefabs.Box;
->>>>>>> 52604e9134d0e7315bcd971cc24bdf4234f98e66
 import entity.Entity;
 import entity.EntityType;
 import level.LevelManager;
-import physics.Prefabs.TileBlock;
 
 public class LevelScene extends Scene{
 
