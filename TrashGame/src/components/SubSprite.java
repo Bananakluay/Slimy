@@ -19,8 +19,6 @@ public class SubSprite extends Component{
         int nRow = sprite.getHeight()/tileSize;
         int nCol = sprite.getWidth()/tileSize;
 
-        System.out.println(nRow + " " + nCol);
-        System.out.println(tileSize);
 		for (int row = 0; row < nRow; row++){
 			for (int col = 0; col < nCol; col++){
                 sprites.add(new Sprite(sprite.img.getSubimage(col*tileSize, row*tileSize, tileSize, tileSize)));

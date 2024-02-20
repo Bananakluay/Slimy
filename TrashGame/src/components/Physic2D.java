@@ -2,7 +2,7 @@ package components;
 
 import util.Vec2;
 
-import static util.Constants.physics.*;
+import static util.Constants.Physics.*;
 public class Physic2D extends Component {
 
     private Rigidbody rig;

@@ -62,7 +62,6 @@ public class Level {
 					if(value != 255){
 						SubSprite s = new SubSprite(tileSetFile, 8);
 						TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(value));
-
 						entities.add(tileBlock);
 					}
 				}

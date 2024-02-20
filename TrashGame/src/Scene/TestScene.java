@@ -29,7 +29,7 @@ public class TestScene extends Scene {
             "player",
             new Transform(new Vec2(5*TILES_SIZE,TILES_SIZE), new Vec2(TILES_SIZE, TILES_SIZE)),
             0);
-        player.addComponent(new Bounds());
+        player.addComponent(new Bounds(null));
         player.addComponent(new Rigidbody(1f));
         player.addComponent(new Physic2D());
         player.addComponent(new Controller());
@@ -38,7 +38,7 @@ public class TestScene extends Scene {
         addEntity(player);
 
         Entity floor = new Entity("floor", new Transform(new Vec2(5*TILES_SIZE,10*TILES_SIZE), new Vec2(TILES_SIZE*200, TILES_SIZE)), 0);
-        floor.addComponent(new Bounds());
+        floor.addComponent(new Bounds(null));
         addEntity(floor);
 
         renderer.submit(floor);

@@ -19,7 +19,7 @@ public class TileBlock extends Entity{
 
     private void init(){
         addComponent(sprite);
-        addComponent(new Bounds());
+        addComponent(new Bounds(null));
     }
 
 
