@@ -1,9 +1,6 @@
 package components;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,14 +10,17 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import dataStructure.AssetPool;
-import dataStructure.Transform;
 
 public class Sprite  extends Component{
     public BufferedImage img;
     public String imgFile;
     public int width, height;
-    private int offsetX, offsetY;
-    public Sprite(String imgFile){
+    public int tileSize;
+    public int offsetX = 0, offsetY = 0;
+
+    public List<Sprite> subSprite = new ArrayList<>();
+
+    public Sprite(String imgFile, int tileSize){
 
         this.imgFile = imgFile;
 
@@ -52,14 +52,13 @@ public class Sprite  extends Component{
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
-        AffineTransform transform = new AffineTransform();
-        transform.setToIdentity();
-        transform.translate(entity.getTransform().position.x, entity.getTransform().position.y);
-        transform.scale(SCALE, SCALE);
-        Transform t = entity.getTransform();
-        g2d.draw(new Rectangle((int)t.position.x,(int)t.position.y, (int)t.scale.x, (int)t.scale.y));
+        int x = (int)entity.getTransform().position.x - offsetX;
+        int y = (int)entity.getTransform().position.y - offsetY;
+        int w = (int)entity.getTransform().scale.x;
+        int h = (int)entity.getTransform().scale.y;
+        g.drawImage(img, x,y,w,h, null);
+        // Transform t = entity.getTransform();
+        // g2d.draw(new Rectangle((int)t.position.x,(int)t.position.y, (int)t.scale.x, (int)t.scale.y));
 
     }
 
