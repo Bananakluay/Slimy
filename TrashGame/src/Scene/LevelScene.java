@@ -25,7 +25,7 @@ public class LevelScene extends Scene{
         getAllEntities().addAll(LevelManager.getCurrentLevel().getAllEntities());
         renderer.submitAll(entities);
         Box player = new Box("Green", 10*TILES_SIZE, 6*TILES_SIZE, TILES_SIZE, TILES_SIZE,Color.GREEN,1f,2f, true);
-        player.tag = EntityType.PLAYER;
+        player.type = EntityType.PLAYER;
         player.addComponent(new Controller());
         addEntity(player);
         renderer.submit(player);
@@ -34,7 +34,7 @@ public class LevelScene extends Scene{
         addEntity(bw);
         renderer.submit(bw);
 
-        Box bw2 = new Box("Blue", 12*TILES_SIZE, 7*TILES_SIZE, TILES_SIZE, TILES_SIZE,Color.BLUE,5f ,1f,true);
+        Box bw2 = new Box("Blue", 12*TILES_SIZE, 7*TILES_SIZE, TILES_SIZE, TILES_SIZE,Color.BLUE,5f ,1f,false);
         addEntity(bw2);
         renderer.submit(bw2);
 

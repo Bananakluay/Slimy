@@ -3,7 +3,6 @@ package components;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.List;
 import Scene.SceneManager;
 import dataStructure.Transform;
 import entity.Entity;
-import main.Game;
 import physics.Collision;
 import util.Vec2;
 
