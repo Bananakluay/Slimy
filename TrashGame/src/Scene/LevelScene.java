@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import components.Controller;
 
 import Prefabs.Box;
+import Prefabs.Button;
 import Prefabs.Spike;
 import entity.Entity;
 import entity.EntityType;
@@ -52,6 +53,11 @@ public class LevelScene extends Scene{
         Spike spike = new Spike("Spike", TILES_SIZE*3, TILES_SIZE*12, 3);
         addEntity(spike);
         renderer.submit(spike);
+
+        Button button = new Button("Button", TILES_SIZE*16, TILES_SIZE*12, 3);
+        addEntity(button);
+        renderer.submit(button);
+
         
 
     }

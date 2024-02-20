@@ -12,9 +12,9 @@ import entity.Entity;
 import entity.EntityType;
 import util.Vec2;
 
-public class Spike extends Entity implements Behavior{
+public class Button extends Entity implements Behavior{
 
-    public Spike(String name, float x, float y, int zIndex) {
+    public Button(String name, float x, float y, int zIndex) {
         super(name, 
         new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE/2)), 
         zIndex);
@@ -25,7 +25,7 @@ public class Spike extends Entity implements Behavior{
     public void init(){
         Detector detector = new Detector(
             transform.position.x, 
-            transform.position.y, 
+            transform.position.y + (TILES_SIZE/2), 
             transform.scale.x, 
             transform.scale.y, 
             Arrays.asList(EntityType.PLAYER),
