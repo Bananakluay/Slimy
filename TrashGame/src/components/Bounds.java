@@ -29,7 +29,6 @@ public class Bounds extends Component {
     @Override
     public void update() {
         Transform t = entity.getTransform();
-        bounds.setRect(t.position.x, t.position.y, t.scale.x, t.scale.y);
         boundsX = getBoundsX(t.position.x, t.position.y, t.scale.x, t.scale.y);
         boundsY = getBoundsY(t.position.x, t.position.y, t.scale.x, t.scale.y);
     }
@@ -37,23 +36,11 @@ public class Bounds extends Component {
     public List<Collision> checkCollision(Vec2 velocity){
         List<Collision> res = new ArrayList<>();
 
-        Rectangle2D.Float predictedBounds = new Rectangle2D.Float(bounds.x+velocity.x, bounds.y+velocity.y,bounds.width,bounds.height);
         Rectangle2D.Float predictedBoundsX = new Rectangle2D.Float(boundsX.x+velocity.x, boundsX.y,boundsX.width,boundsX.height);
         Rectangle2D.Float predictedBoundsY = new Rectangle2D.Float(boundsY.x, boundsY.y + velocity.y,boundsY.width,boundsY.height);
         for(Entity entity : SceneManager.getCurrentScene().getEntitiesWithComponent(Bounds.class)){
             if(entity.equals(this.entity))
                 continue;
-            // if(predictedBounds.intersects(entity.getComponent(Bounds.class).bounds)){
-            //     // if(this.entity.getName().equals("player"))
-            //     //     System.out.println("intersects with" + entity.getName() );
-            //     res.add(new Collision(this.entity, entity));    
-            // }
-            // if(predictedBoundsX.intersects(entity.getComponent(Bounds.class).boundsX)){
-            //     res.add(new Collision(this.entity, entity)); 
-            // }
-            // if(predictedBoundsY.intersects(entity.getComponent(Bounds.class).boundsY)){
-            //     res.add(new Collision(this.entity, entity));    
-            // }
 
             if(predictedBoundsX.intersects(entity.getComponent(Bounds.class).boundsX) || predictedBoundsY.intersects(entity.getComponent(Bounds.class).boundsY)){
                 res.add(new Collision(this.entity, entity)); 

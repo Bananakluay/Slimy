@@ -21,7 +21,7 @@ public class Physic2D extends Component {
             fall();
         else
             return;
-        showVelocity("Green");
+        // showVelocity("Green");
     }
 
     private void fall(){

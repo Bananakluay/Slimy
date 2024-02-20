@@ -1,5 +1,7 @@
 package components;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
@@ -10,13 +12,16 @@ import entity.EntityType;
 
 public class Detector extends Component implements Behavior{
 
-    public Rectangle2D.Float area;
+    public Rectangle2D.Float bound;
     public boolean detected = false;
-    private Behavior behavior;
+
     private final List<EntityType> types;
 
+    private Behavior behavior;
+    
+
     public Detector(float x, float y, float witdth, float height, List<EntityType> types, Behavior behavior){
-        this.area = new Rectangle2D.Float(x,y,witdth,height);
+        this.bound = new Rectangle2D.Float(x,y,witdth,height);
         this.types = types;
         this.behavior = behavior;
     }
@@ -24,15 +29,17 @@ public class Detector extends Component implements Behavior{
     @Override
     public void update() {
         for(Entity entity : SceneManager.getCurrentScene().getEntitiesWithComponent(Bounds.class)){
+
             if (entity.equals(this.entity) || !types.contains(entity.type)) {
                 continue; 
             }
 
             Bounds bounds = entity.getComponent(Bounds.class);
-            boolean intersectedX = area.intersects(bounds.boundsX);
-            boolean intersectedY = area.intersects(bounds.boundsY);
+            
+            boolean intersectedX = bound.intersects(bounds.boundsX);
+            boolean intersectedY = bound.intersects(bounds.boundsY);
 
-            if (intersectedX || intersectedY) { // More efficient intersection check
+            if (intersectedX || intersectedY) {
                 behavior.activate(entity);
                 detected = true;
             } else {
@@ -50,6 +57,11 @@ public class Detector extends Component implements Behavior{
         this.behavior = behavior;
     }
 
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.draw(bound);
+    }
     
     
 
