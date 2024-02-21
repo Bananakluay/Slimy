@@ -60,12 +60,16 @@ public class Level {
 				for(int col=0;col<imgLvlData.getWidth();col++){
 					Color color = new Color(imgLvlData.getRGB(col, row));
 					int value = color.getRed();
-					if(value != 255){
-						SubSprite s = new SubSprite(tileSetFile, 8);
-						TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(value));
-						levelScene.addEntity(tileBlock);
-						levelScene.renderer.submit(tileBlock);
-					}
+					
+					SubSprite s = new SubSprite(tileSetFile, 8);
+
+					if(value < 0 || value > s.sprites.size() || value == 255)
+						continue;
+						
+					TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(value));
+					levelScene.addEntity(tileBlock);
+					levelScene.renderer.submit(tileBlock);
+			
 				}
 			}
 	}
