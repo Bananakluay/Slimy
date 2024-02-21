@@ -23,7 +23,7 @@ public class TinySlime extends Entity{
     private void init(){
         type = EntityType.PLAYER;
         addComponent(new Bounds(null));
-        addComponent(new Rigidbody(10f, 1f));
+        addComponent(new Rigidbody(5f, 1.5f));
         addComponent(new Physic2D());
         
         controller = new Controller(false);

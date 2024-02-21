@@ -13,12 +13,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import Prefabs.TileBlock;
+import Prefabs.Exits.Door;
 import Prefabs.Player.PlayerManager;
 import Prefabs.Player.SlimeType;
 import Scene.LevelScene;
 import components.SubSprite;
 import dataStructure.AssetPool;
-import entity.Entity;;
+import dataStructure.Transform;
+import entity.Entity;
+import utils.Vec2;;
 @SuppressWarnings("unused")
 public class Level {
 
@@ -42,6 +45,7 @@ public class Level {
 		generateLevelData();
 		loadTileBlock();
 		loadPlayer();
+		loadDoor();
 	}
 
 	public void generateLevelData() {
@@ -65,7 +69,7 @@ public class Level {
 
 					if(value < 0 || value > s.sprites.size() || value == 255)
 						continue;
-						
+
 					TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(value));
 					levelScene.addEntity(tileBlock);
 					levelScene.renderer.submit(tileBlock);
@@ -76,9 +80,16 @@ public class Level {
 
 
 	public void loadPlayer(){
+		//temp position
 		PlayerManager.spawnSlime("Blue", TILES_SIZE*2,TILES_SIZE*2, SlimeType.LARGE_SLIME);
 		levelScene.addEntity(PlayerManager.blueLargeSlime);
 		levelScene.renderer.submit(PlayerManager.blueLargeSlime);
+	}
+	public void loadDoor(){
+		//temp position
+		Door Door = new Door("Exits Door", new Transform(new Vec2(TILES_SIZE*15, TILES_SIZE*11), new Vec2(TILES_SIZE, TILES_SIZE*2)), 3);
+		levelScene.addEntity(Door);
+		levelScene.renderer.submit(Door);
 	}
 
 	//TODO public void loadTrap(){}
@@ -87,7 +98,6 @@ public class Level {
 
 	// TODO public void loadTrap(){}
 
-	// TODO public void loadDoor(){}
 
 	// TODO public void loadButton();
 

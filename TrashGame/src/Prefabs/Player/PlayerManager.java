@@ -39,8 +39,6 @@ public class PlayerManager {
 
 
     public static void update(){
-        if(greenTinySlime != null)
-            System.out.println(greenTinySlime.getTransform().position.x);
         if(Game.KI.onPress(KeyEvent.VK_Q)){
             if(status == MERGED){
                 splitSlime();
