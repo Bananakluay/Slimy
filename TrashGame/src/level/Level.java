@@ -25,9 +25,11 @@ import utils.Vec2;;
 @SuppressWarnings("unused")
 public class Level {
 
-	private int[][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
 	private String imgLvlDataFile;
 	private String tileSetFile;
+
+	private int[][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
+
 	private BufferedImage imgLvlData;
 
 	private LevelScene levelScene;
@@ -87,9 +89,21 @@ public class Level {
 	}
 	public void loadDoor(){
 		//temp position
-		Door Door = new Door("Exits Door", new Transform(new Vec2(TILES_SIZE*15, TILES_SIZE*11), new Vec2(TILES_SIZE, TILES_SIZE*2)), 3);
+		Door Door = new Door("Exits Door", new Transform(new Vec2(TILES_SIZE*15, TILES_SIZE*11), new Vec2(TILES_SIZE, TILES_SIZE*2)), 0);
 		levelScene.addEntity(Door);
 		levelScene.renderer.submit(Door);
+
+		// for(int row=0;row<imgLvlData.getHeight();row++){
+		// 	for(int col=0;col<imgLvlData.getWidth();col++){
+		// 		Color color = new Color(imgLvlData.getRGB(col, row));
+		// 		int value = color.getGreen(); 
+							
+		// 		Door door = new Door("Exits Door", new Transform(new Vec2(TILES_SIZE*col, TILES_SIZE*row), new Vec2(TILES_SIZE, TILES_SIZE*2)), 0);
+		// 		levelScene.addEntity(door);
+		// 		levelScene.renderer.submit(door);
+		//		break;
+		// 	}
+		// }
 	}
 
 	//TODO public void loadTrap(){}

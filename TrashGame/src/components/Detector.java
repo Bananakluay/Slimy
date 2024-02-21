@@ -1,5 +1,6 @@
 package components;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -60,7 +61,8 @@ public class Detector extends Component implements Behavior{
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(bound);
+        g2d.setColor(Color.white);
+        g2d.fill(bound);
     }
     
     
