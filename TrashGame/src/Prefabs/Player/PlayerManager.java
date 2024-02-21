@@ -8,11 +8,9 @@ import components.Bounds;
 import components.Controller;
 import entity.Entity;
 import main.Game;
-import utils.Vec2;
 
 import static Prefabs.Player.SlimeStatus.*;
 import static Prefabs.Player.SlimeType.*;
-import static utils.Constants.Game.TILES_SIZE;
 import static utils.Constants.Layer.*;
 import static utils.Constants.Player.*;
 import static entity.EntityType.*;
