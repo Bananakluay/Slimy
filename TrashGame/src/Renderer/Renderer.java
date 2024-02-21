@@ -38,7 +38,7 @@ public class Renderer {
 
     // add to layer
     public void submit(Entity entity){
-        layers.computeIfAbsent(entity.zIndex, k-> new ArrayList<>());//0 -- > array
+        layers.computeIfAbsent(entity.zIndex, k-> new ArrayList<>());
         layers.get(entity.zIndex).add(entity);
     }
 
@@ -47,4 +47,14 @@ public class Renderer {
             submit(entity);
         }
     }
+
+    public void remove(String name, int zIndex) {
+		for (int i = 0; i < layers.get(zIndex).size(); i++) {
+			Entity entity = layers.get(zIndex).get(i);
+			if (entity.getName().equals(name)) {
+				layers.get(zIndex).remove(i);
+				break; 
+			}
+		}
+	}
 }

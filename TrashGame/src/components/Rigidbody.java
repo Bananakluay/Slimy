@@ -3,6 +3,7 @@ package components;
 import physics.Collision;
 import utils.Vec2;
 
+import static entity.EntityType.PLAYER;
 import static physics.CollisionType.*;
 import static utils.Constants.Game.SCALE;
 
@@ -38,6 +39,9 @@ public class Rigidbody extends Component {
             for(Collision collision : entity.getComponent(Bounds.class).checkCollision(velocity)){
                 if(collision.object.equals(this.entity))
                     continue;
+
+                // if(collision.subject.type == PLAYER && collision.object.type == PLAYER)
+                //     continue;
                 Transform s = entity.getTransform();
                 Transform o = collision.object.getTransform();
                 

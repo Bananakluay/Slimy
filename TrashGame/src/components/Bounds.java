@@ -1,5 +1,8 @@
 package components;
 
+import static entity.EntityType.PLAYER;
+import static utils.Constants.Game.SCALE;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,9 +18,12 @@ import utils.Vec2;
 
 public class Bounds extends Component {
     public Color color;
-    public Rectangle2D.Float bounds = new Rectangle2D.Float();
+
     public Rectangle2D.Float boundsX = new Rectangle2D.Float();
     public Rectangle2D.Float boundsY = new Rectangle2D.Float();
+
+    public Rectangle2D.Float interectBounds = new Rectangle2D.Float();
+    public float interectBoundsoffset = 2*SCALE;
     private boolean DEBUG = true;
 
     public Bounds(Color color){
@@ -29,6 +35,8 @@ public class Bounds extends Component {
     @Override
     public void update() {
         Transform t = entity.getTransform();
+        if(entity.type == PLAYER)
+            interectBounds.setRect(entity.getTransform().position.x - interectBoundsoffset/2, entity.getTransform().position.y - interectBoundsoffset/2, entity.getTransform().scale.x + interectBoundsoffset, entity.getTransform().scale.y + interectBoundsoffset);
         boundsX = getBoundsX(t.position.x, t.position.y, t.scale.x, t.scale.y);
         boundsY = getBoundsY(t.position.x, t.position.y, t.scale.x, t.scale.y);
     }
@@ -67,15 +75,21 @@ public class Bounds extends Component {
         return new Rectangle2D.Float(bx, by, bw, bh);
     }
     
+    public void setColor(Color color) {
+        this.color = color;
+    }
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         if(DEBUG){
             g2d.setColor(color);
-            // g2d.draw(bounds);
-            g2d.draw(boundsX);
-            g2d.draw(boundsY);
-        }
+            if(entity.type == PLAYER)
+                g2d.drawRect(
+                    (int)entity.getTransform().position.x, 
+                    (int)entity.getTransform().position.y, 
+                    (int)entity.getTransform().scale.x, 
+                    (int)entity.getTransform().scale.y);
+        }   
 
             
     }

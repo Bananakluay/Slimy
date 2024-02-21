@@ -21,6 +21,15 @@ public class Constants {
     public class Player{
         public final static float JUMP_FORCE = 0.103f * SCALE;
         public final static float WALK_SPEED = 1.3f * SCALE;
+
+        public final static String BLUE = "Blue";
+        public final static String GREEN = "Green";
+        public final static String YELLOW = "Yellow";
+    }
+
+    public class Layer{
+        public final static int PLAYER_LAYER = 3;
+
     }
     
 }

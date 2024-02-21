@@ -14,6 +14,7 @@ import java.util.List;
 
 import Prefabs.TileBlock;
 import Prefabs.Player.PlayerManager;
+import Prefabs.Player.SlimeType;
 import Scene.LevelScene;
 import components.SubSprite;
 import dataStructure.AssetPool;
@@ -21,18 +22,18 @@ import entity.Entity;;
 @SuppressWarnings("unused")
 public class Level {
 
-	
 	private int[][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
 	private String imgLvlDataFile;
 	private String tileSetFile;
 	private BufferedImage imgLvlData;
 	// private SubSprite spritesheet;
 
+	private LevelScene levelScene;
 
-	private List<Entity> entities = new ArrayList<>();
-	public Level(String imgLvlDataFile, String tileSetFile) {
+	public Level(String imgLvlDataFile, String tileSetFile, LevelScene levelScene) {
 		this.imgLvlDataFile = imgLvlDataFile;
 		this.tileSetFile = tileSetFile;
+		this.levelScene = levelScene;
 		init();
 		
 	}
@@ -64,25 +65,30 @@ public class Level {
 					if(value != 255){
 						SubSprite s = new SubSprite(tileSetFile, 8);
 						TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(value));
-						entities.add(tileBlock);
+						levelScene.addEntity(tileBlock);
+						levelScene.renderer.submit(tileBlock);
 					}
 				}
 			}
 	}
 
 	public void loadPlayer(){
-		LevelScene.playerManager.spawnBigSlime(TILES_SIZE*2,TILES_SIZE*2);
+		PlayerManager.spawnSlime("Blue", TILES_SIZE*2,TILES_SIZE*2, SlimeType.LARGE_SLIME);
+		levelScene.addEntity(PlayerManager.blueLargeSlime);
+		levelScene.renderer.submit(PlayerManager.blueLargeSlime);
 	}
 
+	public void removeEntity(String name){
+
+	}
 	//TODO public void loadTrap(){}
 
 	//TODO public void loadDoor(){}
 
 	//TODO public void loadButton();
 
-	public List<Entity> getAllEntities(){
-		return entities;
-	}
+
+
 
 
 	

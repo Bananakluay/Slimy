@@ -13,7 +13,7 @@ public class Controller extends Component{
 
     private float walkSpeed = WALK_SPEED;
     private float jumpForce = JUMP_FORCE;
-    public boolean isCurrentPlayer = false;
+    public boolean isActive = true;
 
     private boolean left, right, jumping;
 
@@ -21,8 +21,7 @@ public class Controller extends Component{
     private int jumpDurationCounter = 0;
 
     public Controller(boolean status){
-    
-        isCurrentPlayer = status;
+        isActive = status;
     }
 
     @Override
@@ -35,7 +34,7 @@ public class Controller extends Component{
 
     @Override
     public void update() {
-        if(!isCurrentPlayer)
+        if(!isActive)
             return;
 
         //Walk
@@ -63,8 +62,8 @@ public class Controller extends Component{
         return rigidbody.botCollision;
     }
     
-    public void setCurrentPlayer(boolean isCurrentPlayer) {
-        this.isCurrentPlayer = isCurrentPlayer;
+    public void setActive(boolean status) {
+        this.isActive = status;
     }
 
     public void setMobility(float walkSpeed, float jumpForce){

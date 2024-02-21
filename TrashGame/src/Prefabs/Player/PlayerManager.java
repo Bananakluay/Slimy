@@ -1,74 +1,166 @@
 package Prefabs.Player;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.util.List;
-
+   
+import Scene.LevelScene;
+import components.Bounds;
+import components.Controller;
 import entity.Entity;
 import main.Game;
+import utils.Vec2;
 
+import static Prefabs.Player.SlimeStatus.*;
+import static Prefabs.Player.SlimeType.*;
+import static utils.Constants.Game.TILES_SIZE;
+import static utils.Constants.Layer.*;
+import static utils.Constants.Player.*;
+import static entity.EntityType.*;
 public class PlayerManager {
 
     private static PlayerManager playerManager = null;
-    private static BigSlime bigSlime;
-    private static SmallSlime smallSlime1;
-    private static SmallSlime smallSlime2;
+    // [0] LargeSlime(blue) | [1] TinySlime(Green) | [2] TinySlime(Yellow)
+    
+    public static LargeSlime blueLargeSlime = null;
+    private static TinySlime greenTinySlime = null;
+    private static TinySlime yellowTinySlime = null;
+    private static SlimeStatus status = MERGED;
 
-    private static List<Entity> entities;
-    private PlayerManager(){
+    private static LevelScene levelScene;
 
+    private PlayerManager(LevelScene levelScene){
+        PlayerManager.levelScene = levelScene;
     }
 
-    public static PlayerManager get(){
+    public static PlayerManager get(LevelScene levelScene){
         if(playerManager == null)
-            playerManager = new PlayerManager();
+            playerManager = new PlayerManager(levelScene);
         return playerManager;
+
     }
 
 
-    public void update(){
+    public static void update(){
+        if(greenTinySlime != null)
+            System.out.println(greenTinySlime.getTransform().position.x);
+        if(Game.KI.onPress(KeyEvent.VK_Q)){
+            if(status == MERGED){
+                splitSlime();
+            }
+            else if(status == SPLIT){
+                mergeSlime();
+            }
+        }
         if(Game.KI.onPress(KeyEvent.VK_R)){
             switchPlayer();
         }
     }
 
-    public BigSlime spawnBigSlime(float x, float y){
-        if(bigSlime == null){
-            bigSlime = new BigSlime("BigSlime", x, y, 0);
+    public static void spawnSlime(String name, float x, float y, SlimeType type){
+        if(type == LARGE_SLIME && name.equals(BLUE)){
+                blueLargeSlime = new LargeSlime(BLUE, x, y, PLAYER_LAYER); 
+                blueLargeSlime.getComponent(Bounds.class).setColor(Color.blue);
+
         }
-        return bigSlime;
+        else if(type == TINY_SLIME){
+            if(name.equals(GREEN)){
+                greenTinySlime = new TinySlime(GREEN, x, y, PLAYER_LAYER);
+                greenTinySlime.getComponent(Bounds.class).setColor(Color.green);
+                greenTinySlime.getComponent(Controller.class).setActive(true);
+  
+            }
+            else if(name.equals(YELLOW)){
+                yellowTinySlime = new TinySlime(YELLOW, x, y, PLAYER_LAYER);
+                yellowTinySlime.getComponent(Controller.class).setActive(false);  
+                yellowTinySlime.getComponent(Bounds.class).setColor(Color.yellow);
+
+            }
+        }
     }
 
-    public SmallSlime spawnSmallSlime1(float x, float y){
-        if(smallSlime1 == null){
-            smallSlime1 = new SmallSlime("SmallSlime1", x, y, 0);
+    public static void splitSlime(){
+        System.out.println("split Here");
+        if(blueLargeSlime == null){
+            System.out.println(blueLargeSlime.getName() + " is Null");
+            return;
         }
-        else{
-            smallSlime1.getTransform().position.x = x;
-            smallSlime1.getTransform().position.y = y;
+        if(status == MERGED){
+
+            //create
+            spawnSlime(GREEN, blueLargeSlime.getTransform().position.x, blueLargeSlime.getTransform().position.y, TINY_SLIME);
+            spawnSlime(YELLOW, greenTinySlime.getTransform().position.x + greenTinySlime.getTransform().scale.x, blueLargeSlime.getTransform().position.y, TINY_SLIME);
+            
+            greenTinySlime.getComponent(Controller.class).setActive(true);
+            yellowTinySlime.getComponent(Controller.class).setActive(false);
+            
+            //add duel slime
+            levelScene.addEntity(greenTinySlime);
+            levelScene.addEntity(yellowTinySlime);
+            levelScene.renderer.submit(greenTinySlime);
+            levelScene.renderer.submit(yellowTinySlime);
+
+            //remove single slime
+            levelScene.removeEntity(BLUE, PLAYER);
+            levelScene.renderer.remove(BLUE, PLAYER_LAYER);
+            status = SPLIT;
         }
-        return smallSlime1;
+
     }
 
-    public SmallSlime spawnSmallSlime2(float x, float y){
-        if(smallSlime2 == null){
-            smallSlime2 = new SmallSlime("SmallSlime2", x, y, 0);
+    public static <T extends Entity> void mergeSlime(){
+        System.out.println("merge");
+        if(greenTinySlime == null && yellowTinySlime == null){
+            System.out.println(greenTinySlime.getName() + " and " + yellowTinySlime.getName() + " is Null");
+            return;
         }
-        else{
-            smallSlime1.getTransform().position.x = x;
-            smallSlime1.getTransform().position.y = y;
+
+
+
+
+        Bounds greenBounds = greenTinySlime.getComponent(Bounds.class);
+        Bounds yellowBounds = yellowTinySlime.getComponent(Bounds.class);
+        if(greenBounds.interectBounds.intersects(yellowBounds.interectBounds)){
+            //create
+            spawnSlime(BLUE, greenTinySlime.getTransform().position.x, greenTinySlime.getTransform().position.y, LARGE_SLIME);
+            blueLargeSlime.getComponent(Controller.class).setActive(true);
+
+            //remove
+            levelScene.removeEntity(GREEN, PLAYER);
+            levelScene.removeEntity(YELLOW, PLAYER);
+
+            levelScene.renderer.remove(GREEN, PLAYER_LAYER);
+            levelScene.renderer.remove(YELLOW, PLAYER_LAYER);
+            
+            //add
+            levelScene.addEntity(blueLargeSlime);
+            levelScene.renderer.submit(blueLargeSlime);
+            
+            status = MERGED;
         }
-        return smallSlime2 ;
+        
     }
+
 
     public static void switchPlayer(){
-        if(smallSlime1.getController().isCurrentPlayer){
-            smallSlime1.getController().setCurrentPlayer(false);
-            smallSlime2.getController().setCurrentPlayer(true);
+        if(status == MERGED)
+            return;
+        
+        Controller s1 = greenTinySlime.getComponent(Controller.class);
+        Controller s2 = yellowTinySlime.getComponent(Controller.class);
+
+        if(s1.isActive){
+            s1.setActive(false);
+            s2.setActive(true);
         }
-        else{
-            smallSlime1.getController().setCurrentPlayer(true);
-            smallSlime2.getController().setCurrentPlayer(false);
+        else if(s2.isActive){
+            s1.setActive(true);
+            s2.setActive(false);
         }
+
+        
+
+        
+        
     }
 
 }
