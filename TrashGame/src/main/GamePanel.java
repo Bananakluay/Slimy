@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import static util.Constants.Game.*;
+import static utils.Constants.Game.*;
 public class GamePanel extends JPanel{
 
     private static GamePanel gamePanel = null;

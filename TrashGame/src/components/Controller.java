@@ -2,21 +2,24 @@ package components;
 
 import main.Game;
 import physics.Collision;
-import util.Vec2;
+import utils.Vec2;
 
 import java.awt.event.KeyEvent;
+import static utils.Constants.Player.*;
 
-import static physics.CollisionType.BOTTOM;
-import static util.Constants.Player.*;
+@SuppressWarnings("unused")
 public class Controller extends Component{
     private Rigidbody rigidbody;
-    private int jumpCount = 0;
-    private int maxJumpCount = 1;
 
     private float walkSpeed = WALK_SPEED;
     private float jumpForce = JUMP_FORCE;
     public boolean isCurrentPlayer = false;
-    
+
+    private boolean left, right, jumping;
+
+    private final int JUMP_DURATION = 15;
+    private int jumpDurationCounter = 0;
+
     public Controller(boolean status){
     
         isCurrentPlayer = status;
@@ -35,40 +38,31 @@ public class Controller extends Component{
         if(!isCurrentPlayer)
             return;
 
-        walk();
-        jump();
-    }
-
-    private void walk(){
-        if(Game.KI.isKeyPressed(KeyEvent.VK_A))
+        //Walk
+        if(Game.KI.isHeld(KeyEvent.VK_A))
             rigidbody.moveX(-walkSpeed );
-        else if(Game.KI.isKeyPressed(KeyEvent.VK_D))
+        else if(Game.KI.isHeld(KeyEvent.VK_D))
             rigidbody.moveX(walkSpeed);
         else
             rigidbody.moveX(0);
 
-        // if(!Game.KI.isKeyPressed(KeyEvent.VK_A))
-        //     rigidbody.addForce(new Vec2(-0.1f, 0));
-        // if(!Game.KI.isKeyPressed(KeyEvent.VK_D))
-        //     rigidbody.addForce(new Vec2(0.1f, 0));
-
-
-    }
-    private void jump(){
-        if(Game.KI.isKeyPressed(KeyEvent.VK_W) && jumpCount < maxJumpCount){
-            rigidbody.addForce(new Vec2(0, -jumpForce));
-            jumpCount++;
+        //Jump
+        if(isOnFloor()){
+            jumpDurationCounter = JUMP_DURATION;
+        }
+        
+        if(Game.KI.isHeld(KeyEvent.VK_W)){
+            if(jumpDurationCounter > 0){
+                rigidbody.addForce(new Vec2(0, -jumpForce)); 
+                jumpDurationCounter--; 
+            }
         }
     }
 
-    @Override
-    public void onCollision(Collision collision) {
-        if(collision.type == BOTTOM){
-            jumpCount = 0;
-
-        }
+    public boolean isOnFloor(){
+        return rigidbody.botCollision;
     }
-
+    
     public void setCurrentPlayer(boolean isCurrentPlayer) {
         this.isCurrentPlayer = isCurrentPlayer;
     }
@@ -77,10 +71,4 @@ public class Controller extends Component{
         this.walkSpeed = walkSpeed;
         this.jumpForce = jumpForce;
     }
-
-    
-
-
-
-    
 }

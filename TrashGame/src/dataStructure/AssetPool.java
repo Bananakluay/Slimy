@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 import components.Sprite;
-import util.InputImage;
+import utils.InputImage;
 @SuppressWarnings("rawtypes")
 public class AssetPool {
     @SuppressWarnings("unchecked")
@@ -17,7 +17,7 @@ public class AssetPool {
     public static Map<String, BufferedImage> bufferImage = new HashMap<>();
     @SuppressWarnings("unchecked")
     public static Map<String, List<BufferedImage>> bufferImageList = new HashMap();
-    //static Map(String, Level) levelsData = new HashMap(); 
+    //TODO static Map(String, Level) levelsData = new HashMap(); 
 
 
 
@@ -81,7 +81,7 @@ public class AssetPool {
         }
         else{
             System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
-            // System.exit(-1);
+            System.exit(-1);
         }
     }
 

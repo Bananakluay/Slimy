@@ -1,4 +1,4 @@
-package util;
+package utils;
 
 public class Vec2 {
     public float x;

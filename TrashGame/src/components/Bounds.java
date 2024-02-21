@@ -7,11 +7,11 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import Manager.SceneManager;
+import Scene.SceneManager;
 import dataStructure.Transform;
 import entity.Entity;
 import physics.Collision;
-import util.Vec2;
+import utils.Vec2;
 
 public class Bounds extends Component {
     public Color color;

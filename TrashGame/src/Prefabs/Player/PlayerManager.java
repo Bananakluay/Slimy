@@ -1,22 +1,32 @@
-package Manager;
+package Prefabs.Player;
 
 import java.awt.event.KeyEvent;
+import java.util.List;
 
-import Prefabs.BigSlime;
-import Prefabs.SmallSlime;
+import entity.Entity;
 import main.Game;
 
 public class PlayerManager {
 
+    private static PlayerManager playerManager = null;
     private static BigSlime bigSlime;
     private static SmallSlime smallSlime1;
     private static SmallSlime smallSlime2;
-    public PlayerManager(){
+
+    private static List<Entity> entities;
+    private PlayerManager(){
 
     }
 
+    public static PlayerManager get(){
+        if(playerManager == null)
+            playerManager = new PlayerManager();
+        return playerManager;
+    }
+
+
     public void update(){
-        if(Game.KI.isKeyPressed(KeyEvent.VK_R)){
+        if(Game.KI.onPress(KeyEvent.VK_R)){
             switchPlayer();
         }
     }

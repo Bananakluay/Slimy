@@ -1,4 +1,4 @@
-package input;
+package input.Keyboard;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -9,12 +9,12 @@ public class KeyInputs extends KeyAdapter{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        keyPressed[e.getKeyCode()] = true;
+            keyPressed[e.getKeyCode()] = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        keyPressed[e.getKeyCode()] = false;
+            keyPressed[e.getKeyCode()] = false;
     }
 
     public boolean isKeyPressed(int keyCode){

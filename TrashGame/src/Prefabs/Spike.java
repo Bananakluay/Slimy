@@ -1,6 +1,6 @@
 package Prefabs;
 
-import static util.Constants.Game.TILES_SIZE;
+import static utils.Constants.Game.TILES_SIZE;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import components.Detector;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
-import util.Vec2;
+import utils.Vec2;
 
 public class Spike extends Entity implements Behavior{
 

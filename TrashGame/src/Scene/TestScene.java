@@ -1,6 +1,6 @@
 package Scene;
 
-import static util.Constants.Game.*;
+import static utils.Constants.Game.*;
 
 import java.awt.Graphics;
 import components.Bounds;
@@ -10,8 +10,7 @@ import components.Rigidbody;
 import components.SubSprite;
 import dataStructure.Transform;
 import entity.Entity;
-
-import util.Vec2;
+import utils.Vec2;
 
 public class TestScene extends Scene {
 

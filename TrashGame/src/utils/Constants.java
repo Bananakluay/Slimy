@@ -1,6 +1,6 @@
-package util;
+package utils;
 
-import static util.Constants.Game.SCALE;
+import static utils.Constants.Game.SCALE;
 
 public class Constants {
     public class Game{
@@ -19,7 +19,7 @@ public class Constants {
     }
 
     public class Player{
-        public final static float JUMP_FORCE = 0.75f * SCALE;
+        public final static float JUMP_FORCE = 0.103f * SCALE;
         public final static float WALK_SPEED = 1.3f * SCALE;
     }
     

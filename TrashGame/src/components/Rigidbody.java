@@ -1,10 +1,10 @@
 package components;
 
 import physics.Collision;
-import static physics.CollisionType.*;
-import static util.Constants.Game.SCALE;
+import utils.Vec2;
 
-import util.Vec2;
+import static physics.CollisionType.*;
+import static utils.Constants.Game.SCALE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,10 @@ public class Rigidbody extends Component {
 
     public final float mass;
     private final float friction;
-
     public Vec2 velocity;
     private List<Vec2> forces = new ArrayList<>();
+
+    public boolean leftCollision, rightCollision, topCollision, botCollision;
     public Rigidbody(float mass ,float friction){
         this.mass = mass;
         this.friction = friction;
@@ -29,12 +30,14 @@ public class Rigidbody extends Component {
 
         boolean isCollidingY = false;
         boolean isCollidingX = false;
-
+        leftCollision = false;
+        rightCollision = false;
+        topCollision = false;
+        botCollision = false;
         if(entity.hasComponent(Bounds.class)){            
             for(Collision collision : entity.getComponent(Bounds.class).checkCollision(velocity)){
                 if(collision.object.equals(this.entity))
                     continue;
-
                 Transform s = entity.getTransform();
                 Transform o = collision.object.getTransform();
                 
@@ -46,12 +49,14 @@ public class Rigidbody extends Component {
                     velocity.x = 0;
                     s.position.x = o.position.x + o.scale.x;
                     isCollidingX = true;
+                    leftCollision = true;
                     // frictionOnY();
                 }
                 else if(collision.type == RIGHT){
                     velocity.x = 0;
                     s.position.x = o.position.x - s.scale.x;
                     isCollidingX = true;
+                    rightCollision = true;
                     // frictionOnY();
                 }
 
@@ -60,11 +65,13 @@ public class Rigidbody extends Component {
                     velocity.y = 0;
                     s.position.y = o.position.y + o.scale.y;
                     isCollidingY = true;  
+                    topCollision = true;
                 }
                 else if(collision.type == BOTTOM){
                     velocity.y = 0;
                     s.position.y = o.position.y - s.scale.y;
                     isCollidingY = true;
+                    botCollision = true;
                 }
                 
             }

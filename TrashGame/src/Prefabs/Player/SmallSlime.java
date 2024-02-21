@@ -1,19 +1,20 @@
-package Prefabs;
+package Prefabs.Player;
 
 import dataStructure.Transform;
 import entity.Entity;
-import util.Vec2;
-import static util.Constants.Game.*;
+import utils.Vec2;
+
+import static utils.Constants.Game.*;
 
 import components.Bounds;
 import components.Controller;
 import components.Rigidbody;
-public class BigSlime extends Entity{
+public class SmallSlime extends Entity{
 
-    private Controller controller;
+    Controller controller;
 
-    public BigSlime(String name, float x, float y, int zIndex) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(1.5f*TILES_SIZE,1.5f*TILES_SIZE)), zIndex);
+    public SmallSlime(String name, float x, float y, int zIndex) {
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE,TILES_SIZE)), zIndex);
         init();
     }
 
@@ -21,16 +22,14 @@ public class BigSlime extends Entity{
         addComponent(new Bounds(null));
         addComponent(new Rigidbody(10f, 1f));
 
-        controller = new Controller(false);
+        controller = new Controller(true);
         addComponent(controller);
-        
+
 
     }
 
     public Controller getController() {
         return controller;
     }
-
-    
     
 }

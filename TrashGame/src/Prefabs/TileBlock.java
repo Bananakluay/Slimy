@@ -7,7 +7,7 @@ import components.Sprite;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
-import util.Vec2;
+import utils.Vec2;
 
 public class TileBlock extends Entity{
     Sprite sprite;

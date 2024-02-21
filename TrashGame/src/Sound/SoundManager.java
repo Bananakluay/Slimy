@@ -1,4 +1,4 @@
-package Manager;
+package Sound;
 
 public class SoundManager {
     

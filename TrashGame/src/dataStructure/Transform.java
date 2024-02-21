@@ -1,6 +1,6 @@
 package dataStructure;
 
-import util.Vec2;
+import utils.Vec2;
 
 public class Transform {
     public Vec2 position; // x pos, y pos

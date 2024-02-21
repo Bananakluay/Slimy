@@ -3,12 +3,14 @@ package main;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
-import Manager.SceneManager;
+import Prefabs.Player.PlayerManager;
 import Scene.Scene;
+import Scene.SceneManager;
 import Scene.TestScene;
-import input.KeyInputs;
 import input.MouseInputs;
-import util.*;
+import input.Keyboard.KeyInputs;
+import input.Keyboard.KeyManager;
+import utils.*;
 @SuppressWarnings("unused")
 public class Game implements Runnable{
 
@@ -19,8 +21,7 @@ public class Game implements Runnable{
 	private SceneManager sceneManager;
 
 	public static MouseInputs MI;
-	public static KeyInputs KI;
-	
+	public static KeyManager KI;
     private Thread gameThread;
 
     private final int FPS_SET = 120;
@@ -33,9 +34,8 @@ public class Game implements Runnable{
         gamePanel = GamePanel.get(this);
         gameWindow = Window.get(gamePanel);
 		
-		KI = new KeyInputs();
 		MI = new MouseInputs();
-		
+		KI = new KeyManager();
 		gamePanel.addKeyListener(KI);
         gamePanel.addMouseListener(MI);
         gamePanel.requestFocus();
@@ -51,6 +51,7 @@ public class Game implements Runnable{
 	}
 
     public void update(){
+		KI.update();
 		SceneManager.getCurrentScene().update();
     }
 

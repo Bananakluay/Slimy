@@ -1,5 +1,10 @@
 package level;
 
+import static utils.Constants.Game.SCALE;
+import static utils.Constants.Game.TILES_IN_HEIGHT;
+import static utils.Constants.Game.TILES_IN_WIDTH;
+import static utils.Constants.Game.TILES_SIZE;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -8,14 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import Prefabs.TileBlock;
+import Prefabs.Player.PlayerManager;
+import Scene.LevelScene;
 import components.SubSprite;
 import dataStructure.AssetPool;
-import entity.Entity;
-
-import static util.Constants.Game.TILES_IN_WIDTH;
-import static util.Constants.Game.TILES_SIZE;
-import static util.Constants.Game.SCALE;
-import static util.Constants.Game.TILES_IN_HEIGHT;;
+import entity.Entity;;
 @SuppressWarnings("unused")
 public class Level {
 
@@ -23,9 +25,9 @@ public class Level {
 	private int[][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
 	private String imgLvlDataFile;
 	private String tileSetFile;
-	
 	private BufferedImage imgLvlData;
 	// private SubSprite spritesheet;
+
 
 	private List<Entity> entities = new ArrayList<>();
 	public Level(String imgLvlDataFile, String tileSetFile) {
@@ -37,9 +39,9 @@ public class Level {
 	
 	public void init(){
 		imgLvlData = AssetPool.getBufferedImage(imgLvlDataFile);
-		// spritesheet = new SubSprite(tileSetFile, 16, 16);
 		generateLevelData();
 		loadTileBlock();
+		loadPlayer();
 	}
 
 
@@ -66,10 +68,11 @@ public class Level {
 					}
 				}
 			}
-
 	}
 
-	//TODO public void loadPlayer(){}
+	public void loadPlayer(){
+		LevelScene.playerManager.spawnBigSlime(TILES_SIZE*2,TILES_SIZE*2);
+	}
 
 	//TODO public void loadTrap(){}
 
