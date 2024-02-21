@@ -26,7 +26,6 @@ public class Level {
 	private String imgLvlDataFile;
 	private String tileSetFile;
 	private BufferedImage imgLvlData;
-	// private SubSprite spritesheet;
 
 	private LevelScene levelScene;
 
@@ -35,20 +34,19 @@ public class Level {
 		this.tileSetFile = tileSetFile;
 		this.levelScene = levelScene;
 		init();
-		
+
 	}
-	
-	public void init(){
+
+	public void init() {
 		imgLvlData = AssetPool.getBufferedImage(imgLvlDataFile);
 		generateLevelData();
 		loadTileBlock();
 		loadPlayer();
 	}
 
-
-	public void generateLevelData(){
-		for(int row=0; row<imgLvlData.getHeight();row++){
-			for(int col=0; col<imgLvlData.getWidth();col++){
+	public void generateLevelData() {
+		for (int row = 0; row < imgLvlData.getHeight(); row++) {
+			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 				Color color = new Color(imgLvlData.getRGB(col, row));
 				int value = color.getRed();
 				lvlData[row][col] = value;
@@ -72,28 +70,24 @@ public class Level {
 			}
 	}
 
+
 	public void loadPlayer(){
 		PlayerManager.spawnSlime("Blue", TILES_SIZE*2,TILES_SIZE*2, SlimeType.LARGE_SLIME);
 		levelScene.addEntity(PlayerManager.blueLargeSlime);
 		levelScene.renderer.submit(PlayerManager.blueLargeSlime);
 	}
 
-	public void removeEntity(String name){
-
-	}
 	//TODO public void loadTrap(){}
 
-	//TODO public void loadDoor(){}
+	// TODO public void loadPlayer(){}
 
-	//TODO public void loadButton();
+	// TODO public void loadTrap(){}
 
+	// TODO public void loadDoor(){}
 
-
-
-
-	
+	// TODO public void loadButton();
 
 
 
-	
+
 }
