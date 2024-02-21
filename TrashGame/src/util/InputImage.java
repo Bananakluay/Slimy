@@ -16,14 +16,14 @@ public class InputImage {
     public static BufferedImage loadBufferedImage(String file) {
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("res/" + file));
+            img = ImageIO.read(new File(file));
 
             if(img == null) 
-                System.out.println("res/"+ file +" not found");
+                System.out.println(file +" not found");
             else
-                System.out.println("GET Img : "+"res/"+ file + " Success");
+                System.out.println("GET Img : "+file + " Success");
         } catch (IOException e) {
-            System.out.println("GET Img : "+"res/"+ file + " fail");
+            System.out.println("GET Img : "+file + " fail");
             e.printStackTrace();
         }
         return img;

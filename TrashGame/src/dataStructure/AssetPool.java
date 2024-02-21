@@ -81,7 +81,7 @@ public class AssetPool {
         }
         else{
             System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
-            System.exit(-1);
+            // System.exit(-1);
         }
     }
 
