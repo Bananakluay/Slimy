@@ -4,6 +4,7 @@ import dataStructure.AssetPool;
 import dataStructure.Transform;
 import utils.Vec2;
 
+import static Prefabs.Player.PlayerStatus.IDLE;
 import static utils.Constants.Game.*;
 import static utils.Constants.Layer.PLAYER_LAYER;
 import static utils.Constants.Player.*;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import Prefabs.Player.Player;
 import components.Animation;
+import components.Controller;
 
 public class TinySlime extends Player{
 
@@ -27,7 +29,7 @@ public class TinySlime extends Player{
     }
     
     private void init(){
-        this.setMass(5);
+        this.setMass(1f);
         this.setFriction(2);
         this.setMobility(WALK_SPEED, JUMP_FORCE);
 
@@ -35,7 +37,7 @@ public class TinySlime extends Player{
         animation = this.getComponent(Animation.class);
         animation.setSize(TILES_SIZE,TILES_SIZE);
         animation.setScale(2);
-        animation.setOffset((int)(-3.75*SCALE), (int)(-10*SCALE));
+        animation.setOffset((int)(-4*SCALE), (int)(-10*SCALE)); //3.75
         animation.addAnimation("IDLE", 100, frames.subList(0, 2));
         animation.addAnimation("WALK", 20, frames.subList(8, 10));
         animation.addAnimation("JUMP", 100, frames.subList(18, 19));
@@ -46,26 +48,26 @@ public class TinySlime extends Player{
     @Override
     public void update() {
         super.update();
-            if(currenStatus == status)
-                return;
+        if(!this.getComponent(Controller.class).isActive()){
+            status = IDLE;
+        }
 
-            switch (status) {
-                case IDLE: 
-                    animation.play("IDLE");
-                    break;
-                case MOVING:
-                    animation.play("WALK");
-                    break;
-                case JUMPING:
-                    animation.play("JUMP");
-                    break;
-                case FALLING:
-                    animation.play("FALL");
-                    break;
-                default:
-                    break;
-            }
-            currenStatus = status;
+        switch (status) {
+            case IDLE: 
+                animation.play("IDLE");
+                break;
+            case MOVING:
+                animation.play("WALK");
+                break;
+            case JUMPING:
+                animation.play("JUMP");
+                break;
+            case FALLING:
+                animation.play("FALL");
+                break;
+            default:
+                break;
+        }
     }
   
     

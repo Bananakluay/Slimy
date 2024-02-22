@@ -92,4 +92,6 @@ public class Controller extends Component{
         this.walkSpeed = walkSpeed;
         this.jumpForce = jumpForce;
     }
+
+    public boolean isActive(){return isActive;}
 }

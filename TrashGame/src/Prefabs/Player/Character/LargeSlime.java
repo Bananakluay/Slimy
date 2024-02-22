@@ -48,26 +48,26 @@ public class LargeSlime extends Player{
     @Override
     public void update() {
         super.update();
-            if(currenStatus == status)
-                return;
+        if(currenStatus == status)
+            return;
 
-            switch (status) {
-                case IDLE: 
-                    animation.play("IDLE");
-                    break;
-                case MOVING:
-                    animation.play("WALK");
-                    break;
-                case JUMPING:
-                    animation.play("JUMP");
-                    break;
-                case FALLING:
-                    animation.play("FALL");
-                    break;
-                default:
-                    break;
-            }
-            currenStatus = status;
+        switch (status) {
+            case IDLE: 
+                animation.play("IDLE");
+                break;
+            case MOVING:
+                animation.play("WALK");
+                break;
+            case JUMPING:
+                animation.play("JUMP");
+                break;
+            case FALLING:
+                animation.play("FALL");
+                break;
+            default:
+                break;
+        }
+        currenStatus = status;
     }
         
 }

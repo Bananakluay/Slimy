@@ -96,7 +96,6 @@ public class Animation extends Component {
     public void draw(Graphics g) {
         if(!isAnimating())
             return;
-        System.out.println(offsetX + " " +offsetY);
         int x = (int)entity.getTransform().position.x + offsetX*scale;
         int y = (int)entity.getTransform().position.y + offsetY*scale;
         int w = (int)width * scale;
@@ -115,7 +114,6 @@ public class Animation extends Component {
     public void setSize(float width, float height){
         this.width = width;
         this.height = height;
-        System.out.println("herer");
     }
     private class AnimationData {
         float duration;
