@@ -19,8 +19,8 @@ public class LevelManager {
     }
 
     private void init(){
-        buildAllLevels();
-        currentLevel = new Level("TrashGame/res/t1.png",levelScene);
+        //buildAllLevels();
+        currentLevel = new Level("TrashGame/res/t3.png",levelScene);
     }
 
     public static LevelManager get(LevelScene levelScene){
