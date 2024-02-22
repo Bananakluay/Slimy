@@ -30,7 +30,6 @@ public class Level {
 	private String tileSetFile;
 
 	private int[][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
-	private List<Entity> entities = new ArrayList<>();
 	private BufferedImage imgLvlData;
 
 	private LevelScene levelScene;
@@ -77,7 +76,6 @@ public class Level {
 						s.sprites.get(value));
 				levelScene.addEntity(tileBlock);
 				levelScene.renderer.submit(tileBlock);
-				entities.add(tileBlock);
 			}
 		}
 	}
@@ -87,7 +85,6 @@ public class Level {
 		PlayerManager.spawnSlime("Blue", TILES_SIZE * 2, TILES_SIZE * 2, SlimeType.LARGE_SLIME);
 		levelScene.addEntity(PlayerManager.blueLargeSlime);
 		levelScene.renderer.submit(PlayerManager.blueLargeSlime);
-		entities.add(PlayerManager.blueLargeSlime);
 	}
 
 	public void loadDoor() {
@@ -118,12 +115,14 @@ public class Level {
 	// TODO public void loadTrap(){}
 
 	// TODO public void loadButton();
-	/*public void onDestroy() {
-		imgLvlData = null;
-		for (Entity e : entities) {
-			e = null;
-		}
-		entities.clear();
-		lvlData = null;
-	}*/
+	/*
+	 * public void onDestroy() {
+	 * imgLvlData = null;
+	 * for (Entity e : entities) {
+	 * e = null;
+	 * }
+	 * entities.clear();
+	 * lvlData = null;
+	 * }
+	 */
 }
