@@ -9,29 +9,36 @@ import components.Detector;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
+import level.LevelManager;
+import Scene.LevelScene;
+import Scene.SceneManager;
 
-public class Door extends Entity implements Behavior{
+public class Door extends Entity implements Behavior {
+    public LevelScene levelScene;
 
     public Door(String name, Transform transform, int zIndex) {
         super(name, transform, zIndex);
         init();
     }
 
-    public void init(){
+    public void init() {
         Detector detector = new Detector(
-            transform.position.x+TILES_SIZE, 
-            transform.position.y, 
-            transform.scale.x, 
-            transform.scale.y, 
-            List.of(EntityType.PLAYER), 
-            this);
+                transform.position.x + TILES_SIZE,
+                transform.position.y,
+                transform.scale.x,
+                transform.scale.y,
+                List.of(EntityType.PLAYER),
+                this);
         addComponent(detector);
-        
+
     }
+
     @Override
     public void activate(Entity entity) {
-        //what to do
+        // what to do
         System.out.println("This is door Exits");
+        LevelManager.loadNextLevels();
+        SceneManager.NextScene();
     }
-    
+
 }
