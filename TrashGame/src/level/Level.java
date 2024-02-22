@@ -26,24 +26,27 @@ import utils.Vec2;;
 public class Level {
 
 	private String imgLvlDataFile;
-	private String tileSetFile;
 
 	private int[][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
 
-	private BufferedImage imgLvlData;
-
 	private LevelScene levelScene;
 
-	public Level(String imgLvlDataFile, String tileSetFile, LevelScene levelScene) {
+	private BufferedImage imgLvlData;
+	private List<BufferedImage> tileSet;
+	private List<BufferedImage> grassesTileSet;
+
+	public Level(String imgLvlDataFile, LevelScene levelScene) {
 		this.imgLvlDataFile = imgLvlDataFile;
-		this.tileSetFile = tileSetFile;
 		this.levelScene = levelScene;
 		init();
 
 	}
 
 	public void init() {
-		imgLvlData = AssetPool.getBufferedImage(imgLvlDataFile);
+		imgLvlData = AssetPool.getBufferedImage(imgLvlDataFile,1,1);
+		tileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/wall.png",16,16);
+		grassesTileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/grasses.png",16,21);
+	
 		generateLevelData();
 		loadTileBlock();
 		loadPlayer();
@@ -67,12 +70,12 @@ public class Level {
 					Color color = new Color(imgLvlData.getRGB(col, row));
 					int value = color.getRed();
 					
-					SubSprite s = new SubSprite(tileSetFile, 8);
-
-					if(value < 0 || value > s.sprites.size() || value == 255)
+					System.out.println(value);
+					if(value < 0 || value > tileSet.size() || value == 255)
 						continue;
-
-					TileBlock tileBlock =  new TileBlock(col*TILES_SIZE, row*TILES_SIZE, TILES_SIZE, TILES_SIZE, s.sprites.get(value));
+					TileBlock tileBlock =  new TileBlock(
+						tileSet.get(value),col*TILES_SIZE, row*TILES_SIZE,
+						grassesTileSet.get(value), );
 					levelScene.addEntity(tileBlock);
 					levelScene.renderer.submit(tileBlock);
 			

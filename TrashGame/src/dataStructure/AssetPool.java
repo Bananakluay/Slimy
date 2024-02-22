@@ -22,20 +22,7 @@ public class AssetPool {
 
 
 
-    public static Sprite getSprite(String imgFile, int tileSize){
-        File file = new File(imgFile);
-        if(AssetPool.sprites.containsKey(imgFile)){
-            return AssetPool.sprites.get(file.getAbsolutePath().toString());
-        }
-        else{
-            Sprite sprite = new Sprite(imgFile, tileSize);
-            AssetPool.add(imgFile, sprite);
-            return AssetPool.sprites.get(file.getAbsolutePath());
-        }
-        
-    }
-
-    public static BufferedImage getBufferedImage(String imgFile){
+    public static BufferedImage getBufferedImage(String imgFile, int tileWidth, int tileHeight){
         File file = new File(imgFile);
         if(AssetPool.bufferImage.containsKey(imgFile)){
             return AssetPool.bufferImage.get(file.getAbsolutePath().toString());
@@ -47,22 +34,22 @@ public class AssetPool {
         }
     }
 
-    public static List<BufferedImage> getBufferedImageList(String imgFile, int tileSize){
+    public static List<BufferedImage> getBufferedImageList(String imgFile, int tileWidth, int tileHeight){
         File file = new File(imgFile);
         if(AssetPool.bufferImageList.containsKey(imgFile)){
             return AssetPool.bufferImageList.get(file.getAbsolutePath().toString());
         }
         else{
 
-            BufferedImage bufferedImage = getBufferedImage(imgFile);
-            int nRow = bufferedImage.getHeight()/tileSize;
-            int nCol = bufferedImage.getWidth()/tileSize;
+            BufferedImage bufferedImage = getBufferedImage(imgFile, tileWidth, tileHeight);
+            int nRow = bufferedImage.getHeight()/tileHeight;
+            int nCol = bufferedImage.getWidth()/tileWidth;
 
             List<BufferedImage> res = new ArrayList<>();
 
 		    for (int row = 0; row < nRow; row++){
 			    for (int col = 0; col < nCol; col++) 
-                    res.add(bufferedImage.getSubimage(col * tileSize, row * tileSize, tileSize, tileSize));
+                    res.add(bufferedImage.getSubimage(col * tileWidth, row * tileHeight, tileWidth, tileHeight));
 			}
 
             return res;

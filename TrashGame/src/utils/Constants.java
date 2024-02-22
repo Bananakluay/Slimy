@@ -30,6 +30,11 @@ public class Constants {
     public class Layer{
         public final static int PLAYER_LAYER = 3;
 
+
+    }
+
+    public class TileSet {
+        
     }
     
 }

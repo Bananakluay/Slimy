@@ -1,5 +1,4 @@
 package level;
-import java.util.List;
 
 import Scene.LevelScene;
 
@@ -21,7 +20,7 @@ public class LevelManager {
 
     private void init(){
         buildAllLevels();
-        currentLevel = new Level("TrashGame/res/lvls/1Tmap.png", "TrashGame/res/Wall.png", levelScene);
+        currentLevel = new Level("TrashGame/res/lvls/1Tmap.png",levelScene);
     }
 
     public static LevelManager get(LevelScene levelScene){
