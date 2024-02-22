@@ -3,7 +3,6 @@ package components;
 import physics.Collision;
 import utils.Vec2;
 
-import static entity.EntityType.PLAYER;
 import static physics.CollisionType.*;
 import static utils.Constants.Game.SCALE;
 
@@ -14,9 +13,10 @@ import dataStructure.Transform;
 
 public class Rigidbody extends Component {
 
-    public final float mass;
-    private final float friction;
+    public  float mass;
+    public  float friction;
     public Vec2 velocity;
+
     private List<Vec2> forces = new ArrayList<>();
 
     public boolean leftCollision, rightCollision, topCollision, botCollision;
@@ -35,6 +35,7 @@ public class Rigidbody extends Component {
         rightCollision = false;
         topCollision = false;
         botCollision = false;
+        
         if(entity.hasComponent(Bounds.class)){            
             for(Collision collision : entity.getComponent(Bounds.class).checkCollision(velocity)){
                 if(collision.object.equals(this.entity))

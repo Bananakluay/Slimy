@@ -20,9 +20,6 @@ public class Controller extends Component{
     private final int JUMP_DURATION = 15;
     private int jumpDurationCounter = 0;
 
-    public Controller(boolean status){
-        isActive = status;
-    }
 
     @Override
     public void ready() {
