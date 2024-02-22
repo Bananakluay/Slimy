@@ -1,22 +1,43 @@
 package components;
 
+import static utils.Constants.Game.SCALE;
+import static utils.Constants.Game.TILES_SIZE;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.List;
 
+import Prefabs.Player.Player;
 import dataStructure.Transform;
 @SuppressWarnings("unused")
 public class Animation extends Component {
+
+    private Player player;
 
     private HashMap<String, AnimationData> animations;
     private String currentAnimation;
     private float animationTime;
     private int ticks, index;
+    private int scale = 1;
+
+    private float width, height;
+    private int offsetX = 0, offsetY = 0;
+
     public Animation() {
+
         this.animations = new HashMap<>();
         this.currentAnimation = null;
         this.animationTime = 0f;
+    }
+
+
+
+    @Override
+    public void ready() {
+        if(entity instanceof Player){
+            player = (Player) this.entity;
+        }
     }
 
     public void addAnimation(String name, float duration, List<BufferedImage> frames) {
@@ -28,6 +49,7 @@ public class Animation extends Component {
         if (animations.containsKey(animationName) && !animationName.equals(currentAnimation)) {
             this.currentAnimation = animationName;
             this.animationTime = 0f;
+            this.index = 0;
         }
     }
 
@@ -42,13 +64,24 @@ public class Animation extends Component {
         this.index = 0;
     }
 
+    public void restart(){
+        this.animationTime = 0;
+        this.index = 0;
+    }
+
     public boolean isAnimating() {
         return currentAnimation != null;
+    }
+
+    public void setOffset(int x, int y){
+        this.offsetX = x;
+        this.offsetY = y;
     }
 
     @Override
     public void update() {
         if(currentAnimation != null){
+            ticks++;
             if(ticks>=animations.get(currentAnimation).duration){
                 ticks = 0;
                 index++;
@@ -61,15 +94,29 @@ public class Animation extends Component {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(
-            animations.get(currentAnimation).frames.get(index), 
-            (int)entity.getTransform().position.x, 
-            (int)entity.getTransform().position.y,
-            (int)entity.getTransform().scale.x,
-            (int)entity.getTransform().scale.y, 
-            null);
+        if(!isAnimating())
+            return;
+        System.out.println(offsetX + " " +offsetY);
+        int x = (int)entity.getTransform().position.x + offsetX*scale;
+        int y = (int)entity.getTransform().position.y + offsetY*scale;
+        int w = (int)width * scale;
+        int h = (int)height * scale;
+        if(player.getDirection().x < 0)
+            g.drawImage(animations.get(currentAnimation).frames.get(index),x + w, y, -w, h, null);
+        else   
+            g.drawImage(animations.get(currentAnimation).frames.get(index),x, y, w, h, null);
+
     }
 
+    public void setScale(int scale){
+        this.scale =scale;
+    }
+
+    public void setSize(float width, float height){
+        this.width = width;
+        this.height = height;
+        System.out.println("herer");
+    }
     private class AnimationData {
         float duration;
         List<BufferedImage> frames;

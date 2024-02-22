@@ -6,7 +6,7 @@ import static utils.Constants.Game.SCALE;
 public class Constants {
     public class Game{
         public final static int TILES_DEFAULT_SIZE = 16;
-        public final static float SCALE = 3.2f;
+        public final static float SCALE = 3f;
         public final static int TILES_IN_WIDTH = 32;
         public final static int TILES_IN_HEIGHT = 18;
         public final static int TILES_SIZE = (int)(TILES_DEFAULT_SIZE * SCALE);
@@ -29,7 +29,7 @@ public class Constants {
     }
 
     public class Layer{
-        public final static int PLAYER_LAYER = 3;
+        public final static int PLAYER_LAYER = -2;
 
 
     }
@@ -64,7 +64,7 @@ public class Constants {
                 case 19:
                 case 20:
                 case 21:
-                    return new Vec2(0, -2*SCALE);
+                    return new Vec2(0, -3*SCALE);
                 default:
                     return new Vec2(0, 0);
             }

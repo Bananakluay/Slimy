@@ -56,19 +56,19 @@ public class PlayerManager {
 
     public static void spawnSlime(String name, float x, float y, SlimeType type){
         if(type == LARGE_SLIME && name.equals(BLUE)){
-                blueLargeSlime = new LargeSlime(BLUE, x, y, PLAYER_LAYER); 
+                blueLargeSlime = new LargeSlime(BLUE, x, y); 
                 blueLargeSlime.getComponent(Bounds.class).setColor(Color.blue);
 
         }
         else if(type == TINY_SLIME){
             if(name.equals(GREEN)){
-                greenTinySlime = new TinySlime(GREEN, x, y, PLAYER_LAYER);
+                greenTinySlime = new TinySlime(GREEN, x, y,"TrashGame/res/assets/Character/GreenSlime.png");
                 greenTinySlime.getComponent(Bounds.class).setColor(Color.green);
                 greenTinySlime.getComponent(Controller.class).setActive(true);
   
             }
             else if(name.equals(YELLOW)){
-                yellowTinySlime = new TinySlime(YELLOW, x, y, PLAYER_LAYER);
+                yellowTinySlime = new TinySlime(YELLOW, x, y, "TrashGame/res/assets/Character/GreenSlime.png");
                 yellowTinySlime.getComponent(Controller.class).setActive(false);  
                 yellowTinySlime.getComponent(Bounds.class).setColor(Color.yellow);
 
