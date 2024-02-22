@@ -51,8 +51,6 @@ public class Level {
 		tileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/wall.png",16,16);
 		grassesTileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/grasses.png",16,21);
 
-		System.out.println(grassesTileSet.size());
-		System.out.println(tileSet.size());
 		generateLevelData();
 		loadTileBlock();
 		loadPlayer();
@@ -76,7 +74,6 @@ public class Level {
 					Color color = new Color(imgLvlData.getRGB(col, row));
 					int value = color.getRed();
 					
-					System.out.println(value);
 					if(value < 0 || value > tileSet.size() || value == 255)
 						continue;
 
