@@ -17,11 +17,12 @@ import Prefabs.Exits.Door;
 import Prefabs.Player.PlayerManager;
 import Prefabs.Player.SlimeType;
 import Scene.LevelScene;
-import components.SubSprite;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
-import utils.Vec2;;
+import utils.Vec2;
+import java.util.Random;
+import static utils.Constants.TileSet.GrassesOffset;
 @SuppressWarnings("unused")
 public class Level {
 
@@ -35,22 +36,27 @@ public class Level {
 	private List<BufferedImage> tileSet;
 	private List<BufferedImage> grassesTileSet;
 
+	private Random rand;
 	public Level(String imgLvlDataFile, LevelScene levelScene) {
 		this.imgLvlDataFile = imgLvlDataFile;
 		this.levelScene = levelScene;
+		rand = new Random();
 		init();
 
 	}
 
 	public void init() {
 		imgLvlData = AssetPool.getBufferedImage(imgLvlDataFile,1,1);
+
 		tileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/wall.png",16,16);
 		grassesTileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/grasses.png",16,21);
-	
+
+		System.out.println(grassesTileSet.size());
+		System.out.println(tileSet.size());
 		generateLevelData();
 		loadTileBlock();
 		loadPlayer();
-		loadDoor();
+		// loadDoor();
 	}
 
 	public void generateLevelData() {
@@ -73,9 +79,16 @@ public class Level {
 					System.out.println(value);
 					if(value < 0 || value > tileSet.size() || value == 255)
 						continue;
+
+					Vec2 posGrasses = new Vec2(col*TILES_SIZE, row*TILES_SIZE);
+					posGrasses.add(GrassesOffset(value));
+					
+					int r = rand.nextInt(5);
+					
 					TileBlock tileBlock =  new TileBlock(
-						tileSet.get(value),col*TILES_SIZE, row*TILES_SIZE,
-						grassesTileSet.get(value), );
+						tileSet.get(value),new Vec2(col*TILES_SIZE, row*TILES_SIZE),
+						grassesTileSet.get(value), posGrasses,
+						r == 1);
 					levelScene.addEntity(tileBlock);
 					levelScene.renderer.submit(tileBlock);
 			
@@ -86,7 +99,7 @@ public class Level {
 
 	public void loadPlayer(){
 		//temp position
-		PlayerManager.spawnSlime("Blue", TILES_SIZE*2,TILES_SIZE*2, SlimeType.LARGE_SLIME);
+		PlayerManager.spawnSlime("Blue", TILES_SIZE*4,TILES_SIZE*10, SlimeType.LARGE_SLIME);
 		levelScene.addEntity(PlayerManager.blueLargeSlime);
 		levelScene.renderer.submit(PlayerManager.blueLargeSlime);
 	}
