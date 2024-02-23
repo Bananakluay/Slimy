@@ -58,15 +58,13 @@ public class AssetPool {
     }
     
     
-    public static <T> void add(String imgFile, T asset){
+    public static <T> void add(String imgFile, T asset) {
         File file = new File(imgFile);
-        if(asset instanceof BufferedImage b && !AssetPool.bufferImage.containsKey(imgFile)){
-            AssetPool.bufferImage.put(file.getAbsolutePath(), b);
-        }
-        else if(asset instanceof Sprite s && !AssetPool.sprites.containsKey(imgFile)){
-            AssetPool.sprites.put(file.getAbsolutePath(), s);
-        }
-        else{
+        if (asset instanceof BufferedImage && !AssetPool.bufferImage.containsKey(imgFile)) {
+            AssetPool.bufferImage.put(file.getAbsolutePath(), (BufferedImage) asset);
+        } else if (asset instanceof Sprite && !AssetPool.sprites.containsKey(imgFile)) {
+            AssetPool.sprites.put(file.getAbsolutePath(), (Sprite) asset);
+        } else {
             System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
             System.exit(-1);
         }

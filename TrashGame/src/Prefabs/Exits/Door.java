@@ -5,6 +5,7 @@ import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.List;
 
 import Behavior.Behavior;
@@ -31,8 +32,9 @@ public class Door extends Entity implements Behavior {
                 transform.position.y + TILES_SIZE*0.3f,
                 transform.scale.x,
                 transform.scale.y*1.7f,
-                List.of(EntityType.PLAYER),
+                Arrays.asList(EntityType.PLAYER),
                 this);
+                
         addComponent(detector);
         img = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/door3.png", 21, 32);
     }
