@@ -16,11 +16,11 @@ public class Player extends Entity{
 
     Controller controller;  
 
+    private boolean isAlive = true;
     private boolean isCurrentPlayer = false;
 
     protected PlayerStatus status= PlayerStatus.IDLE;
     protected PlayerStatus currenStatus = PlayerStatus.IDLE;
-
     public Player(String name, Transform transform, int zIndex) {
         super(name, transform, zIndex);
         init();
