@@ -22,7 +22,7 @@ public class SceneManager {
     public static void changeScene(Scenes scene) {
         switch (scene) {
             case MENU_SCENE:
-                System.out.println("Menu Scene");
+                System.out.println("MENU Scene");
                 currentScene = new MenuScene();
                 break;
             case LEVEL_SCENE:
