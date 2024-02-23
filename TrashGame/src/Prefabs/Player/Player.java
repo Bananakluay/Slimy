@@ -11,22 +11,24 @@ import components.Bounds;
 import components.Controller;
 import components.Physic2D;
 import components.Rigidbody;
-@SuppressWarnings("unused")
-public class Player extends Entity{
 
-    Controller controller;  
+@SuppressWarnings("unused")
+public class Player extends Entity {
+
+    Controller controller;
 
     private boolean isAlive = true;
     private boolean isCurrentPlayer = false;
 
-    protected PlayerStatus status= PlayerStatus.IDLE;
+    protected PlayerStatus status = PlayerStatus.IDLE;
     protected PlayerStatus currenStatus = PlayerStatus.IDLE;
+
     public Player(String name, Transform transform, int zIndex) {
         super(name, transform, zIndex);
         init();
     }
 
-    private void init(){
+    private void init() {
         type = EntityType.PLAYER;
         addComponent(new Bounds(null));
         addComponent(new Rigidbody(5f, 1.5f));
@@ -36,36 +38,34 @@ public class Player extends Entity{
 
     }
 
-    public void setMass(float mass){
+    public void setMass(float mass) {
         this.getComponent(Rigidbody.class).mass = mass;
     }
 
-    public void setFriction(float friction){
+    public void setFriction(float friction) {
         this.getComponent(Rigidbody.class).friction = friction;
     }
 
-    public void setActive(boolean value){
-        if(value == true)
+    public void setActive(boolean value) {
+        if (value == true)
             isCurrentPlayer = true;
-        else    
+        else
             isCurrentPlayer = false;
         this.getComponent(Controller.class).isActive = value;
     }
 
-    public void setMobility(float walkSpeed, float jumpForce){
+    public void setMobility(float walkSpeed, float jumpForce) {
         this.getComponent(Controller.class).setMobility(walkSpeed, jumpForce);
     }
 
-    public void setStatus(PlayerStatus status){
+    public void setStatus(PlayerStatus status) {
         this.status = status;
     }
 
-    public Vec2 getDirection(){
+    public Vec2 getDirection() {
         float directionX = Math.signum(this.getComponent(Rigidbody.class).velocity.x);
         float directionY = Math.signum(this.getComponent(Rigidbody.class).velocity.y);
         return new Vec2(directionX, directionY);
     }
 
-
-    
 }
