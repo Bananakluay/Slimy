@@ -36,7 +36,7 @@ public class Constants {
 
     }
 
-    public class TileSet {
+    public static class TileSet {
         public static Vec2 GrassesOffset(int value){
             switch (value) {
                 case 0:

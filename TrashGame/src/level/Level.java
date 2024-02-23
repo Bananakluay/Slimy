@@ -80,7 +80,8 @@ public class Level {
 					continue;
 
 				Vec2 posGrasses = new Vec2(col*TILES_SIZE, row*TILES_SIZE);
-				posGrasses.add(GrassesOffset(value));
+				// posGrasses.add(GrassesOffset(value));
+				
 				
 				int r = rand.nextInt(5);
 				
