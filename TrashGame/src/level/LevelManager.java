@@ -76,8 +76,8 @@ public class LevelManager {
     }
 
     public static void loadNextLevels() {
-        //PlayerManager.onDestroy();
-        //currentLevel.onDestroy();
+        PlayerManager.onDestroy();
+        // currentLevel.onDestroy();
         //onDestroy();
         if (lvlindex < Map.size()) {
             lvlindex++;
@@ -89,7 +89,6 @@ public class LevelManager {
 
     public static void onDestroy() {
         if (currentLevel != null) {
-
             currentLevel = null;
         }
     }

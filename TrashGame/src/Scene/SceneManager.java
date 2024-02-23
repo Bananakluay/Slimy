@@ -1,5 +1,7 @@
 package Scene;
 
+import Prefabs.Player.PlayerManager;
+
 public class SceneManager {
     private static SceneManager sceneManager = null;
 
@@ -45,5 +47,6 @@ public class SceneManager {
     public static void NextScene() {
         currentScene.onDestroy();
         currentScene = new LevelScene();
+        PlayerManager.get(currentScene);
     }
 }

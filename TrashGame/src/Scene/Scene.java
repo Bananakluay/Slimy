@@ -11,7 +11,7 @@ import entity.EntityType;
 
 public abstract class Scene{
 
-	 protected List<Entity> entities = new ArrayList<>();
+	protected List<Entity> entities = new ArrayList<>();
 	public Renderer renderer = new Renderer();
 	private boolean isRunning = false;
 	
