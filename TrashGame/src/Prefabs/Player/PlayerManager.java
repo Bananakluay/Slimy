@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 
 import Prefabs.Player.Character.LargeSlime;
 import Prefabs.Player.Character.TinySlime;
-import Scene.LevelScene;
+import Scene.Scene;
 import Scene.Scenes;
 import Scene.SceneManager;
 
