@@ -3,6 +3,7 @@ package Scene;
 
 
 
+
 import java.awt.Graphics;
 import java.util.List;
 
@@ -24,7 +25,6 @@ public class LevelScene extends Scene {
 
     @Override
     public void update() {
-        // System.out.println(entities.size());
         PlayerManager.update();
         for (Entity entity : this.entities) {
             entity.update();

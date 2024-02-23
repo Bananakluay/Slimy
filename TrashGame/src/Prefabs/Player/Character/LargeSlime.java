@@ -32,7 +32,7 @@ public class LargeSlime extends Player{
 
         
         // //animation
-        frames = AssetPool.getBufferedImageList("TrashGame/res/assets/Character/GreenSlime.png", 16, 16);
+        frames = AssetPool.getBufferedImageList("TrashGame/res/assets/Character/BlueSlime.png", 16, 16);
         animation = this.getComponent(Animation.class);
         animation.setSize(1.3f*TILES_SIZE, 1.3f*TILES_SIZE);
         animation.setScale(2);

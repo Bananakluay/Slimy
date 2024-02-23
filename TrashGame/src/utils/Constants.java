@@ -29,7 +29,9 @@ public class Constants {
     }
 
     public class Layer{
-        public final static int PLAYER_LAYER = -2;
+        public final static int PLAYER_LAYER = 0;
+        public final static int TRAP = 1;
+        public final static int TILEB_LAYER = 2;
 
 
     }

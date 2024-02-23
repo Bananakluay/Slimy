@@ -69,7 +69,7 @@ public class PlayerManager {
   
             }
             else if(name.equals(YELLOW)){
-                yellowTinySlime = new TinySlime(YELLOW, x, y, "TrashGame/res/assets/Character/GreenSlime.png");
+                yellowTinySlime = new TinySlime(YELLOW, x, y, "TrashGame/res/assets/Character/YellowSlime.png");
                 yellowTinySlime.getComponent(Controller.class).setActive(false);  
                 yellowTinySlime.getComponent(Bounds.class).setColor(Color.yellow);
 

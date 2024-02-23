@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import Prefabs.Spike;
 import Prefabs.TileBlock;
 import Prefabs.Exits.Door;
 import Prefabs.Player.PlayerManager;
@@ -55,6 +56,7 @@ public class Level {
 		loadTileBlock();
 		loadPlayer();
 		loadDoor();
+		loadTrap();
 	}
 
 	public void generateLevelData() {
@@ -105,7 +107,7 @@ public class Level {
 	public void loadDoor() {
 		// temp position
 		Door Door = new Door("Exits Door",
-				new Transform(new Vec2(TILES_SIZE * 15, TILES_SIZE * 11), new Vec2(TILES_SIZE, TILES_SIZE * 2)), 0);
+				new Transform(new Vec2(TILES_SIZE * 15, TILES_SIZE * 11), new Vec2(TILES_SIZE, TILES_SIZE)));
 		levelScene.addEntity(Door);
 		levelScene.renderer.submit(Door);
 
@@ -123,7 +125,11 @@ public class Level {
 		// }
 	}
 
-	// TODO public void loadTrap(){}
+	public void loadTrap(){
+		Spike spike = new Spike("spike", TILES_SIZE*10, TILES_SIZE*12);
+        levelScene.addEntity(spike);
+        levelScene.renderer.submit(spike);
+	}
 
 	// TODO public void loadPlayer(){}
 
