@@ -2,6 +2,7 @@ package Prefabs.Player;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.time.Year;
 
 import Prefabs.Player.Character.LargeSlime;
 import Prefabs.Player.Character.TinySlime;
@@ -161,30 +162,35 @@ public class PlayerManager {
     }
 
     public static void Died() {
-        if (status == MERGED)
-            return;
-        if (Spike.died_green || Spike.died_yellow) {
+        if (Spike.died_green || Spike.died_yellow || Spike.died_blue) {
             Controller s1 = greenTinySlime.getComponent(Controller.class);
             Controller s2 = yellowTinySlime.getComponent(Controller.class);
-
-            if (s1.isActive) {
-                s1.setActive(false);
-                s2.setActive(true);
-            } else if (s2.isActive) {
-                s1.setActive(true);
-                s2.setActive(false);
-            }
+            Controller s3 = blueLargeSlime.getComponent(Controller.class);
 
             if (Spike.died_green) {
                 levelScene.removeEntity(GREEN, PLAYER);
 
                 levelScene.renderer.remove(GREEN, PLAYER_LAYER);
+                s1.setActive(false);
+                s2.setActive(true);
                 Spike.died_green = false;
+                // greenTinySlime = null;
             } else if (Spike.died_yellow) {
                 levelScene.removeEntity(YELLOW, PLAYER);
 
                 levelScene.renderer.remove(YELLOW, PLAYER_LAYER);
                 Spike.died_yellow = false;
+                s1.setActive(true);
+                s2.setActive(false);
+                // yellowTinySlime = null;
+            } else if (Spike.died_blue) {
+                System.out.println("hI");
+                levelScene.removeEntity(BLUE, PLAYER);
+
+                levelScene.renderer.remove(BLUE, PLAYER_LAYER);
+                // aadawdwas3.setActive(false);
+                Spike.died_blue = false;
+                // blueLargeSlime = null;
             }
         }
     }
