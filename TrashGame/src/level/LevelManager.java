@@ -88,8 +88,6 @@ public class LevelManager {
     }
 
     public static void onDestroy() {
-        if (currentLevel != null) {
-            currentLevel = null;
-        }
+        levelManager = null;
     }
 }

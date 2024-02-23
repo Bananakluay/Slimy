@@ -1,6 +1,11 @@
 package Scene;
 
 import Prefabs.Player.PlayerManager;
+import level.LevelManager;
+
+import java.util.logging.Level;
+
+import Prefabs.Spike;
 
 public class SceneManager {
     private static SceneManager sceneManager = null;
@@ -48,5 +53,23 @@ public class SceneManager {
         currentScene.onDestroy();
         currentScene = new LevelScene();
         PlayerManager.get(currentScene);
+    }
+
+    public static void restart() {
+        if (Spike.died_blue) {
+            LevelManager.onDestroy();
+            PlayerManager.onDestroy();
+            currentScene = new LevelScene();
+            PlayerManager.get(currentScene);
+            Spike.died_blue = false;
+
+        } else if (Spike.died_green && Spike.died_yellow) {
+            LevelManager.onDestroy();
+            PlayerManager.onDestroy();
+            currentScene = new LevelScene();
+            PlayerManager.get(currentScene);
+            Spike.died_yellow = false;
+            Spike.died_green = false;
+        }
     }
 }
