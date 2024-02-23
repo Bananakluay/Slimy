@@ -11,55 +11,59 @@ import input.MouseInputs;
 import input.Keyboard.KeyInputs;
 import input.Keyboard.KeyManager;
 import utils.*;
+
 @SuppressWarnings("unused")
-public class Game implements Runnable{
+public class Game implements Runnable {
 
 	private static Game game = null;
 
 	private Window gameWindow;
-    private GamePanel gamePanel;
+	private GamePanel gamePanel;
 	private SceneManager sceneManager;
 
 	public static MouseInputs MI;
 	public static KeyManager KI;
-    private Thread gameThread;
+	private Thread gameThread;
 
-    private final int FPS_SET = 120;
-    private final int UPS_SET = 200;
- 
-    private Game(){
-		//setting scene
+	private final int FPS_SET = 120;
+	private final int UPS_SET = 200;
+
+	private Game() {
+		// setting scene
 		sceneManager = SceneManager.get();
-		//setting window
-        gamePanel = GamePanel.get(this);
-        gameWindow = Window.get(gamePanel);
-		
+		// setting window
+		gamePanel = GamePanel.get(this);
+		gameWindow = Window.get(gamePanel);
+
 		MI = new MouseInputs();
 		KI = new KeyManager();
 		gamePanel.addKeyListener(KI);
-        gamePanel.addMouseListener(MI);
-        gamePanel.requestFocus();
-		
+		gamePanel.addMouseListener(MI);
+		gamePanel.requestFocus();
 
-        startGameLoop();
-    }
+		startGameLoop();
+	}
 
-	public static Game get(){
-		if(game == null)
+	public static Game get() {
+		if (game == null)
 			return new Game();
 		return game;
 	}
 
-    public void update(){
+	public void update() {
+		// Runtime runtime = Runtime.getRuntime();
+		// long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 *
+		// 1024); // in MB
+		// System.out.println("Used Memory: " + usedMemory + " MB");
 		KI.update();
 		SceneManager.getCurrentScene().update();
-    }
+	}
 
-    public void render(Graphics g){
+	public void render(Graphics g) {
 		SceneManager.getCurrentScene().draw(g);
-    }
-    
-    private void startGameLoop() {
+	}
+
+	private void startGameLoop() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
@@ -109,7 +113,7 @@ public class Game implements Runnable{
 
 	}
 
-	public Scene getCurrentScene(){
+	public Scene getCurrentScene() {
 		return sceneManager.getCurrentScene();
 	}
 }

@@ -69,29 +69,30 @@ public class Level {
 	}
 	
 	public void loadTileBlock(){
-			for(int row=0;row<imgLvlData.getHeight();row++){
-				for(int col=0;col<imgLvlData.getWidth();col++){
-					Color color = new Color(imgLvlData.getRGB(col, row));
-					int value = color.getRed();
-					
-					if(value < 0 || value > tileSet.size() || value == 255)
-						continue;
+		for(int row=0;row<imgLvlData.getHeight();row++){
+			for(int col=0;col<imgLvlData.getWidth();col++){
+				Color color = new Color(imgLvlData.getRGB(col, row));
+				int value = color.getRed();
+				
+				if(value < 0 || value > tileSet.size() || value == 255)
+					continue;
 
-					Vec2 posGrasses = new Vec2(col*TILES_SIZE, row*TILES_SIZE);
-					posGrasses.add(GrassesOffset(value));
-					
-					int r = rand.nextInt(5);
-					
-					TileBlock tileBlock =  new TileBlock(
-						tileSet.get(value),new Vec2(col*TILES_SIZE, row*TILES_SIZE),
-						grassesTileSet.get(value), posGrasses,
-						r == 1);
-					levelScene.addEntity(tileBlock);
-					levelScene.renderer.submit(tileBlock);
+				Vec2 posGrasses = new Vec2(col*TILES_SIZE, row*TILES_SIZE);
+				posGrasses.add(GrassesOffset(value));
+				
+				int r = rand.nextInt(5);
+				
+				TileBlock tileBlock =  new TileBlock(
+					tileSet.get(value),new Vec2(col*TILES_SIZE, row*TILES_SIZE),
+					grassesTileSet.get(value), posGrasses,
+					r == 1);
+				levelScene.addEntity(tileBlock);
+				levelScene.renderer.submit(tileBlock);
 			
-				}
 			}
+		}
 	}
+	
 
 
 	public void loadPlayer(){
@@ -100,35 +101,43 @@ public class Level {
 		levelScene.addEntity(PlayerManager.blueLargeSlime);
 		levelScene.renderer.submit(PlayerManager.blueLargeSlime);
 	}
-	public void loadDoor(){
-		//temp position
-		Door Door = new Door("Exits Door", new Transform(new Vec2(TILES_SIZE*15, TILES_SIZE*11), new Vec2(TILES_SIZE, TILES_SIZE*2)), 0);
+
+	public void loadDoor() {
+		// temp position
+		Door Door = new Door("Exits Door",
+				new Transform(new Vec2(TILES_SIZE * 15, TILES_SIZE * 11), new Vec2(TILES_SIZE, TILES_SIZE * 2)), 0);
 		levelScene.addEntity(Door);
 		levelScene.renderer.submit(Door);
 
 		// for(int row=0;row<imgLvlData.getHeight();row++){
-		// 	for(int col=0;col<imgLvlData.getWidth();col++){
-		// 		Color color = new Color(imgLvlData.getRGB(col, row));
-		// 		int value = color.getGreen(); 
-							
-		// 		Door door = new Door("Exits Door", new Transform(new Vec2(TILES_SIZE*col, TILES_SIZE*row), new Vec2(TILES_SIZE, TILES_SIZE*2)), 0);
-		// 		levelScene.addEntity(door);
-		// 		levelScene.renderer.submit(door);
-		//		break;
-		// 	}
+		// for(int col=0;col<imgLvlData.getWidth();col++){
+		// Color color = new Color(imgLvlData.getRGB(col, row));
+		// int value = color.getGreen();
+
+		// Door door = new Door("Exits Door", new Transform(new Vec2(TILES_SIZE*col,
+		// TILES_SIZE*row), new Vec2(TILES_SIZE, TILES_SIZE*2)), 0);
+		// levelScene.addEntity(door);
+		// levelScene.renderer.submit(door);
+		// break;
+		// }
 		// }
 	}
 
-	//TODO public void loadTrap(){}
+	// TODO public void loadTrap(){}
 
 	// TODO public void loadPlayer(){}
 
 	// TODO public void loadTrap(){}
 
-
 	// TODO public void loadButton();
-
-
-
-
+	/*
+	 * public void onDestroy() {
+	 * imgLvlData = null;
+	 * for (Entity e : entities) {
+	 * e = null;
+	 * }
+	 * entities.clear();
+	 * lvlData = null;
+	 * }
+	 */
 }

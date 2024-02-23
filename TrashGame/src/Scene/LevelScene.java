@@ -12,12 +12,11 @@ import Prefabs.Player.PlayerManager;
 import entity.Entity;
 import level.LevelManager;
 
-public class LevelScene extends Scene{
-    public LevelScene(){
+public class LevelScene extends Scene {
+    public LevelScene() {
         init();
         ready();
     }
-
 
     @Override
     public void init() {
@@ -52,9 +51,9 @@ public class LevelScene extends Scene{
 
     @Override
     public void onDestroy() {
-
+        for (Entity entity : entities) {
+            entity.onDestroy();
+        }
     }
 
-
-    
 }
