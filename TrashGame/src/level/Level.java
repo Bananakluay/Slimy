@@ -48,8 +48,8 @@ public class Level {
 	public void init() {
 		imgLvlData = AssetPool.getBufferedImage(imgLvlDataFile,1,1);
 
-		tileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/wall.png",16,16);
-		grassesTileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/grasses.png",16,21);
+		tileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/Tile/wall.png",16,16);
+		grassesTileSet = AssetPool.getBufferedImageList("TrashGame/res/assets/Tile/grasses.png",16,21);
 
 		generateLevelData();
 		loadTileBlock();
