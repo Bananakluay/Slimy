@@ -31,7 +31,7 @@ public class Detector extends Component implements Behavior{
     public void update() {
         for(Entity entity : SceneManager.getCurrentScene().getEntitiesWithComponent(Bounds.class)){
 
-            if (entity.equals(this.entity) || !types.contains(entity.type)) {
+            if (entity.equals(this.entity) || !types.contains(entity.getType())) {
                 continue; 
             }
 

@@ -14,5 +14,10 @@ public class Vec2 {
         this.y += vec2.y;
     }
 
+    public void sub(Vec2 vec2){
+        this.x -= vec2.x;
+        this.y -= vec2.y;
+    }
+
     
 }

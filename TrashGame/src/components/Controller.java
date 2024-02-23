@@ -5,24 +5,25 @@ import physics.Collision;
 import utils.Vec2;
 
 import java.awt.event.KeyEvent;
+
+import Prefabs.Player.Player;
+import static Prefabs.Player.PlayerStatus.*;
+
 import static utils.Constants.Player.*;
 
 @SuppressWarnings("unused")
 public class Controller extends Component{
+    private Player player;
     private Rigidbody rigidbody;
 
     private float walkSpeed = WALK_SPEED;
     private float jumpForce = JUMP_FORCE;
-    public boolean isActive = true;
 
-    private boolean left, right, jumping;
+    public boolean isActive = true;
 
     private final int JUMP_DURATION = 15;
     private int jumpDurationCounter = 0;
 
-    public Controller(boolean status){
-        isActive = status;
-    }
 
     @Override
     public void ready() {
@@ -30,24 +31,45 @@ public class Controller extends Component{
             rigidbody = entity.getComponent(Rigidbody.class);
         else
             System.out.println("WARNING FROM CLASS: " +this.getClass()+ " | "+entity.getName() + "needs a Rigidbody.");
+
+        if(entity instanceof Player){
+            player = (Player) entity;
+        }
     }
 
     @Override
     public void update() {
         if(!isActive)
             return;
-
         //Walk
-        if(Game.KI.isHeld(KeyEvent.VK_A))
-            rigidbody.moveX(-walkSpeed );
-        else if(Game.KI.isHeld(KeyEvent.VK_D))
+        if(Game.KI.isHeld(KeyEvent.VK_A)){
+            rigidbody.moveX(-walkSpeed);
+            player.setStatus(MOVING);
+
+        }
+            
+        else if(Game.KI.isHeld(KeyEvent.VK_D)){
             rigidbody.moveX(walkSpeed);
-        else
+            player.setStatus(MOVING);
+
+        }
+        else{
             rigidbody.moveX(0);
+            player.setStatus(IDLE);
+
+        }
 
         //Jump
         if(isOnFloor()){
             jumpDurationCounter = JUMP_DURATION;
+        }
+
+        if(!isOnFloor()){
+            if(rigidbody.velocity.y<0)
+                player.setStatus(JUMPING);
+            else if(rigidbody.velocity.y>0){
+                player.setStatus(FALLING);
+            }    
         }
         
         if(Game.KI.isHeld(KeyEvent.VK_W)){
@@ -70,4 +92,6 @@ public class Controller extends Component{
         this.walkSpeed = walkSpeed;
         this.jumpForce = jumpForce;
     }
+
+    public boolean isActive(){return isActive;}
 }

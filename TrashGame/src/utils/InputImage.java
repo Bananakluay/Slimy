@@ -7,9 +7,10 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import dataStructure.AssetPool;
+
 @SuppressWarnings("unused")
 public class InputImage {
-    private final static int TILE_SIZE = 16;
 
     public static BufferedImage loadBufferedImage(String file) {
         BufferedImage img = null;
@@ -27,25 +28,21 @@ public class InputImage {
         return img;
     }
 
-    public static BufferedImage loadSprite(String file, int x, int y) {
-        return loadBufferedImage(file).getSubimage(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-    }
+    public static BufferedImage[] loadBufferImageList(String file, int tileWidth, int tileHeight) {
+        BufferedImage img = AssetPool.getBufferedImage(file, tileWidth, tileHeight);
 
-    public static BufferedImage[] loadBufferImageList(String file) {
-        BufferedImage sprite = loadBufferedImage(file);
-
-        int nRow = sprite.getHeight() / TILE_SIZE;
-        int nCol = sprite.getWidth() / TILE_SIZE;
+        int nRow = img.getHeight() / tileHeight;
+        int nCol = img.getWidth() / tileWidth;
 
         System.out.println(nRow + " " + nCol);
 
-        BufferedImage[] spriteList = new BufferedImage[nRow * nCol];
+        BufferedImage[] imgList = new BufferedImage[nRow * nCol];
         int index = 0;
         for (int row = 0; row < nRow; row++) {
             for (int col = 0; col < nCol; col++)
-                spriteList[index++] = sprite.getSubimage(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            imgList[index++] = img.getSubimage(col * tileWidth, row * tileHeight, tileWidth, tileHeight);
         }
-        return spriteList;
+        return imgList;
     }
 
 }

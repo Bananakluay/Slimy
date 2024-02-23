@@ -11,7 +11,7 @@ import entity.EntityType;
 
 public abstract class Scene{
 
-	 protected List<Entity> entities = new ArrayList<>();
+	protected List<Entity> entities = new ArrayList<>();
 	public Renderer renderer = new Renderer();
 	private boolean isRunning = false;
 	
@@ -57,7 +57,7 @@ public abstract class Scene{
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
 			System.out.println(name);
-			if (entity.getName().equals(name) && entity.type == type) {
+			if (entity.getName().equals(name) && entity.getType() == type) {
 				entities.remove(i);
 				System.out.println("remove : "+ entity.getName());
 				break; 

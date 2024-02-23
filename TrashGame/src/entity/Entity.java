@@ -10,7 +10,7 @@ public class Entity {
 
     private String name;
     public int uid = -1;
-    public EntityType type = EntityType.NONE;
+    protected EntityType type = EntityType.NONE;
     public static int ID_COUNTER = 0;
     protected Transform transform;
     private List<Component> components;
@@ -92,6 +92,8 @@ public class Entity {
     public String getName() {return name;}
 
     public Transform getTransform() {return transform;}
+
+    public EntityType getType(){return this.type;}
 
 
     

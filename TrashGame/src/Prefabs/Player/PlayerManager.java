@@ -3,6 +3,8 @@ package Prefabs.Player;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import Prefabs.Player.Character.LargeSlime;
+import Prefabs.Player.Character.TinySlime;
 import Scene.LevelScene;
 import Scene.Scenes;
 import Scene.SceneManager;
@@ -11,7 +13,7 @@ import components.Bounds;
 import components.Controller;
 import entity.Entity;
 import main.Game;
-import utils.Constants.Player;
+
 
 import static Prefabs.Player.SlimeStatus.*;
 import static Prefabs.Player.SlimeType.*;
@@ -29,13 +31,13 @@ public class PlayerManager {
     private static TinySlime yellowTinySlime = null;
     private static SlimeStatus status = MERGED;
 
-    private static LevelScene levelScene;
+    private static Scene levelScene;
 
-    private PlayerManager(LevelScene levelScene) {
+    private PlayerManager(Scene levelScene) {
         PlayerManager.levelScene = levelScene;
     }
 
-    public static PlayerManager get(LevelScene levelScene) {
+    public static PlayerManager get(Scene levelScene) {
         if (playerManager == null)
             playerManager = new PlayerManager(levelScene);
         return playerManager;
@@ -58,20 +60,22 @@ public class PlayerManager {
         }
     }
 
-    public static void spawnSlime(String name, float x, float y, SlimeType type) {
-        if (type == LARGE_SLIME && name.equals(BLUE)) {
-            blueLargeSlime = new LargeSlime(BLUE, x, y, PLAYER_LAYER);
-            blueLargeSlime.getComponent(Bounds.class).setColor(Color.blue);
+    public static void spawnSlime(String name, float x, float y, SlimeType type){
+        if(type == LARGE_SLIME && name.equals(BLUE)){
+                blueLargeSlime = new LargeSlime(BLUE, x, y); 
+                blueLargeSlime.getComponent(Bounds.class).setColor(Color.blue);
 
-        } else if (type == TINY_SLIME) {
-            if (name.equals(GREEN)) {
-                greenTinySlime = new TinySlime(GREEN, x, y, PLAYER_LAYER);
+        }
+        else if(type == TINY_SLIME){
+            if(name.equals(GREEN)){
+                greenTinySlime = new TinySlime(GREEN, x, y,"TrashGame/res/assets/Character/GreenSlime.png");
                 greenTinySlime.getComponent(Bounds.class).setColor(Color.green);
                 greenTinySlime.getComponent(Controller.class).setActive(true);
-
-            } else if (name.equals(YELLOW)) {
-                yellowTinySlime = new TinySlime(YELLOW, x, y, PLAYER_LAYER);
-                yellowTinySlime.getComponent(Controller.class).setActive(false);
+  
+            }
+            else if(name.equals(YELLOW)){
+                yellowTinySlime = new TinySlime(YELLOW, x, y, "TrashGame/res/assets/Character/YellowSlime.png");
+                yellowTinySlime.getComponent(Controller.class).setActive(false);  
                 yellowTinySlime.getComponent(Bounds.class).setColor(Color.yellow);
 
             }
@@ -94,7 +98,7 @@ public class PlayerManager {
 
             greenTinySlime.getComponent(Controller.class).setActive(true);
             yellowTinySlime.getComponent(Controller.class).setActive(false);
-
+            
             // add duel slime
             levelScene.addEntity(greenTinySlime);
             levelScene.addEntity(yellowTinySlime);
@@ -157,19 +161,9 @@ public class PlayerManager {
 
     }
 
-    /*public static void onDestroy() {
-
-        // Remove from renderer
-        levelScene.renderer.remove(BLUE, PLAYER_LAYER);
-        levelScene.renderer.remove(GREEN, PLAYER_LAYER);
-        levelScene.renderer.remove(YELLOW, PLAYER_LAYER);
-
-        // Reset variables
-        blueLargeSlime = null;
-        greenTinySlime = null;
-        yellowTinySlime = null;
-        status = MERGED;
+    public static void onDestroy() {
         playerManager = null;
-    }*/
+        status = MERGED;
+    }
 
 }

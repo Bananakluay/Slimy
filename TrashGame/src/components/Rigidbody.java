@@ -1,9 +1,9 @@
 package components;
 
 import physics.Collision;
+import utils.MiniMath;
 import utils.Vec2;
 
-import static entity.EntityType.PLAYER;
 import static physics.CollisionType.*;
 import static utils.Constants.Game.SCALE;
 
@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataStructure.Transform;
+import entity.EntityType;
 
 public class Rigidbody extends Component {
 
-    public final float mass;
-    private final float friction;
+    public  float mass;
+    public  float friction;
     public Vec2 velocity;
+
     private List<Vec2> forces = new ArrayList<>();
 
     public boolean leftCollision, rightCollision, topCollision, botCollision;
@@ -35,13 +37,12 @@ public class Rigidbody extends Component {
         rightCollision = false;
         topCollision = false;
         botCollision = false;
+
         if(entity.hasComponent(Bounds.class)){            
             for(Collision collision : entity.getComponent(Bounds.class).checkCollision(velocity)){
                 if(collision.object.equals(this.entity))
                     continue;
 
-                // if(collision.subject.type == PLAYER && collision.object.type == PLAYER)
-                //     continue;
                 Transform s = entity.getTransform();
                 Transform o = collision.object.getTransform();
                 
@@ -96,8 +97,8 @@ public class Rigidbody extends Component {
             }
         }
         forces.clear();  
-            
-        // velocity.x = MiniMath.clamp(velocity.x, -3, 3);
+        // velocity.x = MiniMath.clamp(velocity.x, -1.2f, 1.2f);
+        
 
         // if not colliding (can move)
         if(!isCollidingX){
@@ -113,12 +114,19 @@ public class Rigidbody extends Component {
     @Override
     public void onCollision(Collision collision) {
 
+        if(collision.object.getType() == EntityType.BOX){
+            if(collision.subject.getName().equals("Green") || collision.subject.getName().equals("Yellow"))
+                return;
+        }
+
+          
         if(collision.subject.hasComponent(Rigidbody.class) && collision.object.hasComponent(Rigidbody.class)){
             Rigidbody s = collision.subject.getComponent(Rigidbody.class);
             Rigidbody o = collision.object.getComponent(Rigidbody.class);
-            if(collision.type == LEFT || collision.type == RIGHT){
+            if(collision.type == LEFT || collision.type == RIGHT){      
                 s.addForce(new Vec2(-velocity.x/o.mass, 0));
                 o.addForce(new Vec2(velocity.x/o.mass, 0));
+                
             }
     
             if(collision.type == TOP || collision.type == BOTTOM){

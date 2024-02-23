@@ -24,7 +24,7 @@ public class LevelManager {
 
     private void init() {
         buildAllLevels();
-        currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex), "TrashGame/res/Wall.png", levelScene);
+        currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex), levelScene);
     }
 
     public static LevelManager get(LevelScene levelScene) {
@@ -76,8 +76,8 @@ public class LevelManager {
     }
 
     public static void loadNextLevels() {
-        //PlayerManager.onDestroy();
-        //currentLevel.onDestroy();
+        PlayerManager.onDestroy();
+        // currentLevel.onDestroy();
         //onDestroy();
         if (lvlindex < Map.size()) {
             lvlindex++;
@@ -89,7 +89,6 @@ public class LevelManager {
 
     public static void onDestroy() {
         if (currentLevel != null) {
-
             currentLevel = null;
         }
     }

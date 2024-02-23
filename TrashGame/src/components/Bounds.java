@@ -1,5 +1,6 @@
 package components;
 
+import static entity.EntityType.BOX;
 import static entity.EntityType.PLAYER;
 import static utils.Constants.Game.SCALE;
 
@@ -35,7 +36,7 @@ public class Bounds extends Component {
     @Override
     public void update() {
         Transform t = entity.getTransform();
-        if(entity.type == PLAYER)
+        if(entity.getType() == PLAYER)
             interectBounds.setRect(entity.getTransform().position.x - interectBoundsoffset/2, entity.getTransform().position.y - interectBoundsoffset/2, entity.getTransform().scale.x + interectBoundsoffset, entity.getTransform().scale.y + interectBoundsoffset);
         boundsX = getBoundsX(t.position.x, t.position.y, t.scale.x, t.scale.y);
         boundsY = getBoundsY(t.position.x, t.position.y, t.scale.x, t.scale.y);
@@ -83,8 +84,8 @@ public class Bounds extends Component {
         Graphics2D g2d = (Graphics2D) g;
         if(DEBUG){
             g2d.setColor(color);
-            if(entity.type == PLAYER)
-                g2d.drawRect(
+            if(entity.getType() == BOX)
+                g2d.fillRect(
                     (int)entity.getTransform().position.x, 
                     (int)entity.getTransform().position.y, 
                     (int)entity.getTransform().scale.x, 

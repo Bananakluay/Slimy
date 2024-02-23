@@ -1,6 +1,11 @@
 package Scene;
 
+
+
+
+
 import java.awt.Graphics;
+import java.util.List;
 
 import Prefabs.Player.PlayerManager;
 import entity.Entity;
@@ -36,6 +41,10 @@ public class LevelScene extends Scene {
         for (Entity entity : entities) {
             entity.onDestroy();
         }
+    }
+
+    public List<Entity> getEntity(){
+        return entities;
     }
 
 }
