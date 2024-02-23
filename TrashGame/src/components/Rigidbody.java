@@ -97,7 +97,7 @@ public class Rigidbody extends Component {
             }
         }
         forces.clear();  
-        velocity.x = MiniMath.clamp(velocity.x, -1.2f, 1.2f);
+        // velocity.x = MiniMath.clamp(velocity.x, -1.2f, 1.2f);
         
 
         // if not colliding (can move)

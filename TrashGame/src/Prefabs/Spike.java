@@ -28,7 +28,7 @@ public class Spike extends Entity implements Behavior{
         Detector detector = new Detector(
             transform.position.x, 
             transform.position.y+TILES_SIZE/2, 
-            transform.scale.x, 
+            transform.scale.x - SCALE, 
             transform.scale.y, 
             List.of(EntityType.PLAYER), 
             this);

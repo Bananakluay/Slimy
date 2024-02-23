@@ -61,8 +61,8 @@ public class Detector extends Component implements Behavior{
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        // g2d.setColor(Color.white);
-        // g2d.fill(bound);
+        g2d.setColor(Color.white);
+        g2d.fill(bound);
     }
     
     
