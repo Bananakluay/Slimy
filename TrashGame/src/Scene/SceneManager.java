@@ -19,7 +19,7 @@ public class SceneManager {
         changeScene(Scenes.LEVEL_SCENE);
     }
 
-    public void changeScene(Scenes scene) {
+    public static void changeScene(Scenes scene) {
         switch (scene) {
             case MENU_SCENE:
                 System.out.println("Menu Scene");

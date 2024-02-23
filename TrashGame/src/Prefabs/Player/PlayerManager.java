@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 
 import Scene.LevelScene;
+import Scene.Scenes;
+import Scene.SceneManager;
+
 import components.Bounds;
 import components.Controller;
 import entity.Entity;
@@ -49,6 +52,9 @@ public class PlayerManager {
         }
         if (Game.KI.onPress(KeyEvent.VK_R)) {
             switchPlayer();
+        }
+        if (Game.KI.onPress(KeyEvent.VK_ESCAPE)) {
+            SceneManager.changeScene(Scenes.MENU_SCENE);
         }
     }
 

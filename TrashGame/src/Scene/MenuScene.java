@@ -1,9 +1,19 @@
 package Scene;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+
+import entity.Entity;
+import main.Game;
+
+import java.awt.Color;
+import static utils.Constants.Game.*;
 
 public class MenuScene extends Scene{
 
+    public MenuScene(){
+        ready();
+    }
     @Override
     public void init() {
         // TODO Auto-generated method stub
@@ -11,21 +21,23 @@ public class MenuScene extends Scene{
     }
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void draw(Graphics g) {
+        g.setColor(Color.white);
+        g.drawString("MENU", GAME_WIDTH / 2, 200);
     }
 
     @Override
-    public void draw(Graphics g) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'draw'");
+    public void update() {
+        if (Game.KI.onPress(KeyEvent.VK_ESCAPE)) {
+            SceneManager.changeScene(Scenes.LEVEL_SCENE);
+        }
     }
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'onDestroy'");
+        for (Entity entity : entities) {
+            entity.onDestroy();
+        }
     }
     
 }
