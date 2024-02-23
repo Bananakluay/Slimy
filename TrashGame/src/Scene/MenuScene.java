@@ -3,7 +3,9 @@ package Scene;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
+import Prefabs.Player.PlayerManager;
 import entity.Entity;
+import level.LevelManager;
 import main.Game;
 
 import java.awt.Color;
@@ -29,6 +31,8 @@ public class MenuScene extends Scene{
     @Override
     public void update() {
         if (Game.KI.onPress(KeyEvent.VK_ESCAPE)) {
+            LevelManager.onDestroy();
+            PlayerManager.onDestroy();
             SceneManager.changeScene(Scenes.LEVEL_SCENE);
         }
     }
