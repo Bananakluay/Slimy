@@ -58,6 +58,7 @@ public class PlayerManager {
         if (Game.KI.onPress(KeyEvent.VK_ESCAPE)) {
             SceneManager.changeScene(Scenes.MENU_SCENE);
         }
+
         Died();
     }
 
