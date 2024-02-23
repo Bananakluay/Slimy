@@ -16,41 +16,49 @@ import entity.Entity;
 import entity.EntityType;
 import utils.Vec2;
 
-public class Spike extends Entity implements Behavior{
+public class Spike extends Entity implements Behavior {
     BufferedImage img;
+    public static boolean died_green = false;
+    public static boolean died_yellow = false;
+
     public Spike(String name, float x, float y) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE/2)), TRAP);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE / 2)), TRAP);
         init();
     }
 
-    public void init(){
+    public void init() {
 
         Detector detector = new Detector(
-            transform.position.x, 
-            transform.position.y+TILES_SIZE/2, 
-            transform.scale.x - SCALE, 
-            transform.scale.y, 
-            List.of(EntityType.PLAYER), 
-            this);
+                transform.position.x,
+                transform.position.y + TILES_SIZE / 2,
+                transform.scale.x - SCALE,
+                transform.scale.y,
+                List.of(EntityType.PLAYER),
+                this);
         addComponent(detector);
         img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/spike.png", TILES_SIZE, TILES_SIZE);
-        
+
     }
-    
+
     @Override
     public void activate(Entity entity) {
         System.out.println(entity.getName());
+        if (entity.getName() == "Green")
+            died_green = true;
+        else if (entity.getName() == "Yellow")
+            died_yellow = true;
+
     }
 
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        g.drawImage(img, 
-        (int)(this.getTransform().position.x), 
-        (int)(this.getTransform().position.y),
-        (int)(TILES_SIZE), 
-        (int)(TILES_SIZE),
-        null);
+        g.drawImage(img,
+                (int) (this.getTransform().position.x),
+                (int) (this.getTransform().position.y),
+                (int) (TILES_SIZE),
+                (int) (TILES_SIZE),
+                null);
     }
-    
+
 }
