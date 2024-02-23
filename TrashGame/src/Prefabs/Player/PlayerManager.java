@@ -2,6 +2,7 @@ package Prefabs.Player;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.time.Year;
 
 import Prefabs.Player.Character.LargeSlime;
 import Prefabs.Player.Character.TinySlime;
@@ -14,6 +15,7 @@ import components.Controller;
 import entity.Entity;
 import main.Game;
 import Prefabs.Spike;
+import Scene.SceneManager;
 
 import static Prefabs.Player.SlimeStatus.*;
 import static Prefabs.Player.SlimeType.*;
@@ -167,32 +169,35 @@ public class PlayerManager {
     }
 
     public static void Died() {
-        if (status == MERGED)
-            return;
         if (Spike.died_green || Spike.died_yellow) {
             Controller s1 = greenTinySlime.getComponent(Controller.class);
             Controller s2 = yellowTinySlime.getComponent(Controller.class);
-
-            if (s1.isActive) {
-                s1.setActive(false);
-                s2.setActive(true);
-            } else if (s2.isActive) {
-                s1.setActive(true);
-                s2.setActive(false);
-            }
 
             if (Spike.died_green) {
                 levelScene.removeEntity(GREEN, PLAYER);
 
                 levelScene.renderer.remove(GREEN, PLAYER_LAYER);
-                Spike.died_green = false;
+                s1.setActive(false);
+                s2.setActive(true);
+                // Spike.died_green = false;
+                // greenTinySlime = null;
             } else if (Spike.died_yellow) {
                 levelScene.removeEntity(YELLOW, PLAYER);
 
                 levelScene.renderer.remove(YELLOW, PLAYER_LAYER);
-                Spike.died_yellow = false;
+                // Spike.died_yellow = false;
+                s1.setActive(true);
+                s2.setActive(false);
+                // yellowTinySlime = null;
             }
         }
-    }
+        if (Spike.died_blue) {
+            levelScene.removeEntity(BLUE, PLAYER);
 
+            levelScene.renderer.remove(BLUE, PLAYER_LAYER);
+            // aadawdwas3.setActive(false);
+            // blueLargeSlime = null;
+        }
+        SceneManager.restart();
+    }
 }

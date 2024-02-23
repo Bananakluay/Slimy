@@ -1,9 +1,5 @@
 package Scene;
 
-
-
-
-
 import java.awt.Graphics;
 import java.util.List;
 
@@ -43,7 +39,7 @@ public class LevelScene extends Scene {
         }
     }
 
-    public List<Entity> getEntity(){
+    public List<Entity> getEntity() {
         return entities;
     }
 
