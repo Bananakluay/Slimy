@@ -17,12 +17,12 @@ import entity.EntityType;
 import utils.Vec2;
 
 public class Button extends Entity implements Behavior{
-    Gate gate;
+
     List<BufferedImage> img;
-    public boolean isActive = false;
-    public Button(String name, float x , float y, Gate gate) {
+    private boolean isActive = false;
+
+    public Button(String name, float x , float y) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), 1);
-        this.gate = gate;
         init();
     }
 
@@ -40,15 +40,11 @@ public class Button extends Entity implements Behavior{
 
     @Override
     public void activateOn(Entity entity){
-        // System.out.println(entity.getName());
-        gate.open();
         isActive = true;
     }
 
     @Override
     public void activateOff(){
-        // System.out.println("off");
-        gate.close();
         isActive = false;
     }
    
@@ -74,6 +70,9 @@ public class Button extends Entity implements Behavior{
                 (int)this.getTransform().scale.y,
                 null);
         }
+    }
+    public boolean isActive(){
+        return isActive;
     }
     
 }

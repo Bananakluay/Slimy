@@ -12,7 +12,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import Scene.SceneManager;
+import Scene.LevelScene;
 import dataStructure.Transform;
 import entity.Entity;
 import physics.Collision;
@@ -48,10 +48,10 @@ public class Bounds extends Component {
 
         Rectangle2D.Float predictedBoundsX = new Rectangle2D.Float(boundsX.x+velocity.x, boundsX.y,boundsX.width,boundsX.height);
         Rectangle2D.Float predictedBoundsY = new Rectangle2D.Float(boundsY.x, boundsY.y + velocity.y,boundsY.width,boundsY.height);
-        for(Entity entity : SceneManager.getCurrentScene().getEntitiesWithComponent(Bounds.class)){
+        for(Entity entity : LevelScene.getEntityManager().getEntitiesWithComponent(Bounds.class)){
             if(entity.equals(this.entity))
                 continue;
-
+            
             if(predictedBoundsX.intersects(entity.getComponent(Bounds.class).boundsX) || predictedBoundsY.intersects(entity.getComponent(Bounds.class).boundsY)){
                 res.add(new Collision(this.entity, entity)); 
             }
@@ -86,6 +86,7 @@ public class Bounds extends Component {
         entity.getTransform().position.y = y;
         entity.getTransform().scale.x = w;
         entity.getTransform().scale.y = h;
+    
 
     }
     @Override

@@ -31,7 +31,7 @@ public class LargeSlime extends Player{
         this.setMobility(WALK_SPEED*0.8f, JUMP_FORCE*0.8f);
 
         
-        // //animation
+        //animation
         frames = AssetPool.getBufferedImageList("TrashGame/res/assets/Character/BlueSlime.png", 16, 16);
         animation = this.getComponent(Animation.class);
         animation.setSize(1.3f*TILES_SIZE, 1.3f*TILES_SIZE);
@@ -48,10 +48,8 @@ public class LargeSlime extends Player{
     @Override
     public void update() {
         super.update();
-        if(currenStatus == status)
-            return;
-
-        switch (status) {
+    
+        switch (animationStatus) {
             case IDLE: 
                 animation.play("IDLE");
                 break;
@@ -67,7 +65,6 @@ public class LargeSlime extends Player{
             default:
                 break;
         }
-        currenStatus = status;
     }
         
 }

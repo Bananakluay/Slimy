@@ -1,5 +1,6 @@
 package Interaction;
 
+
 import entity.Entity;
 
 public interface Behavior {

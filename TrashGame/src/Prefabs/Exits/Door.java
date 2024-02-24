@@ -15,7 +15,6 @@ import entity.Entity;
 import entity.EntityType;
 import level.LevelManager;
 import Scene.LevelScene;
-import Scene.SceneManager;
 
 public class Door extends Entity implements Behavior {
     public LevelScene levelScene;
@@ -41,7 +40,6 @@ public class Door extends Entity implements Behavior {
     public void activateOn(Entity entity) {
         System.out.println("This is door Exits");
         LevelManager.loadNextLevels();
-        SceneManager.NextScene();
     }
     
     @Override

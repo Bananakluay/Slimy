@@ -9,7 +9,7 @@ public abstract class Component {
     public int uid = -1;
     private static int ID_COUNTER = 0;
     public Entity entity = null;
-
+    
     public void ready(){};
     public void update(){};
     public void draw(Graphics g){};
@@ -19,5 +19,8 @@ public abstract class Component {
     {
         if (this.uid == -1)
             this.uid = ID_COUNTER++;
+    }
+    public int getID(){
+        return uid;
     }
 }

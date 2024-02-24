@@ -1,9 +1,10 @@
 package Prefabs.Player;
 
-public enum PlayerStatus {
+public enum AnimationStatus {
     IDLE,
     MOVING,
     JUMPING,
-    FALLING
+    FALLING,
+    DEAD
 
 }

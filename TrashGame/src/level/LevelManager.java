@@ -1,10 +1,6 @@
 package level;
 
-import java.util.List;
-
-import Prefabs.Player.PlayerManager;
 import Scene.LevelScene;
-import utils.Constants.Player;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -13,42 +9,30 @@ import java.util.ArrayList;
 
 public class LevelManager {
 
-    public static LevelManager levelManager = null;
-    private static Level currentLevel;
-    private static LevelScene levelScene;
-
-    private LevelManager(LevelScene levelScene) {
-        LevelManager.levelScene = levelScene;
-        init();
-    }
-
-    private void init() {
-        buildAllLevels();
-        currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex), levelScene);
-    }
-
-    public static LevelManager get(LevelScene levelScene) {
-        if (levelManager == null)
-            levelManager = new LevelManager(levelScene);
-        return levelManager;
-    }
+    private static LevelManager levelManager = null;
 
     private static ArrayList<String> Map = new ArrayList<>();
+
+    private static Level currentLevel;
 
     private static int lvlindex = 0;
 
     private LevelManager() {
         init();
     }
-
+    
     public static LevelManager get() {
         if (levelManager == null)
             levelManager = new LevelManager();
-
         return levelManager;
     }
+    private void init() {
+        getCurrentLevel();
+        buildAllLevels();
+        currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+    }
 
-    public static Level getCurrentLevel() {
+    public Level getCurrentLevel() {
         return currentLevel;
     }
 
@@ -76,15 +60,19 @@ public class LevelManager {
     }
 
     public static void loadNextLevels() {
-        PlayerManager.onDestroy();
-        // currentLevel.onDestroy();
-        //onDestroy();
         if (lvlindex < Map.size()) {
+            // LevelScene.deleteCurrentLevel();
+            LevelScene.createNextLevel();
+            currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
             lvlindex++;
-            levelManager = null;
         } else {
             System.out.println("Game complete");
         }
+    }
+
+    public static void resetLevel(){
+        LevelScene.createNextLevel();
+        currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
     }
 
     public static void onDestroy() {

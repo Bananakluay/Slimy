@@ -17,12 +17,12 @@ public class InputImage {
         try {
             img = ImageIO.read(new File(file));
 
-            if(img == null) 
-                System.out.println(file +" not found");
-            else
-                System.out.println("GET Img : "+file + " Success");
+            // if(img == null) 
+            //     System.out.println(file +" not found");
+            // else
+            //     System.out.println("GET Img : "+file + " Success");
         } catch (IOException e) {
-            System.out.println("GET Img : "+file + " fail");
+            // System.out.println("GET Img : "+file + " fail");
             e.printStackTrace();
         }
         return img;

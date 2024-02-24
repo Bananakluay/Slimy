@@ -4,7 +4,7 @@ import dataStructure.AssetPool;
 import dataStructure.Transform;
 import utils.Vec2;
 
-import static Prefabs.Player.PlayerStatus.IDLE;
+import static Prefabs.Player.AnimationStatus.IDLE;
 import static utils.Constants.Game.*;
 import static utils.Constants.Layer.PLAYER_LAYER;
 import static utils.Constants.Player.*;
@@ -14,6 +14,7 @@ import java.util.List;
 
 import Prefabs.Player.Player;
 import components.Animation;
+import components.Bounds;
 import components.Controller;
 
 public class TinySlime extends Player{
@@ -48,11 +49,12 @@ public class TinySlime extends Player{
     @Override
     public void update() {
         super.update();
+
         if(!this.getComponent(Controller.class).isActive()){
-            status = IDLE;
+            animationStatus = IDLE;
         }
 
-        switch (status) {
+        switch (animationStatus) {
             case IDLE: 
                 animation.play("IDLE");
                 break;

@@ -20,8 +20,7 @@ public class Player extends Entity {
     private boolean isAlive = true;
     private boolean isCurrentPlayer = false;
 
-    protected PlayerStatus status = PlayerStatus.IDLE;
-    protected PlayerStatus currenStatus = PlayerStatus.IDLE;
+    protected AnimationStatus animationStatus = AnimationStatus.IDLE;
 
     public Player(String name, Transform transform, int zIndex) {
         super(name, transform, zIndex);
@@ -58,8 +57,11 @@ public class Player extends Entity {
         this.getComponent(Controller.class).setMobility(walkSpeed, jumpForce);
     }
 
-    public void setStatus(PlayerStatus status) {
-        this.status = status;
+    public void setStatus(boolean status){
+        this.isAlive = status;
+    }
+    public void setAnimation(AnimationStatus status) {
+        this.animationStatus = status;
     }
 
     public Vec2 getDirection() {
@@ -68,4 +70,14 @@ public class Player extends Entity {
         return new Vec2(directionX, directionY);
     }
 
+    public void die(){
+        if(isAlive)
+            PlayerManager.switchPlayer();
+        this.isAlive = false;
+        this.animationStatus = AnimationStatus.DEAD;
+    }
+
+    public boolean isAlive(){
+        return isAlive;
+    }
 }

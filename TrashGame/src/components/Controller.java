@@ -7,7 +7,7 @@ import utils.Vec2;
 import java.awt.event.KeyEvent;
 
 import Prefabs.Player.Player;
-import static Prefabs.Player.PlayerStatus.*;
+import static Prefabs.Player.AnimationStatus.*;
 
 import static utils.Constants.Player.*;
 
@@ -44,18 +44,18 @@ public class Controller extends Component{
         //Walk
         if(Game.KI.isHeld(KeyEvent.VK_A)){
             rigidbody.moveX(-walkSpeed);
-            player.setStatus(MOVING);
+            player.setAnimation(MOVING);
 
         }
             
         else if(Game.KI.isHeld(KeyEvent.VK_D)){
             rigidbody.moveX(walkSpeed);
-            player.setStatus(MOVING);
+            player.setAnimation(MOVING);
 
         }
         else{
             rigidbody.moveX(0);
-            player.setStatus(IDLE);
+            player.setAnimation(IDLE);
 
         }
 
@@ -66,9 +66,9 @@ public class Controller extends Component{
 
         if(!isOnFloor()){
             if(rigidbody.velocity.y<0)
-                player.setStatus(JUMPING);
+                player.setAnimation(JUMPING);
             else if(rigidbody.velocity.y>0){
-                player.setStatus(FALLING);
+                player.setAnimation(FALLING);
             }    
         }
         

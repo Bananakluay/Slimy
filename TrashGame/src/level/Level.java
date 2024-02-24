@@ -32,7 +32,6 @@ public class Level {
 
 	private int[][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
 
-	private LevelScene levelScene;
 
 	private BufferedImage imgLvlData;
 	private List<BufferedImage> tileSet;
@@ -40,9 +39,8 @@ public class Level {
 
 	private Random rand;
 
-	public Level(String imgLvlDataFile, LevelScene levelScene) {
+	public Level(String imgLvlDataFile) {
 		this.imgLvlDataFile = imgLvlDataFile;
-		this.levelScene = levelScene;
 		rand = new Random();
 		init();
 
@@ -58,7 +56,7 @@ public class Level {
 		loadTileBlock();
 		loadPlayer();
 		loadDoor();
-		// loadTrap();
+		loadTrap();
 	}
 
 	public void generateLevelData() {
@@ -90,8 +88,8 @@ public class Level {
 						tileSet.get(value), new Vec2(col * TILES_SIZE, row * TILES_SIZE),
 						grassesTileSet.get(value), posGrasses,
 						r == 1);
-				levelScene.addEntity(tileBlock);
-				levelScene.renderer.submit(tileBlock);
+				LevelScene.getEntityManager().addEntity(tileBlock);
+				LevelScene.getRenderer().submit(tileBlock);
 
 			}
 		}
@@ -99,17 +97,16 @@ public class Level {
 
 	public void loadPlayer() {
 		// temp position
-		PlayerManager.spawnSlime("Blue", TILES_SIZE * 4, TILES_SIZE * 10, SlimeType.LARGE_SLIME);
-		levelScene.addEntity(PlayerManager.blueLargeSlime);
-		levelScene.renderer.submit(PlayerManager.blueLargeSlime);
+		LevelScene.getPlayerManager().spawnSlime("Blue", TILES_SIZE * 4, TILES_SIZE * 10, SlimeType.LARGE_SLIME);
+
 	}
 
 	public void loadDoor() {
 		// temp position
 		Door Door = new Door("Exits Door",
 				new Transform(new Vec2(TILES_SIZE * 15, TILES_SIZE * 11), new Vec2(TILES_SIZE, TILES_SIZE)));
-		levelScene.addEntity(Door);
-		levelScene.renderer.submit(Door);
+		LevelScene.getEntityManager().addEntity(Door);
+		LevelScene.getRenderer().submit(Door);
 
 		// for(int row=0;row<imgLvlData.getHeight();row++){
 		// for(int col=0;col<imgLvlData.getWidth();col++){
@@ -127,8 +124,8 @@ public class Level {
 
 	public void loadTrap() {
 		Spike spike = new Spike("spike", TILES_SIZE * 10, TILES_SIZE * 12);
-		levelScene.addEntity(spike);
-		levelScene.renderer.submit(spike);
+		LevelScene.getEntityManager().addEntity(spike);
+		LevelScene.getRenderer().submit(spike);
 	}
 
 	// TODO public void loadPlayer(){}

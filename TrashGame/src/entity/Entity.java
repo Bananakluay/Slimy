@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import components.Component;
 import dataStructure.Transform;
+import utils.Vec2;
 
 public class Entity {
 
@@ -48,6 +49,7 @@ public class Entity {
     public void addComponent(Component c){
         this.components.add(c);
         c.entity = this;
+        c.generateId();
     }
 
     public <T extends Component> void removeCompnent(Class<T> componentClass){
@@ -89,11 +91,16 @@ public class Entity {
     
     public int getId(){return uid;}
 
+    public int getZindex(){return zIndex;}
+
     public List<Component> getAllComponents() {return components;}
 
     public String getName() {return name;}
 
     public Transform getTransform() {return transform;}
+
+    public Vec2 getPosition(){return transform.position;}
+    public Vec2 getScale(){return transform.scale;}
 
     public EntityType getType(){return this.type;}
 

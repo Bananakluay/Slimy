@@ -1,11 +1,6 @@
 package Scene;
 
-import Prefabs.Player.PlayerManager;
 import level.LevelManager;
-
-import java.util.logging.Level;
-
-import Prefabs.Spike;
 
 public class SceneManager {
     private static SceneManager sceneManager = null;
@@ -26,7 +21,10 @@ public class SceneManager {
         changeScene(Scenes.LEVEL_SCENE);
     }
 
-    public void changeScene(Scenes scene) {
+    public static void changeScene(Scenes scene) {
+        if(currentScene != null){
+            currentScene.onDestroy();
+        }
         switch (scene) {
             case MENU_SCENE:
                 System.out.println("Menu Scene");
@@ -35,10 +33,6 @@ public class SceneManager {
             case LEVEL_SCENE:
                 System.out.println("LEVEL Scene");
                 currentScene = new LevelScene();
-                break;
-            case TEST_SCENE:
-                System.out.println("TEST Scene");
-                currentScene = new TestScene();
                 break;
             default:
                 break;
@@ -49,27 +43,10 @@ public class SceneManager {
         return currentScene;
     }
 
-    public static void NextScene() {
-        currentScene.onDestroy();
-        currentScene = new LevelScene();
-        PlayerManager.get(currentScene);
-    }
+    // public static void NextScene() {
+    //     currentScene.onDestroy();
+    //     currentScene = new LevelScene();
+    //     PlayerManager.get(currentScene);
+    // }
 
-    public static void restart() {
-        if (Spike.died_blue) {
-            LevelManager.onDestroy();
-            PlayerManager.onDestroy();
-            currentScene = new LevelScene();
-            PlayerManager.get(currentScene);
-            Spike.died_blue = false;
-
-        } else if (Spike.died_green && Spike.died_yellow) {
-            LevelManager.onDestroy();
-            PlayerManager.onDestroy();
-            currentScene = new LevelScene();
-            PlayerManager.get(currentScene);
-            Spike.died_yellow = false;
-            Spike.died_green = false;
-        }
-    }
 }

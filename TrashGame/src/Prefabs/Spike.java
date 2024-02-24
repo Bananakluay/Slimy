@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import Interaction.Behavior;
+import Prefabs.Player.Player;
 import components.Detector;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
@@ -18,9 +19,6 @@ import utils.Vec2;
 
 public class Spike extends Entity implements Behavior {
     BufferedImage img;
-    public static boolean died_green = false;
-    public static boolean died_yellow = false;
-    public static boolean died_blue = false;
 
     public Spike(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE / 2)), TRAP);
@@ -43,14 +41,8 @@ public class Spike extends Entity implements Behavior {
 
     @Override
     public void activateOn(Entity entity) {
-
-        if (entity.getName() == "Green")
-            died_green = true;
-        else if (entity.getName() == "Yellow")
-            died_yellow = true;
-        else if (entity.getName() == "Blue") {
-            //System.out.println(entity.getName());
-            died_blue = true;
+        if(entity instanceof Player player){
+            player.die();
         }
 
     }

@@ -1,16 +1,14 @@
 package components;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import Interaction.Behavior;
-import Scene.SceneManager;
+import Scene.LevelScene;
 import entity.Entity;
 import entity.EntityType;
 
@@ -33,7 +31,7 @@ public class Detector extends Component implements Behavior{
 
     @Override
     public void update() {
-        for(Entity entity : SceneManager.getCurrentScene().getEntitiesWithComponent(Bounds.class)){
+        for(Entity entity : LevelScene.getEntityManager().getEntitiesWithComponent(Bounds.class)){
 
             if (entity.equals(this.entity) || !types.contains(entity.getType())) {
                 continue; 
@@ -44,35 +42,40 @@ public class Detector extends Component implements Behavior{
             boolean intersectedX = bound.intersects(bounds.boundsX);
             boolean intersectedY = bound.intersects(bounds.boundsY);
 
+            //check intesect
             if (intersectedX || intersectedY) {
                 if(!interaction.containsKey(entity.getId())){
                     interaction.put(entity.getId(), entity);
+                    System.out.println(entity.getName()+" in");
                 }
 
             } 
             else {
                 if(interaction.containsKey(entity.getId())){
                     interaction.remove(entity.getId());
+                    System.out.println(entity.getName() + " out");
                 }
             }
 
             if(!interaction.isEmpty()){
-                behavior.activateOn(entity);
+                if(entity == interaction.get(entity.getId()))
+                    behavior.activateOn(entity);
             }
             else{
                 behavior.activateOff();
             }
         }
+
     }
 
     @Override
     public void activateOn(Entity entity){
-        System.out.println(this.entity.getName() + " founds "+entity.getName());
     }
     @Override
     public void activateOff(){
         System.out.println("activeOff");
     }
+
 
     public void setBehavior(Behavior behavior) {
         this.behavior = behavior;
