@@ -1,5 +1,8 @@
 package dataStructure;
 
+import file.*;
+
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ public class AssetPool {
     @SuppressWarnings("unchecked")
     public static Map<String, Sprite> sprites = new HashMap();
     public static Map<String, BufferedImage> bufferImage = new HashMap<>();
+    private static final Map<String, Font> fonts = new HashMap<>();
     @SuppressWarnings("unchecked")
     public static Map<String, List<BufferedImage>> bufferImageList = new HashMap();
     //TODO static Map(String, Level) levelsData = new HashMap(); 
@@ -70,6 +74,33 @@ public class AssetPool {
             System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
             System.exit(-1);
         }
+    }
+
+    public static Font getFont(String resource, int size)
+    {
+        Font font;
+
+        if (!fonts.containsKey(resource))
+        {
+            font = FileLoader.loadFont(resource, size);
+            fonts.put(resource, font);
+        }
+        else
+        {
+            if (fonts.get(resource).getSize() != size)
+            {
+                font = FileLoader.loadFont(resource, size);
+                fonts.put(resource, font);
+            }
+
+            for (Map.Entry<String, Font> fontSet : fonts.entrySet())
+            {
+                if (fontSet.getKey().equals(resource) && fontSet.getValue().getSize() == size)
+                    return fontSet.getValue();
+            }
+        }
+
+        return null;
     }
 
 

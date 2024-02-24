@@ -4,5 +4,9 @@
         "TrashGame\\src",
         "TrashGame/res",
         "TrashGame/src"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "TrashGame\\src\\lib\\joml-1.10.5.jar"
     ]
 }

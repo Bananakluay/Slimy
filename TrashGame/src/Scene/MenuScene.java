@@ -1,31 +1,51 @@
 package Scene;
 
-import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-
-import Prefabs.Player.PlayerManager;
-import entity.Entity;
-import level.LevelManager;
-import main.Game;
+import static utils.Constants.Game.GAME_WIDTH;
 
 import java.awt.Color;
-import static utils.Constants.Game.*;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-public class MenuScene extends Scene{
+import org.joml.Vector2i;
 
-    public MenuScene(){
-        ready();
-    }
+import Prefabs.Player.PlayerManager;
+import dataStructure.AssetPool;
+import entity.Entity;
+import file.FileLoader;
+import level.LevelManager;
+import main.Game;
+import main.Window;
+import ui.ClickListener;
+import ui.GuiButton;
+import ui.GuiLayer;
+import ui.GuiText;
+
+public class MenuScene extends Scene{  
+    private BufferedImage image;
+
     @Override
     public void init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+        
+        GuiLayer.getInstance().addGuiComponent(new GuiButton(
+            "Button", 
+            new Vector2i(100, 100),
+            new Vector2i(230, 48), 
+            "TrashGame/res/something/button_layout.png", 
+            () -> SceneManager.changeScene(Scenes.LEVEL_SCENE)
+            
+            )
+        );
+    }
+
+    public BufferedImage loadResources() {
+        return AssetPool.getBufferedImage("TrashGame/res/something/button layout.png", 48, 48);
     }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.white);
-        g.drawString("MENU", GAME_WIDTH / 2, 200);
+        init();
     }
 
     @Override
