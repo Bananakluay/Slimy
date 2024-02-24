@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import Behavior.Behavior;
+import Interaction.Behavior;
 import components.Detector;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
@@ -38,13 +38,14 @@ public class Door extends Entity implements Behavior {
     }
 
     @Override
-    public void activate(Entity entity) {
-        // what to do
+    public void activateOn(Entity entity) {
         System.out.println("This is door Exits");
         LevelManager.loadNextLevels();
         SceneManager.NextScene();
     }
-
+    
+    @Override
+    public void activateOff() {}
     @Override
     public void draw(Graphics g) {
         super.draw(g);

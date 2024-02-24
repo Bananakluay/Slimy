@@ -87,10 +87,16 @@ public class PlayerManager {
         if (status == MERGED) {
 
             // create
-            spawnSlime(GREEN, blueLargeSlime.getTransform().position.x, blueLargeSlime.getTransform().position.y,
-                    TINY_SLIME);
-            spawnSlime(YELLOW, greenTinySlime.getTransform().position.x + greenTinySlime.getTransform().scale.x,
-                    blueLargeSlime.getTransform().position.y, TINY_SLIME);
+            spawnSlime(
+                GREEN, 
+                blueLargeSlime.getTransform().position.x, 
+                blueLargeSlime.getTransform().position.y,
+                TINY_SLIME);
+            spawnSlime(
+                YELLOW, 
+                greenTinySlime.getTransform().position.x + greenTinySlime.getTransform().scale.x,
+                blueLargeSlime.getTransform().position.y, 
+                TINY_SLIME);
 
             greenTinySlime.getComponent(Controller.class).setActive(true);
             yellowTinySlime.getComponent(Controller.class).setActive(false);

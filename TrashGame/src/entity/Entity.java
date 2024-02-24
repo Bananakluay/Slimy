@@ -21,6 +21,7 @@ public class Entity {
         this.transform = transform;
         this.components = new ArrayList<>();
         this.zIndex = zIndex;
+        generateId();
     }
     
     public void update(){
@@ -86,6 +87,7 @@ public class Entity {
             this.uid = ID_COUNTER++;
     }
     
+    public int getId(){return uid;}
 
     public List<Component> getAllComponents() {return components;}
 

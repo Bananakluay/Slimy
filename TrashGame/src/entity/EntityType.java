@@ -4,5 +4,8 @@ public enum EntityType {
     PLAYER,
     BOX,
     TILE,
+    GATE,
+    BUTTON,
+    TRAP,
     NONE
 }

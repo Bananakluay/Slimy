@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import Behavior.Behavior;
+import Interaction.Behavior;
 import components.Detector;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
@@ -42,7 +42,7 @@ public class Spike extends Entity implements Behavior {
     }
 
     @Override
-    public void activate(Entity entity) {
+    public void activateOn(Entity entity) {
 
         if (entity.getName() == "Green")
             died_green = true;
@@ -56,6 +56,9 @@ public class Spike extends Entity implements Behavior {
     }
 
     @Override
+    public void activateOff() {}
+    
+    @Override
     public void draw(Graphics g) {
         super.draw(g);
         g.drawImage(img,
@@ -65,5 +68,7 @@ public class Spike extends Entity implements Behavior {
                 (int) (TILES_SIZE),
                 null);
     }
+
+    
 
 }

@@ -1,6 +1,7 @@
 package components;
 
 import static entity.EntityType.BOX;
+import static entity.EntityType.GATE;
 import static entity.EntityType.PLAYER;
 import static utils.Constants.Game.SCALE;
 
@@ -79,12 +80,20 @@ public class Bounds extends Component {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    public void setBound(float x, float y, float w, float h){
+        entity.getTransform().position.x = x;
+        entity.getTransform().position.y = y;
+        entity.getTransform().scale.x = w;
+        entity.getTransform().scale.y = h;
+
+    }
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         if(DEBUG){
             g2d.setColor(color);
-            if(entity.getType() == BOX)
+            if(true)
                 g2d.fillRect(
                     (int)entity.getTransform().position.x, 
                     (int)entity.getTransform().position.y, 
