@@ -20,7 +20,7 @@ public class LargeSlime extends Player{
     private List<BufferedImage> frames;
 
     public LargeSlime(String name, float x, float y) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(1.3f*TILES_SIZE,1.3f*TILES_SIZE)), PLAYER_LAYER);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE,TILES_SIZE*0.9f)), PLAYER_LAYER);
         init();
 
     }
@@ -28,15 +28,16 @@ public class LargeSlime extends Player{
     private void init(){
         this.setMass(30);
         this.setFriction(2);
-        this.setMobility(WALK_SPEED*0.8f, JUMP_FORCE*0.8f);
+        this.setMobility(WALK_SPEED*0.9f, JUMP_FORCE*0.7f);
 
         
         //animation
         frames = AssetPool.getBufferedImageList("TrashGame/res/assets/Character/BlueSlime.png", 16, 16);
         animation = this.getComponent(Animation.class);
-        animation.setSize(1.3f*TILES_SIZE, 1.3f*TILES_SIZE);
-        animation.setScale(2);
-        animation.setOffset((int)(-5*SCALE), (int)(-10*SCALE));
+        animation.setSize(TILES_SIZE, TILES_SIZE);
+        animation.setScale(2f);
+        animation.setOffset((int)(-4*SCALE), (int)(-9*SCALE + 1)); // 3 = 28
+        System.out.println((int)(-9*SCALE + 1));
         animation.addAnimation("IDLE", 100, frames.subList(0, 2));
         animation.addAnimation("WALK", 80, frames.subList(8, 10));
         animation.addAnimation("JUMP", 100, frames.subList(18, 19));

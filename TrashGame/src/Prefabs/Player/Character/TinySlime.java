@@ -14,7 +14,6 @@ import java.util.List;
 
 import Prefabs.Player.Player;
 import components.Animation;
-import components.Bounds;
 import components.Controller;
 
 public class TinySlime extends Player{
@@ -24,21 +23,21 @@ public class TinySlime extends Player{
     private List<BufferedImage> frames;
     private String file;
     public TinySlime(String name, float x, float y, String file) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE,TILES_SIZE*0.7f)), PLAYER_LAYER);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE*0.8f,TILES_SIZE/2)), PLAYER_LAYER);
         this.file = file;
         init();
     }
     
     private void init(){
-        this.setMass(5f);
-        this.setFriction(1.3f);
-        this.setMobility(WALK_SPEED, JUMP_FORCE);
+        this.setMass(1.5f*SCALE);
+        this.setFriction(0.4f*SCALE);
+        this.setMobility(WALK_SPEED*0.9f, JUMP_FORCE);
 
         frames = AssetPool.getBufferedImageList(file, 16, 16);
         animation = this.getComponent(Animation.class);
         animation.setSize(TILES_SIZE,TILES_SIZE);
-        animation.setScale(2);
-        animation.setOffset((int)(-4*SCALE), (int)(-10*SCALE)); //3.75
+        animation.setScale(1.6f);
+        animation.setOffset((int)(-4*SCALE), (int)(-11*SCALE + 1)); //3.75
         animation.addAnimation("IDLE", 100, frames.subList(0, 2));
         animation.addAnimation("WALK", 20, frames.subList(8, 10));
         animation.addAnimation("JUMP", 100, frames.subList(18, 19));

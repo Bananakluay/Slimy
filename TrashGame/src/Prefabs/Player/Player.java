@@ -6,6 +6,9 @@ import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
 import utils.Vec2;
+
+import static utils.Constants.Game.SCALE;
+
 import components.Animation;
 import components.Bounds;
 import components.Controller;
@@ -29,7 +32,7 @@ public class Player extends Entity {
         type = EntityType.PLAYER;
         direction = new Vec2(0, 0);
         addComponent(new Bounds(null));
-        addComponent(new Rigidbody(5f, 1.5f));
+        addComponent(new Rigidbody(1.5f*SCALE, 0.5f*SCALE));
         addComponent(new Physic2D());
         addComponent(new Controller());
         addComponent(new Animation());
