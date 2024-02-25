@@ -6,8 +6,7 @@ import static utils.Constants.Layer.TRAP;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 import Interaction.Behavior;
 import Prefabs.Player.Player;

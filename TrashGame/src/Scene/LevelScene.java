@@ -10,6 +10,7 @@ import Prefabs.Objects.Button;
 import Prefabs.Objects.Gate;
 import Prefabs.Player.PlayerManager;
 import Prefabs.Trap.FakeButton;
+import Prefabs.Trap.Spike;
 import entity.Entity;
 import entity.EntityManager;
 
@@ -45,6 +46,8 @@ public class LevelScene extends Scene {
         FakeButton fb = new FakeButton(TILES_SIZE*8, TILES_SIZE*12);
         entitiyManager.addEntity(fb);
 
+        Spike sp = new Spike("spike", TILES_SIZE*10, TILES_SIZE*12);
+        entitiyManager.addEntity(sp);
         entitiyManager.ready();
         
     }

@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javax.sound.midi.Soundbank;
 
 import Prefabs.Player.Character.*;
 import Scene.LevelScene;
@@ -23,7 +26,7 @@ public class PlayerManager {
 
     private static Map<String, Player> slimes;
     private static SlimeMode mode = SINGLE;
-
+    private boolean isReseting = false;
     public PlayerManager() {
         this.slimes = new HashMap<>();
         this.mode = SINGLE;
@@ -44,9 +47,7 @@ public class PlayerManager {
             switchPlayer();
         }
         // System.out.println(isDead());
-        //checkStatus
-        resetIfDead();
-        
+        //checkStatus        
     }
 
     public void spawnSlime(String name, float x, float y, SlimeType type) {
@@ -136,37 +137,43 @@ public class PlayerManager {
     public static void switchPlayer() {
         if (mode == SINGLE)
             return;
-        if(!slimes.get(GREEN).isAlive() || !slimes.get(YELLOW).isAlive())
-            return;
-
+      
         Player green = slimes.get(GREEN);
         Player yellow = slimes.get(YELLOW);
 
-        if (green.isActive()) {
+        if (green.isActive() && yellow.isAlive()) {
             green.setActive(false);
             yellow.setActive(true);
-        } else if (yellow.isActive()) {
+        } else if (yellow.isActive() && green.isAlive()) {
             green.setActive(true);
             yellow.setActive(false);
+        }else{
+            green.setActive(false);
+            yellow.setActive(false);
+
         }
+
 
     }
     
-    private void resetIfDead() {
+    public static void resetIfDead() {
         Player blue = slimes.get(BLUE);
         Player green = slimes.get(GREEN);
         Player yellow = slimes.get(YELLOW);
-    
+
+        Timer Timer = new Timer();
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    LevelManager.resetLevel();}
+            };
+
         if (blue != null && !blue.isAlive()) {
-            resetLevel();
-            return;
-        } else if (green != null && yellow != null && !green.isAlive() && !yellow.isAlive()) {
-            // Reset
-            resetLevel();
-            return;
+            Timer.schedule(timerTask, 2000);
+        }else if(green != null && yellow != null && !green.isAlive() && !yellow.isAlive()){
+            Timer.schedule(timerTask, 2000);
         }
+        
     }
-    public void resetLevel(){
-        LevelManager.resetLevel();
-    }
+
 }

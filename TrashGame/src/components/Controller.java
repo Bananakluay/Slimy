@@ -58,7 +58,8 @@ public class Controller extends Component{
         }
         else{
             rigidbody.moveX(0);
-            player.setAnimation(IDLE);
+            if(player.isAlive())
+                player.setAnimation(IDLE);
 
         }
 

@@ -63,11 +63,15 @@ public class Player extends Entity {
     }
 
     public void die(){
-        if(isAlive && isActive())
+        if(isAlive && isActive()){
             PlayerManager.switchPlayer();
-        this.isAlive = false;
+            this.isAlive = false;
+            this.setActive(false);
+            PlayerManager.resetIfDead();
+        }
         this.animationStatus = AnimationStatus.DEAD;
     }
+
     public void setDirectionX(float x){
         direction.x = x;
     }
