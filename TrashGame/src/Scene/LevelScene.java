@@ -5,11 +5,11 @@ import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Graphics;
 
-import Prefabs.Box;
-import Prefabs.Button;
-import Prefabs.Gate;
+import Prefabs.Objects.Box;
+import Prefabs.Objects.Button;
+import Prefabs.Objects.Gate;
 import Prefabs.Player.PlayerManager;
-
+import Prefabs.Trap.FakeButton;
 import entity.Entity;
 import entity.EntityManager;
 
@@ -20,7 +20,6 @@ public class LevelScene extends Scene {
     private static PlayerManager playerManager;
 
     private static EntityManager entitiyManager;
-
     public LevelScene() {
         entitiyManager = new EntityManager();
         playerManager = new PlayerManager();
@@ -30,18 +29,21 @@ public class LevelScene extends Scene {
     @Override
     public void init() {
         loadLevels();
-        Button b = new Button("Button", TILES_SIZE*8, TILES_SIZE*12);
-        entitiyManager.addEntity(b);
-        Button b2 = new Button("Button", TILES_SIZE*5, TILES_SIZE*12);
-        entitiyManager.addEntity(b2);
+        // Button b = new Button("Button", TILES_SIZE*8, TILES_SIZE*12);
+        // entitiyManager.addEntity(b);
+        // Button b2 = new Button("Button", TILES_SIZE*5, TILES_SIZE*12);
+        // entitiyManager.addEntity(b2);
 
-        Gate g = new Gate("Gate", TILES_SIZE*10, TILES_SIZE*11);
-        entitiyManager.addEntity(g);
-        g.addListener(b);
-        g.addListener(b2);
+        // Gate g = new Gate("Gate", TILES_SIZE*10, TILES_SIZE*11);
+        // entitiyManager.addEntity(g);
+        // g.addListener(b);
+        // g.addListener(b2);
 
         Box box = new Box("box", TILES_SIZE*4, TILES_SIZE*2, TILES_SIZE, TILES_SIZE, null, 3f*SCALE, 0.67f*SCALE);
         entitiyManager.addEntity(box);
+
+        FakeButton fb = new FakeButton(TILES_SIZE*8, TILES_SIZE*12);
+        entitiyManager.addEntity(fb);
 
         entitiyManager.ready();
         
@@ -49,7 +51,6 @@ public class LevelScene extends Scene {
 
     @Override
     public void update() {
-        System.out.println(entitiyManager.getAllEntities().size());
         playerManager.update();
         entitiyManager.updateEntities();
         // System.out.println("Entity : " + entitiyManager.getAllEntities().size() +" Renderer : " +renderer.size(PLAYER_LAYER));

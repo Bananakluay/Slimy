@@ -7,7 +7,11 @@ import entity.Entity;
 import entity.EntityType;
 import utils.Vec2;
 
+import static entity.EntityType.PLAYER;
+import static entity.EntityType.TILE;
 import static utils.Constants.Game.SCALE;
+
+import java.util.List;
 
 import components.Animation;
 import components.Bounds;
@@ -31,7 +35,7 @@ public class Player extends Entity {
     private void init() {
         type = EntityType.PLAYER;
         direction = new Vec2(0, 0);
-        addComponent(new Bounds(null));
+        addComponent(new Bounds(null,List.of(PLAYER)));
         addComponent(new Rigidbody(1.5f*SCALE, 0.5f*SCALE));
         addComponent(new Physic2D());
         addComponent(new Controller());

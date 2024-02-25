@@ -17,6 +17,7 @@ public class LevelManager {
 
     private static int lvlindex = 0;
 
+    public static boolean isGameOver = false;
     private LevelManager() {
         init();
     }

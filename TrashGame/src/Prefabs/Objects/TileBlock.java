@@ -1,12 +1,14 @@
-package Prefabs;
+package Prefabs.Objects;
 
 
 
+import static entity.EntityType.PLAYER;
 import static utils.Constants.Game.TILES_SIZE;
 import static utils.Constants.Layer.TILEB_LAYER;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import components.Bounds;
 import dataStructure.Transform;
@@ -30,7 +32,7 @@ public class TileBlock extends Entity{
     }
 
     private void init(){
-        addComponent(new Bounds(null));
+        addComponent(new Bounds(null,null));
     }
     
     @Override

@@ -1,4 +1,4 @@
-package Prefabs;
+package Prefabs.Objects;
 
 
 import java.awt.Color;
@@ -15,7 +15,7 @@ public class Box extends Entity{
     public Box(String name,float x, float y, float w, float h,Color color,float mass, float friction){
         super(name, new Transform(new Vec2(x, y), new Vec2(w, h)), 2);
         this.type = EntityType.BOX;
-        this.addComponent(new Bounds(color));
+        this.addComponent(new Bounds(color,null));
         this.addComponent(new Physic2D());
         this.addComponent(new Rigidbody(mass, friction));
 

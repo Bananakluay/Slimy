@@ -1,4 +1,4 @@
-package Prefabs;
+package Prefabs.Objects;
 
 import static utils.Constants.Game.TILES_SIZE;
 
@@ -28,7 +28,7 @@ public class Gate extends Entity{
         type = EntityType.GATE;
         buttons = new ArrayList<>();
         img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/Gate.png", 16, 32);
-        addComponent(new Bounds(Color.DARK_GRAY));
+        addComponent(new Bounds(Color.DARK_GRAY,null));
     }
 
     @Override

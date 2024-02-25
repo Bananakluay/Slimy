@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import Prefabs.Spike;
-import Prefabs.TileBlock;
 import Prefabs.Exits.Door;
+import Prefabs.Objects.TileBlock;
 import Prefabs.Player.PlayerManager;
 import Prefabs.Player.SlimeType;
+import Prefabs.Trap.Spike;
 import Scene.LevelScene;
 import dataStructure.AssetPool;
 import dataStructure.Transform;

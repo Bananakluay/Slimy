@@ -1,4 +1,4 @@
-package Prefabs;
+package Prefabs.Objects;
 
 import static entity.EntityType.NONE;
 import static utils.Constants.Game.TILES_SIZE;

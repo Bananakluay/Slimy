@@ -3,14 +3,13 @@ package components;
 import physics.Collision;
 import utils.Vec2;
 
+import static entity.EntityType.PLAYER;
 import static physics.CollisionType.*;
-import static utils.Constants.Game.SCALE;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dataStructure.Transform;
-import entity.EntityType;
 
 public class Rigidbody extends Component {
 
@@ -79,6 +78,8 @@ public class Rigidbody extends Component {
         frictionOnX();
         //net force
         if(!forces.isEmpty()){
+            if(this.entity.getType() == PLAYER){
+            }
             for(Vec2 v : forces){
                 velocity.x += v.x;
                 velocity.y += v.y;
