@@ -1,7 +1,5 @@
 package components;
 
-import static entity.EntityType.BOX;
-import static entity.EntityType.GATE;
 import static entity.EntityType.PLAYER;
 import static utils.Constants.Game.SCALE;
 
@@ -25,7 +23,7 @@ public class Bounds extends Component {
     public Rectangle2D.Float boundsY = new Rectangle2D.Float();
 
     public Rectangle2D.Float interectBounds = new Rectangle2D.Float();
-    public float interectBoundsoffset = 2*SCALE;
+    public float interectBoundsoffset = 10*SCALE;
     private boolean DEBUG = false;
 
     public Bounds(Color color){

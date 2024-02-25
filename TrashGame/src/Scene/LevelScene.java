@@ -1,5 +1,6 @@
 package Scene;
 
+import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Graphics;
@@ -39,7 +40,7 @@ public class LevelScene extends Scene {
         g.addListener(b);
         g.addListener(b2);
 
-        Box box = new Box("box", TILES_SIZE*4, TILES_SIZE*2, TILES_SIZE, TILES_SIZE, null, 10, 2, true);
+        Box box = new Box("box", TILES_SIZE*4, TILES_SIZE*2, TILES_SIZE, TILES_SIZE, null, 3f*SCALE, 0.67f*SCALE);
         entitiyManager.addEntity(box);
 
         entitiyManager.ready();

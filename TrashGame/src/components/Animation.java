@@ -19,7 +19,7 @@ public class Animation extends Component {
     private String currentAnimation;
     private float animationTime;
     private int ticks, index;
-    private int scale = 1;
+    private float scale = 1f;
 
     private float width, height;
     private int offsetX = 0, offsetY = 0;
@@ -96,10 +96,10 @@ public class Animation extends Component {
     public void draw(Graphics g) {
         if(!isAnimating())
             return;
-        int x = (int)entity.getTransform().position.x + offsetX*scale;
-        int y = (int)entity.getTransform().position.y + offsetY*scale;
-        int w = (int)width * scale;
-        int h = (int)height * scale;
+        int x = (int)(entity.getTransform().position.x + offsetX*scale);
+        int y = (int)(entity.getTransform().position.y + offsetY*scale);
+        int w = (int)(width * scale);
+        int h = (int)(height * scale);
         if(player.getDirection().x < 0)
             g.drawImage(animations.get(currentAnimation).frames.get(index),x + w, y, -w, h, null);
         else   
@@ -107,7 +107,7 @@ public class Animation extends Component {
 
     }
 
-    public void setScale(int scale){
+    public void setScale(float scale){
         this.scale =scale;
     }
 
