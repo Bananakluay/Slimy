@@ -68,10 +68,13 @@ public class Controller extends Component{
         }
 
         if(!isOnFloor()){
-            if(rigidbody.velocity.y<0)
+            if(rigidbody.velocity.y<0){
                 player.setAnimation(JUMPING);
+                player.setDirectionY(-1);
+            }
             else if(rigidbody.velocity.y>0){
                 player.setAnimation(FALLING);
+                player.setDirectionY(1);
             }    
         }
         
