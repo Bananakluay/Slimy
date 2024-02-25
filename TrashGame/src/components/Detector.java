@@ -1,5 +1,7 @@
 package components;
 
+import static utils.Constants.Player.BLUE;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -47,8 +49,8 @@ public class Detector extends Component implements Behavior{
 
             if (interaction.containsKey(entity.getId()) && !intersected) {
                 interaction.remove(entity.getId());
-                // System.out.println(entity.getName() + " out");
-                behavior.activateOff(); 
+                if(interaction.isEmpty())
+                    behavior.activateOff(); 
             } else if (intersected) {
                 if (!interaction.containsKey(entity.getId())) {
                     interaction.put(entity.getId(), entity);
@@ -56,15 +58,23 @@ public class Detector extends Component implements Behavior{
                     behavior.activateOn(entity);
                 }
             }
-
+      
             if (LevelScene.getEntityManager().getEntity(entity.getId()) == null) {
                 entitiesToRemove.add(entity);
             }  
+
+            for (Map.Entry<Integer, Entity> e :interaction.entrySet()) {
+                if (LevelScene.getEntityManager().getEntity(e.getKey()) == null) {
+                    entitiesToRemove.add(e.getValue());
+                } 
+            }
+            
         }
 
         for (Entity entityToRemove : entitiesToRemove) {
             interaction.remove(entityToRemove.getId());
         }
+        
 
     }
 

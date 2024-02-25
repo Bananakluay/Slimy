@@ -49,6 +49,7 @@ public class LevelScene extends Scene {
 
     @Override
     public void update() {
+        System.out.println(entitiyManager.getAllEntities().size());
         playerManager.update();
         entitiyManager.updateEntities();
         // System.out.println("Entity : " + entitiyManager.getAllEntities().size() +" Renderer : " +renderer.size(PLAYER_LAYER));

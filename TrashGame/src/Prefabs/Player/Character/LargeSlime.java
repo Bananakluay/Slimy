@@ -28,7 +28,7 @@ public class LargeSlime extends Player{
     private void init(){
         this.setMass(30);
         this.setFriction(2);
-        this.setMobility(WALK_SPEED*0.9f, JUMP_FORCE*0.7f);
+        this.setMobility(WALK_SPEED*0.9f, JUMP_FORCE*0.8f);
 
         
         //animation
