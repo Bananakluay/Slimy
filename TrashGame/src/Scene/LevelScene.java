@@ -29,19 +29,18 @@ public class LevelScene extends Scene {
     @Override
     public void init() {
         loadLevels();
-        // Button b = new Button("Button", TILES_SIZE*8, TILES_SIZE*12);
-        // entitiyManager.addEntity(b);
-        // Button b2 = new Button("Button", TILES_SIZE*5, TILES_SIZE*12);
-        // entitiyManager.addEntity(b2);
+        Button b = new Button("Button", TILES_SIZE*8, TILES_SIZE*12);
+        entitiyManager.addEntity(b);
+        Button b2 = new Button("Button", TILES_SIZE*5, TILES_SIZE*12);
+        entitiyManager.addEntity(b2);
 
-        // Gate g = new Gate("Gate", TILES_SIZE*10, TILES_SIZE*11);
-        // entitiyManager.addEntity(g);
-        // g.addListener(b);
-        // g.addListener(b2);
+        Gate g = new Gate("Gate", TILES_SIZE*10, TILES_SIZE*11);
+        entitiyManager.addEntity(g);
+        g.addListener(b);
+        g.addListener(b2);
 
-        // Box box = new Box("box", TILES_SIZE*4, TILES_SIZE*2, TILES_SIZE, TILES_SIZE, null, 10, 2, true);
-        // entitiyManager.addEntity(box);
-
+        Box box = new Box("box", TILES_SIZE*4, TILES_SIZE*2, TILES_SIZE, TILES_SIZE, null, 10, 2, true);
+        entitiyManager.addEntity(box);
 
         entitiyManager.ready();
         

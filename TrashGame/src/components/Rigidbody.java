@@ -1,7 +1,6 @@
 package components;
 
 import physics.Collision;
-import utils.MiniMath;
 import utils.Vec2;
 
 import static physics.CollisionType.*;

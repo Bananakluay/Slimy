@@ -26,7 +26,7 @@ public class Bounds extends Component {
 
     public Rectangle2D.Float interectBounds = new Rectangle2D.Float();
     public float interectBoundsoffset = 2*SCALE;
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
 
     public Bounds(Color color){
         if(color == null)

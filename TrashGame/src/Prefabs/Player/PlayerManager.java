@@ -90,13 +90,19 @@ public class PlayerManager {
         }
 
         //get position of Blue
-        Entity blueSlime = slimes.get(BLUE);
+        Player blueSlime = slimes.get(BLUE);
         float x = blueSlime.getTransform().position.x;
         float y = blueSlime.getTransform().position.y;
 
         //Spawn Green and Yellow
-        spawnSlime(GREEN, x, y, TINY_SLIME);
-        spawnSlime(YELLOW, x + blueSlime.getTransform().scale.x, y, TINY_SLIME);
+        if(blueSlime.getDirection().x > 0){
+            spawnSlime(YELLOW, x, y, TINY_SLIME);
+            spawnSlime(GREEN, x + blueSlime.getTransform().scale.x, y, TINY_SLIME);
+        }
+        else{
+            spawnSlime(GREEN, x, y, TINY_SLIME);
+            spawnSlime(YELLOW, x + blueSlime.getTransform().scale.x, y, TINY_SLIME);
+        }
 
         //Remove Blue
         removeSlime(BLUE);
@@ -128,7 +134,6 @@ public class PlayerManager {
     }
     
     public static void switchPlayer() {
-        
         if (mode == SINGLE)
             return;
         if(!slimes.get(GREEN).isAlive() || !slimes.get(YELLOW).isAlive())
