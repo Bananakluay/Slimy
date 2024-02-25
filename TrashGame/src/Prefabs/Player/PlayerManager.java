@@ -96,8 +96,8 @@ public class PlayerManager {
 
         //Spawn Green and Yellow
         if(blueSlime.getDirection().x > 0){
-            spawnSlime(YELLOW, x, y, TINY_SLIME);
-            spawnSlime(GREEN, x + blueSlime.getTransform().scale.x, y, TINY_SLIME);
+            spawnSlime(GREEN, x, y, TINY_SLIME);
+            spawnSlime(YELLOW, x - blueSlime.getTransform().scale.x, y, TINY_SLIME);
         }
         else{
             spawnSlime(GREEN, x, y, TINY_SLIME);

@@ -55,8 +55,8 @@ public class Level {
 		generateLevelData();
 		loadTileBlock();
 		loadPlayer();
-		loadDoor();
-		loadTrap();
+		// loadDoor();
+		// loadTrap();
 	}
 
 	public void generateLevelData() {

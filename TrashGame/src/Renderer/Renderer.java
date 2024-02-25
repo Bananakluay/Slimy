@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 import entity.Entity;
+import utils.Constants.Layer;
 
 public class Renderer {
 
-    Map<Integer, List<Entity>> layers = new HashMap<>();
+    public Map<Integer, List<Entity>> layers = new HashMap<>();
  
-    int lozIndex = Integer.MAX_VALUE; //0
-    int hizIndex = Integer.MIN_VALUE; //-99999999
     public void render(Graphics g){
+        int lozIndex = Integer.MAX_VALUE; //0
+        int hizIndex = Integer.MIN_VALUE; 
         // 0 5 3 2 11
         for(Integer i : layers.keySet()){
             if(i<lozIndex) 
@@ -22,16 +23,17 @@ public class Renderer {
             if(i>hizIndex) 
                 hizIndex = i;
         }
-        //lo = 0 hi = 11
-        int currentZIndex;
-        for(currentZIndex = lozIndex ; currentZIndex<=hizIndex;currentZIndex++){
-            if(layers.get(currentZIndex) == null){
-                currentZIndex++;
+    
+        int zIndex = lozIndex;
+        while (zIndex <= hizIndex) {
+            if(layers.get(zIndex) == null){
+                zIndex++;
                 continue;
             }
-            for(Entity entity : layers.get(currentZIndex)){
+            for(Entity entity : layers.get(zIndex)){
                 entity.draw(g);
             }
+            zIndex++;
         }
 
     }
@@ -58,7 +60,8 @@ public class Renderer {
 
     public void clear(){
         layers.clear();
-        lozIndex = Integer.MAX_VALUE;
-        hizIndex = Integer.MIN_VALUE;
     }
+
+ 
 }
+

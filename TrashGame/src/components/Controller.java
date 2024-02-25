@@ -45,12 +45,15 @@ public class Controller extends Component{
         if(Game.KI.isHeld(KeyEvent.VK_A)){
             rigidbody.moveX(-walkSpeed);
             player.setAnimation(MOVING);
+            player.setDirectionX(-1);
 
         }
             
         else if(Game.KI.isHeld(KeyEvent.VK_D)){
             rigidbody.moveX(walkSpeed);
             player.setAnimation(MOVING);
+            player.setDirectionX(1);
+
 
         }
         else{

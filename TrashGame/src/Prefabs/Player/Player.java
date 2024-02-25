@@ -18,9 +18,8 @@ public class Player extends Entity {
     Controller controller;
 
     private boolean isAlive = true;
-
+    private Vec2 direction;
     protected AnimationStatus animationStatus = AnimationStatus.IDLE;
-
     public Player(String name, Transform transform, int zIndex) {
         super(name, transform, zIndex);
         init();
@@ -28,6 +27,7 @@ public class Player extends Entity {
 
     private void init() {
         type = EntityType.PLAYER;
+        direction = new Vec2(0, 0);
         addComponent(new Bounds(null));
         addComponent(new Rigidbody(5f, 1.5f));
         addComponent(new Physic2D());
@@ -61,11 +61,14 @@ public class Player extends Entity {
         this.isAlive = false;
         this.animationStatus = AnimationStatus.DEAD;
     }
-
+    public void setDirectionX(float x){
+        direction.x = x;
+    }
+    public void setDirectionY(float y){
+        direction.y = y;
+    }
     public Vec2 getDirection() {
-        float directionX = Math.signum(this.getComponent(Rigidbody.class).velocity.x);
-        float directionY = Math.signum(this.getComponent(Rigidbody.class).velocity.y);
-        return new Vec2(directionX, directionY);
+        return direction;
     }
 
     public void setMass(float mass) {
