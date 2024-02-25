@@ -100,6 +100,7 @@ public class Entity {
     public Transform getTransform() {return transform;}
 
     public Vec2 getPosition(){return transform.position;}
+    
     public Vec2 getScale(){return transform.scale;}
 
     public EntityType getType(){return this.type;}
