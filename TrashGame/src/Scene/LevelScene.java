@@ -1,7 +1,6 @@
 package Scene;
 
 import static utils.Constants.Game.TILES_SIZE;
-import static utils.Constants.Layer.PLAYER_LAYER;
 
 import java.awt.Graphics;
 
@@ -44,9 +43,6 @@ public class LevelScene extends Scene {
         // entitiyManager.addEntity(box);
 
 
-        for (Entity entity : entitiyManager.getAllEntities()) {
-            renderer.submit(entity);
-        }
         entitiyManager.ready();
         
     }

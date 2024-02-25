@@ -30,7 +30,6 @@ public class PlayerManager {
     }
 
     public void update() {
-
         //switch mode SINGLE / DUAL
         if (Game.KI.onPress(KeyEvent.VK_Q)) {
             if (mode == SINGLE) {
@@ -78,6 +77,7 @@ public class PlayerManager {
 
     private void removeSlime(String name) {
         Entity slime = slimes.remove(name);
+        System.out.println(slime);
         if (slime != null) {
             LevelScene.getEntityManager().removeEntity(slime);
             LevelScene.getRenderer().remove(slime,slime.getZindex());
@@ -106,10 +106,9 @@ public class PlayerManager {
     
     public void mergeSlime(){
 
-        if(mode != DUAL || !slimes.containsKey(GREEN) || !slimes.containsKey(YELLOW)){
+        if(mode != DUAL || !slimes.get(GREEN).isAlive() || !slimes.get(YELLOW).isAlive()){
             return;
         }
-
         Entity greenSlime = slimes.get(GREEN);
         Entity yellowSlime = slimes.get(YELLOW);
 
@@ -135,13 +134,13 @@ public class PlayerManager {
         if(!slimes.get(GREEN).isAlive() || !slimes.get(YELLOW).isAlive())
             return;
 
-        Controller green = slimes.get(GREEN).getComponent(Controller.class);
-        Controller yellow = slimes.get(YELLOW).getComponent(Controller.class);
+        Player green = slimes.get(GREEN);
+        Player yellow = slimes.get(YELLOW);
 
-        if (green.isActive) {
+        if (green.isActive()) {
             green.setActive(false);
             yellow.setActive(true);
-        } else if (yellow.isActive) {
+        } else if (yellow.isActive()) {
             green.setActive(true);
             yellow.setActive(false);
         }

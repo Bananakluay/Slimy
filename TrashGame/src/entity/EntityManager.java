@@ -55,6 +55,14 @@ public class EntityManager {
 		return null;
 	}
 
+    public Entity getEntity(int id){
+		for(Entity entity : this.entities){
+			if(entity.getId() == id)
+				return entity;
+		}
+		return null;
+	}
+
 	public List<Entity> getEntitiesWithComponent(Class<? extends Component> componentClass){
 		List<Entity> res = new ArrayList<>();
 		for(Entity entity : entities)

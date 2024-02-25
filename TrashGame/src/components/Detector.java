@@ -3,6 +3,7 @@ package components;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,39 +32,38 @@ public class Detector extends Component implements Behavior{
 
     @Override
     public void update() {
+
+        List<Entity> entitiesToRemove = new ArrayList<>();
+
         for(Entity entity : LevelScene.getEntityManager().getEntitiesWithComponent(Bounds.class)){
 
             if (entity.equals(this.entity) || !types.contains(entity.getType())) {
-                continue; 
+                continue;
             }
 
             Bounds bounds = entity.getComponent(Bounds.class);
-            
-            boolean intersectedX = bound.intersects(bounds.boundsX);
-            boolean intersectedY = bound.intersects(bounds.boundsY);
 
-            //check intesect
-            if (intersectedX || intersectedY) {
-                if(!interaction.containsKey(entity.getId())){
+            boolean intersected = bound.intersects(bounds.boundsX) || bound.intersects(bounds.boundsY);
+
+            if (interaction.containsKey(entity.getId()) && !intersected) {
+                interaction.remove(entity.getId());
+                // System.out.println(entity.getName() + " out");
+                behavior.activateOff(); 
+            } else if (intersected) {
+                if (!interaction.containsKey(entity.getId())) {
                     interaction.put(entity.getId(), entity);
-                    System.out.println(entity.getName()+" in");
-                }
-
-            } 
-            else {
-                if(interaction.containsKey(entity.getId())){
-                    interaction.remove(entity.getId());
-                    System.out.println(entity.getName() + " out");
-                }
-            }
-
-            if(!interaction.isEmpty()){
-                if(entity == interaction.get(entity.getId()))
+                    // System.out.println(entity.getName() + " in");
                     behavior.activateOn(entity);
+                }
             }
-            else{
-                behavior.activateOff();
-            }
+
+            if (LevelScene.getEntityManager().getEntity(entity.getId()) == null) {
+                entitiesToRemove.add(entity);
+            }  
+        }
+
+        for (Entity entityToRemove : entitiesToRemove) {
+            interaction.remove(entityToRemove.getId());
         }
 
     }

@@ -18,7 +18,6 @@ public class Player extends Entity {
     Controller controller;
 
     private boolean isAlive = true;
-    private boolean isCurrentPlayer = false;
 
     protected AnimationStatus animationStatus = AnimationStatus.IDLE;
 
@@ -37,6 +36,38 @@ public class Player extends Entity {
 
     }
 
+    
+
+    public boolean isActive(){
+        return this.getComponent(Controller.class).isActive;
+    }
+
+    public boolean isAlive(){
+        return isAlive;
+    }
+
+    public void setStatus(boolean status){
+
+        this.isAlive = status;
+    }
+    
+    public void setAnimation(AnimationStatus status) {
+        this.animationStatus = status;
+    }
+
+    public void die(){
+        if(isAlive && isActive())
+            PlayerManager.switchPlayer();
+        this.isAlive = false;
+        this.animationStatus = AnimationStatus.DEAD;
+    }
+
+    public Vec2 getDirection() {
+        float directionX = Math.signum(this.getComponent(Rigidbody.class).velocity.x);
+        float directionY = Math.signum(this.getComponent(Rigidbody.class).velocity.y);
+        return new Vec2(directionX, directionY);
+    }
+
     public void setMass(float mass) {
         this.getComponent(Rigidbody.class).mass = mass;
     }
@@ -46,10 +77,6 @@ public class Player extends Entity {
     }
 
     public void setActive(boolean value) {
-        if (value == true)
-            isCurrentPlayer = true;
-        else
-            isCurrentPlayer = false;
         this.getComponent(Controller.class).isActive = value;
     }
 
@@ -57,27 +84,4 @@ public class Player extends Entity {
         this.getComponent(Controller.class).setMobility(walkSpeed, jumpForce);
     }
 
-    public void setStatus(boolean status){
-        this.isAlive = status;
-    }
-    public void setAnimation(AnimationStatus status) {
-        this.animationStatus = status;
-    }
-
-    public Vec2 getDirection() {
-        float directionX = Math.signum(this.getComponent(Rigidbody.class).velocity.x);
-        float directionY = Math.signum(this.getComponent(Rigidbody.class).velocity.y);
-        return new Vec2(directionX, directionY);
-    }
-
-    public void die(){
-        if(isAlive)
-            PlayerManager.switchPlayer();
-        this.isAlive = false;
-        this.animationStatus = AnimationStatus.DEAD;
-    }
-
-    public boolean isAlive(){
-        return isAlive;
-    }
 }
