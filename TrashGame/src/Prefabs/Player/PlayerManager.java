@@ -42,12 +42,11 @@ public class PlayerManager {
             }
         }
 
-        //switch player
+        //switch Player
         if (Game.KI.onPress(KeyEvent.VK_R)) {
             switchPlayer();
         }
-        // System.out.println(isDead());
-        //checkStatus        
+   
     }
 
     public void spawnSlime(String name, float x, float y, SlimeType type) {

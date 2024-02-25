@@ -68,8 +68,8 @@ public class Player extends Entity {
             this.isAlive = false;
             this.setActive(false);
             PlayerManager.resetIfDead();
+            this.animationStatus = AnimationStatus.DEAD;
         }
-        this.animationStatus = AnimationStatus.DEAD;
     }
 
     public void setDirectionX(float x){
