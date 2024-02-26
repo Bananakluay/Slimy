@@ -4,6 +4,8 @@ import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import Prefabs.Objects.Box;
 import Prefabs.Objects.Button;
@@ -15,6 +17,7 @@ import entity.Entity;
 import entity.EntityManager;
 
 import level.LevelManager;
+import main.Game;
 
 public class LevelScene extends Scene {
 
@@ -57,8 +60,7 @@ public class LevelScene extends Scene {
         playerManager.update();
         entitiyManager.updateEntities();
         // System.out.println("Entity : " + entitiyManager.getAllEntities().size() +" Renderer : " +renderer.size(PLAYER_LAYER));
-        
-
+ 
     }
 
     @Override

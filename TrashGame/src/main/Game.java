@@ -6,8 +6,7 @@ import java.awt.event.KeyEvent;
 import Prefabs.Player.PlayerManager;
 import Scene.Scene;
 import Scene.SceneManager;
-import input.MouseInputs;
-import input.Keyboard.KeyInputs;
+import input.Mouse.MouseManager;
 import input.Keyboard.KeyManager;
 import utils.*;
 
@@ -20,7 +19,7 @@ public class Game implements Runnable {
 	private GamePanel gamePanel;
 	private SceneManager sceneManager;
 
-	public static MouseInputs MI;
+	public static MouseManager MI;
 	public static KeyManager KI;
 	private Thread gameThread;
 
@@ -34,7 +33,7 @@ public class Game implements Runnable {
 		gamePanel = GamePanel.get(this);
 		gameWindow = Window.get(gamePanel);
 
-		MI = new MouseInputs();
+		MI = new MouseManager();
 		KI = new KeyManager();
 		gamePanel.addKeyListener(KI);
 		gamePanel.addMouseListener(MI);
@@ -54,6 +53,7 @@ public class Game implements Runnable {
 		// long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 *
 		// 1024); // in MB
 		// System.out.println("Used Memory: " + usedMemory + " MB");
+		MI.update();
 		KI.update();
 		SceneManager.getCurrentScene().update();
 	}
