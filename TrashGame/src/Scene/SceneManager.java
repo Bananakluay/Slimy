@@ -1,5 +1,6 @@
 package Scene;
 
+import Gui.GuiLayer;
 import level.LevelManager;
 
 public class SceneManager {
@@ -18,7 +19,7 @@ public class SceneManager {
     }
 
     public void init() {
-        changeScene(Scenes.LEVEL_SCENE);
+        changeScene(Scenes.MENU_SCENE);
     }
 
     public static void changeScene(Scenes scene) {
@@ -42,11 +43,4 @@ public class SceneManager {
     public static Scene getCurrentScene() {
         return currentScene;
     }
-
-    // public static void NextScene() {
-    //     currentScene.onDestroy();
-    //     currentScene = new LevelScene();
-    //     PlayerManager.get(currentScene);
-    // }
-
 }

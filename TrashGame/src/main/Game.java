@@ -37,6 +37,7 @@ public class Game implements Runnable {
 		KI = new KeyManager();
 		gamePanel.addKeyListener(KI);
 		gamePanel.addMouseListener(MI);
+		gamePanel.addMouseMotionListener(MI);
 		gamePanel.requestFocus();
 
 		startGameLoop();
@@ -53,13 +54,14 @@ public class Game implements Runnable {
 		// long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 *
 		// 1024); // in MB
 		// System.out.println("Used Memory: " + usedMemory + " MB");
+		
 		MI.update();
 		KI.update();
 		SceneManager.getCurrentScene().update();
 	}
 
 	public void render(Graphics g) {
-		SceneManager.getCurrentScene().draw(g);
+		SceneManager.getCurrentScene().render(g);
 	}
 
 	private void startGameLoop() {
