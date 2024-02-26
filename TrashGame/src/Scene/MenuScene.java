@@ -27,17 +27,17 @@ public class MenuScene extends Scene{
    
     @Override
     public void init() {
-        guiLayer = new GuiLayer();
+        guiLayer = new GuiLayer(); //layer
 
         
-        GuiButton playButton = new GuiButton(
+        GuiButton playButton = new GuiButton( /*gen button*/
             "PlayButton", 
             new Vec2(GAME_WIDTH/2, GAME_HEIGHT*0.8f),
             new Vec2(33f*SCALE*2, 16f*SCALE*2), 
             AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PlayButton.png", 33, 16),
             ()-> SceneManager.changeScene(Scenes.LEVEL_SCENE));
             
-        guiLayer.addGuiComponent(playButton);
+        guiLayer.addGuiComponent(playButton); // add to guilayer
     }
 
     @Override
