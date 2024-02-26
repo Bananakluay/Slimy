@@ -17,8 +17,14 @@ import entity.Entity;
 import entity.EntityType;
 import utils.Vec2;
 
+import Prefabs.ArrowRush;
+import Scene.LevelScene;
+import Scene.SceneManager;
+
 public class ArrowTrap extends Entity implements Behavior{
+
     BufferedImage img;
+    
     public ArrowTrap(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE/2)), TRAP);
         init();
@@ -42,8 +48,15 @@ public class ArrowTrap extends Entity implements Behavior{
     @Override
     public void activate(Entity entity) {
         System.out.println(entity.getName());
-        // player hit something new arrow
+        
+        // สร้างลูกธนูที่มีทิศทางเคลื่อนที่มาจากด้านข้าง
+        ArrowRush arrowRush = new ArrowRush("ArrowRush", this.getTransform().position.x, this.getTransform().position.y, -1.0f, 0.0f);
+        arrowRush.init();
+        
+        SceneManager.getCurrentScene().addEntity(arrowRush);
+        SceneManager.getCurrentScene().renderer.submit(arrowRush);
     }
+
 
     @Override
     public void draw(Graphics g) {
