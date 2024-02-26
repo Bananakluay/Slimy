@@ -1,6 +1,5 @@
 package components;
 
-import static utils.Constants.Player.BLUE;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
