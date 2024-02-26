@@ -48,7 +48,6 @@ public class ToggleGuiButton extends GuiComponent{
         }else{
             status = IDLE;
         }
-        System.out.println(isActive);
   
         
     }

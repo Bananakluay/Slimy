@@ -11,8 +11,9 @@ public abstract class GuiComponent {
     protected Vec2 position;
     protected Vec2 scale;
 
-    protected Rectangle bounds;
 
+    protected Rectangle bounds;
+    
     public GuiComponent(String name, Vec2 position, Vec2 scale){
         this.name = name;
         this.position =position;

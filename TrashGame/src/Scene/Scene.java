@@ -14,7 +14,9 @@ public abstract class Scene{
     public abstract void update();
 
 	public abstract void render(Graphics g);
+
 	public  void gui(Graphics g){};
+	
 	public abstract void onDestroy();
 
 	public static Renderer getRenderer(){return renderer;

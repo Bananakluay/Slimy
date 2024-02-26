@@ -1,12 +1,9 @@
 package Gui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.net.IDN;
 import java.util.List;
 
 import main.Game;
@@ -18,6 +15,7 @@ public class GuiButton extends GuiComponent{
     private BufferedImage[] imgs;
     private ClickListener clicker;
     private GuiButtonStatus status = GuiButtonStatus.IDLE;
+
     public GuiButton(String name, Vec2 position, Vec2 scale, List<BufferedImage> imgs, ClickListener clicker) {
         super(name, position, scale);
         this.position = position;

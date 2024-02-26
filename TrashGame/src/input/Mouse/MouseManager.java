@@ -4,8 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import Gui.GuiLayer;
-import utils.Vec2;
 
 
 public class MouseManager implements MouseListener, MouseMotionListener

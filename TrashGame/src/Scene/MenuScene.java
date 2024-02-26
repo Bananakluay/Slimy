@@ -14,7 +14,6 @@ import Gui.GuiButton;
 import Gui.GuiLayer;
 import Gui.GuiText;
 import dataStructure.AssetPool;
-import input.Keyboard.KeyManager;
 import main.Game;
 import utils.Vec2;
 
@@ -30,12 +29,14 @@ public class MenuScene extends Scene{
     public void init() {
         guiLayer = new GuiLayer();
 
+        
         GuiButton playButton = new GuiButton(
             "PlayButton", 
             new Vec2(GAME_WIDTH/2, GAME_HEIGHT*0.8f),
             new Vec2(33f*SCALE*2, 16f*SCALE*2), 
             AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PlayButton.png", 33, 16),
             ()-> SceneManager.changeScene(Scenes.LEVEL_SCENE));
+            
         guiLayer.addGuiComponent(playButton);
     }
 
@@ -54,8 +55,14 @@ public class MenuScene extends Scene{
 
     @Override
     public void gui(Graphics g) {
-        GuiText.drawString(g, "Slimey", new Vec2(GAME_WIDTH/2, GAME_HEIGHT*0.1f),  Color.BLACK, AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 32*5));
-        guiLayer.render(g);
+        GuiText.drawString(
+            g, 
+            "Slimey", 
+            new Vec2(GAME_WIDTH/2, GAME_HEIGHT*0.1f),  
+            Color.BLACK, 
+            AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 16*10));
+        if(guiLayer != null)
+            guiLayer.render(g);
     }
 
     @Override

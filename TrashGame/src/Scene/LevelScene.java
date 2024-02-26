@@ -76,6 +76,7 @@ public class LevelScene extends Scene {
 
     // Gui playing scene----------------------------------------------
     public void initGuiPlayingScene(){
+
         GuiButton playButton = new GuiButton(
             "PlayButton", 
             new Vec2(GAME_WIDTH/2, GAME_HEIGHT*0.8f),
@@ -94,11 +95,13 @@ public class LevelScene extends Scene {
             AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16), 
             ()->System.out.println("SoundButton"));
         guiPauseScene.addGuiComponent(soundButton);
+        
     }
 
 
     @Override
     public void update() {
+        //pause and player
         if(Game.KI.onPress(KeyEvent.VK_ESCAPE)){
             if(isRunning == true){
                 isRunning = false;
@@ -106,6 +109,7 @@ public class LevelScene extends Scene {
                 isRunning = true;
             }
         }
+        
         if(isRunning){
             playerManager.update();
             entitiyManager.updateEntities();

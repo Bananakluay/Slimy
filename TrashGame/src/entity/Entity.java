@@ -14,7 +14,9 @@ public class Entity {
     protected EntityType type = EntityType.NONE;
     public static int ID_COUNTER = 0;
     protected Transform transform;
+
     private List<Component> components;
+    
     public int zIndex = 0;
     
     public Entity(String name, Transform transform, int zIndex){
