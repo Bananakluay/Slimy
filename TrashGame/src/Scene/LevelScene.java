@@ -47,7 +47,7 @@ public class LevelScene extends Scene {
     @Override
     public void init() {
         // Entity--------------------------------
-        loadLevels();
+        LevelManager.loadLevels();
         Button b = new Button("Button", TILES_SIZE * 11, TILES_SIZE * 12);
         entitiyManager.addEntity(b);
         Button b2 = new Button("Button", TILES_SIZE * 14, TILES_SIZE * 12);
@@ -117,6 +117,7 @@ public class LevelScene extends Scene {
 
     @Override
     public void update() {
+        System.out.println(entitiyManager.getAllEntities().size());
         // pause and player
         if (Game.KI.onPress(KeyEvent.VK_ESCAPE)) {
             if (isRunning == true) {
@@ -147,9 +148,6 @@ public class LevelScene extends Scene {
         }
     }
 
-    private void loadLevels() {
-        LevelManager.get();
-    }
 
     @Override
     public synchronized void onDestroy() {
@@ -157,6 +155,7 @@ public class LevelScene extends Scene {
         entitiyManager.getAllEntities().clear();
         guiPlayingScene.clear();
         guiPauseScene.clear();
+        renderer.clear();
     }
 
     public static void deleteCurrentLevel() {

@@ -32,11 +32,13 @@ public class LevelManager {
         return levelManager;
     }
     private void init() {
-        getCurrentLevel();
+        loadLevels();
+    }
+
+    public static void loadLevels() {
         buildAllLevels();
         currentLevel = new Level("TrashGame/res/lvls/6Tmap.png");
     }
-
     public Level getCurrentLevel() {
         return currentLevel;
     }
@@ -56,7 +58,7 @@ public class LevelManager {
         return files;
     }
 
-    private void buildAllLevels() {
+    private static void buildAllLevels() {
         File[] allLevels = GetAllLevels();
         for (File img : allLevels) {
             Map.add((String) img.getName());
