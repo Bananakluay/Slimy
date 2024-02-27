@@ -75,7 +75,6 @@ public class PlayerManager {
 
     private void removeSlime(String name) {
         Entity slime = slimes.remove(name);
-        System.out.println(slime);
         if (slime != null) {
             LevelScene.getEntityManager().removeEntity(slime);
             LevelScene.getRenderer().remove(slime,slime.getZindex());

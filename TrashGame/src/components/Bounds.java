@@ -8,7 +8,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import entity.Entity;
 import entity.EntityType;
@@ -19,17 +21,24 @@ import utils.Vec2;
 public class Bounds extends Component {
     public Color color;
 
-    public Rectangle2D.Float boundsX = new Rectangle2D.Float();
-    public Rectangle2D.Float boundsY = new Rectangle2D.Float();
+    public Rectangle2D.Float boundsX;
+    public Rectangle2D.Float boundsY;
 
-    public Rectangle2D.Float interectBounds = new Rectangle2D.Float();
+    public Rectangle2D.Float interectBounds;
+
     public float interectBoundsoffset = 10 * SCALE;
     private boolean DEBUG = false;
-    private List<EntityType> ignoreET;
+    private Set<EntityType> types;
 
-    public Bounds(Color color, List<EntityType> ignoreET) {
+    public Bounds(Color color, List<EntityType> types) {
         this.color = color != null ? color : Color.WHITE;
-        this.ignoreET = ignoreET != null ? ignoreET : null;
+        this.types = new HashSet<>();
+
+        boundsX = new Rectangle2D.Float();
+        boundsY = new Rectangle2D.Float();
+
+        interectBounds = new Rectangle2D.Float();
+
     }
 
     @Override
@@ -63,8 +72,7 @@ public class Bounds extends Component {
                     || predictedBoundsY.intersects(entity.getComponent(Bounds.class).boundsY)) {
                 results.add(new Collision(this.entity, entity));
             }
-            if (ignoreET != null && ignoreET.contains(entity.getType()))
-                continue;
+
         }
         return results;
     }
@@ -104,7 +112,7 @@ public class Bounds extends Component {
         Graphics2D g2d = (Graphics2D) g;
         if (DEBUG) {
             g2d.setColor(color);
-            if (true){
+            if (true) {
                 g2d.draw(boundsX);
                 g2d.draw(boundsY);
             }
