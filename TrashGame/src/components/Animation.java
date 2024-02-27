@@ -25,6 +25,7 @@ public class Animation extends Component {
     private float width, height;
     private int offsetX = 0, offsetY = 0;
 
+    private boolean playOneTime = false;
     public Animation() {
 
         this.animations = new HashMap<>();
@@ -39,7 +40,7 @@ public class Animation extends Component {
         }
     }
 
-    public void addAnimation(String name, float duration, List<BufferedImage> frames) {
+    public void addAnimation(String name, float duration, List<BufferedImage> frames, boolean playOneTime) {
         AnimationData data = new AnimationData(duration, frames);
         animations.put(name, data);
     }
@@ -85,7 +86,11 @@ public class Animation extends Component {
                 ticks = 0;
                 index++;
                 if (index >= animations.get(currentAnimation).frames.size()) {
-                    index = 0;
+                    if (playOneTime) { // Check if playOnce is set and reset animation
+                        currentAnimation = null;
+                    } else {
+                        index = 0;
+                    }
                 }
             }
         }

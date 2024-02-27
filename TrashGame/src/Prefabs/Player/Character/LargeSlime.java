@@ -35,10 +35,10 @@ public class LargeSlime extends Player {
         animation.setSize(TILES_SIZE, TILES_SIZE);
         animation.setScale(2f);
         animation.setOffset((int) (-4 * SCALE), (int) (-9 * SCALE + 1)); // 3 = 28
-        animation.addAnimation("IDLE", 100, frames.subList(0, 2));
-        animation.addAnimation("WALK", 80, frames.subList(8, 10));
-        animation.addAnimation("JUMP", 100, frames.subList(18, 19));
-        animation.addAnimation("FALL", 100, frames.subList(21, 22));
+        animation.addAnimation("IDLE", 100, frames.subList(0, 2), false);
+        animation.addAnimation("WALK", 80, frames.subList(8, 10), false);
+        animation.addAnimation("JUMP", 100, frames.subList(18, 19), false);
+        animation.addAnimation("FALL", 100, frames.subList(21, 22), false);
         animation.play("IDLE");
 
     }
