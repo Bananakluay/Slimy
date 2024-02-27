@@ -56,7 +56,9 @@ public class GuiButton extends GuiComponent{
                 g.drawImage(imgs[1], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
                 break;
             case PRESSED:
-                g.drawImage(imgs[2], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
+                if (imgs.length >= 3) { // Check if PRESSED state image exists
+                    g.drawImage(imgs[2], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
+                }
                 break;
             default:
                 break;
