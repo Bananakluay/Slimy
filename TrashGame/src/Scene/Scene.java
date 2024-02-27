@@ -1,7 +1,8 @@
-package Scene;
+package scene;
 
 import java.awt.Graphics;
-import Renderer.Renderer;
+
+import renderer.Renderer;
 
 
 public abstract class Scene{

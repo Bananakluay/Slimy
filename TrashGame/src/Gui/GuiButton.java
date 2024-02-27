@@ -1,4 +1,6 @@
-package Gui;
+package gui;
+
+import static gui.GuiButtonStatus.*;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,8 +10,6 @@ import java.util.List;
 
 import main.Game;
 import utils.Vec2;
-
-import static Gui.GuiButtonStatus.*;
 public class GuiButton extends GuiComponent{
 
     private BufferedImage[] imgs;

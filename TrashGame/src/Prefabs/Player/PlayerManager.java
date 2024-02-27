@@ -1,4 +1,4 @@
-package Prefabs.Player;
+package prefabs.player;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -8,16 +8,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-import Prefabs.Player.Character.*;
-import Scene.LevelScene;
+import prefabs.player.character.*;
+import scene.LevelScene;
 import components.Bounds;
 import components.Controller;
 import entity.Entity;
 import level.LevelManager;
 import main.Game;
 
-import static Prefabs.Player.SlimeType.*;
-import static Prefabs.Player.SlimeMode.*;
+import static prefabs.player.SlimeType.*;
+import static prefabs.player.SlimeMode.*;
 import static utils.Constants.Player.*;
 
 public class PlayerManager {

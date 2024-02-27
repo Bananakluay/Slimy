@@ -1,4 +1,4 @@
-package Interaction;
+package interaction;
 
 public interface Listener {
     void receiveSignal();

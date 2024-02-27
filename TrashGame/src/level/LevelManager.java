@@ -1,13 +1,13 @@
 package level;
 
-import Scene.LevelScene;
-
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import scene.LevelScene;
 
 public class LevelManager {
 

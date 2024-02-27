@@ -1,10 +1,12 @@
-package Prefabs.Player.Character;
+package prefabs.player.character;
 
 import dataStructure.AssetPool;
 import dataStructure.Transform;
+import prefabs.player.Player;
+import sound.Sound;
 import utils.Vec2;
 
-import static Prefabs.Player.AnimationStatus.IDLE;
+import static prefabs.player.AnimationStatus.IDLE;
 import static utils.Constants.Game.*;
 import static utils.Constants.Layer.PLAYER_LAYER;
 import static utils.Constants.Player.*;
@@ -12,32 +14,31 @@ import static utils.Constants.Player.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import Prefabs.Player.Player;
 import components.Animation;
 import components.Controller;
 
-public class TinySlime extends Player{
+public class TinySlime extends Player {
 
- 
     private Animation animation;
     private List<BufferedImage> frames;
     private String file;
+
     public TinySlime(String name, float x, float y, String file) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE*0.8f,TILES_SIZE/2)), PLAYER_LAYER);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE * 0.8f, TILES_SIZE / 2)), PLAYER_LAYER);
         this.file = file;
         init();
     }
-    
-    private void init(){
-        this.setMass(1.5f*SCALE);
-        this.setFriction(0.4f*SCALE);
-        this.setMobility(WALK_SPEED*0.9f, JUMP_FORCE);
+
+    private void init() {
+        this.setMass(1.5f * SCALE);
+        this.setFriction(0.4f * SCALE);
+        this.setMobility(WALK_SPEED * 0.9f, JUMP_FORCE);
 
         frames = AssetPool.getBufferedImageList(file, 16, 16);
         animation = this.getComponent(Animation.class);
-        animation.setSize(TILES_SIZE,TILES_SIZE);
+        animation.setSize(TILES_SIZE, TILES_SIZE);
         animation.setScale(1.6f);
-        animation.setOffset((int)(-4*SCALE), (int)(-11*SCALE + 1)); //3.75
+        animation.setOffset((int) (-4 * SCALE), (int) (-11 * SCALE + 1)); // 3.75
         animation.addAnimation("IDLE", 100, frames.subList(0, 2));
         animation.addAnimation("WALK", 20, frames.subList(8, 10));
         animation.addAnimation("JUMP", 100, frames.subList(18, 19));
@@ -49,12 +50,12 @@ public class TinySlime extends Player{
     public void update() {
         super.update();
 
-        if(!this.getComponent(Controller.class).isActive()){
+        if (!this.getComponent(Controller.class).isActive()) {
             animationStatus = IDLE;
         }
 
         switch (animationStatus) {
-            case IDLE: 
+            case IDLE:
                 animation.play("IDLE");
                 break;
             case MOVING:
@@ -70,6 +71,5 @@ public class TinySlime extends Player{
                 break;
         }
     }
-  
-    
+
 }

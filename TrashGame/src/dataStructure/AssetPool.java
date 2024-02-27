@@ -18,7 +18,7 @@ public class AssetPool {
     public static Map<String, BufferedImage> bufferImage = new HashMap<>();
     @SuppressWarnings("unchecked")
     public static Map<String, List<BufferedImage>> bufferImageList = new HashMap();
-    public static Map<String, Font> fonts = new HashMap();
+    public static Map<String, Font> fonts = new HashMap<>();
     // TODO static Map(String, Level) levelsData = new HashMap(); 
 
 

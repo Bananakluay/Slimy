@@ -3,10 +3,10 @@ package main;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
-import Prefabs.Player.PlayerManager;
-import Scene.Scene;
-import Scene.SceneManager;
 import input.Mouse.MouseManager;
+import prefabs.player.PlayerManager;
+import scene.Scene;
+import scene.SceneManager;
 import input.Keyboard.KeyManager;
 import utils.*;
 
@@ -114,7 +114,7 @@ public class Game implements Runnable {
 
 	}
 
-	public Scene getCurrentScene() {
-		return sceneManager.getCurrentScene();
+	public static Scene getCurrentScene() {
+		return SceneManager.getCurrentScene();
 	}
 }

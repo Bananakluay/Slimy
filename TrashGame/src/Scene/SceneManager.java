@@ -1,7 +1,5 @@
-package Scene;
+package scene;
 
-import Gui.GuiLayer;
-import level.LevelManager;
 
 public class SceneManager {
     private static SceneManager sceneManager = null;

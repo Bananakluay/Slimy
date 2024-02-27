@@ -1,4 +1,4 @@
-package Renderer;
+package renderer;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import entity.Entity;
-import utils.Constants.Layer;
 
 public class Renderer {
 

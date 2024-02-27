@@ -1,4 +1,4 @@
-package Prefabs.Objects;
+package prefabs.Objects;
 
 
 import java.awt.Color;

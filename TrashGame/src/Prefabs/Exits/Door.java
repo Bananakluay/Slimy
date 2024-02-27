@@ -1,4 +1,4 @@
-package Prefabs.Exits;
+package prefabs.Exits;
 
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
@@ -7,14 +7,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import Interaction.Behavior;
 import components.Detector;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
+import interaction.Behavior;
 import level.LevelManager;
-import Scene.LevelScene;
+import scene.LevelScene;
 
 public class Door extends Entity implements Behavior {
     public LevelScene levelScene;
@@ -31,7 +31,7 @@ public class Door extends Entity implements Behavior {
                 transform.scale.x,
                 transform.scale.y*1.7f,
                 List.of(EntityType.PLAYER),
-                this);
+                this,false);
         addComponent(detector);
         img = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/door3.png", 21, 32);
     }
@@ -55,5 +55,8 @@ public class Door extends Entity implements Behavior {
             (int)(32*SCALE), 
             null);
     }
+
+    @Override
+    public void activateOneShot(Entity entity) {}
 
 }

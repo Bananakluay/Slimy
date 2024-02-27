@@ -1,4 +1,4 @@
-package Prefabs.Player;
+package prefabs.player;
 
 public enum AnimationStatus {
     IDLE,

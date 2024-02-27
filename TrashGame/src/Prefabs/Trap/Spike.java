@@ -1,4 +1,4 @@
-package Prefabs.Trap;
+package prefabs.trap;
 
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
@@ -8,13 +8,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import Interaction.Behavior;
-import Prefabs.Player.Player;
 import components.Detector;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
+import interaction.Behavior;
+import prefabs.player.Player;
+import sound.Sound;
 import utils.Vec2;
 
 public class Spike extends Entity implements Behavior {
@@ -33,7 +34,7 @@ public class Spike extends Entity implements Behavior {
                 transform.scale.x - SCALE,
                 transform.scale.y,
                 List.of(EntityType.PLAYER),
-                this);
+                this,false);
         addComponent(detector);
         img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/spike.png", TILES_SIZE, TILES_SIZE);
 
@@ -60,6 +61,9 @@ public class Spike extends Entity implements Behavior {
                 (int) (TILES_SIZE),
                 null);
     }
+
+    @Override
+    public void activateOneShot(Entity entity) {}
 
     
 

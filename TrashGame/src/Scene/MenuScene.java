@@ -1,4 +1,4 @@
-package Scene;
+package scene;
 
 import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
@@ -8,10 +8,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
-import Gui.GuiButton;
-import Gui.GuiLayer;
-import Gui.GuiText;
 import dataStructure.AssetPool;
+import gui.GuiButton;
+import gui.GuiLayer;
+import gui.GuiText;
 import main.Game;
 import utils.Vec2;
 
