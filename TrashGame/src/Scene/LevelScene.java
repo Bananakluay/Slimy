@@ -16,12 +16,12 @@ import gui.GuiLayer;
 import gui.ToggleGuiButton;
 import level.LevelManager;
 import main.Game;
-import prefabs.Objects.Box;
+import prefabs.objects.Box;
+import prefabs.objects.Button;
+import prefabs.objects.Gate;
 import prefabs.player.PlayerManager;
 import prefabs.trap.BombButton;
 import prefabs.trap.Spike;
-import prefabs.Objects.Button;
-import prefabs.Objects.Gate;
 import utils.Vec2;
 
 public class LevelScene extends Scene {

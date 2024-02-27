@@ -1,4 +1,4 @@
-package prefabs.Objects;
+package prefabs.objects;
 
 
 

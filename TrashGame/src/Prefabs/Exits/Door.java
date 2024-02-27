@@ -1,4 +1,4 @@
-package prefabs.Exits;
+package prefabs.exits;
 
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
