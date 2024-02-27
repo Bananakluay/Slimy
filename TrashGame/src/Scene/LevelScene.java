@@ -97,7 +97,6 @@ public class LevelScene extends Scene {
                 new Vec2(GAME_WIDTH - (40f * SCALE), GAME_HEIGHT * 0.03f), // position
                 new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16), // change png
-                                                                                                      // later
                 () -> isRunning = true);
 
         GuiButton backButton = new GuiButton( /* gen option button */
@@ -105,7 +104,6 @@ public class LevelScene extends Scene {
                 new Vec2(GAME_WIDTH - (50f * SCALE), GAME_HEIGHT * 0.84f), // position
                 new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png
-                                                                                                       // later
                 () -> SceneManager.changeScene(Scenes.MENU_SCENE));
 
         guiPauseScene.addGuiComponent(backButton);
@@ -116,7 +114,7 @@ public class LevelScene extends Scene {
 
     @Override
     public void update() {
-        System.out.println(entitiyManager.getAllEntities().size());
+
         // pause and player
         if (Game.KI.onPress(KeyEvent.VK_ESCAPE)) {
             if (isRunning == true) {
@@ -147,7 +145,6 @@ public class LevelScene extends Scene {
         }
         renderer.processQueuedChanges();
     }
-
 
     @Override
     public synchronized void onDestroy() {
