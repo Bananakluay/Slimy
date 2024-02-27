@@ -24,7 +24,7 @@ public abstract class Scene{
 	public static Renderer getRenderer(){return renderer;
 	}
 	public void setRunning(boolean isRunning) {
-		this.isRunning = isRunning;
+		Scene.isRunning = isRunning;
 	}
 
 	

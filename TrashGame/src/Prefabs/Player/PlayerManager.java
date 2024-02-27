@@ -25,10 +25,9 @@ public class PlayerManager {
 
     private static Map<String, Player> slimes;
     private static SlimeMode mode = SINGLE;
-    private boolean isReseting = false;
     public PlayerManager() {
-        this.slimes = new HashMap<>();
-        this.mode = SINGLE;
+        slimes = new HashMap<>();
+        mode = SINGLE;
     }
 
     public void update() {

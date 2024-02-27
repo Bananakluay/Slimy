@@ -15,7 +15,6 @@ import entity.Entity;
 import entity.EntityType;
 import interaction.Behavior;
 import prefabs.player.Player;
-import sound.Sound;
 import utils.Vec2;
 
 public class Spike extends Entity implements Behavior {
