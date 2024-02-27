@@ -10,17 +10,33 @@ import scene.LevelScene;
 public class EntityManager {
 
     private List<Entity> entities;
+    List<Entity> entitiesToRemove;
+    List<Entity> entitiesToAdd;
 
     public EntityManager() {
         entities = new ArrayList<>();
+        entitiesToAdd = new ArrayList<>();
+        entitiesToRemove = new ArrayList<>();
     }
 
     public void updateEntities() {
         Iterator<Entity> iterator = entities.iterator();
+
+        for (Entity entity : entitiesToAdd) {
+            entities.add(entity);
+            LevelScene.getRenderer().submit(entity);
+        }
+        entitiesToAdd.clear();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
             entity.update();
         }
+
+        for (Entity entity : entitiesToRemove) {
+            entities.remove(entity);
+            LevelScene.getRenderer().remove(entity, entity.getZindex());
+        }
+        entitiesToRemove.clear();
     }
 
     public void ready() {
