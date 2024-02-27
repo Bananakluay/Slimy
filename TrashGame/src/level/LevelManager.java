@@ -34,7 +34,7 @@ public class LevelManager {
     private void init() {
         //getCurrentLevel();
         //buildAllLevels();
-        currentLevel = new Level("TrashGame/res/lvls/5Tmap.png");
+        currentLevel = new Level("TrashGame/res/lvls/6Tmap.png");
     }
 
     public Level getCurrentLevel() {
