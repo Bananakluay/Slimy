@@ -22,6 +22,7 @@ public class SceneManager {
     public static void changeScene(Scenes scene) {
         if (currentScene != null) {
             currentScene.onDestroy();
+            currentScene = null;
         }
         switch (scene) {
             case MENU_SCENE:

@@ -3,7 +3,6 @@ package prefabs.player.character;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
 import prefabs.player.Player;
-import sound.Sound;
 import utils.Vec2;
 
 import static utils.Constants.Game.*;

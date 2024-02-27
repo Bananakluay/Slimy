@@ -6,5 +6,4 @@ public enum AnimationStatus {
     JUMPING,
     FALLING,
     DEAD
-
 }
