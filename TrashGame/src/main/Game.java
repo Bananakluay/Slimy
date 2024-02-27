@@ -1,52 +1,70 @@
 package main;
 
 import java.awt.Graphics;
-import gameState.GameStatesManager;
+import java.awt.event.KeyEvent;
+
+import input.Mouse.MouseManager;
+import prefabs.player.PlayerManager;
+import scene.Scene;
+import scene.SceneManager;
+import input.Keyboard.KeyManager;
+import utils.*;
 
 @SuppressWarnings("unused")
-public class Game implements Runnable{
+public class Game implements Runnable {
 
-    private final int FPS_SET = 120;
-    private final int UPS_SET = 200;
+	private static Game game = null;
 
-    public final static int TILES_DEFAULT_SIZE = 16;
-    public final static float SCALE = 4f;
-    public final static int TILES_IN_WIDTH = 26;
-    public final static int TILES_IN_HEIGHT = 14;
-    public final static int TILES_SIZE = (int)(TILES_DEFAULT_SIZE * SCALE);
-    public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
-    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
+	private Window gameWindow;
+	private GamePanel gamePanel;
+	private SceneManager sceneManager;
 
-	private GameStatesManager gsm;
-	
-    private GameWindow gameWindow;
-    private GamePanel gamePanel;
+	public static MouseManager MI;
+	public static KeyManager KI;
+	private Thread gameThread;
 
+	private final int FPS_SET = 120;
+	private final int UPS_SET = 200;
 
-    private Thread gameThread;
+	private Game() {
+		// setting scene
+		sceneManager = SceneManager.get();
+		// setting window
+		gamePanel = GamePanel.get(this);
+		gameWindow = Window.get(gamePanel);
 
-    public Game(){
-		gsm = new GameStatesManager();
-        gamePanel = new GamePanel(this);
-        gameWindow = new GameWindow(gamePanel);
-        gamePanel.requestFocus();
-        startGameLoop();
-    }
+		MI = new MouseManager();
+		KI = new KeyManager();
+		gamePanel.addKeyListener(KI);
+		gamePanel.addMouseListener(MI);
+		gamePanel.addMouseMotionListener(MI);
+		gamePanel.requestFocus();
 
-    public void ready(){
+		startGameLoop();
+	}
 
-    }
-    public void update(){
-		gsm.getCurrentState().update();
-    }
+	public static Game get() {
+		if (game == null)
+			return new Game();
+		return game;
+	}
 
-    public void render(Graphics g){
-		//playing 
-		//
-		gsm.getCurrentState().draw(g);
-    }
-    
-    private void startGameLoop() {
+	public void update() {
+		// Runtime runtime = Runtime.getRuntime();
+		// long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 *
+		// 1024); // in MB
+		// System.out.println("Used Memory: " + usedMemory + " MB");
+		
+		MI.update();
+		KI.update();
+		SceneManager.getCurrentScene().update();
+	}
+
+	public void render(Graphics g) {
+		SceneManager.getCurrentScene().render(g);
+	}
+
+	private void startGameLoop() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
@@ -96,9 +114,7 @@ public class Game implements Runnable{
 
 	}
 
-	public GameStatesManager getGameStatesManager(){
-		return gsm;
+	public static Scene getCurrentScene() {
+		return SceneManager.getCurrentScene();
 	}
-
-
 }
