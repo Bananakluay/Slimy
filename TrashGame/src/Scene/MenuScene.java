@@ -3,12 +3,10 @@ package Scene;
 import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
 import static utils.Constants.Game.SCALE;
-import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 import Gui.GuiButton;
 import Gui.GuiLayer;

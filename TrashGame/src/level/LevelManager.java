@@ -6,6 +6,8 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LevelManager {
 
@@ -16,6 +18,8 @@ public class LevelManager {
     private static Level currentLevel;
 
     private static int lvlindex = 0;
+
+    private static Timer timer;
 
     public static boolean isGameOver = false;
     private LevelManager() {
@@ -72,8 +76,17 @@ public class LevelManager {
     }
 
     public static void resetLevel(){
-        LevelScene.createNextLevel();
-        currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // Code to load and display the new scene
+                LevelScene.createNextLevel();
+                currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+                timer.cancel();
+            }
+        }, 2000);
+        
     }
 
     public static void onDestroy() {
