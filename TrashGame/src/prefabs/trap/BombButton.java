@@ -40,7 +40,6 @@ public class BombButton extends Entity implements Behavior {
                 true));
         imgs = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/button.png", 16, 16);
 
-        // TODO add animation
     }
 
     @Override
@@ -58,12 +57,10 @@ public class BombButton extends Entity implements Behavior {
     }
 
     @Override
-    public void activateOn(Entity entity) {
-    }
-
+    public void activateOn(Entity entity) {}
+    
     @Override
-    public void activateOff() {
-    }
+    public void activateOff() {}
 
     @Override
     public void draw(Graphics g) {

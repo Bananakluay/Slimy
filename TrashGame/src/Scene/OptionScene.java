@@ -1,18 +1,14 @@
-package Scene;
+package scene;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 
 import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
 import static utils.Constants.Game.SCALE;
-import static utils.Constants.Game.TILES_SIZE;
-import Gui.GuiButton;
-import Gui.GuiLayer;
-import Gui.GuiText;
+import gui.GuiButton;
+import gui.GuiLayer;
 import dataStructure.AssetPool;
-import main.Game;
 import utils.Vec2;
 
 public class OptionScene extends Scene{

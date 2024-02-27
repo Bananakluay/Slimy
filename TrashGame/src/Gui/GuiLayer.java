@@ -11,9 +11,7 @@ import java.util.ConcurrentModificationException;
 
 public class GuiLayer {
 
-    private final List<GuiComponent> guiComponents = new ArrayList<>();
-
-    public GuiLayer(){};
+    private List<GuiComponent> guiComponents = new ArrayList<>();
 
 
     public void update(){

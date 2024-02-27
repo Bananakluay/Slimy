@@ -74,59 +74,43 @@ public class LevelScene extends Scene {
     // Gui playing scene----------------------------------------------
     public void initGuiPlayingScene() {
 
-<<<<<<< Updated upstream
-        GuiButton pauseButton = new GuiButton( /*gen option button*/
-            "PauseButton", 
-            new Vec2(GAME_WIDTH - (40f*SCALE), GAME_HEIGHT*0.03f), //position
-            new Vec2(16f*SCALE*2, 16f*SCALE*2), 
-            AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PauseButton.png", 16, 16), // change png later
-            ()-> isRunning = false) ;
-            
+        GuiButton pauseButton = new GuiButton( /* gen option button */
+                "PauseButton",
+                new Vec2(GAME_WIDTH - (40f * SCALE), GAME_HEIGHT * 0.03f), // position
+                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PauseButton.png", 16, 16), // change png later
+                () -> isRunning = false);
+
         guiPlayingScene.addGuiComponent(pauseButton);
-=======
-        GuiButton playButton = new GuiButton(
-                "PlayButton",
-                new Vec2(GAME_WIDTH / 2, GAME_HEIGHT * 0.8f),
-                new Vec2(33f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PlayButton.png", 33, 16),
-                () -> System.out.println("play"));
-        guiPlayingScene.addGuiComponent(playButton);
->>>>>>> Stashed changes
     }
 
     // Gui pause scene----------------------------------------------
     public void initGuiPauseScene() {
         ToggleGuiButton soundButton = new ToggleGuiButton(
-<<<<<<< Updated upstream
-            "SoundButton", 
-            new Vec2(TILES_SIZE*10, TILES_SIZE*3),
-            new Vec2(16f*SCALE*1.5f, 16f*SCALE*1.5f), 
-            AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16), 
-            ()->System.out.println("SoundButton"));
-
-        GuiButton continueButton = new GuiButton( /*gen option button*/
-            "ContinueButton", 
-            new Vec2(GAME_WIDTH - (40f*SCALE), GAME_HEIGHT*0.03f), //position
-            new Vec2(16f*SCALE*2, 16f*SCALE*2), 
-            AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16), // change png later
-            ()-> isRunning = true) ;
-            
-        GuiButton backButton = new GuiButton( /*gen option button*/
-            "backButton", 
-            new Vec2(GAME_WIDTH - (50f*SCALE), GAME_HEIGHT*0.84f), //position
-            new Vec2(16f*SCALE*2, 16f*SCALE*2), 
-            AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png later
-            ()-> SceneManager.changeScene(Scenes.MENU_SCENE));
-
-        guiPauseScene.addGuiComponent(backButton);
-        guiPauseScene.addGuiComponent(continueButton);
-=======
                 "SoundButton",
                 new Vec2(TILES_SIZE * 10, TILES_SIZE * 3),
                 new Vec2(16f * SCALE * 1.5f, 16f * SCALE * 1.5f),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16),
                 () -> System.out.println("SoundButton"));
->>>>>>> Stashed changes
+
+        GuiButton continueButton = new GuiButton( /* gen option button */
+                "ContinueButton",
+                new Vec2(GAME_WIDTH - (40f * SCALE), GAME_HEIGHT * 0.03f), // position
+                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16), // change png
+                                                                                                      // later
+                () -> isRunning = true);
+
+        GuiButton backButton = new GuiButton( /* gen option button */
+                "backButton",
+                new Vec2(GAME_WIDTH - (50f * SCALE), GAME_HEIGHT * 0.84f), // position
+                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png
+                                                                                                       // later
+                () -> SceneManager.changeScene(Scenes.MENU_SCENE));
+
+        guiPauseScene.addGuiComponent(backButton);
+        guiPauseScene.addGuiComponent(continueButton);
         guiPauseScene.addGuiComponent(soundButton);
 
     }
@@ -149,8 +133,6 @@ public class LevelScene extends Scene {
         } else {
             guiPauseScene.update();
         }
-        // System.out.println("Entity : " + entitiyManager.getAllEntities().size() +"
-        // Renderer : " +renderer.size(PLAYER_LAYER));
 
     }
 
@@ -170,11 +152,11 @@ public class LevelScene extends Scene {
     }
 
     @Override
-    public void onDestroy() {
-        for (Entity entity : entitiyManager.getAllEntities()) {
-            entity.onDestroy();
-            entitiyManager.removeEntity(entity);
-        }
+    public synchronized void onDestroy() {
+        playerManager = null;
+        entitiyManager.getAllEntities().clear();
+        guiPlayingScene.clear();
+        guiPauseScene.clear();
     }
 
     public static void deleteCurrentLevel() {

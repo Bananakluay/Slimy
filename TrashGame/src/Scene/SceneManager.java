@@ -1,6 +1,5 @@
 package scene;
 
-
 public class SceneManager {
     private static SceneManager sceneManager = null;
 
@@ -21,7 +20,7 @@ public class SceneManager {
     }
 
     public static void changeScene(Scenes scene) {
-        if(currentScene != null){
+        if (currentScene != null) {
             currentScene.onDestroy();
         }
         switch (scene) {

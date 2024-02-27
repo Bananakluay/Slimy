@@ -29,7 +29,7 @@ public class Detector extends Component implements Behavior {
         this.types = types;
         this.behavior = behavior;
         this.isOneShot = isOneShot;
-        interaction = new HashMap();
+        interaction = new HashMap<Integer, Entity>();
     }
 
     @Override
@@ -49,10 +49,10 @@ public class Detector extends Component implements Behavior {
 
             if (isOneShot && !activated) {
                 oneShotMode(entity, intersected);
-            }else if(!isOneShot) {
+            } else if (!isOneShot) {
                 continueMode(entity, intersected);
             }
-            System.out.println(activated);
+
             if (LevelScene.getEntityManager().getEntity(entity.getId()) == null) {
                 entitiesToRemove.add(entity);
             }
@@ -74,7 +74,6 @@ public class Detector extends Component implements Behavior {
     private void oneShotMode(Entity entity, boolean intersected) {
         if (intersected) {
             activated = true;
-            System.out.println(activated);
             behavior.activateOneShot(entity);
         }
     }
