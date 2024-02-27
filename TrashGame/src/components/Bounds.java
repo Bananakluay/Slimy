@@ -15,6 +15,8 @@ import java.util.Set;
 import entity.Entity;
 import entity.EntityType;
 import physics.Collision;
+import prefabs.objects.Platform;
+import prefabs.player.Player;
 import scene.LevelScene;
 import utils.Vec2;
 
@@ -27,8 +29,10 @@ public class Bounds extends Component {
     public Rectangle2D.Float interectBounds;
 
     public float interectBoundsoffset = 10 * SCALE;
-    private boolean DEBUG = false;
     private Set<EntityType> types;
+    public boolean isOneWay = false;
+
+    private boolean DEBUG = true;
 
     public Bounds(Color color, List<EntityType> types) {
         this.color = color != null ? color : Color.WHITE;
@@ -57,19 +61,38 @@ public class Bounds extends Component {
     }
 
     public List<Collision> checkCollision(Vec2 velocity) {
+
         List<Collision> results = new ArrayList<>();
 
-        Rectangle2D.Float predictedBoundsX = new Rectangle2D.Float(boundsX.x + velocity.x, boundsX.y, boundsX.width,
-                boundsX.height);
-        Rectangle2D.Float predictedBoundsY = new Rectangle2D.Float(boundsY.x, boundsY.y + velocity.y, boundsY.width,
-                boundsY.height);
+        Rectangle2D.Float predictedBoundsX = new Rectangle2D.Float(
+            boundsX.x + velocity.x, 
+            boundsX.y, boundsX.width,
+            boundsX.height
+        );
+
+        Rectangle2D.Float predictedBoundsY = new Rectangle2D.Float(
+            boundsY.x, 
+            boundsY.y + velocity.y, 
+            boundsY.width,
+            boundsY.height
+            );
 
         for (Entity entity : LevelScene.getEntityManager().getEntitiesWithComponent(Bounds.class)) {
+
+            //avoid self collision
             if (entity.equals(this.entity))
                 continue;
 
-            if (predictedBoundsX.intersects(entity.getComponent(Bounds.class).boundsX)
-                    || predictedBoundsY.intersects(entity.getComponent(Bounds.class).boundsY)) {
+            //handle one way platform
+            if(this.entity instanceof Player player && entity instanceof Platform platform){
+                if(platform.isMovable(player)){
+                    continue;
+                }
+            }
+
+            //check collision
+            if (predictedBoundsX.intersects(entity.getComponent(Bounds.class).boundsX) || 
+            predictedBoundsY.intersects(entity.getComponent(Bounds.class).boundsY)) {
                 results.add(new Collision(this.entity, entity));
             }
 
@@ -107,6 +130,8 @@ public class Bounds extends Component {
 
     }
 
+
+    
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;

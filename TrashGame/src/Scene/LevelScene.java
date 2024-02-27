@@ -5,12 +5,16 @@ import static utils.Constants.Game.GAME_WIDTH;
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
+import components.Bounds;
 import dataStructure.AssetPool;
+import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityManager;
+import entity.EntityType;
 import gui.GuiButton;
 import gui.GuiLayer;
 import gui.ToggleGuiButton;
@@ -19,6 +23,7 @@ import main.Game;
 import prefabs.objects.Box;
 import prefabs.objects.Button;
 import prefabs.objects.Gate;
+import prefabs.objects.Platform;
 import prefabs.player.PlayerManager;
 import prefabs.trap.BombButton;
 import prefabs.trap.Spike;
@@ -50,15 +55,15 @@ public class LevelScene extends Scene {
         // Entity--------------------------------
         LevelManager.loadLevels();
 
-        // Button b = new Button("Button", TILES_SIZE * 11, TILES_SIZE * 12);
-        // entitiyManager.addEntity(b);
-        // Button b2 = new Button("Button", TILES_SIZE * 14, TILES_SIZE * 12);
-        // entitiyManager.addEntity(b2);
+        Button b = new Button("Button", TILES_SIZE * 11, TILES_SIZE * 12);
+        entitiyManager.addEntity(b);
+        Button b2 = new Button("Button", TILES_SIZE * 14, TILES_SIZE * 12);
+        entitiyManager.addEntity(b2);
 
-        // Gate g = new Gate("Gate", TILES_SIZE * 16, TILES_SIZE * 11);
-        // entitiyManager.addEntity(g);
-        // g.addListener(b);
-        // g.addListener(b2);
+        Gate g = new Gate("Gate", TILES_SIZE * 16, TILES_SIZE * 11);
+        entitiyManager.addEntity(g);
+        g.addListener(b);
+        g.addListener(b2);
 
         // Box box = new Box("box", TILES_SIZE * 4, TILES_SIZE * 2, TILES_SIZE,
         // TILES_SIZE, null, 3f * SCALE,
@@ -70,6 +75,11 @@ public class LevelScene extends Scene {
         // Spike sp = new Spike("spike", TILES_SIZE * 21, TILES_SIZE * 12);
         // entitiyManager.addEntity(sp);
         // entitiyManager.ready();
+
+        Platform p = new Platform(TILES_SIZE * 10, TILES_SIZE * 10);
+        entitiyManager.addEntity(p);
+        Platform p2 = new Platform(TILES_SIZE * 11, TILES_SIZE * 10);
+        entitiyManager.addEntity(p2);
 
     }
 

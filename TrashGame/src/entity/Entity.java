@@ -105,6 +105,7 @@ public class Entity {
     
     public Vec2 getScale(){return transform.scale;}
 
+    public void setType(EntityType type){this.type = type;}
     public EntityType getType(){return this.type;}
 
 

@@ -5,9 +5,8 @@ import dataStructure.Transform;
 import prefabs.player.Player;
 import utils.Vec2;
 
-import static prefabs.player.AnimationStatus.IDLE;
+import static prefabs.player.AnimationStatus.*;
 import static utils.Constants.Game.*;
-import static utils.Constants.Layer.PLAYER_LAYER;
 import static utils.Constants.Player.*;
 
 import java.awt.image.BufferedImage;
@@ -23,7 +22,7 @@ public class TinySlime extends Player {
     private String file;
 
     public TinySlime(String name, float x, float y, String file) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE * 0.8f, TILES_SIZE / 2)), PLAYER_LAYER);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE * 0.8f, TILES_SIZE / 2)));
         this.file = file;
         init();
     }
@@ -31,7 +30,7 @@ public class TinySlime extends Player {
     private void init() {
         this.setMass(1.5f * SCALE);
         this.setFriction(0.4f * SCALE);
-        this.setMobility(WALK_SPEED * 0.9f, JUMP_FORCE);
+        this.setMobility(WALK_SPEED * 0.8f, JUMP_FORCE * 0.9f);
 
         frames = AssetPool.getBufferedImageList(file, 16, 16);
         animation = this.getComponent(Animation.class);

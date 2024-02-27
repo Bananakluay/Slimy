@@ -23,7 +23,7 @@ public class Controller extends Component {
 
     public boolean isActive = true;
 
-    private final int JUMP_DURATION = 15;
+    private final int JUMP_DURATION = 25;
     private int jumpDurationCounter = 0;
 
     @Override
@@ -92,6 +92,7 @@ public class Controller extends Component {
                 jumpDurationCounter--;
             }
         }
+
     }
 
     public boolean isOnFloor() {

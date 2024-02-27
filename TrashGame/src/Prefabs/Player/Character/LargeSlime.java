@@ -6,7 +6,6 @@ import prefabs.player.Player;
 import utils.Vec2;
 
 import static utils.Constants.Game.*;
-import static utils.Constants.Layer.PLAYER_LAYER;
 import static utils.Constants.Player.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -19,7 +18,7 @@ public class LargeSlime extends Player {
     private List<BufferedImage> frames;
 
     public LargeSlime(String name, float x, float y) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.9f)), PLAYER_LAYER);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.9f)));
         init();
 
     }
@@ -27,7 +26,7 @@ public class LargeSlime extends Player {
     private void init() {
         this.setMass(30);
         this.setFriction(2);
-        this.setMobility(WALK_SPEED * 0.9f, JUMP_FORCE * 0.8f);
+        this.setMobility(WALK_SPEED * 0.9f, JUMP_FORCE * 0.7f);
 
         // animation
         frames = AssetPool.getBufferedImageList("TrashGame/res/assets/Character/BlueSlime.png", 16, 16);

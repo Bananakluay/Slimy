@@ -7,6 +7,7 @@ import entity.Entity;
 import entity.EntityType;
 import sound.Sound;
 import utils.Vec2;
+import utils.Constants.Layer;
 
 import static entity.EntityType.PLAYER;
 import static entity.EntityType.TILE;
@@ -28,8 +29,8 @@ public class Player extends Entity {
     private Vec2 direction;
     protected AnimationStatus animationStatus = AnimationStatus.IDLE;
 
-    public Player(String name, Transform transform, int zIndex) {
-        super(name, transform, zIndex);
+    public Player(String name, Transform transform) {
+        super(name, transform, Layer.PLAYER);
         init();
     }
 

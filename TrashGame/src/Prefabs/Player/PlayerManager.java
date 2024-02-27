@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 import prefabs.player.character.*;
 import scene.LevelScene;
 import components.Bounds;
@@ -18,21 +17,22 @@ import main.Game;
 
 import static prefabs.player.SlimeType.*;
 import static prefabs.player.SlimeMode.*;
+import static utils.Constants.Game.SCALE;
 import static utils.Constants.Player.*;
 
 public class PlayerManager {
 
-
     private static Map<String, Player> slimes;
     private static SlimeMode mode = SINGLE;
+
     public PlayerManager() {
         slimes = new HashMap<>();
         mode = SINGLE;
     }
 
     public void update() {
-        //switch mode SINGLE / DUAL
-        if (Game.KI.onPress(KeyEvent.VK_Q)) {
+        // switch mode SINGLE / DUAL
+        if (Game.KI.onPress(KeyEvent.VK_SPACE)) {
             if (mode == SINGLE) {
                 splitSlime();
             } else if (mode == DUAL) {
@@ -40,11 +40,11 @@ public class PlayerManager {
             }
         }
 
-        //switch Player
+        // switch Player
         if (Game.KI.onPress(KeyEvent.VK_R)) {
             switchPlayer();
         }
-   
+
     }
 
     public void spawnSlime(String name, float x, float y, SlimeType type) {
@@ -54,7 +54,7 @@ public class PlayerManager {
             slime.getComponent(Bounds.class).setColor(Color.blue);
             slimes.put(name, slime);
             LevelScene.getEntityManager().addEntity(slime);
-        // spawn TINY SLIME
+            // spawn TINY SLIME
         } else if (type == TINY_SLIME) {
             if (name.equals(GREEN)) {
                 TinySlime slime = new TinySlime(GREEN, x, y, "TrashGame/res/assets/Character/GreenSlime.png");
@@ -77,7 +77,7 @@ public class PlayerManager {
         Entity slime = slimes.remove(name);
         if (slime != null) {
             LevelScene.getEntityManager().removeEntity(slime);
-            LevelScene.getRenderer().remove(slime,slime.getZindex());
+            LevelScene.getRenderer().remove(slime, slime.getZindex());
         }
     }
 
@@ -86,54 +86,73 @@ public class PlayerManager {
             return;
         }
 
-        //get position of Blue
+        // get position of Blue
         Player blueSlime = slimes.get(BLUE);
         float x = blueSlime.getTransform().position.x;
         float y = blueSlime.getTransform().position.y;
 
-        //Spawn Green and Yellow
-        if(blueSlime.getDirection().x > 0){
-            spawnSlime(GREEN, x, y, TINY_SLIME);
-            spawnSlime(YELLOW, x - blueSlime.getTransform().scale.x, y, TINY_SLIME);
-        }
-        else{
-            spawnSlime(GREEN, x, y, TINY_SLIME);
-            spawnSlime(YELLOW, x + blueSlime.getTransform().scale.x, y, TINY_SLIME);
-        }
+        // Spawn Green and Yellow
+        // if (blueSlime.getDirection().x > 0) {
+        // spawnSlime(GREEN, x, y, TINY_SLIME);
+        // spawnSlime(YELLOW, x - blueSlime.getTransform().scale.x, y, TINY_SLIME);
+        // } else {
+        // spawnSlime(GREEN, x, y, TINY_SLIME);
+        // spawnSlime(YELLOW, x + blueSlime.getTransform().scale.x, y, TINY_SLIME);
+        // }
+        spawnSlime(GREEN, x, y, TINY_SLIME);
+        spawnSlime(YELLOW, x, y, TINY_SLIME);
 
-        //Remove Blue
+        // Remove Blue
         removeSlime(BLUE);
 
         mode = DUAL;
-        }
-    
-    public void mergeSlime(){
+    }
 
-        if(mode != DUAL || !slimes.get(GREEN).isAlive() || !slimes.get(YELLOW).isAlive()){
+    public void mergeSlime() {
+
+        if (mode != DUAL || !slimes.get(GREEN).isAlive() || !slimes.get(YELLOW).isAlive()) {
             return;
         }
         Entity greenSlime = slimes.get(GREEN);
         Entity yellowSlime = slimes.get(YELLOW);
 
         // check is within range
-        if (!greenSlime.getComponent(Bounds.class).interectBounds.intersects(yellowSlime.getComponent(Bounds.class).interectBounds)) {
+        if (!greenSlime.getComponent(Bounds.class).interectBounds
+                .intersects(yellowSlime.getComponent(Bounds.class).interectBounds)) {
             return;
         }
 
-        //Spawn Blue
-        spawnSlime(BLUE, greenSlime.getTransform().position.x, greenSlime.getTransform().position.y, LARGE_SLIME);
+        Player activeSlime = null;
+        Player inactiveSlime = null;
 
-        //Remove Green and Yellow
+        for (Player slime : slimes.values()) {
+            if (slime.isAlive() && slime.isActive()) {
+                activeSlime = slime;
+            } else if (slime.isAlive() && !slime.isActive()) {
+                inactiveSlime = slime;
+            }
+        }
+
+        if (activeSlime != null && inactiveSlime != null) {
+
+            float inactiveX = inactiveSlime.getPosition().x;
+            float inactiveY = inactiveSlime.getPosition().y;
+
+            spawnSlime(BLUE, inactiveX, inactiveY - 10 * SCALE, LARGE_SLIME);
+
+        }
+
+        // Remove Green and Yellow
         removeSlime(GREEN);
         removeSlime(YELLOW);
 
         mode = SINGLE;
     }
-    
+
     public static void switchPlayer() {
         if (mode == SINGLE)
             return;
-      
+
         Player green = slimes.get(GREEN);
         Player yellow = slimes.get(YELLOW);
 
@@ -143,33 +162,33 @@ public class PlayerManager {
         } else if (yellow.isActive() && green.isAlive()) {
             green.setActive(true);
             yellow.setActive(false);
-        }else{
+        } else {
             green.setActive(false);
             yellow.setActive(false);
 
         }
 
-
     }
-    
+
     public static void resetIfDead() {
         Player blue = slimes.get(BLUE);
         Player green = slimes.get(GREEN);
         Player yellow = slimes.get(YELLOW);
 
         Timer Timer = new Timer();
-            TimerTask timerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    LevelManager.resetLevel();}
-            };
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                LevelManager.resetLevel();
+            }
+        };
 
         if (blue != null && !blue.isAlive()) {
             Timer.schedule(timerTask, 2000);
-        }else if(green != null && yellow != null && !green.isAlive() && !yellow.isAlive()){
+        } else if (green != null && yellow != null && !green.isAlive() && !yellow.isAlive()) {
             Timer.schedule(timerTask, 2000);
         }
-        
+
     }
 
 }

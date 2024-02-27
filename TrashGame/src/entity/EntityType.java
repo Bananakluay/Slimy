@@ -7,5 +7,6 @@ public enum EntityType {
     GATE,
     BUTTON,
     TRAP,
+    PLATFORM,
     NONE
 }
