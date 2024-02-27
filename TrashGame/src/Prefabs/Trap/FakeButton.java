@@ -5,6 +5,7 @@ import static utils.Constants.Layer.TRAP;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -35,33 +36,55 @@ public class FakeButton extends Entity implements Behavior {
                 (int) this.getTransform().position.y + TILES_SIZE * 0.8f,
                 TILES_SIZE * 0.8f,
                 TILES_SIZE * 0.2f,
-                List.of(EntityType.PLAYER, EntityType.BOX),
+                Arrays.asList(EntityType.PLAYER, EntityType.BOX),
                 this));
         imgs = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/button.png", 16, 16);
 
         //TODO add animation
     }
 
+    // @Override
+    // public void activateOn(Entity entity) {
+    //     if(!entity.hasComponent(Rigidbody.class))
+    //         return;
+    //     if(activatedOnce)
+    //         return;
+    //     if (entity instanceof Player player) {
+    //         isActive = true;
+    //         activatedOnce = true;
+    //         System.out.println("Bomb!");
+
+    //         player.getComponent(Rigidbody.class).addForce(new Vec2(0, -20));
+    //         player.die();
+        
+    //     }else{
+    //         isActive = true;
+    //         activatedOnce = true;
+    //         entity.getComponent(Rigidbody.class).addForce(new Vec2(-10, -10));
+    //     }
+    // }
     @Override
     public void activateOn(Entity entity) {
-        if(!entity.hasComponent(Rigidbody.class))
+        if (!entity.hasComponent(Rigidbody.class))
             return;
-        if(activatedOnce)
+        if (activatedOnce)
             return;
-        if (entity instanceof Player player) {
+
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
             isActive = true;
             activatedOnce = true;
             System.out.println("Bomb!");
 
             player.getComponent(Rigidbody.class).addForce(new Vec2(0, -20));
             player.die();
-        
-        }else{
+        } else {
             isActive = true;
             activatedOnce = true;
             entity.getComponent(Rigidbody.class).addForce(new Vec2(-10, -10));
         }
     }
+
 
     @Override
     public void activateOff() {}
@@ -87,6 +110,12 @@ public class FakeButton extends Entity implements Behavior {
                 (int)this.getTransform().scale.y,
                 null);
         }
+    }
+
+    @Override
+    public void activate(Entity entity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'activate'");
     }
 
     

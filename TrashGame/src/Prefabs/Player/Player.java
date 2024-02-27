@@ -11,6 +11,7 @@ import static entity.EntityType.PLAYER;
 import static entity.EntityType.TILE;
 import static utils.Constants.Game.SCALE;
 
+import java.util.Arrays;
 import java.util.List;
 
 import components.Animation;
@@ -32,16 +33,26 @@ public class Player extends Entity {
         init();
     }
 
+    // private void init() {
+    //     type = EntityType.PLAYER;
+    //     direction = new Vec2(0, 0);
+    //     addComponent(new Bounds(null,List.of(PLAYER)));
+    //     addComponent(new Rigidbody(1.5f*SCALE, 0.5f*SCALE));
+    //     addComponent(new Physic2D());
+    //     addComponent(new Controller());
+    //     addComponent(new Animation());
+
+    // }
     private void init() {
         type = EntityType.PLAYER;
         direction = new Vec2(0, 0);
-        addComponent(new Bounds(null,List.of(PLAYER)));
-        addComponent(new Rigidbody(1.5f*SCALE, 0.5f*SCALE));
+        
+        addComponent(new Bounds(null, Arrays.asList(EntityType.PLAYER)));
+        addComponent(new Rigidbody(1.5f * SCALE, 0.5f * SCALE));
         addComponent(new Physic2D());
         addComponent(new Controller());
         addComponent(new Animation());
-
-    }
+}
 
     
 

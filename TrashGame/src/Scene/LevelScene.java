@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import Gui.GuiButton;
 import Gui.GuiLayer;
 import Gui.ToggleGuiButton;
+import Prefabs.Objects.ArrowTrap;
 import Prefabs.Objects.Box;
 import Prefabs.Player.PlayerManager;
 import Prefabs.Trap.FakeButton;
@@ -60,17 +61,17 @@ public class LevelScene extends Scene {
         Box box = new Box("box", TILES_SIZE*4, TILES_SIZE*2, TILES_SIZE, TILES_SIZE, null, 3f*SCALE, 0.67f*SCALE);
         entitiyManager.addEntity(box);
 
-        FakeButton fb = new FakeButton(TILES_SIZE*8, TILES_SIZE*12);
-        entitiyManager.addEntity(fb);
+        // FakeButton fb = new FakeButton(TILES_SIZE*8, TILES_SIZE*12);
+        // entitiyManager.addEntity(fb);
 
-        Spike sp = new Spike("spike", TILES_SIZE*10, TILES_SIZE*12);
-        entitiyManager.addEntity(sp);
+        // Spike sp = new Spike("spike", TILES_SIZE*10, TILES_SIZE*12);
+        // entitiyManager.addEntity(sp);
+        // entitiyManager.ready();
+
+        ArrowTrap at = new ArrowTrap("arrowtrap", TILES_SIZE*15, TILES_SIZE*12);
+        entitiyManager.addEntity(at);
         entitiyManager.ready();
-
     
-
-       
-
 
     }
 

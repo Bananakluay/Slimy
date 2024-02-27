@@ -6,6 +6,7 @@ import static utils.Constants.Layer.TRAP;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.List;
 
 import Interaction.Behavior;
@@ -32,21 +33,30 @@ public class Spike extends Entity implements Behavior {
                 transform.position.y + TILES_SIZE / 2,
                 transform.scale.x - SCALE,
                 transform.scale.y,
-                List.of(EntityType.PLAYER),
+                Arrays.asList(EntityType.PLAYER),
                 this);
         addComponent(detector);
         img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/spike.png", TILES_SIZE, TILES_SIZE);
 
     }
 
+    // @Override
+    // public void activateOn(Entity entity) {
+    //     if(entity instanceof Player player){
+    //         player.die();
+    //     }
+
+    // }
     @Override
-    public void activateOn(Entity entity) {
-        if(entity instanceof Player player){
-            player.die();
+        public void activateOn(Entity entity) {
+            if (entity instanceof Player) {
+                Player player = (Player) entity;
+                player.die();
+                System.out.println("spike");
+            }
         }
 
-    }
-
+        
     @Override
     public void activateOff() {}
     
@@ -59,6 +69,12 @@ public class Spike extends Entity implements Behavior {
                 (int) (TILES_SIZE),
                 (int) (TILES_SIZE),
                 null);
+    }
+
+    @Override
+    public void activate(Entity entity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'activate'");
     }
 
     

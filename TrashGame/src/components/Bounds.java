@@ -25,7 +25,7 @@ public class Bounds extends Component{
 
     public Rectangle2D.Float interectBounds = new Rectangle2D.Float();
     public float interectBoundsoffset = 10*SCALE;
-    private boolean DEBUG = false;
+    private boolean DEBUG = true;
     private List<EntityType> ignoreET;
     public Bounds(Color color, List<EntityType> ignoreET){
         this.color = color != null ? color : Color.WHITE;

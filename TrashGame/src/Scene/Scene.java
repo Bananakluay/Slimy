@@ -1,7 +1,12 @@
 package Scene;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
+
 import Renderer.Renderer;
+
+import entity.Entity;
 
 
 public abstract class Scene{
@@ -26,7 +31,13 @@ public abstract class Scene{
 	}
 
 	
-
+	// protected List<Entity> entities = new ArrayList<>();
+	// public void addEntity(Entity entity) {
+    //     entities.add(entity);
+    // }
+	// public List<Entity> getEntities() {
+    //     return entities;
+    // }
 
 	
 

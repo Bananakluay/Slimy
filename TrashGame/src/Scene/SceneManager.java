@@ -1,5 +1,7 @@
 package Scene;
 
+import Renderer.Renderer;
+
 import Gui.GuiLayer;
 import level.LevelManager;
 
@@ -17,7 +19,7 @@ public class SceneManager {
             sceneManager = new SceneManager();
         return sceneManager;
     }
-
+    
     public void init() {
         changeScene(Scenes.MENU_SCENE);
     }
@@ -43,4 +45,10 @@ public class SceneManager {
     public static Scene getCurrentScene() {
         return currentScene;
     }
+
+
+    // private static Renderer renderer = new Renderer();
+    // public static Renderer getRenderer() {
+    //     return renderer;
+    // }
 }

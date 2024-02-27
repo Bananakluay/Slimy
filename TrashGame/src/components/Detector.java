@@ -1,6 +1,7 @@
 package components;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -93,8 +94,18 @@ public class Detector extends Component implements Behavior{
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        // g2d.setColor(Color.red);
-        // g2d.fill(bound);
+        g2d.setColor(Color.red);
+        g2d.fill(bound);
+    }
+
+    @Override
+    public void activate(Entity entity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'activate'");
+    }
+
+    public void updatePos(float x, float y) {
+        this.bound.setRect(x, y, this.entity.getScale().x, this.entity.getScale().y);
     }
     
     

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import components.Component;
-import scene.LevelScene;
+import Scene.LevelScene;
 
 public class EntityManager {
 
@@ -20,13 +20,14 @@ public class EntityManager {
     }
 
     public void updateEntities() {
-        Iterator<Entity> iterator = entities.iterator();
+        
 
         for (Entity entity : entitiesToAdd) {
             entities.add(entity);
             LevelScene.getRenderer().submit(entity);
         }
         entitiesToAdd.clear();
+        Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
             entity.update();
@@ -47,7 +48,7 @@ public class EntityManager {
 
     public void addEntity(Entity entity) {
         entity.ready();
-        entities.add(entity);
+        entitiesToAdd.add(entity);
         LevelScene.getRenderer().submit(entity);
 
     }

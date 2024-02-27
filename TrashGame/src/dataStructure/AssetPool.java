@@ -83,18 +83,42 @@ public class AssetPool {
     }
     
     
-    private static <T> void add(String resource, T asset){
+    // private static <T> void add(String resource, T asset){
+    //     File file = new File(resource);
+    //     if(asset instanceof BufferedImage b && !AssetPool.bufferImage.containsKey(resource)){
+    //         AssetPool.bufferImage.put(file.getAbsolutePath(), b);
+
+    //     }else if(asset instanceof Sprite s && !AssetPool.sprites.containsKey(resource)){
+    //         AssetPool.sprites.put(file.getAbsolutePath(), s);
+
+    //     }else if(asset instanceof Font f && !AssetPool.fonts.containsKey(resource)){
+    //         AssetPool.fonts.put(file.getAbsolutePath(), f);
+
+    //     }else{
+    //         System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
+    //         System.exit(-1);
+    //     }
+    // }
+
+    private static <T> void add(String resource, T asset) {
         File file = new File(resource);
-        if(asset instanceof BufferedImage b && !AssetPool.bufferImage.containsKey(resource)){
-            AssetPool.bufferImage.put(file.getAbsolutePath(), b);
-
-        }else if(asset instanceof Sprite s && !AssetPool.sprites.containsKey(resource)){
-            AssetPool.sprites.put(file.getAbsolutePath(), s);
-
-        }else if(asset instanceof Font f && !AssetPool.fonts.containsKey(resource)){
-            AssetPool.fonts.put(file.getAbsolutePath(), f);
-
-        }else{
+        
+        if (asset instanceof BufferedImage) {
+            BufferedImage b = (BufferedImage) asset;
+            if (!AssetPool.bufferImage.containsKey(resource)) {
+                AssetPool.bufferImage.put(file.getAbsolutePath(), b);
+            }
+        } else if (asset instanceof Sprite) {
+            Sprite s = (Sprite) asset;
+            if (!AssetPool.sprites.containsKey(resource)) {
+                AssetPool.sprites.put(file.getAbsolutePath(), s);
+            }
+        } else if (asset instanceof Font) {
+            Font f = (Font) asset;
+            if (!AssetPool.fonts.containsKey(resource)) {
+                AssetPool.fonts.put(file.getAbsolutePath(), f);
+            }
+        } else {
             System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
             System.exit(-1);
         }
