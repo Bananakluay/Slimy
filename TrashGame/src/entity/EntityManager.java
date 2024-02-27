@@ -20,13 +20,14 @@ public class EntityManager {
     }
 
     public void updateEntities() {
-        Iterator<Entity> iterator = entities.iterator();
-
+        
         for (Entity entity : entitiesToAdd) {
             entities.add(entity);
             LevelScene.getRenderer().submit(entity);
         }
         entitiesToAdd.clear();
+        
+        Iterator<Entity> iterator = entities.iterator();
         while (iterator.hasNext()) {
             Entity entity = iterator.next();
             entity.update();
@@ -46,20 +47,23 @@ public class EntityManager {
     }
 
     public void addEntity(Entity entity) {
-        entity.ready();
-        entities.add(entity);
+        if(LevelScene.isRunning){
+            entity.ready();
+        }
+        entitiesToAdd.add(entity);
         LevelScene.getRenderer().submit(entity);
 
+    }
+
+    public void removeEntity(Entity entity) {
+        entitiesToRemove.add(entity);
+        LevelScene.getRenderer().remove(entity, entity.getZindex());
     }
 
     public void addAllEntities(List<Entity> entities) {
         this.entities = entities;
     }
 
-    public void removeEntity(Entity entity) {
-        entities.remove(entity);
-        LevelScene.getRenderer().remove(entity, entity.getZindex());
-    }
 
     public Entity getEntity(String name) {
         for (Entity entity : this.entities) {
@@ -87,7 +91,8 @@ public class EntityManager {
 
     public void clear() {
         entities.clear();
-    } 
+    }
+
     public List<Entity> getAllEntities() {
         return entities;
     }

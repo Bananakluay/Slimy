@@ -61,7 +61,6 @@ public class LevelScene extends Scene {
         Box box = new Box("box", TILES_SIZE * 4, TILES_SIZE * 2, TILES_SIZE, TILES_SIZE, null, 3f * SCALE,
                 0.67f * SCALE);
         entitiyManager.addEntity(box);
-
         BombButton fb = new BombButton(TILES_SIZE * 8, TILES_SIZE * 12);
         entitiyManager.addEntity(fb);
 
@@ -146,6 +145,7 @@ public class LevelScene extends Scene {
             renderer.render(g);
             guiPauseScene.render(g);
         }
+        renderer.processQueuedChanges();
     }
 
 

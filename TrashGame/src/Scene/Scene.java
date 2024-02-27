@@ -8,7 +8,8 @@ import renderer.Renderer;
 public abstract class Scene{
 
 	protected static Renderer renderer = new Renderer();
-	public boolean isRunning = true;
+
+	public static boolean isRunning = true;
 	
 	public abstract void init();
 

@@ -24,7 +24,7 @@ public class Bounds extends Component {
 
     public Rectangle2D.Float interectBounds = new Rectangle2D.Float();
     public float interectBoundsoffset = 10 * SCALE;
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
     private List<EntityType> ignoreET;
 
     public Bounds(Color color, List<EntityType> ignoreET) {
@@ -104,17 +104,12 @@ public class Bounds extends Component {
         Graphics2D g2d = (Graphics2D) g;
         if (DEBUG) {
             g2d.setColor(color);
-            if (true)
-                g2d.fillRect(
-                        (int) entity.getTransform().position.x,
-                        (int) entity.getTransform().position.y,
-                        (int) entity.getTransform().scale.x,
-                        (int) entity.getTransform().scale.y);
+            if (true){
+                g2d.draw(boundsX);
+                g2d.draw(boundsY);
+            }
+
         }
-
     }
-
-    public void addListener() {
-    };
 
 }

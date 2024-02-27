@@ -26,6 +26,7 @@ public class Animation extends Component {
     private int offsetX = 0, offsetY = 0;
 
     private boolean playOneTime = false;
+
     public Animation() {
 
         this.animations = new HashMap<>();
@@ -105,9 +106,9 @@ public class Animation extends Component {
         int w = (int) (width * scale);
         int h = (int) (height * scale);
         if (player.getDirection().x < 0)
-            g.drawImage(animations.get(currentAnimation).frames.get(index), x + w, y, -w, h, null);
+            g.drawImage(animations.get(currentAnimation).frames.get(index), x + w, y, -w,h, null);
         else
-            g.drawImage(animations.get(currentAnimation).frames.get(index), x, y, w, h, null);
+            g.drawImage(animations.get(currentAnimation).frames.get(index), x, y, w, h,null);
 
     }
 
