@@ -32,9 +32,9 @@ public class LevelManager {
         return levelManager;
     }
     private void init() {
-        getCurrentLevel();
-        buildAllLevels();
-        currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+        //getCurrentLevel();
+        //buildAllLevels();
+        currentLevel = new Level("TrashGame/res/lvls/5Tmap.png");
     }
 
     public Level getCurrentLevel() {
