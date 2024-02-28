@@ -23,11 +23,11 @@ import static utils.Constants.Player.*;
 public class PlayerManager {
 
     private static Map<String, Player> slimes;
-    private static SlimeMode mode = SINGLE;
+    private static SlimeMode mode;
 
     public PlayerManager() {
         slimes = new HashMap<>();
-        mode = SINGLE;
+        mode = DUAL;
     }
 
     public void update() {
@@ -42,6 +42,7 @@ public class PlayerManager {
 
         // switch Player
         if (Game.KI.onPress(KeyEvent.VK_R)) {
+            System.out.println("here");
             switchPlayer();
         }
 

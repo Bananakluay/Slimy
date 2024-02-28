@@ -23,8 +23,8 @@ public class BombButton extends Entity implements Behavior {
     private List<BufferedImage> imgs;
     private boolean isActive;
 
-    public BombButton(float x, float y) {
-        super("Fake Button", new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), TRAP);
+    public BombButton(String name, float x, float y) {
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), TRAP);
         init();
     }
 

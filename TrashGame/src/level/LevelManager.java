@@ -37,14 +37,14 @@ public class LevelManager {
 
     public static void loadLevels() {
         buildAllLevels();
-        currentLevel = new Level("TrashGame/res/lvls/6Tmap.png");
+        currentLevel = new Level("TrashGame/res/lvlstest/" + Map.get(lvlindex));
     }
     public Level getCurrentLevel() {
         return currentLevel;
     }
 
     public static File[] GetAllLevels() {
-        URL url = LevelManager.class.getResource("/lvls");
+        URL url = LevelManager.class.getResource("/lvlstest");
         File file = null;
 
         try {
@@ -70,7 +70,7 @@ public class LevelManager {
         if (lvlindex < Map.size()) {
             // LevelScene.deleteCurrentLevel();
             LevelScene.createNextLevel();
-            currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+            currentLevel = new Level("TrashGame/res/lvlstest/" + Map.get(lvlindex));
             lvlindex++;
         } else {
             System.out.println("Game complete");

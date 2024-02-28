@@ -15,12 +15,16 @@ import entity.EntityType;
 import interaction.Behavior;
 import level.LevelManager;
 import scene.LevelScene;
+import utils.Vec2;
 
 public class Door extends Entity implements Behavior {
     public LevelScene levelScene;
     List<BufferedImage> img;
-    public Door(String name, Transform transform) {
-        super(name, transform, 1);
+    public Door(String name ,float x, float y) {
+        super(
+            name, 
+            new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE*2)), 
+            1);
         init();
     }
 

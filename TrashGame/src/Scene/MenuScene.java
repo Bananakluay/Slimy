@@ -19,7 +19,6 @@ public class MenuScene extends Scene {
     private GuiLayer guiLayer;
 
     public MenuScene() {
-        System.out.println("here");
         init();
     }
 

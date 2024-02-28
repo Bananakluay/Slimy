@@ -55,27 +55,6 @@ public class LevelScene extends Scene {
         // Entity--------------------------------
         LevelManager.loadLevels();
 
-        Button b = new Button("Button", TILES_SIZE * 11, TILES_SIZE * 12);
-        entitiyManager.addEntity(b);
-        Button b2 = new Button("Button", TILES_SIZE * 14, TILES_SIZE * 12);
-        entitiyManager.addEntity(b2);
-
-        Gate g = new Gate("Gate", TILES_SIZE * 16, TILES_SIZE * 11);
-        entitiyManager.addEntity(g);
-        g.addListener(b);
-        g.addListener(b2);
-
-        // Box box = new Box("box", TILES_SIZE * 4, TILES_SIZE * 2, TILES_SIZE,
-        // TILES_SIZE, null, 3f * SCALE,
-        // 0.67f * SCALE);
-        // entitiyManager.addEntity(box);
-        // BombButton fb = new BombButton(TILES_SIZE * 8, TILES_SIZE * 12);
-        // entitiyManager.addEntity(fb);
-
-        // Spike sp = new Spike("spike", TILES_SIZE * 21, TILES_SIZE * 12);
-        // entitiyManager.addEntity(sp);
-        // entitiyManager.ready();
-
         Platform p = new Platform(TILES_SIZE * 10, TILES_SIZE * 10);
         entitiyManager.addEntity(p);
         Platform p2 = new Platform(TILES_SIZE * 11, TILES_SIZE * 10);
