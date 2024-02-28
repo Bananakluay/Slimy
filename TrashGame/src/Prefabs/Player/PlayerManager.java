@@ -73,7 +73,7 @@ public class PlayerManager {
 
     private void removeSlime(String name) {
         Entity slime = slimes.remove(name);
-        
+
         LevelScene.getEntityManager().removeEntity(slime);
 
     }
@@ -145,6 +145,10 @@ public class PlayerManager {
         Player green = slimes.get(GREEN);
         Player yellow = slimes.get(YELLOW);
 
+        if (!green.isAlive() || !yellow.isAlive()) {
+            return;
+        }
+
         if (green.isActive() && yellow.isAlive()) {
             green.setActive(false);
             yellow.setActive(true);
@@ -154,8 +158,9 @@ public class PlayerManager {
         } else {
             green.setActive(false);
             yellow.setActive(false);
-
         }
+
+        System.out.println(green.isActive() + " " + yellow.isActive());
 
     }
 

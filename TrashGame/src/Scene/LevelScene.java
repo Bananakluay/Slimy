@@ -117,13 +117,17 @@ public class LevelScene extends Scene {
             // g.drawLine((GAME_WIDTH / 2) + 175, 0, (GAME_WIDTH / 2) + 175, GAME_HEIGHT);
             // // draw center
 
-            GuiText.drawString(
-                    g,
-                    "PAUSED",
-                    new Vec2(GAME_WIDTH / 2, (float) (GAME_HEIGHT / 2.2)),
-                    Color.BLACK,
-                    AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 32 * 10));
+            drawPauseGui(g);
         }
+    }
+
+    public void drawPauseGui(Graphics g) {
+        GuiText.drawString(
+                g,
+                "PAUSED",
+                new Vec2(GAME_WIDTH / 2, (float) (GAME_HEIGHT / 2.2)),
+                Color.GRAY,
+                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 32 * 10));
     }
 
     // Gui playing scene----------------------------------------------
@@ -156,21 +160,21 @@ public class LevelScene extends Scene {
 
         GuiButton continueButton = new GuiButton( /* gen option button */
                 "ContinueButton",
-                new Vec2(GAME_WIDTH / 2 - (16f * SCALE), GAME_HEIGHT * 0.595f), // position
+                new Vec2(GAME_WIDTH / 2 - (16f * SCALE), GAME_HEIGHT * 0.8f), // position
                 new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16), // change png
                 () -> isRunning = true);
 
         GuiButton backButton = new GuiButton( /* gen option button */
                 "backButton",
-                new Vec2(GAME_WIDTH / 2 - (75f * SCALE), GAME_HEIGHT * 0.595f), // position
+                new Vec2(GAME_WIDTH / 2 - (75f * SCALE), GAME_HEIGHT * 0.8f), // position
                 new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png
                 () -> SceneManager.changeScene(Scenes.MENU_SCENE));
 
         GuiButton restartButton = new GuiButton( /* gen option button */
                 "restartButton",
-                new Vec2(GAME_WIDTH / 2 - (-42f * SCALE), GAME_HEIGHT * 0.595f), // position
+                new Vec2(GAME_WIDTH / 2 - (-42f * SCALE), GAME_HEIGHT * 0.8f), // position
                 new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ResetButton.png", 16, 16), // change png
                 () -> LevelManager.resetLevel());
