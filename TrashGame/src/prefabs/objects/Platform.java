@@ -26,7 +26,6 @@ public class Platform extends Entity {
     public void init() {
         this.type = EntityType.PLATFORM;
         this.addComponent(new Bounds(Color.green, null));
-        this.getComponent(Bounds.class).isOneWay = true;
     }
 
     public boolean isMovable(Entity player) {
