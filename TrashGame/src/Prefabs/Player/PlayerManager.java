@@ -42,7 +42,6 @@ public class PlayerManager {
 
         // switch Player
         if (Game.KI.onPress(KeyEvent.VK_R)) {
-            System.out.println("here");
             switchPlayer();
         }
 
@@ -76,10 +75,9 @@ public class PlayerManager {
 
     private void removeSlime(String name) {
         Entity slime = slimes.remove(name);
-        if (slime != null) {
-            LevelScene.getEntityManager().removeEntity(slime);
-            LevelScene.getRenderer().remove(slime, slime.getZindex());
-        }
+        
+        LevelScene.getEntityManager().removeEntity(slime);
+
     }
 
     public void splitSlime() {
@@ -176,18 +174,10 @@ public class PlayerManager {
         Player green = slimes.get(GREEN);
         Player yellow = slimes.get(YELLOW);
 
-        Timer Timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                LevelManager.resetLevel();
-            }
-        };
-
         if (blue != null && !blue.isAlive()) {
-            Timer.schedule(timerTask, 2000);
+            LevelManager.resetLevel();
         } else if (green != null && yellow != null && !green.isAlive() && !yellow.isAlive()) {
-            Timer.schedule(timerTask, 2000);
+            LevelManager.resetLevel();
         }
 
     }

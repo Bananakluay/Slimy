@@ -57,16 +57,6 @@ public class Level {
 		loadPlayer();// BLUE 100
 	}
 
-	// public void generateLevelData() {
-	// for (int row = 0; row < imgLvlData.getHeight(); row++) {
-	// for (int col = 0; col < imgLvlData.getWidth(); col++) {
-	// Color color = new Color(imgLvlData.getRGB(col, row));
-	// int colorCode = color.getRed();
-	// lvlData[row][col] = colorCode;
-	// }
-	// }
-
-	// }
 
 	public void loadTileBlock() {
 		// RED colorCode : 0 - 21
@@ -176,7 +166,6 @@ public class Level {
 					lvlData.put(name, gate);
 					for (int i = 0; i < maxButton; i++) {
 						Button button = (Button) lvlData.get("Button" + i + "For" + col + "" + row);
-						System.out.println("Button" + i + "For" + col + "" + row);
 						if (button != null)
 							gate.addListener(button);
 					}
@@ -204,7 +193,6 @@ public class Level {
 							col * TILES_SIZE,
 							row * TILES_SIZE
 					);
-					System.out.println(name);
 					lvlData.put(name, button);
 					LevelScene.getEntityManager().addEntity(button);
 					break;

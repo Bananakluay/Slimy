@@ -52,13 +52,14 @@ public class LevelScene extends Scene {
 
     @Override
     public void init() {
+        isRunning = true;
         // Entity--------------------------------
         LevelManager.loadLevels();
 
-        Platform p = new Platform(TILES_SIZE * 10, TILES_SIZE * 10);
-        entitiyManager.addEntity(p);
-        Platform p2 = new Platform(TILES_SIZE * 11, TILES_SIZE * 10);
-        entitiyManager.addEntity(p2);
+        // Platform p = new Platform(TILES_SIZE * 10, TILES_SIZE * 10);
+        // entitiyManager.addEntity(p);
+        // Platform p2 = new Platform(TILES_SIZE * 11, TILES_SIZE * 10);
+        // entitiyManager.addEntity(p2);
 
     }
 
@@ -123,7 +124,6 @@ public class LevelScene extends Scene {
         } else {
             guiPauseScene.update();
         }
-
     }
 
     @Override
@@ -135,16 +135,14 @@ public class LevelScene extends Scene {
             renderer.render(g);
             guiPauseScene.render(g);
         }
-        renderer.processQueuedChanges();
     }
 
     @Override
-    public synchronized void onDestroy() {
+    public void onDestroy() {
         playerManager = null;
         entitiyManager.getAllEntities().clear();
         guiPlayingScene.clear();
         guiPauseScene.clear();
-        renderer.clear();
     }
 
     public static void deleteCurrentLevel() {
@@ -155,9 +153,9 @@ public class LevelScene extends Scene {
     }
 
     public static void createNextLevel() {
+        renderer.clear();
         entitiyManager = new EntityManager();
         playerManager = new PlayerManager();
-        renderer.clear();
     }
 
     public static EntityManager getEntityManager() {

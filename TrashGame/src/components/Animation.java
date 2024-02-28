@@ -105,10 +105,26 @@ public class Animation extends Component {
         int y = (int) (entity.getTransform().position.y + offsetY * scale);
         int w = (int) (width * scale);
         int h = (int) (height * scale);
-        if (player.getDirection().x < 0)
-            g.drawImage(animations.get(currentAnimation).frames.get(index), x + w, y, -w,h, null);
-        else
-            g.drawImage(animations.get(currentAnimation).frames.get(index), x, y, w, h,null);
+        if(player == null){
+            System.out.println("Player is null");
+            return;
+            
+        } 
+        if (player.getDirection().x < 0){
+            g.drawImage(
+                animations.get(currentAnimation).frames.get(index), 
+                x + w, 
+                y,
+                -w,
+                h, 
+                null);
+        }
+        else{
+            g.drawImage(
+                animations.get(currentAnimation).frames.get(index), 
+                x, y, w, h,
+                null);
+        }
 
     }
 
