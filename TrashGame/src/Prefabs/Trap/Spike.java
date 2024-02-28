@@ -19,6 +19,7 @@ import utils.Vec2;
 
 public class Spike extends Entity implements Behavior {
     BufferedImage img;
+
     public Spike(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE / 2)), TRAP);
         init();
@@ -27,12 +28,12 @@ public class Spike extends Entity implements Behavior {
     public void init() {
 
         Detector detector = new Detector(
-                transform.position.x,
-                transform.position.y + TILES_SIZE / 2,
-                transform.scale.x - SCALE,
+                transform.position.x + SCALE,
+                transform.position.y + (TILES_SIZE / 2),
+                transform.scale.x - 2*SCALE,
                 transform.scale.y,
                 List.of(EntityType.PLAYER),
-                this,false);
+                this, false);
         addComponent(detector);
         img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/spike.png", TILES_SIZE, TILES_SIZE);
 
@@ -40,15 +41,16 @@ public class Spike extends Entity implements Behavior {
 
     @Override
     public void activateOn(Entity entity) {
-        if(entity instanceof Player player){
+        if (entity instanceof Player player) {
             player.die();
         }
 
     }
 
     @Override
-    public void activateOff() {}
-    
+    public void activateOff() {
+    }
+
     @Override
     public void draw(Graphics g) {
         super.draw(g);
@@ -61,8 +63,7 @@ public class Spike extends Entity implements Behavior {
     }
 
     @Override
-    public void activateOneShot(Entity entity) {}
-
-    
+    public void activateOneShot(Entity entity) {
+    }
 
 }

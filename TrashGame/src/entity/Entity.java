@@ -84,6 +84,9 @@ public class Entity {
         return null;
     }
 
+    public void setZindex(int zIndex) {
+        this.zIndex = zIndex;
+    }
     public void generateId() {
         if (this.uid == -1)
             this.uid = ID_COUNTER++;

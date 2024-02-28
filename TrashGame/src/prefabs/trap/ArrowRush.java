@@ -77,7 +77,6 @@ public class ArrowRush extends Entity implements Behavior {
     public void activateOneShot(Entity entity) {
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            System.out.println(player.getName() + " hit arrow");
         }
     }
 
@@ -114,7 +113,6 @@ public class ArrowRush extends Entity implements Behavior {
 
     @Override
     public void update() {
-        System.out.println("here");
         System.out.println(this.getTransform().position.x);
         super.update();
         this.getComponent(Detector.class).updatePos(this.getTransform().position.x, this.getTransform().position.y);

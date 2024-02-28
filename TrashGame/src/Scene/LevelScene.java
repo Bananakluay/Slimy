@@ -7,6 +7,7 @@ import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -42,6 +43,8 @@ public class LevelScene extends Scene {
     private static EntityManager entitiyManager;
     private static GuiLayer guiPlayingScene;
     private static GuiLayer guiPauseScene;
+
+    BufferedImage bg = AssetPool.getBufferedImage("TrashGame/res/assets/Background/bg.png", 64, 36);
 
     public LevelScene() {
         LevelManager.get();
@@ -105,6 +108,7 @@ public class LevelScene extends Scene {
         if (isRunning) {
             renderer.render(g);
             guiPlayingScene.render(g);
+            // drawBackGround(g);
         } else {
             renderer.render(g);
             g.setColor(new Color(0, 0, 0, 128));
@@ -119,6 +123,16 @@ public class LevelScene extends Scene {
 
             drawPauseGui(g);
         }
+    }
+
+    public void drawBackGround(Graphics g) {
+        g.drawImage(
+                bg,
+                (64 * 15) / 2,
+                (36 * 15) / 2,
+                (int) (64 * 15),
+                (int) (36 * 15),
+                null);
     }
 
     public void drawPauseGui(Graphics g) {

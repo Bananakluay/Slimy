@@ -20,22 +20,23 @@ import utils.Vec2;
 public class Door extends Entity implements Behavior {
     public LevelScene levelScene;
     List<BufferedImage> img;
-    public Door(String name ,float x, float y) {
+
+    public Door(String name, float x, float y) {
         super(
-            name, 
-            new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE*2)), 
-            1);
+                name,
+                new Transform(new Vec2(x - 4 * SCALE, y - TILES_SIZE), new Vec2(TILES_SIZE, TILES_SIZE * 2)),
+                1);
         init();
     }
 
     public void init() {
         Detector detector = new Detector(
                 transform.position.x,
-                transform.position.y + TILES_SIZE*0.3f,
+                transform.position.y + TILES_SIZE * 0.3f,
                 transform.scale.x,
-                transform.scale.y*1.7f,
+                transform.scale.y * 1.7f,
                 List.of(EntityType.PLAYER),
-                this,false);
+                this, false);
         addComponent(detector);
         img = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/door3.png", 21, 32);
     }
@@ -45,22 +46,25 @@ public class Door extends Entity implements Behavior {
         System.out.println("This is door Exits");
         LevelManager.loadNextLevels();
     }
-    
+
     @Override
-    public void activateOff() {}
+    public void activateOff() {
+    }
+
     @Override
     public void draw(Graphics g) {
         super.draw(g);
         g.drawImage(
-            img.get(1), 
-            (int)(this.getTransform().position.x), 
-            (int)(this.getTransform().position.y),
-            (int)(21*SCALE), 
-            (int)(32*SCALE), 
-            null);
+                img.get(1),
+                (int) (this.getTransform().position.x),
+                (int) (this.getTransform().position.y),
+                (int) (21 * SCALE),
+                (int) (32 * SCALE),
+                null);
     }
 
     @Override
-    public void activateOneShot(Entity entity) {}
+    public void activateOneShot(Entity entity) {
+    }
 
 }

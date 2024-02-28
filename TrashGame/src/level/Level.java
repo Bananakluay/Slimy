@@ -29,6 +29,9 @@ import prefabs.trap.Spike;
 import scene.LevelScene;
 import utils.Vec2;
 import java.util.Random;
+
+import components.Sprite;
+
 import static utils.Constants.TileSet.GrassesOffset;
 
 @SuppressWarnings("unused")
@@ -38,8 +41,11 @@ public class Level {
 
 	private HashMap<String, Entity> lvlData;
 
+	private BufferedImage bgLvlData;
+
 	public Level(String imgLvlDataFile) {
 		imgLvlData = AssetPool.getBufferedImage(imgLvlDataFile, 1, 1);
+		bgLvlData = AssetPool.getBufferedImage("TrashGame/res/assets/background/bgdata1.png", 1, 1);
 		lvlData = new HashMap<String, Entity>();
 		init();
 
@@ -51,13 +57,15 @@ public class Level {
 		loadDoor(); // GREEN 255
 
 		loadButton(); // RED 40
-		loadGate(); // GREEN 254
+		// loadGate(); // GREEN 254
 
 		loadTrap();// GREEN 0 - 10
 
 		loadPlayer();// BLUE 100
 
-		loadPlatform();// RED 22 - 24
+		loadPlatform();// RED 32 - 34
+
+		loadbackground();// BLUE 0 - 11
 	}
 
 	public void loadTileBlock() {
@@ -78,7 +86,7 @@ public class Level {
 				Color color = new Color(imgLvlData.getRGB(col, row));
 				int colorCode = color.getRed();
 
-				if (colorCode < 0 || colorCode > tileSet.size() || colorCode == 255)
+				if (colorCode < 0 || colorCode > 22 || colorCode == 255)
 					continue;
 
 				String name = "TileBlock" + col + "" + row;
@@ -93,6 +101,27 @@ public class Level {
 				lvlData.put(name, tileBlock);
 				LevelScene.getEntityManager().addEntity(tileBlock);
 
+			}
+		}
+	}
+
+	public void loadbackground() {
+		// BLUE colorCode : [0 , 11]
+		List<BufferedImage> bg = AssetPool.getBufferedImageList("TrashGame/res/assets/background/bg.png", 16, 16);
+
+		for (int row = 0; row < bgLvlData.getHeight(); row++) {
+			for (int col = 0; col < bgLvlData.getWidth(); col++) {
+				Color color = new Color(bgLvlData.getRGB(col, row));
+				int colorCode = color.getBlue();
+				if (colorCode < 0 || colorCode > 12)
+					continue;
+				Entity background = new Entity("background",
+						new Transform(new Vec2(col * TILES_SIZE, row * TILES_SIZE), new Vec2(TILES_SIZE, TILES_SIZE)),
+						0);
+				background.addComponent(new Sprite(bg.get(colorCode)));
+				background.setZindex(-1);
+				lvlData.put("background", background);
+				LevelScene.getEntityManager().addEntity(background);
 			}
 		}
 	}
@@ -187,12 +216,12 @@ public class Level {
 				Color color = new Color(imgLvlData.getRGB(col, row));
 				int colorCode = color.getRed();
 
-				if (colorCode < 22 || colorCode > 25)
+				if (colorCode < 32 || colorCode > 35)
 					continue;
 
 				String name = "Platform" + col + "" + row;
 
-				Platform platform = new Platform(col * TILES_SIZE, row * TILES_SIZE, colorCode % 22);
+				Platform platform = new Platform(col * TILES_SIZE, row * TILES_SIZE, colorCode - 32);
 
 				lvlData.put(name, platform);
 				LevelScene.getEntityManager().addEntity(platform);
