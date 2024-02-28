@@ -90,14 +90,6 @@ public class PlayerManager {
         float x = blueSlime.getTransform().position.x;
         float y = blueSlime.getTransform().position.y;
 
-        // Spawn Green and Yellow
-        // if (blueSlime.getDirection().x > 0) {
-        // spawnSlime(GREEN, x, y, TINY_SLIME);
-        // spawnSlime(YELLOW, x - blueSlime.getTransform().scale.x, y, TINY_SLIME);
-        // } else {
-        // spawnSlime(GREEN, x, y, TINY_SLIME);
-        // spawnSlime(YELLOW, x + blueSlime.getTransform().scale.x, y, TINY_SLIME);
-        // }
         spawnSlime(GREEN, x, y, TINY_SLIME);
         spawnSlime(YELLOW, x, y, TINY_SLIME);
 

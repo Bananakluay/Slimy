@@ -11,13 +11,11 @@ import entity.Entity;
 public class Renderer {
 
     public Map<Integer, List<Entity>> layers;
-    public Map<Integer, List<Entity>> entitiesToRemove;
-    public Map<Integer, List<Entity>> entitiesToAdd;
+    public Map<Integer, List<Entity>> entitiesToRemove = new HashMap<>();
+    public Map<Integer, List<Entity>> entitiesToAdd = new HashMap<>();
 
     public Renderer() {
         layers = new HashMap<>();
-        entitiesToRemove = new HashMap<>();
-        entitiesToAdd = new HashMap<>();
     }
 
     public void render(Graphics g) {
@@ -42,11 +40,15 @@ public class Renderer {
             zIndex++;
         }
 
+        processQueuedChanges();
+
     }
 
     public void submit(Entity entity) {
         layers.computeIfAbsent(entity.zIndex, k -> new ArrayList<>());
-        layers.get(entity.zIndex).add(entity);
+        entitiesToAdd.computeIfAbsent(entity.zIndex, k -> new ArrayList<>());
+
+        entitiesToAdd.get(entity.zIndex).add(entity);
     }
 
     public void submitAll(List<Entity> entities) {
@@ -71,6 +73,7 @@ public class Renderer {
     }
 
     public void processQueuedChanges() {
+
         for (Integer zIndex : entitiesToAdd.keySet()) {
             if (!layers.containsKey(zIndex)) {
                 layers.put(zIndex, new ArrayList<>());
@@ -78,7 +81,6 @@ public class Renderer {
             layers.get(zIndex).addAll(entitiesToAdd.get(zIndex));
         }
         entitiesToAdd.clear();
-
         for (Integer zIndex : entitiesToRemove.keySet()) {
             if (layers.containsKey(zIndex)) {
                 layers.get(zIndex).removeAll(entitiesToRemove.get(zIndex));

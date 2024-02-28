@@ -1,7 +1,6 @@
 package entity;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import components.Component;
@@ -20,24 +19,23 @@ public class EntityManager {
     }
 
     public void updateEntities() {
-        
-        for (Entity entity : entitiesToAdd) {
-            entities.add(entity);
-            LevelScene.getRenderer().submit(entity);
-        }
-        entitiesToAdd.clear();
-        
-        Iterator<Entity> iterator = entities.iterator();
-        while (iterator.hasNext()) {
-            Entity entity = iterator.next();
-            entity.update();
-        }
-
-        for (Entity entity : entitiesToRemove) {
+        // Process entities to add
+        entities.addAll(entitiesToAdd);
+        entitiesToAdd.clear(); // Clear after processing
+    
+        // Process entities to remove
+        List<Entity> toRemove = new ArrayList<>(entitiesToRemove); // Create a copy
+        for (Entity entity : toRemove) {
             entities.remove(entity);
             LevelScene.getRenderer().remove(entity, entity.getZindex());
         }
-        entitiesToRemove.clear();
+        entitiesToRemove.clear(); // Clear after processing
+    
+        // Update remaining entities
+        List<Entity> toUpdate = new ArrayList<>(entities); // Create a copy
+        for (Entity entity : toUpdate) {
+            entity.update();
+        }
     }
 
     public void ready() {
@@ -47,7 +45,7 @@ public class EntityManager {
     }
 
     public void addEntity(Entity entity) {
-        if(LevelScene.isRunning){
+        if (LevelScene.isRunning) {
             entity.ready();
         }
         entitiesToAdd.add(entity);
@@ -63,7 +61,6 @@ public class EntityManager {
     public void addAllEntities(List<Entity> entities) {
         this.entities = entities;
     }
-
 
     public Entity getEntity(String name) {
         for (Entity entity : this.entities) {
