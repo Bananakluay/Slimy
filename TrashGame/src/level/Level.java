@@ -20,6 +20,7 @@ import entity.Entity;
 import prefabs.exits.Door;
 import prefabs.objects.Button;
 import prefabs.objects.Gate;
+import prefabs.objects.Platform;
 import prefabs.objects.TileBlock;
 import prefabs.player.PlayerManager;
 import prefabs.player.SlimeType;
@@ -55,6 +56,8 @@ public class Level {
 		loadTrap();// GREEN 0 - 10
 
 		loadPlayer();// BLUE 100
+
+		loadPlatform();// RED 22 - 24
 	}
 
 	public void loadTileBlock() {
@@ -175,6 +178,30 @@ public class Level {
 		}
 	}
 
+	public void loadPlatform(){
+		// RED colorCode : 22 - 24
+
+
+		for (int row = 0; row < imgLvlData.getHeight(); row++) {
+			for (int col = 0; col < imgLvlData.getWidth(); col++) {
+
+				Color color = new Color(imgLvlData.getRGB(col, row));
+				int colorCode = color.getRed();
+
+				if (colorCode < 22 || colorCode > 25)
+					continue;
+
+				String name = "Platform" + col + "" + row;
+
+				Platform platform = new Platform(col*TILES_SIZE, row*TILES_SIZE, colorCode % 22);
+
+				lvlData.put(name, platform);
+				LevelScene.getEntityManager().addEntity(platform);
+
+			}
+		}
+	
+	}
 	public void loadButton() {
 		// Red Color Code : 40
 		int i = 0;

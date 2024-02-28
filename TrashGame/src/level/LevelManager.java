@@ -4,8 +4,6 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import scene.LevelScene;
 
@@ -71,17 +69,7 @@ public class LevelManager {
     }
 
     public static void resetLevel() {
-        // timer = new Timer();
-        // timer.schedule(new TimerTask() {
-        // @Override
-        // public void run() {
-        // // Code to load and display the new scene
-        // loadLevels();
-        // timer.cancel();
-        // }
-        // }, 1000);
         loadLevels();
-
     }
 
     public static void onDestroy() {

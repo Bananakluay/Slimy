@@ -25,6 +25,7 @@ import main.Game;
 import prefabs.objects.Box;
 import prefabs.objects.Button;
 import prefabs.objects.Gate;
+import prefabs.objects.Platform;
 import prefabs.player.PlayerManager;
 import prefabs.trap.BombButton;
 import prefabs.trap.Spike;
@@ -52,13 +53,22 @@ public class LevelScene extends Scene {
 
     }
 
-
     public void init() {
         LevelManager.loadLevels();
-        setup();  
+        setup();
+        test();
     }
 
-    public static void setup(){
+    public void test() {
+        Platform p1 = new Platform(TILES_SIZE * 12, TILES_SIZE * 8, 0);
+        Platform p2 = new Platform(TILES_SIZE * 13, TILES_SIZE * 8, 1);
+        Platform p3 = new Platform(TILES_SIZE * 14, TILES_SIZE * 8, 2);
+        entitiyManager.addEntity(p1);
+        entitiyManager.addEntity(p2);
+        entitiyManager.addEntity(p3);
+    }
+
+    public static void setup() {
         initGuiPlayingScene();
         initGuiPauseScene();
         entitiyManager.ready();

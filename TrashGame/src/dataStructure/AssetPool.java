@@ -70,19 +70,27 @@ public class AssetPool {
             int nRow = bufferedImage.getHeight()/tileHeight;
             int nCol = bufferedImage.getWidth()/tileWidth;
 
-            List<BufferedImage> res = new ArrayList<>();
+            List<BufferedImage> bufferImgList = new ArrayList<>();
 
 		    for (int row = 0; row < nRow; row++){
 			    for (int col = 0; col < nCol; col++) 
-                    res.add(bufferedImage.getSubimage(col * tileWidth, row * tileHeight, tileWidth, tileHeight));
+                    bufferImgList.add(bufferedImage.getSubimage(col * tileWidth, row * tileHeight, tileWidth, tileHeight));
 			}
-
-            return res;
+            AssetPool.add(resource, bufferImgList);
+            return AssetPool.bufferImageList.get(file.getAbsolutePath());
         }
         
     }
     
-    
+    private static void add(String resource, List<BufferedImage> asset){
+        File file = new File(resource);
+        if(asset instanceof List<BufferedImage> b && !AssetPool.bufferImageList.containsKey(resource)){
+            AssetPool.bufferImageList.put(file.getAbsolutePath(), b);
+        }else{
+            System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
+            System.exit(-1);
+        }
+    }
     private static <T> void add(String resource, T asset){
         File file = new File(resource);
         if(asset instanceof BufferedImage b && !AssetPool.bufferImage.containsKey(resource)){

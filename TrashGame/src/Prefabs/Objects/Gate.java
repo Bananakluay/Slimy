@@ -80,10 +80,12 @@ public class Gate extends Entity {
         super.draw(g);
         if (allButtonActive) {
             g.drawImage(img,
-                    (int) this.getPosition().x,
-                    (int) this.getPosition().y,
-                    (int) this.getScale().x,
-                    (int) this.getScale().y, null);
+                        (int) this.getPosition().x,
+                        (int) this.getPosition().y,
+                        (int) this.getScale().x,
+                        (int) this.getScale().y, 
+                        null);
+
         } else {
             g.drawImage(img,
                     (int) this.getPosition().x,
