@@ -4,6 +4,8 @@ import static utils.Constants.Game.TILES_SIZE;
 import utils.Constants.Layer;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import components.Bounds;
 import components.Rigidbody;
@@ -47,6 +49,14 @@ public class Platform extends Entity {
     private void checkIsjustslightlyWhenMoveDown(Entity player) {
         justslightlyWhenMoveDown =  player.getPosition().y - this.getPosition().y + player.getScale().y < Game.SCALE
                 && player.getComponent(Rigidbody.class).velocity.y > 0;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        super.draw(g);
+        g2d.draw(this.getComponent(Bounds.class).boundsX);
+        
     }
 
 }
