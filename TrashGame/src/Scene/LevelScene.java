@@ -58,8 +58,6 @@ public class LevelScene extends Scene {
         // Entity--------------------------------
         LevelManager.loadLevels();
 
-        pauseBackground = AssetPool.getBufferedImage("TrashGame/res/assets/ui/test_pause_menu.png", 258, 389);
-
         Platform p = new Platform(TILES_SIZE * 10, TILES_SIZE * 10);
         entitiyManager.addEntity(p);
         Platform p2 = new Platform(TILES_SIZE * 11, TILES_SIZE * 10);
