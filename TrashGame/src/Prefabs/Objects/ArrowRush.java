@@ -42,7 +42,7 @@ public class ArrowRush extends Entity implements Interaction.Behavior {
         img = AssetPool.getBufferedImage("TrashGame/res/something/dart.png", TILES_SIZE, TILES_SIZE);
 
         this.addComponent(new Rigidbody(0, 0));
-        this.getComponent(Rigidbody.class).addForce(new Vec2(-5, 0));
+        this.getComponent(Rigidbody.class).addForce(new Vec2(-5.5f, 0));
     }
 
     @Override
