@@ -60,6 +60,7 @@ public class Renderer {
     public void remove(Entity entity, int zIndex) {
         entitiesToRemove.computeIfAbsent(zIndex, k -> new ArrayList<>());
         entitiesToRemove.get(zIndex).add(entity);
+        System.out.println(entity.getName());
     }
 
     public int size(int zIndex) {

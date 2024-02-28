@@ -69,8 +69,8 @@ public class LevelScene extends Scene {
         entitiyManager.addEntity(p2);
         entitiyManager.addEntity(p3);
 
-        // ArrowTrap arrowTrap = new ArrowTrap("asda", TILES_S I ZE*17, TILES_S I ZE*8, 0);
-        // entitiyManager.addEntity(arrowTrap);
+        ArrowTrap arrowTrap = new ArrowTrap("ArrowTrap", TILES_SIZE * 16, TILES_SIZE * 10, 2);
+        entitiyManager.addEntity(arrowTrap);
     }
 
     public static void setup() {

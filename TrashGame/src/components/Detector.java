@@ -1,5 +1,6 @@
 package components;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -22,6 +23,8 @@ public class Detector extends Component implements Behavior {
     private final List<EntityType> types;
     public Map<Integer, Entity> interaction;
     private Behavior behavior;
+
+    private boolean debug = false;
 
     public Detector(float x, float y, float witdth, float height, List<EntityType> types, Behavior behavior,
             boolean isOneShot) {
@@ -117,9 +120,11 @@ public class Detector extends Component implements Behavior {
 
     @Override
     public void draw(Graphics g) {
-        // Graphics2D g2d = (Graphics2D) g;
-        // g2d.setColor(Color.red);
-        // g2d.fill(bound);
+        if (!debug)
+            return;
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.red);
+        g2d.fill(bound);
     }
 
 }

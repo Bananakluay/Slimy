@@ -1,7 +1,7 @@
 package prefabs.trap;
 
+import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
-import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 import static utils.Constants.Layer.TRAP;
 
@@ -21,10 +21,10 @@ public class ArrowTrap extends Entity implements Behavior {
 
     int direction; // 0 : left, 1 : right, 2 : up, 3 : down
 
-    boolean dubug = true;
+    boolean dubug = false;
 
     public ArrowTrap(String name, float x, float y, int direction) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE / 2)), TRAP);
+        super(name, new Transform(new Vec2(x, y - (TILES_SIZE / 2)), new Vec2(TILES_SIZE, TILES_SIZE / 2)), TRAP);
         this.direction = direction;
         init();
     }
@@ -32,8 +32,8 @@ public class ArrowTrap extends Entity implements Behavior {
     public void init() {
         Detector detector = new Detector(
                 transform.position.x,
-                transform.position.y + TILES_SIZE / 2,
-                transform.scale.x - SCALE,
+                transform.position.y,
+                transform.scale.x,
                 transform.scale.y,
                 Arrays.asList(EntityType.PLAYER),
                 this,
@@ -44,7 +44,6 @@ public class ArrowTrap extends Entity implements Behavior {
 
     @Override
     public void activateOneShot(Entity entity) {
-        System.out.println("here");
         if (entity instanceof Player) {
             Player player = (Player) entity;
             System.out.println(player.getName() + " hit arrowtrap");
@@ -52,16 +51,29 @@ public class ArrowTrap extends Entity implements Behavior {
 
             // 0 : left, 1 : right, 2 : up, 3 : down
             if (direction == 0)
-                arrowRush = new ArrowRush("ArrowRush", -10f, entity.getPosition().y + entity.getScale().y / 2,
+                arrowRush = new ArrowRush(
+                        "ArrowRush",
+                        0,
+                        entity.getPosition().y + entity.getScale().y / 2,
                         direction);
+
             else if (direction == 1)
-                arrowRush = new ArrowRush("ArrowRush", GAME_WIDTH, entity.getPosition().y + entity.getScale().y / 2,
+                arrowRush = new ArrowRush(
+                        "ArrowRush",
+                        GAME_WIDTH,
+                        entity.getPosition().y + entity.getScale().y / 2,
                         direction);
             else if (direction == 2)
-                arrowRush = new ArrowRush("ArrowRush", entity.getPosition().x + entity.getScale().x / 2, -10f,
+                arrowRush = new ArrowRush(
+                        "ArrowRush",
+                        entity.getPosition().x + entity.getScale().x / 2,
+                        -10f,
                         direction);
             else
-                arrowRush = new ArrowRush("ArrowRush", entity.getPosition().x + entity.getScale().x / 2, GAME_WIDTH,
+                arrowRush = new ArrowRush(
+                        "ArrowRush",
+                        entity.getPosition().x + entity.getScale().x / 2,
+                        GAME_HEIGHT,
                         direction);
 
             LevelScene.getEntityManager().addEntity(arrowRush);
