@@ -21,8 +21,6 @@ public class LevelManager {
 
     private static Timer timer;
 
-    public static boolean isGameOver = false;
-
     private LevelManager() {
         init();
     }

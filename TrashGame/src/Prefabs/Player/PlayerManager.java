@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import prefabs.player.character.*;
 import scene.LevelScene;
