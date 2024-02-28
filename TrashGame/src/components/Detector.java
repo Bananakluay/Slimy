@@ -94,6 +94,11 @@ public class Detector extends Component implements Behavior {
 
     }
 
+    public void updatePos(float x, float y) {
+        bound.x = x;
+        bound.y = y;
+    }
+
     @Override
     public void activateOneShot(Entity entity) {
     }

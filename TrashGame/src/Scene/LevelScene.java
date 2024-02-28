@@ -22,6 +22,8 @@ import gui.GuiText;
 import gui.ToggleGuiButton;
 import level.LevelManager;
 import main.Game;
+import prefabs.trap.ArrowRush;
+import prefabs.trap.ArrowTrap;
 import prefabs.objects.Box;
 import prefabs.objects.Button;
 import prefabs.objects.Gate;
@@ -66,6 +68,9 @@ public class LevelScene extends Scene {
         entitiyManager.addEntity(p1);
         entitiyManager.addEntity(p2);
         entitiyManager.addEntity(p3);
+
+        // ArrowTrap arrowTrap = new ArrowTrap("asda", TILES_S I ZE*17, TILES_S I ZE*8, 0);
+        // entitiyManager.addEntity(arrowTrap);
     }
 
     public static void setup() {
@@ -123,7 +128,6 @@ public class LevelScene extends Scene {
 
     // Gui playing scene----------------------------------------------
     public static void initGuiPlayingScene() {
-        System.out.println("initGuiPlayingScene");
         GuiButton pauseButton = new GuiButton( /* gen option button */
                 "PauseButton",
                 new Vec2(GAME_WIDTH - (40f * SCALE), GAME_HEIGHT * 0.03f), // position

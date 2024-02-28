@@ -178,9 +178,8 @@ public class Level {
 		}
 	}
 
-	public void loadPlatform(){
+	public void loadPlatform() {
 		// RED colorCode : 22 - 24
-
 
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
@@ -193,15 +192,16 @@ public class Level {
 
 				String name = "Platform" + col + "" + row;
 
-				Platform platform = new Platform(col*TILES_SIZE, row*TILES_SIZE, colorCode % 22);
+				Platform platform = new Platform(col * TILES_SIZE, row * TILES_SIZE, colorCode % 22);
 
 				lvlData.put(name, platform);
 				LevelScene.getEntityManager().addEntity(platform);
 
 			}
 		}
-	
+
 	}
+
 	public void loadButton() {
 		// Red Color Code : 40
 		int i = 0;
