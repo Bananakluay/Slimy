@@ -33,7 +33,7 @@ public class Controller extends Component {
         else
             System.out.println(
                     "WARNING FROM CLASS: " + this.getClass() + " | " + entity.getName() + "needs a Rigidbody.");
-
+                    
         if (entity instanceof Player) {
             player = (Player) entity;
         }

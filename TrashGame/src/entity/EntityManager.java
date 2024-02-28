@@ -22,7 +22,7 @@ public class EntityManager {
         // Process entities to add
         entities.addAll(entitiesToAdd);
         entitiesToAdd.clear(); // Clear after processing
-    
+
         // Process entities to remove
         List<Entity> toRemove = new ArrayList<>(entitiesToRemove); // Create a copy
         for (Entity entity : toRemove) {
@@ -30,16 +30,20 @@ public class EntityManager {
             LevelScene.getRenderer().remove(entity, entity.getZindex());
         }
         entitiesToRemove.clear(); // Clear after processing
-    
+
         // Update remaining entities
         List<Entity> toUpdate = new ArrayList<>(entities); // Create a copy
         for (Entity entity : toUpdate) {
             entity.update();
         }
+        // System.out.println("Entities: " + entities.size());
     }
 
     public void ready() {
-        for (Entity entity : entities) {
+        // for (Entity entity : entities) {
+        // entity.ready();
+        // }
+        for (Entity entity : entitiesToAdd) {
             entity.ready();
         }
     }

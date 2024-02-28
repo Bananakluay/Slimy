@@ -37,91 +37,36 @@ public class LevelScene extends Scene {
     private static BufferedImage pauseBackground;
 
     private static EntityManager entitiyManager;
-    private GuiLayer guiPlayingScene;
-    private GuiLayer guiPauseScene;
+    private static GuiLayer guiPlayingScene;
+    private static GuiLayer guiPauseScene;
 
     public LevelScene() {
+        LevelManager.get();
+
+        entitiyManager = new EntityManager();
+        playerManager = new PlayerManager();
+        guiPlayingScene = new GuiLayer();
+        guiPauseScene = new GuiLayer();
 
         init();
 
     }
 
-    @Override
-    public void init() {
-        isRunning = true;
-        entitiyManager = new EntityManager();
-        playerManager = new PlayerManager();
 
-        guiPlayingScene = new GuiLayer();
-        guiPauseScene = new GuiLayer();
-        renderer.clear();
+    public void init() {
+        LevelManager.loadLevels();
+        setup();  
+    }
+
+    public static void setup(){
         initGuiPlayingScene();
         initGuiPauseScene();
-        LevelManager.loadLevels();
-
-    }
-
-    // Gui playing scene----------------------------------------------
-    public void initGuiPlayingScene() {
-
-        GuiButton pauseButton = new GuiButton( /* gen option button */
-                "PauseButton",
-                new Vec2(GAME_WIDTH - (40f * SCALE), GAME_HEIGHT * 0.03f), // position
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PauseButton.png", 16, 16), // change png later
-                () -> isRunning = false);
-
-        guiPlayingScene.addGuiComponent(pauseButton);
-    }
-
-    // Gui pause scene----------------------------------------------
-    public void initGuiPauseScene() {
-        ToggleGuiButton soundButton = new ToggleGuiButton(
-                "SoundButton",
-                new Vec2((float) (TILES_SIZE * 17.15), (float) (TILES_SIZE * 4.8)),
-                new Vec2(16f * SCALE * 1.5f, 16f * SCALE * 1.5f),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16),
-                () -> System.out.println("SoundButton"));
-
-        ToggleGuiButton musicButton = new ToggleGuiButton(
-                "musicButton",
-                new Vec2((float) (TILES_SIZE * 13.45), (float) (TILES_SIZE * 4.8)),
-                new Vec2(16f * SCALE * 1.5f, 16f * SCALE * 1.5f),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16),
-                () -> System.out.println("musicButton"));
-
-        GuiButton continueButton = new GuiButton( /* gen option button */
-                "ContinueButton",
-                new Vec2(GAME_WIDTH / 2 - (16f * SCALE), GAME_HEIGHT * 0.595f), // position
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16), // change png
-                () -> isRunning = true);
-
-        GuiButton backButton = new GuiButton( /* gen option button */
-                "backButton",
-                new Vec2(GAME_WIDTH / 2 - (75f * SCALE), GAME_HEIGHT * 0.595f), // position
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png
-                () -> SceneManager.changeScene(Scenes.MENU_SCENE));
-
-        GuiButton restartButton = new GuiButton( /* gen option button */
-                "restartButton",
-                new Vec2(GAME_WIDTH / 2 - (-42f * SCALE), GAME_HEIGHT * 0.595f), // position
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ResetButton.png", 16, 16), // change png
-                () -> init());
-
-        guiPauseScene.addGuiComponent(restartButton);
-        guiPauseScene.addGuiComponent(musicButton);
-        guiPauseScene.addGuiComponent(backButton);
-        guiPauseScene.addGuiComponent(continueButton);
-        guiPauseScene.addGuiComponent(soundButton);
-
+        entitiyManager.ready();
+        isRunning = true;
     }
 
     @Override
     public void update() {
-        System.out.println(entitiyManager.getAllEntities().size());
         // pause and player
         if (Game.KI.onPress(KeyEvent.VK_ESCAPE)) {
             if (isRunning == true) {
@@ -166,25 +111,77 @@ public class LevelScene extends Scene {
         }
     }
 
+    // Gui playing scene----------------------------------------------
+    public static void initGuiPlayingScene() {
+        System.out.println("initGuiPlayingScene");
+        GuiButton pauseButton = new GuiButton( /* gen option button */
+                "PauseButton",
+                new Vec2(GAME_WIDTH - (40f * SCALE), GAME_HEIGHT * 0.03f), // position
+                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PauseButton.png", 16, 16), // change png later
+                () -> isRunning = false);
+
+        guiPlayingScene.addGuiComponent(pauseButton);
+    }
+
+    // Gui pause scene----------------------------------------------
+    public static void initGuiPauseScene() {
+        ToggleGuiButton soundButton = new ToggleGuiButton(
+                "SoundButton",
+                new Vec2((float) (TILES_SIZE * 17.15), (float) (TILES_SIZE * 4.8)),
+                new Vec2(16f * SCALE * 1.5f, 16f * SCALE * 1.5f),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16),
+                () -> System.out.println("SoundButton"));
+
+        ToggleGuiButton musicButton = new ToggleGuiButton(
+                "musicButton",
+                new Vec2((float) (TILES_SIZE * 13.45), (float) (TILES_SIZE * 4.8)),
+                new Vec2(16f * SCALE * 1.5f, 16f * SCALE * 1.5f),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16),
+                () -> System.out.println("musicButton"));
+
+        GuiButton continueButton = new GuiButton( /* gen option button */
+                "ContinueButton",
+                new Vec2(GAME_WIDTH / 2 - (16f * SCALE), GAME_HEIGHT * 0.595f), // position
+                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16), // change png
+                () -> isRunning = true);
+
+        GuiButton backButton = new GuiButton( /* gen option button */
+                "backButton",
+                new Vec2(GAME_WIDTH / 2 - (75f * SCALE), GAME_HEIGHT * 0.595f), // position
+                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png
+                () -> SceneManager.changeScene(Scenes.MENU_SCENE));
+
+        GuiButton restartButton = new GuiButton( /* gen option button */
+                "restartButton",
+                new Vec2(GAME_WIDTH / 2 - (-42f * SCALE), GAME_HEIGHT * 0.595f), // position
+                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ResetButton.png", 16, 16), // change png
+                () -> LevelManager.resetLevel());
+
+        guiPauseScene.addGuiComponent(restartButton);
+        guiPauseScene.addGuiComponent(musicButton);
+        guiPauseScene.addGuiComponent(backButton);
+        guiPauseScene.addGuiComponent(continueButton);
+        guiPauseScene.addGuiComponent(soundButton);
+
+    }
+
+    public static void clear() {
+        renderer.clear();
+        entitiyManager.getAllEntities().clear();
+        guiPlayingScene.clear();
+        guiPauseScene.clear();
+    }
+
     @Override
     public void onDestroy() {
         playerManager = null;
         entitiyManager.getAllEntities().clear();
         guiPlayingScene.clear();
         guiPauseScene.clear();
-    }
-
-    public static void deleteCurrentLevel() {
-        for (Entity entity : entitiyManager.getAllEntities()) {
-            entity.onDestroy();
-        }
-        playerManager = null;
-    }
-
-    public static void createNextLevel() {
-        renderer.clear();
-        entitiyManager = new EntityManager();
-        playerManager = new PlayerManager();
     }
 
     public static EntityManager getEntityManager() {
@@ -195,16 +192,4 @@ public class LevelScene extends Scene {
         return playerManager;
     }
 
-    private void renderPauseBackground(Graphics g) {
-        if (!isRunning && pauseBackground != null) {
-            g.drawImage(pauseBackground, (int) (GAME_WIDTH / 2 - (33f * SCALE)), (int) (GAME_HEIGHT * 0.25f), null); // Render
-                                                                                                                     // the
-                                                                                                                     // pause
-                                                                                                                     // menu
-                                                                                                                     // background
-                                                                                                                     // at
-                                                                                                                     // (0,
-                                                                                                                     // 0)
-        }
-    }
 }

@@ -22,7 +22,6 @@ public class OptionScene extends Scene{
         init();
     }
 
-    @Override
     public void init() {
         guiLayer = new GuiLayer();
 

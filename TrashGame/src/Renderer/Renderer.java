@@ -70,6 +70,7 @@ public class Renderer {
         layers.clear();
         entitiesToAdd.clear();
         entitiesToRemove.clear();
+        System.out.println(layers.size() + " " + entitiesToAdd.size() + " " + entitiesToRemove.size());
     }
 
     public void processQueuedChanges() {

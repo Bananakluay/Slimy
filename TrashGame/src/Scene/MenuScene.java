@@ -22,7 +22,7 @@ public class MenuScene extends Scene {
         init();
     }
 
-    @Override
+
     public void init() {
         guiLayer = new GuiLayer(); // layer
 

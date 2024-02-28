@@ -15,11 +15,8 @@ public class LevelManager {
 
     private static ArrayList<String> Map = new ArrayList<>();
 
-    private static Level currentLevel;
-
     private static int lvlindex = 0;
 
-    private static Timer timer;
 
     private LevelManager() {
         init();
@@ -32,16 +29,22 @@ public class LevelManager {
     }
 
     private void init() {
-        loadLevels();
+        buildAllLevels();
     }
 
     public static void loadLevels() {
-        buildAllLevels();
-        currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+        LevelScene.clear();
+        LevelScene.setup();
+        new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
     }
 
-    public Level getCurrentLevel() {
-        return currentLevel;
+    public static void loadNextLevels() {
+        lvlindex++;
+        if (lvlindex < Map.size()) {
+            loadLevels();
+        } else {
+            System.out.println("Game complete");
+        }
     }
 
     public static File[] GetAllLevels() {
@@ -67,28 +70,17 @@ public class LevelManager {
 
     }
 
-    public static void loadNextLevels() {
-        if (lvlindex < Map.size()) {
-            // LevelScene.deleteCurrentLevel();
-            LevelScene.createNextLevel();
-            currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
-            lvlindex++;
-        } else {
-            System.out.println("Game complete");
-        }
-    }
-
     public static void resetLevel() {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // Code to load and display the new scene
-                LevelScene.createNextLevel();
-                currentLevel = new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
-                timer.cancel();
-            }
-        }, 2000);
+        // timer = new Timer();
+        // timer.schedule(new TimerTask() {
+        // @Override
+        // public void run() {
+        // // Code to load and display the new scene
+        // loadLevels();
+        // timer.cancel();
+        // }
+        // }, 1000);
+        loadLevels();
 
     }
 

@@ -9,10 +9,8 @@ public abstract class Scene{
 
 	protected static Renderer renderer = new Renderer();
 
-	public static boolean isRunning = true;
+	public static boolean isRunning = false;
 	
-	public abstract void init();
-
     public abstract void update();
 
 	public abstract void render(Graphics g);
@@ -23,9 +21,7 @@ public abstract class Scene{
 
 	public static Renderer getRenderer(){return renderer;
 	}
-	public void setRunning(boolean isRunning) {
-		Scene.isRunning = isRunning;
-	}
+
 
 	
 

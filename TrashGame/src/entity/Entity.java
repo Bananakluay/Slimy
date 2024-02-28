@@ -16,67 +16,66 @@ public class Entity {
     protected Transform transform;
 
     private List<Component> components;
-    
+
     public int zIndex = 0;
-    
-    public Entity(String name, Transform transform, int zIndex){
+
+    public Entity(String name, Transform transform, int zIndex) {
         this.name = name;
         this.transform = transform;
         this.components = new ArrayList<>();
         this.zIndex = zIndex;
         generateId();
     }
-    
-    public void update(){
-        for(Component c : components)
+
+    public void update() {
+        for (Component c : components)
             c.update();
     }
-    public void draw(Graphics g){
-        for(Component c : components)
+
+    public void draw(Graphics g) {
+        for (Component c : components)
             c.draw(g);
     }
-    
-    public void ready(){
-        for(Component c : components)
+
+    public void ready() {
+        for (Component c : components)
             c.ready();
     }
 
-    public void onDestroy(){
-        for(Component c : components)
+    public void onDestroy() {
+        for (Component c : components)
             c.onDestroy();
     };
 
-    
-    
-    public void addComponent(Component c){
+    public void addComponent(Component c) {
         this.components.add(c);
         c.entity = this;
         c.generateId();
     }
 
-    public <T extends Component> void removeCompnent(Class<T> componentClass){
-        for(int i=0;i<components.size();i++){
+    public <T extends Component> void removeCompnent(Class<T> componentClass) {
+        for (int i = 0; i < components.size(); i++) {
             Component c = components.get(i);
-            if(componentClass.isAssignableFrom(c.getClass())){
+            if (componentClass.isAssignableFrom(c.getClass())) {
                 components.remove(i);
                 return;
             }
         }
     }
-    
-    public <T extends Component> boolean hasComponent(Class<T> componentClass){
-        for(Component c : components)
-            if(componentClass.isAssignableFrom(c.getClass()))
+
+    public <T extends Component> boolean hasComponent(Class<T> componentClass) {
+        for (Component c : components)
+            if (componentClass.isAssignableFrom(c.getClass()))
                 return true;
         return false;
     }
 
-    public <T extends Component> T getComponent(Class<T> componentClass){
-        for(Component c : components){
-            if(componentClass.isAssignableFrom(c.getClass())){
-                try{
-                    return componentClass.cast(c); 
-                }catch (ClassCastException e){
+    public <T extends Component> T getComponent(Class<T> componentClass) {
+        for (Component c : components) {
+            if (componentClass.isAssignableFrom(c.getClass())) {
+                try {
+                    return componentClass.cast(c);
+                } catch (ClassCastException e) {
                     e.printStackTrace();
                     System.exit(-1);
                 }
@@ -85,29 +84,45 @@ public class Entity {
         return null;
     }
 
-    public void generateId()
-    {
+    public void generateId() {
         if (this.uid == -1)
             this.uid = ID_COUNTER++;
     }
-    
-    public int getId(){return uid;}
 
-    public int getZindex(){return zIndex;}
+    public int getId() {
+        return uid;
+    }
 
-    public List<Component> getAllComponents() {return components;}
+    public int getZindex() {
+        return zIndex;
+    }
 
-    public String getName() {return name;}
+    public List<Component> getAllComponents() {
+        return components;
+    }
 
-    public Transform getTransform() {return transform;}
+    public String getName() {
+        return name;
+    }
 
-    public Vec2 getPosition(){return transform.position;}
-    
-    public Vec2 getScale(){return transform.scale;}
+    public Transform getTransform() {
+        return transform;
+    }
 
-    public void setType(EntityType type){this.type = type;}
-    public EntityType getType(){return this.type;}
+    public Vec2 getPosition() {
+        return transform.position;
+    }
 
+    public Vec2 getScale() {
+        return transform.scale;
+    }
 
-    
+    public void setType(EntityType type) {
+        this.type = type;
+    }
+
+    public EntityType getType() {
+        return this.type;
+    }
+
 }

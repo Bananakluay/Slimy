@@ -57,7 +57,6 @@ public class Level {
 		loadPlayer();// BLUE 100
 	}
 
-
 	public void loadTileBlock() {
 		// RED colorCode : 0 - 21
 		List<BufferedImage> tileSet = AssetPool.getBufferedImageList(
@@ -185,14 +184,13 @@ public class Level {
 				Color color = new Color(imgLvlData.getRGB(col, row));
 				int colorCode = color.getRed();
 				Vec2 posGate = new Vec2(color.getGreen(), color.getBlue());
-				
+
 				if (colorCode == 40) {
-					String name = "Button" + (i++) + "For" + (int)posGate.x + "" + (int)posGate.y;
+					String name = "Button" + (i++) + "For" + (int) posGate.x + "" + (int) posGate.y;
 					Button button = new Button(
 							name,
 							col * TILES_SIZE,
-							row * TILES_SIZE
-					);
+							row * TILES_SIZE);
 					lvlData.put(name, button);
 					LevelScene.getEntityManager().addEntity(button);
 					break;
