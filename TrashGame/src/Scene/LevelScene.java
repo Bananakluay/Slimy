@@ -44,7 +44,7 @@ public class LevelScene extends Scene {
     private static GuiLayer guiPlayingScene;
     private static GuiLayer guiPauseScene;
 
-    BufferedImage bg = AssetPool.getBufferedImage("TrashGame/res/assets/Background/bg.png", 64, 36);
+    BufferedImage bg = AssetPool.getBufferedImage("TrashGame/res/assets/Background/background.png", 64, 36);
 
     public LevelScene() {
         LevelManager.get();
@@ -106,10 +106,11 @@ public class LevelScene extends Scene {
     @Override
     public void render(Graphics g) {
         if (isRunning) {
+            drawBackGround(g);
             renderer.render(g);
             guiPlayingScene.render(g);
-            // drawBackGround(g);
         } else {
+            drawBackGround(g);
             renderer.render(g);
             g.setColor(new Color(0, 0, 0, 128));
             g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -128,11 +129,12 @@ public class LevelScene extends Scene {
     public void drawBackGround(Graphics g) {
         g.drawImage(
                 bg,
-                (64 * 15) / 2,
-                (36 * 15) / 2,
-                (int) (64 * 15),
-                (int) (36 * 15),
+                0,
+                0,
+                (int) (256 * 2 * SCALE),
+                (int) (144 * 2 * SCALE),
                 null);
+        System.out.println(GAME_WIDTH + " " + GAME_HEIGHT);
     }
 
     public void drawPauseGui(Graphics g) {
