@@ -23,7 +23,7 @@ public class Box extends Entity {
         this.type = EntityType.BOX;
         this.addComponent(new Bounds(null, null));
         this.addComponent(new Physic2D());
-        this.addComponent(new Rigidbody(2f * SCALE, 0.3f * SCALE));
+        this.addComponent(new Rigidbody(2f * SCALE, 0.048f));
         img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/Box19.png", 19, 19);
     }
 
@@ -38,5 +38,5 @@ public class Box extends Entity {
                 (int) this.getScale().y,
                 null);
     }
-    
+
 }

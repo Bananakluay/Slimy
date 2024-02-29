@@ -4,16 +4,16 @@ import physics.Collision;
 import prefabs.objects.Box;
 import prefabs.player.Player;
 import prefabs.player.character.TinySlime;
+import utils.MiniMath;
 import utils.Vec2;
 
-import static entity.EntityType.PLAYER;
 import static physics.CollisionType.*;
+import static utils.Constants.Game.SCALE;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dataStructure.Transform;
-import entity.Entity;
 
 public class Rigidbody extends Component {
 
@@ -24,6 +24,7 @@ public class Rigidbody extends Component {
     private List<Vec2> forces = new ArrayList<>();
 
     public boolean leftCollision, rightCollision, topCollision, botCollision;
+    public float extremumSpeed = 1f;
 
     public Rigidbody(float mass, float friction) {
         this.mass = mass;
@@ -78,19 +79,21 @@ public class Rigidbody extends Component {
         if (Math.abs(velocity.y) < 0.025)
             velocity.y = 0;
 
-        frictionOnX();
+        if (botCollision || topCollision) {
+            frictionOnX();
+        }
+        // System.out.println(velocity.x + " | " + velocity.y);
         // net force
         if (!forces.isEmpty()) {
-            if (this.entity.getType() == PLAYER) {
-            }
             for (Vec2 v : forces) {
                 velocity.x += v.x;
                 velocity.y += v.y;
+
             }
             forces.clear();
         }
-        // velocity.x = MiniMath.clamp(velocity.x, -1.2f, 1.2f);
 
+        velocity.x = MiniMath.clamp(velocity.x, -this.extremumSpeed, this.extremumSpeed);
         // if not colliding (can move)
         if (!isCollidingX) {
             entity.getTransform().position.x += velocity.x;
@@ -120,8 +123,8 @@ public class Rigidbody extends Component {
             }
 
             if (collision.type == TOP || collision.type == BOTTOM) {
-                s.addForce(new Vec2(0, -velocity.y * 0.5f / o.mass));
-                o.addForce(new Vec2(0, velocity.y * 0.5f / o.mass));
+                s.addForce(new Vec2(0, -velocity.y / o.mass));
+                o.addForce(new Vec2(0, velocity.y / o.mass));
                 if (collision.type == BOTTOM) {
                     s.addForce(new Vec2(o.velocity.x * 0.2f / s.mass, 0));
                 }
@@ -149,7 +152,8 @@ public class Rigidbody extends Component {
     }
 
     private void frictionOnX() {
-        velocity.x -= Math.signum(velocity.x) * Math.min(Math.abs(velocity.x), friction);
+        System.out.println(-velocity.x * friction);
+        this.addForce(new Vec2(-velocity.x * friction, 0));
     }
 
     public void moveX(float x) {
@@ -158,6 +162,10 @@ public class Rigidbody extends Component {
 
     public void moveY(float y) {
         this.velocity.y = y;
+    }
+
+    public void setExtrmumXSpeed(float speed) {
+        this.extremumSpeed = speed;
     }
 
     @Override
