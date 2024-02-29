@@ -86,6 +86,7 @@ public class LevelScene extends Scene {
     @Override
     public void update() {
         // pause and player
+
         if (Game.KI.onPress(KeyEvent.VK_ESCAPE)) {
             if (isRunning == true) {
                 isRunning = false;
