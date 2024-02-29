@@ -37,6 +37,10 @@ public class SceneManager {
                 System.out.println("OPTION Scene");
                 currentScene = new OptionScene();
                 break;
+            case LEVEL_SELECT_SCENE:
+                System.out.println("LEVEL SELECT SCENE");
+                currentScene = new LevelSelectScene();
+                break;
             default:
                 break;
         }

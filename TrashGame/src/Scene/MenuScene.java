@@ -31,7 +31,7 @@ public class MenuScene extends Scene {
                 new Vec2(GAME_WIDTH / 2 - (33f * SCALE), GAME_HEIGHT * 0.84f), // position
                 new Vec2(33f * SCALE * 2, 16f * SCALE * 2),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PlayButton.png", 33, 16),
-                () -> SceneManager.changeScene(Scenes.LEVEL_SCENE));
+                () -> SceneManager.changeScene(Scenes.LEVEL_SELECT_SCENE));
 
         GuiButton optionButton = new GuiButton( /* gen option button */
                 "PlayButton",
