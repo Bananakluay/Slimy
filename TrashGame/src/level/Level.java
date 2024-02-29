@@ -51,16 +51,24 @@ public class Level {
 	public void init() {
 		// generateLevelData();
 		loadTileBlock(); // RED 0 - 21
-		loadDoor(); // GREEN 255
 
-		loadButton(); // RED 40
-		// loadGate(); // GREEN 254
+		loadPlatform();// RED 32 - 34
+
+		loadButton(); // RED 40 BLUE posxGate GREEN posYGate
 
 		loadTrap();// GREEN 0 - 10
 
-		loadPlayer();// BLUE 100
+		loadGate(); // GREEN 254
 
-		loadPlatform();// RED 32 - 34
+		loadDoor(); // GREEN 255
+
+		
+
+		
+
+		loadPlayer();// RED
+
+		
 
 		// loadbackground();// BLUE 0 - 11
 	}
