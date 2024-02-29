@@ -33,7 +33,7 @@ public class Controller extends Component {
         else
             System.out.println(
                     "WARNING FROM CLASS: " + this.getClass() + " | " + entity.getName() + "needs a Rigidbody.");
-                    
+
         if (entity instanceof Player) {
             player = (Player) entity;
         }
@@ -57,7 +57,7 @@ public class Controller extends Component {
             player.setDirectionX(1);
 
         } else {
-            rigidbody.moveX(0);
+            rigidbody.velocity.x *= 0.2f;
             if (player.isAlive())
                 player.setAnimation(IDLE);
 
