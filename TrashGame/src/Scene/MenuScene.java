@@ -37,7 +37,7 @@ public class MenuScene extends Scene {
                 "PlayButton",
                 new Vec2(GAME_WIDTH - (50f * SCALE), GAME_HEIGHT * 0.84f), // position
                 new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16), // change png later
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/OptionButton.png", 16, 16), // change png later
                 () -> SceneManager.changeScene(Scenes.OPTION_SCENE));
 
         guiLayer.addGuiComponent(playButton); // add to guilayer

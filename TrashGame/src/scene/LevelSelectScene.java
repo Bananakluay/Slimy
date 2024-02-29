@@ -15,7 +15,7 @@ public class LevelSelectScene extends Scene {
 
     private GuiLayer levelSelectGuiLayer;
     private GuiLayer nextPrevGuiLayer;
-
+    
     private int currentPage = 0;
     private int maxPage = 2;
     int gridSpacing = 128;
@@ -50,22 +50,29 @@ public class LevelSelectScene extends Scene {
         float posY = GAME_HEIGHT - 16 * SCALE * 3;
         float scaleX = 16f * SCALE * 3;
         float scaleY = 16f * SCALE * 3;
-        float half_scaleX = scaleX / 2;
-        float half_scaleY = scaleY / 2;
+        float half_scaleX = (float) (scaleX / 2 * 0.75);
+        float half_scaleY = (float) (scaleY / 2 * 0.75);
 
         GuiButton prevButton = new GuiButton(
                 "PrevButton",
                 new Vec2(256 - half_scaleX, (posY / 0.95f) - half_scaleY),
-                new Vec2(scaleX, scaleY),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16),
+                new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16),
                 () -> loadPrevLevels());
 
         GuiButton NextButton = new GuiButton(
                     "NextButton",
                     new Vec2(1280 - half_scaleX, (posY / 0.95f) - half_scaleY) ,
-                    new Vec2(scaleX, scaleY),
-                    AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16),
+                    new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
+                    AssetPool.getBufferedImageList("TrashGame/res/assets/ui/NextButton.png", 16, 16),
                     () -> loadNextLevels());
+        
+        GuiButton BackButton = new GuiButton(
+                        "BackButton",
+                        new Vec2(1280 - half_scaleX, (posY / 0.95f) - half_scaleY) ,
+                        new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
+                        AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16),
+                        () -> SceneManager.changeScene(Scenes.MENU_SCENE));
 
         nextPrevGuiLayer.addGuiComponent(prevButton);
         nextPrevGuiLayer.addGuiComponent(NextButton);
@@ -76,6 +83,10 @@ public class LevelSelectScene extends Scene {
         currentPage--;
         levelSelectGuiLayer.clear();
         loadLevelButtons(currentPage);
+        }
+        if (currentPage == 0 ) {
+            nextPrevGuiLayer.removeGuiComponent(prevButton);
+            nextPrevGuiLayer.addGuiComponent(BackButton);
         }
         else {
             levelSelectGuiLayer.clear();

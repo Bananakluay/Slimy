@@ -30,7 +30,7 @@ public class OptionScene extends Scene{
             "optionButton", 
             new Vec2(GAME_WIDTH - (50f*SCALE), GAME_HEIGHT*0.84f), //position
             new Vec2(16f*SCALE*2, 16f*SCALE*2), 
-            AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png later
+            AssetPool.getBufferedImageList("TrashGame/res/assets/ui/MusicButton.png", 16, 16), // change png later
             ()-> SceneManager.changeScene(Scenes.MENU_SCENE));
 
         ToggleGuiButton soundButton = new ToggleGuiButton(
