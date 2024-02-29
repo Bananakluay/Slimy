@@ -50,31 +50,27 @@ public class Level {
 
 	public void init() {
 		// generateLevelData();
-		loadTileBlock(); // RED 0 - 21
+		loadTileBlock(); // RED [0 , 21]
 
-		loadPlatform();// RED 32 - 34
+		loadPlatform();// RED [32 , 34]
 
-		loadButton(); // RED 40 BLUE posxGate GREEN posYGate
+		loadButton(); // RED : 40 | BLUE : posX Gate | GREEN : posY Gate
 
-		loadTrap();// GREEN 0 - 10
+		loadTrap();// GREEN [0 , 10]
 
-		loadGate(); // GREEN 254
+		loadGate(); // GREEN : 254
 
-		loadDoor(); // GREEN 255
+		loadDoor(); // GREEN : 255
 
-		
-
-		
-
-		loadPlayer();// RED
+	
+		loadPlayer(); // BLUE : 100 
 
 		
 
-		// loadbackground();// BLUE 0 - 11
 	}
 
 	public void loadTileBlock() {
-		// RED colorCode : 0 - 21
+		// RED [0 , 21]
 		List<BufferedImage> tileSet = AssetPool.getBufferedImageList(
 				"TrashGame/res/assets/Tile/wall.png",
 				16,
@@ -111,7 +107,7 @@ public class Level {
 	}
 
 	public void loadPlayer() {
-		// BLUE Color Code : 100
+		// BLUE : 100 
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
@@ -139,7 +135,7 @@ public class Level {
 	}
 
 	public void loadDoor() {
-		// GREEN Color Code : 255
+		 // GREEN : 255
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
@@ -164,7 +160,7 @@ public class Level {
 	int maxButton = 5;
 
 	public void loadGate() {
-		// GREEN Color Code : 254
+		// GREEN : 254
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
@@ -192,7 +188,7 @@ public class Level {
 	}
 
 	public void loadPlatform() {
-		// RED colorCode : 22 - 24
+		// RED [32 , 34]
 
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
@@ -216,7 +212,7 @@ public class Level {
 	}
 
 	public void loadButton() {
-		// Red Color Code : 40
+		// RED : 40 | BLUE : posX Gate | GREEN : posY Gate
 		int i = 0;
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
@@ -240,7 +236,7 @@ public class Level {
 	}
 
 	public void loadTrap() {
-		// GREEN Color Code : 0 - 10
+		//GREEN [0 , 10]
 		// 0 : spike
 		// 1 : bomb button
 
