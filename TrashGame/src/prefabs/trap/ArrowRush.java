@@ -22,15 +22,18 @@ import entity.EntityType;
 import utils.Vec2;
 import utils.Constants.Layer;
 
+import java.util.Random;
+
 public class ArrowRush extends Entity implements Behavior {
 
     BufferedImage img;
     float speed = 8f;
     int direction; // 0 : left, 1 : right, 2 : up, 3 : down
 
-    public ArrowRush(String name, float x, float y, int direction) {
+    public ArrowRush(String name, float x, float y, Random random) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.3f)), Layer.TRAP);
-        this.direction = direction;
+
+        this.direction = random.nextInt(4); // Random direction: 0, 1, 2, 3
         init();
     }
 
@@ -58,7 +61,18 @@ public class ArrowRush extends Entity implements Behavior {
 
         addComponent(detector);
 
-        img = AssetPool.getBufferedImage("TrashGame/res/assets/Character/BlueSlime.png", TILES_SIZE, TILES_SIZE);
+        String imagePath; // 0 : left, 1 : right, 2 : up, 3 : down
+        if (direction == 0) {
+            imagePath = "TrashGame/res/assets/Object/dartleft.png";
+        } else if (direction == 1) {
+            imagePath = "TrashGame/res/assets/Object/dartright.png";
+        } else if (direction == 2) {
+            imagePath = "TrashGame/res/assets/Object/dartup.png";
+        } else if (direction == 3){
+            imagePath = "TrashGame/res/assets/Object/dartdown.png";
+        }
+
+        img = AssetPool.getBufferedImage(imagePath, TILES_SIZE, TILES_SIZE);
 
         Rigidbody rb = new Rigidbody(0, 0);
         this.addComponent(rb);
@@ -77,6 +91,20 @@ public class ArrowRush extends Entity implements Behavior {
     public void activateOneShot(Entity entity) {
         if (entity instanceof Player) {
             Player player = (Player) entity;
+            System.out.println(player.getName() + " hit arrowtrap");
+            ArrowRush arrowRush;
+
+            // 0 : left, 1 : right, 2 : up, 3 : down
+            if (direction == 0)
+                arrowRush = new ArrowRush("ArrowRush", 0, entity.getPosition().y + entity.getScale().y / 2, new Random());
+            else if (direction == 1)
+                arrowRush = new ArrowRush("ArrowRush", GAME_WIDTH, entity.getPosition().y + entity.getScale().y / 2, new Random());
+            else if (direction == 2)
+                arrowRush = new ArrowRush("ArrowRush", entity.getPosition().x + entity.getScale().x / 2, -10f, new Random());
+            else
+                arrowRush = new ArrowRush("ArrowRush", entity.getPosition().x + entity.getScale().x / 2, GAME_HEIGHT, new Random());
+
+            LevelScene.getEntityManager().addEntity(arrowRush);
         }
     }
 
