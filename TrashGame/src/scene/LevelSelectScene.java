@@ -18,7 +18,6 @@ public class LevelSelectScene extends Scene {
 
     private int currentPage = 0;
     private int maxPage = 2;
-    
     int gridSpacing = 128;
 
     public LevelSelectScene() {
@@ -28,13 +27,17 @@ public class LevelSelectScene extends Scene {
     private void init() {
         levelSelectGuiLayer = new GuiLayer();
         nextPrevGuiLayer = new GuiLayer();
+        loadNextPrevButtons();
         loadLevelButtons(currentPage);
     }
 
     @Override
     public void update() {
         levelSelectGuiLayer.update();
-        // nextPrevGuiLayer.update();
+        if (this.nextPrevGuiLayer != null) {
+            nextPrevGuiLayer.update();
+        }
+        
     }
 
     @Override
@@ -47,25 +50,50 @@ public class LevelSelectScene extends Scene {
         float posY = GAME_HEIGHT - 16 * SCALE * 3;
         float scaleX = 16f * SCALE * 3;
         float scaleY = 16f * SCALE * 3;
+        float half_scaleX = scaleX / 2;
+        float half_scaleY = scaleY / 2;
 
         GuiButton prevButton = new GuiButton(
                 "PrevButton",
-                new Vec2(posX, posY),
+                new Vec2(256 - half_scaleX, (posY / 0.95f) - half_scaleY),
                 new Vec2(scaleX, scaleY),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PrevButton.png", 16, 16),
-                () -> loadPrevLevels()
-        );
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16),
+                () -> loadPrevLevels());
 
-        GuiButton nextButton = new GuiButton(
-                "NextButton",
-                new Vec2(posX + 16 * SCALE * 3, posY),
-                new Vec2(scaleX, scaleY),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/NextButton.png", 16, 16),
-                () -> loadNextLevels()
-        );
-        
+        GuiButton NextButton = new GuiButton(
+                    "NextButton",
+                    new Vec2(1280 - half_scaleX, (posY / 0.95f) - half_scaleY) ,
+                    new Vec2(scaleX, scaleY),
+                    AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16),
+                    () -> loadNextLevels());
+
+        nextPrevGuiLayer.addGuiComponent(prevButton);
+        nextPrevGuiLayer.addGuiComponent(NextButton);
     }
 
+    private void loadPrevLevels() { // ก่อน
+        if (currentPage > 0 ) {
+        currentPage--;
+        levelSelectGuiLayer.clear();
+        loadLevelButtons(currentPage);
+        }
+        else {
+            levelSelectGuiLayer.clear();
+            loadLevelButtons(currentPage);
+        }
+    }
+
+    private void loadNextLevels() { //ต่อไป
+        if (currentPage < maxPage) {
+        currentPage++;
+        levelSelectGuiLayer.clear();
+        loadLevelButtons(currentPage);
+        }
+        else {
+            levelSelectGuiLayer.clear();
+            loadLevelButtons(currentPage);
+        }
+    }
 
     private void loadLevelButtons(int page) {
         int row = 2;
@@ -77,7 +105,7 @@ public class LevelSelectScene extends Scene {
                 int levelNumber = i + j * col + page * (row * col) + 1;
                 System.out.println(levelNumber);
                 float posX = initPosX * (gridSpacing * (i + 2)) - ((16f * SCALE * 3) / 2) + i * gridSpacing;
-                float posY = initPosY * (gridSpacing * (j + 1)) - ((16f * SCALE * 3) / 2) + j * gridSpacing / 2;
+                float posY = initPosY * (gridSpacing * (j + 1)) - ((16f * SCALE * 3) / 2) + j * gridSpacing / 9;
                 float scaleX = 16f * SCALE * 3;
                 float scaleY = 16f * SCALE * 3;
 
@@ -91,35 +119,16 @@ public class LevelSelectScene extends Scene {
         }
     }
 
-    private void loadPrevLevels() {
-        currentPage--;
-        levelSelectGuiLayer.clear();
-        loadLevelButtons(currentPage);
-    }
-
-    private void loadNextLevels() {
-        currentPage++;
-        levelSelectGuiLayer.clear();
-        loadLevelButtons(currentPage);
-    }
-
     @Override
     public void gui(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
 
-        // Define the spacing between grid lines
-        // You can adjust this value to change the spacing
-
-        // Set the color for the grid lines
         g.setColor(Color.LIGHT_GRAY);
 
-        // Draw vertical grid lines
         for (int x = 0; x < GAME_WIDTH; x += gridSpacing) {
             g.drawLine(x, 0, x, GAME_HEIGHT);
         }
-
-        // Draw horizontal grid lines
         for (int y = 0; y < GAME_HEIGHT; y += gridSpacing) {
             g.drawLine(0, y, GAME_WIDTH, y);
         }
