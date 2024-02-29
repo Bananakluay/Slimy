@@ -73,7 +73,7 @@ public class LevelScene extends Scene {
     }
 
     public static void setup() {
-        test();
+        // test();
         initGuiPlayingScene();
         initGuiPauseScene();
         entitiyManager.ready();
