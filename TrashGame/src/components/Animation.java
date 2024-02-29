@@ -26,7 +26,6 @@ public class Animation extends Component {
     private int offsetX = 0, offsetY = 0;
 
     private boolean playOneTime = false;
-
     public Animation() {
 
         this.animations = new HashMap<>();
