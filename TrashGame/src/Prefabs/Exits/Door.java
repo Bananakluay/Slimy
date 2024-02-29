@@ -38,7 +38,7 @@ public class Door extends Entity implements Behavior {
                 List.of(EntityType.PLAYER),
                 this, false);
         addComponent(detector);
-        img = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/door3.png", 21, 32);
+        img = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/door.png", 21, 32);
     }
 
     @Override

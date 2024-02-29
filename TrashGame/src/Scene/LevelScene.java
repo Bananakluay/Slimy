@@ -64,16 +64,13 @@ public class LevelScene extends Scene {
         test();
     }
 
-    public void test() {
-        Platform p1 = new Platform(TILES_SIZE * 12, TILES_SIZE * 8, 0);
-        Platform p2 = new Platform(TILES_SIZE * 13, TILES_SIZE * 8, 1);
-        Platform p3 = new Platform(TILES_SIZE * 14, TILES_SIZE * 8, 2);
-        entitiyManager.addEntity(p1);
-        entitiyManager.addEntity(p2);
-        entitiyManager.addEntity(p3);
+    public static void test() {
 
         ArrowTrap arrowTrap = new ArrowTrap("ArrowTrap", TILES_SIZE * 16, TILES_SIZE * 10, 2);
         entitiyManager.addEntity(arrowTrap);
+
+        Box box = new Box("Box", TILES_SIZE * 15, TILES_SIZE * 9);
+        entitiyManager.addEntity(box);
     }
 
     public static void setup() {

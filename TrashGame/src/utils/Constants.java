@@ -30,6 +30,7 @@ public class Constants {
     public class Layer {
         public final static int PLAYER = 0;
         public final static int PLATFORM = 1;
+        public final static int OBJECTS = 1;
         public final static int TRAP = 1;
         public final static int TILE = 2;
 

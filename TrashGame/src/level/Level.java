@@ -18,6 +18,7 @@ import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
 import prefabs.exits.Door;
+import prefabs.objects.Box;
 import prefabs.objects.Button;
 import prefabs.objects.Gate;
 import prefabs.objects.Platform;
@@ -56,16 +57,15 @@ public class Level {
 
 		loadButton(); // RED : 40 | BLUE : posX Gate | GREEN : posY Gate
 
-		loadTrap();// GREEN [0 , 10]
+		// loadTrap();// GREEN [0 , 10]
+
+		loadBox(); // GREEN : 11
 
 		loadGate(); // GREEN : 254
 
 		loadDoor(); // GREEN : 255
 
-	
-		loadPlayer(); // BLUE : 100 
-
-		
+		loadPlayer(); // BLUE : 100
 
 	}
 
@@ -102,87 +102,6 @@ public class Level {
 				lvlData.put(name, tileBlock);
 				LevelScene.getEntityManager().addEntity(tileBlock);
 
-			}
-		}
-	}
-
-	public void loadPlayer() {
-		// BLUE : 100 
-		for (int row = 0; row < imgLvlData.getHeight(); row++) {
-			for (int col = 0; col < imgLvlData.getWidth(); col++) {
-
-				Color color = new Color(imgLvlData.getRGB(col, row));
-				int colorCode = color.getBlue();
-
-				if (colorCode == 100) {
-					LevelScene.getPlayerManager().spawnSlime(
-							"Green",
-							TILES_SIZE * col,
-							TILES_SIZE * row,
-							SlimeType.TINY_SLIME);
-
-					LevelScene.getPlayerManager().spawnSlime(
-							"Yellow",
-							TILES_SIZE * col,
-							TILES_SIZE * row,
-							SlimeType.TINY_SLIME);
-
-					return;
-				}
-			}
-		}
-
-	}
-
-	public void loadDoor() {
-		 // GREEN : 255
-		for (int row = 0; row < imgLvlData.getHeight(); row++) {
-			for (int col = 0; col < imgLvlData.getWidth(); col++) {
-
-				Color color = new Color(imgLvlData.getRGB(col, row));
-				int colorCode = color.getGreen();
-
-				String name = "ExitsDoor" + col + "" + row;
-
-				if (colorCode == 255) {
-					Door door = new Door(
-							name,
-							col * TILES_SIZE,
-							row * TILES_SIZE);
-					lvlData.put(name, door);
-					LevelScene.getEntityManager().addEntity(door);
-					return;
-				}
-			}
-		}
-	}
-
-	int maxButton = 5;
-
-	public void loadGate() {
-		// GREEN : 254
-		for (int row = 0; row < imgLvlData.getHeight(); row++) {
-			for (int col = 0; col < imgLvlData.getWidth(); col++) {
-
-				Color color = new Color(imgLvlData.getRGB(col, row));
-				int colorCode = color.getGreen();
-
-				String name = "Gate" + col + "" + row;
-
-				if (colorCode == 254) {
-					Gate gate = new Gate(
-							name,
-							col * TILES_SIZE,
-							row * TILES_SIZE);
-					lvlData.put(name, gate);
-					for (int i = 0; i < maxButton; i++) {
-						Button button = (Button) lvlData.get("Button" + i + "For" + col + "" + row);
-						if (button != null)
-							gate.addListener(button);
-					}
-					LevelScene.getEntityManager().addEntity(gate);
-					break;
-				}
 			}
 		}
 	}
@@ -236,7 +155,7 @@ public class Level {
 	}
 
 	public void loadTrap() {
-		//GREEN [0 , 10]
+		// GREEN [0 , 10]
 		// 0 : spike
 		// 1 : bomb button
 
@@ -271,6 +190,104 @@ public class Level {
 				}
 			}
 		}
+	}
+
+	public void loadBox() {
+		// GREEN : 11
+		for (int row = 0; row < imgLvlData.getHeight(); row++) {
+			for (int col = 0; col < imgLvlData.getWidth(); col++) {
+
+				Color color = new Color(imgLvlData.getRGB(col, row));
+				int colorCode = color.getGreen();
+
+				String name = "Box" + col + "" + row;
+				if (colorCode == 11) {
+					Box box = new Box(name, col * TILES_SIZE, row * TILES_SIZE);
+					LevelScene.getEntityManager().addEntity(box);
+				}
+			}
+		}
+	}
+
+	int maxButton = 5;
+
+	public void loadGate() {
+		// GREEN : 254
+		for (int row = 0; row < imgLvlData.getHeight(); row++) {
+			for (int col = 0; col < imgLvlData.getWidth(); col++) {
+
+				Color color = new Color(imgLvlData.getRGB(col, row));
+				int colorCode = color.getGreen();
+
+				String name = "Gate" + col + "" + row;
+
+				if (colorCode == 254) {
+					Gate gate = new Gate(
+							name,
+							col * TILES_SIZE,
+							row * TILES_SIZE);
+					lvlData.put(name, gate);
+					for (int i = 0; i < maxButton; i++) {
+						Button button = (Button) lvlData.get("Button" + i + "For" + col + "" + row);
+						if (button != null)
+							gate.addListener(button);
+					}
+					LevelScene.getEntityManager().addEntity(gate);
+					break;
+				}
+			}
+		}
+	}
+
+	public void loadDoor() {
+		// GREEN : 255
+		for (int row = 0; row < imgLvlData.getHeight(); row++) {
+			for (int col = 0; col < imgLvlData.getWidth(); col++) {
+
+				Color color = new Color(imgLvlData.getRGB(col, row));
+				int colorCode = color.getGreen();
+
+				String name = "ExitsDoor" + col + "" + row;
+
+				if (colorCode == 255) {
+					Door door = new Door(
+							name,
+							col * TILES_SIZE,
+							row * TILES_SIZE);
+					lvlData.put(name, door);
+					LevelScene.getEntityManager().addEntity(door);
+					return;
+				}
+			}
+		}
+	}
+
+	public void loadPlayer() {
+		// BLUE : 100
+		for (int row = 0; row < imgLvlData.getHeight(); row++) {
+			for (int col = 0; col < imgLvlData.getWidth(); col++) {
+
+				Color color = new Color(imgLvlData.getRGB(col, row));
+				int colorCode = color.getBlue();
+
+				if (colorCode == 100) {
+					LevelScene.getPlayerManager().spawnSlime(
+							"Green",
+							TILES_SIZE * col,
+							TILES_SIZE * row,
+							SlimeType.TINY_SLIME);
+
+					LevelScene.getPlayerManager().spawnSlime(
+							"Yellow",
+							TILES_SIZE * col,
+							TILES_SIZE * row,
+							SlimeType.TINY_SLIME);
+
+					return;
+				}
+			}
+		}
+
 	}
 
 }
