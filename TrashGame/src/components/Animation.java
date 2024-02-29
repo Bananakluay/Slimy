@@ -96,6 +96,15 @@ public class Animation extends Component {
         }
     }
 
+    public void draw(Graphics g, Transform transform){
+        g.drawImage(
+                animations.get(currentAnimation).frames.get(index), 
+                    (int)transform.position.x, 
+                    (int)transform.position.y, 
+                    (int)transform.scale.x, 
+                    (int)transform.scale.y,
+                null);
+    }
     @Override
     public void draw(Graphics g) {
         if (!isAnimating())

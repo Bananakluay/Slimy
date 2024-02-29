@@ -25,11 +25,12 @@ public class Rigidbody extends Component {
 
     public boolean leftCollision, rightCollision, topCollision, botCollision;
     public float extremumSpeed = 0.34f * SCALE;
-
+    
     public Rigidbody(float mass, float friction) {
         this.mass = mass;
         this.friction = friction;
         this.velocity = new Vec2(0, 0);
+
     }
 
     @Override
@@ -152,7 +153,6 @@ public class Rigidbody extends Component {
     }
 
     private void frictionOnX() {
-        System.out.println(-velocity.x * friction);
         this.addForce(new Vec2(-velocity.x * friction, 0));
     }
 

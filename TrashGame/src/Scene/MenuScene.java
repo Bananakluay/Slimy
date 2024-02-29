@@ -7,8 +7,13 @@ import static utils.Constants.Game.SCALE;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.List;
 
+
+import components.Animation;
 import dataStructure.AssetPool;
+import dataStructure.Transform;
 import gui.GuiButton;
 import gui.GuiLayer;
 import gui.GuiText;
@@ -17,11 +22,20 @@ import utils.Vec2;
 
 public class MenuScene extends Scene {
     private GuiLayer guiLayer;
+    List<BufferedImage> bg;
+    Animation background;
+    Transform bgTransform;
 
     public MenuScene() {
         init();
-    }
+        bg = AssetPool.getBufferedImageList("TrashGame/res/assets/Background/bgMainMenu.png", 256, 144);
+        background = new Animation();
 
+        background.addAnimation("bg", 100, bg, false);
+        background.play("bg");
+        bgTransform = new Transform(new Vec2(0, 0), new Vec2(256 * 2 * SCALE, 144 * 2 * SCALE));
+
+    }
 
     public void init() {
         guiLayer = new GuiLayer(); // layer
@@ -50,10 +64,12 @@ public class MenuScene extends Scene {
         if (Game.KI.onPress(KeyEvent.VK_ENTER)) {
             SceneManager.changeScene(Scenes.LEVEL_SCENE);
         }
+        background.update();
     }
 
     @Override
     public void render(Graphics g) {
+        background.draw(g, bgTransform);
         gui(g);
     }
 
@@ -61,7 +77,13 @@ public class MenuScene extends Scene {
     public void gui(Graphics g) {
         g.setColor(Color.BLACK);
         g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
-
+        // g.drawImage(
+        // bg.get(0),
+        // 0,
+        // 0,
+        // (int) (256 * 2 * SCALE),
+        // (int) (144 * 2 * SCALE),
+        // null);
         GuiText.drawString(
                 g,
                 "Slimey",
