@@ -19,7 +19,7 @@ public class Box extends Entity {
     BufferedImage img;
 
     public Box(String name, float x, float y) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(19 * 3, 19 * 3)), Layer.OBJECTS);
+        super(name, new Transform(new Vec2(x, y), new Vec2(19 * SCALE, 19 * SCALE)), Layer.OBJECTS);
         this.type = EntityType.BOX;
         this.addComponent(new Bounds(null, null));
         this.addComponent(new Physic2D());

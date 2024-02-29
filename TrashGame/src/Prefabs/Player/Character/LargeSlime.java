@@ -25,8 +25,8 @@ public class LargeSlime extends Player {
 
     private void init() {
         this.setMass(30);
-        this.setFriction(0.06f);
-        this.setMobility(WALK_SPEED * 0.7f, JUMP_FORCE * 0.75f);
+        this.setFriction(0.07f);
+        this.setMobility(WALK_SPEED * 0.44f, JUMP_FORCE * 0.75f);
 
         // animation
         frames = AssetPool.getBufferedImageList("TrashGame/res/assets/Character/BlueSlime.png", 16, 16);

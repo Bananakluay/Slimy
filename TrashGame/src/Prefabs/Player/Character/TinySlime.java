@@ -30,7 +30,7 @@ public class TinySlime extends Player {
     private void init() {
         this.setMass(1.5f * SCALE);
         this.setFriction(0.35f);
-        this.setMobility(WALK_SPEED, JUMP_FORCE * 0.9f);
+        this.setMobility(WALK_SPEED * 0.6f, JUMP_FORCE * 0.9f);
 
         frames = AssetPool.getBufferedImageList(file, 16, 16);
         animation = this.getComponent(Animation.class);

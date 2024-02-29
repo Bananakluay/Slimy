@@ -24,7 +24,7 @@ public class Rigidbody extends Component {
     private List<Vec2> forces = new ArrayList<>();
 
     public boolean leftCollision, rightCollision, topCollision, botCollision;
-    public float extremumSpeed = 1f;
+    public float extremumSpeed = 0.34f * SCALE;
 
     public Rigidbody(float mass, float friction) {
         this.mass = mass;
@@ -74,9 +74,9 @@ public class Rigidbody extends Component {
         }
 
         // avoid velocity --> 0.00...
-        if (Math.abs(velocity.x) < 0.025)
+        if (Math.abs(velocity.x) < 0.001)
             velocity.x = 0;
-        if (Math.abs(velocity.y) < 0.025)
+        if (Math.abs(velocity.y) < 0.001)
             velocity.y = 0;
 
         if (botCollision || topCollision) {
