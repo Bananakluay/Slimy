@@ -88,10 +88,9 @@ public class Gate extends Entity {
 
     @Override
     public void draw(Graphics g) {
-        System.out.println(currentIndex);
         super.draw(g);
         if (img == null) {
-            System.out.println("here");
+            System.out.println("img is null");
         }
         g.drawImage(img.get(currentIndex),
                 (int) this.getPosition().x,

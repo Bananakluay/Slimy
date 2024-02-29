@@ -2,10 +2,8 @@ package prefabs.objects;
 
 import static utils.Constants.Game.SCALE;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 
 import components.Bounds;
 import components.Physic2D;
@@ -21,12 +19,12 @@ public class Box extends Entity {
     BufferedImage img;
 
     public Box(String name, float x, float y) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(25, 25)), Layer.OBJECTS);
+        super(name, new Transform(new Vec2(x, y), new Vec2(19 * 3, 19 * 3)), Layer.OBJECTS);
         this.type = EntityType.BOX;
         this.addComponent(new Bounds(null, null));
         this.addComponent(new Physic2D());
-        this.addComponent(new Rigidbody(2.5f * SCALE, 0.5f * SCALE));
-        img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/Box.png", 25, 25);
+        this.addComponent(new Rigidbody(2f * SCALE, 0.3f * SCALE));
+        img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/Box19.png", 19, 19);
     }
 
     @Override
@@ -40,5 +38,5 @@ public class Box extends Entity {
                 (int) this.getScale().y,
                 null);
     }
-
+    
 }

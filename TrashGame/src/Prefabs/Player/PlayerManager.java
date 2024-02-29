@@ -88,7 +88,7 @@ public class PlayerManager {
         float x = blueSlime.getTransform().position.x;
         float y = blueSlime.getTransform().position.y;
 
-        spawnSlime(GREEN, x, y, TINY_SLIME);
+        spawnSlime(GREEN, x, y - 0.1f, TINY_SLIME);
         spawnSlime(YELLOW, x, y, TINY_SLIME);
 
         // Remove Blue
@@ -162,6 +162,11 @@ public class PlayerManager {
 
         System.out.println(green.isActive() + " " + yellow.isActive());
 
+    }
+
+    public static void clear() {
+        slimes.clear();
+        mode = DUAL;
     }
 
     public static void resetIfDead() {

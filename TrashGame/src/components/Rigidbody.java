@@ -1,6 +1,9 @@
 package components;
 
 import physics.Collision;
+import prefabs.objects.Box;
+import prefabs.player.Player;
+import prefabs.player.character.TinySlime;
 import utils.Vec2;
 
 import static entity.EntityType.PLAYER;
@@ -10,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataStructure.Transform;
+import entity.Entity;
 
 public class Rigidbody extends Component {
 
@@ -101,6 +105,12 @@ public class Rigidbody extends Component {
     public void onCollision(Collision collision) {
 
         if (collision.subject.hasComponent(Rigidbody.class) && collision.object.hasComponent(Rigidbody.class)) {
+
+            if (collision.subject instanceof Player p && collision.object instanceof Box) {
+                if (p instanceof TinySlime) {
+                    return;
+                }
+            }
             Rigidbody s = collision.subject.getComponent(Rigidbody.class);
             Rigidbody o = collision.object.getComponent(Rigidbody.class);
             if (collision.type == LEFT || collision.type == RIGHT) {
@@ -123,7 +133,8 @@ public class Rigidbody extends Component {
     private void handleCollision(Collision collision, Transform s, Transform o) {
         if (collision.type == LEFT || collision.type == RIGHT) {
             velocity.x = 0;
-            s.position.x = collision.type == LEFT ? o.position.x + o.scale.x + 0.0001f: o.position.x - s.scale.x - 0.0001f; 
+            s.position.x = collision.type == LEFT ? o.position.x + o.scale.x + 0.0001f
+                    : o.position.x - s.scale.x - 0.0001f;
         } else if (collision.type == TOP) {
             velocity.y = 0;
             s.position.y = o.position.y + o.scale.y;
