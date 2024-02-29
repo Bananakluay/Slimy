@@ -5,12 +5,12 @@ import static utils.Constants.Game.TILES_SIZE;
 import java.awt.Graphics;
 import java.util.List;
 
+import Level.LevelManager;
 import Prefabs.Box;
 import Prefabs.Button;
 import Prefabs.Gate;
 import Prefabs.Player.PlayerManager;
 import entity.Entity;
-import level.LevelManager;
 
 public class LevelScene extends Scene {
     public LevelScene() {

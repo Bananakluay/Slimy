@@ -1,4 +1,4 @@
-package level;
+package Level;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import Scene.SceneManager;
 
 public class LevelManager {
 
@@ -76,10 +77,14 @@ public class LevelManager {
     }
 
     public static void loadNextLevels() {
+        if (SceneManager.isFadingIn() || SceneManager.isFadingOut()) {
+            return;
+        }
         PlayerManager.onDestroy();
         // currentLevel.onDestroy();
-        //onDestroy();
+        // onDestroy();
         if (lvlindex < Map.size()) {
+            System.out.println("NExt lvl");
             lvlindex++;
             levelManager = null;
         } else {

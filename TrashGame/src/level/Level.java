@@ -1,4 +1,4 @@
-package level;
+package Level;
 
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_IN_HEIGHT;

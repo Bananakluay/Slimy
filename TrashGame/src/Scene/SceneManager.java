@@ -1,13 +1,17 @@
 package Scene;
 
 import Prefabs.Player.PlayerManager;
-import level.LevelManager;
+import main.GamePanel;
 
 import java.util.logging.Level;
 
+import Level.LevelManager;
 import Prefabs.Spike;
 
 public class SceneManager {
+    private static boolean fadingOut = false;
+    private static boolean fadingIn = false;
+    private static int fadeSpeed = 2;
     private static SceneManager sceneManager = null;
 
     private static Scene currentScene;
@@ -26,7 +30,12 @@ public class SceneManager {
         changeScene(Scenes.LEVEL_SCENE);
     }
 
-    public void changeScene(Scenes scene) {
+    public static void changeScene(Scenes scene) {
+        if (currentScene != null) {
+            fadingIn = true;
+            // currentScene = null;
+            return;
+        }
         switch (scene) {
             case MENU_SCENE:
                 System.out.println("Menu Scene");
@@ -43,6 +52,7 @@ public class SceneManager {
             default:
                 break;
         }
+        fadingOut = true;
     }
 
     public static Scene getCurrentScene() {
@@ -50,8 +60,8 @@ public class SceneManager {
     }
 
     public static void NextScene() {
-        currentScene.onDestroy();
-        currentScene = new LevelScene();
+        LevelManager.loadNextLevels();
+        changeScene(Scenes.LEVEL_SCENE);
         PlayerManager.get(currentScene);
     }
 
@@ -70,6 +80,36 @@ public class SceneManager {
             PlayerManager.get(currentScene);
             Spike.died_yellow = false;
             Spike.died_green = false;
+        }
+    }
+
+    public static boolean isFadingOut() {
+        return fadingOut;
+    }
+
+    public static boolean isFadingIn() {
+        return fadingIn;
+    }
+
+    public static void updateFade() {
+        if (fadingOut) {
+            // Perform fade-out
+            if (GamePanel.getFadeAlpha() - fadeSpeed >= 0) {
+                GamePanel.setFadeAlpha(GamePanel.getFadeAlpha() - fadeSpeed);
+            } else {
+                fadingOut = false;
+                // Change the scene here if needed
+            }
+        } else if (fadingIn) {
+            // Perform fade-in
+            if (GamePanel.getFadeAlpha() + fadeSpeed <= 255) {
+                GamePanel.setFadeAlpha(GamePanel.getFadeAlpha() + fadeSpeed);
+            } else {
+                fadingIn = false;
+                currentScene = null;
+                changeScene(Scenes.LEVEL_SCENE);
+                // Additional logic if needed after fade-in
+            }
         }
     }
 }

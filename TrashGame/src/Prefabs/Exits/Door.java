@@ -8,18 +8,19 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import Interaction.Behavior;
+import Level.LevelManager;
 import components.Detector;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
-import level.LevelManager;
 import Scene.LevelScene;
 import Scene.SceneManager;
 
 public class Door extends Entity implements Behavior {
     public LevelScene levelScene;
     List<BufferedImage> img;
+
     public Door(String name, Transform transform) {
         super(name, transform, 1);
         init();
@@ -28,9 +29,9 @@ public class Door extends Entity implements Behavior {
     public void init() {
         Detector detector = new Detector(
                 transform.position.x,
-                transform.position.y + TILES_SIZE*0.3f,
+                transform.position.y + TILES_SIZE * 0.3f,
                 transform.scale.x,
-                transform.scale.y*1.7f,
+                transform.scale.y * 1.7f,
                 List.of(EntityType.PLAYER),
                 this);
         addComponent(detector);
@@ -39,23 +40,27 @@ public class Door extends Entity implements Behavior {
 
     @Override
     public void activateOn(Entity entity) {
+        if (SceneManager.isFadingIn() || SceneManager.isFadingOut()) {
+            return;
+        }
         System.out.println("This is door Exits");
-        LevelManager.loadNextLevels();
         SceneManager.NextScene();
     }
-    
+
     @Override
-    public void activateOff() {}
+    public void activateOff() {
+    }
+
     @Override
     public void draw(Graphics g) {
         super.draw(g);
         g.drawImage(
-            img.get(1), 
-            (int)(this.getTransform().position.x), 
-            (int)(this.getTransform().position.y),
-            (int)(21*SCALE), 
-            (int)(32*SCALE), 
-            null);
+                img.get(1),
+                (int) (this.getTransform().position.x),
+                (int) (this.getTransform().position.y),
+                (int) (21 * SCALE),
+                (int) (32 * SCALE),
+                null);
     }
 
 }

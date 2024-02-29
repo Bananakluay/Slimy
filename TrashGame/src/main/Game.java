@@ -56,6 +56,7 @@ public class Game implements Runnable {
 		// 1024); // in MB
 		// System.out.println("Used Memory: " + usedMemory + " MB");
 		KI.update();
+		SceneManager.updateFade();
 		SceneManager.getCurrentScene().update();
 	}
 
