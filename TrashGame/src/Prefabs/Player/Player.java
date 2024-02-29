@@ -12,6 +12,7 @@ import utils.Constants.Layer;
 import static entity.EntityType.PLAYER;
 import static entity.EntityType.TILE;
 import static utils.Constants.Game.SCALE;
+import static utils.Constants.Player.WALK_SPEED;
 
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class Player extends Entity {
         addComponent(new Physic2D());
         addComponent(new Controller());
         addComponent(new Animation());
+        this.getComponent(Rigidbody.class).extremumSpeed = 2f;
 
     }
 

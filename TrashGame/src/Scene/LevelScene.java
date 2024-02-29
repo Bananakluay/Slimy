@@ -29,6 +29,7 @@ import prefabs.objects.Box;
 import prefabs.objects.Button;
 import prefabs.objects.Gate;
 import prefabs.objects.Platform;
+import prefabs.player.Player;
 import prefabs.player.PlayerManager;
 import prefabs.trap.BombButton;
 import prefabs.trap.Spike;
@@ -73,7 +74,7 @@ public class LevelScene extends Scene {
     }
 
     public static void setup() {
-        test();
+        // test();
         initGuiPlayingScene();
         initGuiPauseScene();
         entitiyManager.ready();
@@ -218,7 +219,7 @@ public class LevelScene extends Scene {
         entitiyManager.getAllEntities().clear();
         guiPlayingScene.clear();
         guiPauseScene.clear();
-        playerManager.clear();
+        PlayerManager.clear();
     }
 
     @Override
