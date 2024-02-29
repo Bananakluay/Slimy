@@ -90,7 +90,7 @@ public class ArrowRush extends Entity implements Behavior {
                 (int) (this.getTransform().scale.y),
                 null);
 
-        if(direction == 0 || direction == 1)
+        if (direction == 0 || direction == 1)
             g.drawRect((int) (this.getTransform().position.x),
                     (int) (this.getTransform().position.y),
                     (int) (this.getTransform().scale.x),
@@ -113,7 +113,6 @@ public class ArrowRush extends Entity implements Behavior {
 
     @Override
     public void update() {
-        System.out.println(this.getTransform().position.x);
         super.update();
         this.getComponent(Detector.class).updatePos(this.getTransform().position.x, this.getTransform().position.y);
 
