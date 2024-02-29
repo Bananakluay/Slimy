@@ -77,7 +77,7 @@ public class SelectLevelButton extends GuiButton implements ClickListener {
     public void onClick() {
         System.out.println("Level " + levelNumber);
         if(!isLock()){
-            LevelManager.setLevel(levelNumber);
+            LevelManager.setLevel(levelNumber-1);
             SceneManager.changeScene(Scenes.LEVEL_SCENE);
         }
 

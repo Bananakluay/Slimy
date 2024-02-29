@@ -31,7 +31,7 @@ public class Bounds extends Component {
     public float interectBoundsoffset = 10 * SCALE;
     private Set<EntityType> types;
 
-    private boolean DEBUG = false;
+    private boolean DEBUG = true;
 
     public Bounds(Color color, List<EntityType> types) {
         this.color = color != null ? color : Color.WHITE;
