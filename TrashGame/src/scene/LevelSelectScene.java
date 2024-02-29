@@ -15,7 +15,6 @@ public class LevelSelectScene extends Scene {
 
     private GuiLayer levelSelectGuiLayer;
     private GuiLayer nextPrevGuiLayer;
-    
     private int currentPage = 0;
     private int maxPage = 2;
     int gridSpacing = 128;
@@ -53,44 +52,33 @@ public class LevelSelectScene extends Scene {
         float half_scaleX = (float) (scaleX / 2 * 0.75);
         float half_scaleY = (float) (scaleY / 2 * 0.75);
 
-        GuiButton prevButton = new GuiButton(
-                "PrevButton",
-                new Vec2(256 - half_scaleX, (posY / 0.95f) - half_scaleY),
-                new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16),
-                () -> loadPrevLevels());
-
         GuiButton NextButton = new GuiButton(
                     "NextButton",
                     new Vec2(1280 - half_scaleX, (posY / 0.95f) - half_scaleY) ,
                     new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
                     AssetPool.getBufferedImageList("TrashGame/res/assets/ui/NextButton.png", 16, 16),
                     () -> loadNextLevels());
-        
-        GuiButton BackButton = new GuiButton(
-                        "BackButton",
-                        new Vec2(1280 - half_scaleX, (posY / 0.95f) - half_scaleY) ,
-                        new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
-                        AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16),
-                        () -> SceneManager.changeScene(Scenes.MENU_SCENE));
 
-        nextPrevGuiLayer.addGuiComponent(prevButton);
+        GuiButton prevButton = new GuiButton(
+                    "PrevButton",
+                    new Vec2(256 - half_scaleX, (posY / 0.95f) - half_scaleY),
+                    new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
+                    AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16),
+                    () -> loadPrevLevels());
+        
         nextPrevGuiLayer.addGuiComponent(NextButton);
+        nextPrevGuiLayer.addGuiComponent(prevButton);
     }
 
     private void loadPrevLevels() { // ก่อน
         if (currentPage > 0 ) {
-        currentPage--;
-        levelSelectGuiLayer.clear();
-        loadLevelButtons(currentPage);
-        }
-        if (currentPage == 0 ) {
-            nextPrevGuiLayer.removeGuiComponent(prevButton);
-            nextPrevGuiLayer.addGuiComponent(BackButton);
+            currentPage--;
+            levelSelectGuiLayer.clear();
+            loadLevelButtons(currentPage);
         }
         else {
             levelSelectGuiLayer.clear();
-            loadLevelButtons(currentPage);
+            SceneManager.changeScene(Scenes.MENU_SCENE);
         }
     }
 
