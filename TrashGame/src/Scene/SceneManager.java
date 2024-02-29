@@ -14,7 +14,7 @@ public class SceneManager {
     private static int fadeSpeed = 2;
     private static SceneManager sceneManager = null;
 
-    private static Scene currentScene;
+    private static Scene currentScene = null;
 
     private SceneManager() {
         init();
@@ -62,7 +62,7 @@ public class SceneManager {
     public static void NextScene() {
         LevelManager.loadNextLevels();
         changeScene(Scenes.LEVEL_SCENE);
-        PlayerManager.get(currentScene);
+        //PlayerManager.get(currentScene);
     }
 
     public static void restart() {

@@ -86,7 +86,7 @@ public class LevelManager {
         if (lvlindex < Map.size()) {
             System.out.println("NExt lvl");
             lvlindex++;
-            levelManager = null;
+            LevelManager.onDestroy();
         } else {
             System.out.println("Game complete");
         }
