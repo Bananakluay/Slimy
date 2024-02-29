@@ -12,9 +12,9 @@ import main.Game;
 import utils.Vec2;
 public class GuiButton extends GuiComponent{
 
-    private BufferedImage[] imgs;
     private ClickListener clicker;
-    private GuiButtonStatus status = GuiButtonStatus.IDLE;
+    protected BufferedImage[] imgs;
+    protected GuiButtonStatus status = GuiButtonStatus.IDLE;
 
     public GuiButton(String name, Vec2 position, Vec2 scale, List<BufferedImage> imgs, ClickListener clicker) {
         super(name, position, scale);
@@ -58,6 +58,8 @@ public class GuiButton extends GuiComponent{
             case PRESSED:
                 if (imgs.length >= 3) { // Check if PRESSED state image exists
                     g.drawImage(imgs[2], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
+                }else{
+                    g.drawImage(imgs[1], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
                 }
                 break;
             default:

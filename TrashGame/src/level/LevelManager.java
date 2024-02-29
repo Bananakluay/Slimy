@@ -14,7 +14,7 @@ public class LevelManager {
     private static ArrayList<String> Map = new ArrayList<>();
 
     private static int lvlindex = 0;
-
+    private static int highestReachedLevel = 1;
 
     private LevelManager() {
         init();
@@ -36,10 +36,15 @@ public class LevelManager {
         new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
     }
 
+    public static void setLevel(int levelNumber) {
+        lvlindex = levelNumber;
+    }
+
     public static void loadNextLevels() {
         lvlindex++;
         if (lvlindex < Map.size()) {
             loadLevels();
+            updateHighestReachedLevel();
         } else {
             System.out.println("Game complete");
         }
@@ -68,11 +73,21 @@ public class LevelManager {
 
     }
 
+    public static int getHighestReachedLevel() {
+        return highestReachedLevel;
+    }
+
     public static void resetLevel() {
         loadLevels();
     }
 
     public static void onDestroy() {
         levelManager = null;
+    }
+
+    private static void updateHighestReachedLevel() {
+        if (lvlindex > highestReachedLevel) {
+            highestReachedLevel = lvlindex;
+        }
     }
 }

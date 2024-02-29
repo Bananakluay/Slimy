@@ -45,7 +45,7 @@ public class SceneManager {
                 break;
         }
     }
-
+    
     public static Scene getCurrentScene() {
         return currentScene;
     }

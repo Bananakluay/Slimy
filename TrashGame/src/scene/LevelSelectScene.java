@@ -8,56 +8,86 @@ import java.awt.Graphics;
 import dataStructure.AssetPool;
 import gui.GuiButton;
 import gui.GuiLayer;
-import main.Game;
+import ui.SelectLevelButton;
 import utils.Vec2;
 
 public class LevelSelectScene extends Scene {
-    
-    private GuiLayer guiLayer;
+
+    private GuiLayer levelSelectGuiLayer;
+    private GuiLayer nextPrevGuiLayer;
+
+    private int currentPage = 0;
+    int gridSpacing = 128;
 
     public LevelSelectScene() {
         init();
     }
 
     private void init() {
-        guiLayer = new GuiLayer(); // layer
-
-        GuiButton playButton = new GuiButton( /* gen paly button */
-                "PlayButton",
-                new Vec2(GAME_WIDTH / 2 - (33f * SCALE), GAME_HEIGHT * 0.84f), // position
-                new Vec2(33f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PlayButton.png", 33, 16),
-                () -> SceneManager.changeScene(Scenes.LEVEL_SCENE));
-
-        GuiButton First_B = new GuiButton( /* gen paly button */
-                "FirstButton",
-                new Vec2(256 - ((16f * SCALE * 3) / 2), 256 - ((16f * SCALE * 3) / 2)), // position((16f * SCALE * 3) / 2)
-                new Vec2(16f * SCALE * 3, 16f * SCALE * 3),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16),
-                () -> SceneManager.changeScene(Scenes.LEVEL_SCENE));
-
-        GuiButton Second_B = new GuiButton( /* gen paly button */
-                "SecondButton",
-                new Vec2(512 - ((16f * SCALE * 3) / 2), 256 - ((16f * SCALE * 3) / 2)), // position((16f * SCALE * 3) / 2)
-                new Vec2(16f * SCALE * 3, 16f * SCALE * 3),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16),
-                () -> SceneManager.changeScene(Scenes.LEVEL_SCENE));
-
-        guiLayer.addGuiComponent(playButton); // add to guilayer
-        guiLayer.addGuiComponent(First_B);
-        guiLayer.addGuiComponent(Second_B);
+        levelSelectGuiLayer = new GuiLayer();
+        nextPrevGuiLayer = new GuiLayer();
+        loadLevelButtons(currentPage);
     }
 
     @Override
     public void update() {
-        System.out.println(Game.MI.getMouseX());
-        System.out.println(Game.MI.getMouseY());
-        guiLayer.update();
+        levelSelectGuiLayer.update();
+        // nextPrevGuiLayer.update();
     }
 
     @Override
     public void render(Graphics g) {
         gui(g);
+    }
+
+    private void loadNextPrevButtons() {
+        float posX = GAME_WIDTH / 2 - 16 * SCALE * 3;
+        float posY = GAME_HEIGHT - 16 * SCALE * 3;
+        float scaleX = 16f * SCALE * 3;
+        float scaleY = 16f * SCALE * 3;
+
+        GuiButton prevButton = new GuiButton(
+                "PrevButton",
+                new Vec2(posX, posY),
+                new Vec2(scaleX, scaleY),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PrevButton.png", 16, 16),
+                () -> loadPrevLevels());
+    }
+
+    private void loadPrevLevels() {
+        currentPage--;
+        levelSelectGuiLayer.clear();
+        loadLevelButtons(currentPage);
+    }
+
+    private void loadNextLevels() {
+        currentPage++;
+        levelSelectGuiLayer.clear();
+        loadLevelButtons(currentPage);
+    }
+
+    private void loadLevelButtons(int page) {
+        int row = 2;
+        int col = 5;
+        float initPosX = 1;
+        float initPosY = 2;
+        for (int j = 0; j < row; j++) {
+            for (int i = 0; i < col; i++) {
+                int levelNumber = i + j * col + page * (row * col) + 1;
+                System.out.println(levelNumber);
+                float posX = initPosX * (gridSpacing * (i + 2)) - ((16f * SCALE * 3) / 2) + i * gridSpacing;
+                float posY = initPosY * (gridSpacing * (j + 1)) - ((16f * SCALE * 3) / 2) + j * gridSpacing / 2;
+                float scaleX = 16f * SCALE * 3;
+                float scaleY = 16f * SCALE * 3;
+
+                SelectLevelButton selectLevelButton = new SelectLevelButton(
+                        "SelectLevelButton",
+                        new Vec2(posX, posY),
+                        new Vec2(scaleX, scaleY),
+                        levelNumber);
+                levelSelectGuiLayer.addGuiComponent(selectLevelButton);
+            }
+        }
     }
 
     @Override
@@ -66,29 +96,31 @@ public class LevelSelectScene extends Scene {
         g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
 
         // Define the spacing between grid lines
-    int gridSpacing = 128; // You can adjust this value to change the spacing
-    
-    // Set the color for the grid lines
-    g.setColor(Color.LIGHT_GRAY);
-    
-    // Draw vertical grid lines
-    for (int x = 0; x < GAME_WIDTH; x += gridSpacing) {
-        g.drawLine(x, 0, x, GAME_HEIGHT);
-    }
-    
-    // Draw horizontal grid lines
-    for (int y = 0; y < GAME_HEIGHT; y += gridSpacing) {
-        g.drawLine(0, y, GAME_WIDTH, y);
+        // You can adjust this value to change the spacing
+
+        // Set the color for the grid lines
+        g.setColor(Color.LIGHT_GRAY);
+
+        // Draw vertical grid lines
+        for (int x = 0; x < GAME_WIDTH; x += gridSpacing) {
+            g.drawLine(x, 0, x, GAME_HEIGHT);
+        }
+
+        // Draw horizontal grid lines
+        for (int y = 0; y < GAME_HEIGHT; y += gridSpacing) {
+            g.drawLine(0, y, GAME_WIDTH, y);
+        }
+
+        if (levelSelectGuiLayer != null)
+            levelSelectGuiLayer.render(g);
+        if (nextPrevGuiLayer != null)
+            nextPrevGuiLayer.render(g);
     }
 
-        if (guiLayer != null)
-            guiLayer.render(g);
-    }
-    
     @Override
     public void onDestroy() {
-        guiLayer = null;
+        levelSelectGuiLayer = null;
+        nextPrevGuiLayer = null;
     }
-
 
 }

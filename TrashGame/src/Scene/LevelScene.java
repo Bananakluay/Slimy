@@ -132,7 +132,6 @@ public class LevelScene extends Scene {
                 (int) (256 * 2 * SCALE),
                 (int) (144 * 2 * SCALE),
                 null);
-        System.out.println(GAME_WIDTH + " " + GAME_HEIGHT);
     }
 
     public void drawPauseGui(Graphics g) {
