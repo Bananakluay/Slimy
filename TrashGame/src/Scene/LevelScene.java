@@ -154,7 +154,15 @@ public class LevelScene extends Scene {
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PauseButton.png", 16, 16), // change png later
                 () -> isRunning = false);
 
+        GuiButton resetButton = new GuiButton( /* gen option button */
+                "resetButton",
+                new Vec2((float) (GAME_WIDTH - (38f * SCALE) * 13.25), GAME_HEIGHT * 0.03f), // position
+                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ResetButton.png", 16, 16), // change png later
+                () -> LevelManager.resetLevel());
+
         guiPlayingScene.addGuiComponent(pauseButton);
+        guiPlayingScene.addGuiComponent(resetButton);
     }
 
     // Gui pause scene----------------------------------------------
@@ -164,37 +172,37 @@ public class LevelScene extends Scene {
 
         ToggleGuiButton soundButton = new ToggleGuiButton(
                 "SoundButton",
-                new Vec2((float) (TILES_SIZE * 16.75), (float) (TILES_SIZE * 4)),
-                new Vec2((float) (ScaleX * 1.25), (float) (ScaleY * 1.25)),
+                new Vec2((float) (TILES_SIZE * 16.75), (float) (TILES_SIZE * 3.25)),
+                new Vec2((float) (ScaleX * 1.5), (float) (ScaleY * 1.5)),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16),
                 () -> System.out.println("SoundButton"));
 
         ToggleGuiButton musicButton = new ToggleGuiButton(
                 "musicButton",
-                new Vec2((float) (TILES_SIZE * 13.25), (float) (TILES_SIZE * 4)), 
-                new Vec2((float) (ScaleX * 1.25), (float) (ScaleY * 1.25)),
+                new Vec2((float) (TILES_SIZE * 13.1), (float) (TILES_SIZE * 3.25)), 
+                new Vec2((float) (ScaleX * 1.5), (float) (ScaleY * 1.5)),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/MusicButton.png", 16, 16),
                 () -> System.out.println("musicButton"));
 
         GuiButton continueButton = new GuiButton( /* gen option button */
                 "ContinueButton",
                 new Vec2(GAME_WIDTH / 2 - (16f * SCALE), (float) (TILES_SIZE * 11.45)), 
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16), // change png
+                new Vec2((float) (ScaleX * 1.5), (float) (ScaleY * 1.5)),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/NextButton.png", 16, 16), // change png
                 () -> isRunning = true);
 
         GuiButton backButton = new GuiButton( /* gen option button */
                 "backButton",
                 new Vec2(GAME_WIDTH / 2 - (75f * SCALE), (float) (TILES_SIZE * 11.45)), 
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png
+                new Vec2((float) (ScaleX * 1.5), (float) (ScaleY * 1.5)),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16), // change png
                 () -> SceneManager.changeScene(Scenes.MENU_SCENE));
 
         GuiButton restartButton = new GuiButton( /* gen option button */
                 "restartButton",
                 new Vec2(GAME_WIDTH / 2 - (-42f * SCALE), (float) (TILES_SIZE * 11.45)), 
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ResetButton.png", 16, 16), // change png
+                new Vec2((float) (ScaleX * 1.5), (float) (ScaleY * 1.5)),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ReplayButton.png", 16, 16), // change png
                 () -> LevelManager.resetLevel());
 
         guiPauseScene.addGuiComponent(restartButton);
