@@ -140,7 +140,7 @@ public class LevelScene extends Scene {
         GuiText.drawString(
                 g,
                 "PAUSED",
-                new Vec2((GAME_WIDTH / 2) + 8, (float) (GAME_HEIGHT / 2.2)),
+                new Vec2((GAME_WIDTH / 2) + 10, (float) (GAME_HEIGHT / 2.2)),
                 Color.GRAY,
                 AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 32 * 10));
     }
