@@ -17,6 +17,8 @@ public class LevelSelectScene extends Scene {
     private GuiLayer nextPrevGuiLayer;
 
     private int currentPage = 0;
+    private int maxPage = 2;
+    
     int gridSpacing = 128;
 
     public LevelSelectScene() {
@@ -51,20 +53,19 @@ public class LevelSelectScene extends Scene {
                 new Vec2(posX, posY),
                 new Vec2(scaleX, scaleY),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PrevButton.png", 16, 16),
-                () -> loadPrevLevels());
+                () -> loadPrevLevels()
+        );
+
+        GuiButton nextButton = new GuiButton(
+                "NextButton",
+                new Vec2(posX + 16 * SCALE * 3, posY),
+                new Vec2(scaleX, scaleY),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/NextButton.png", 16, 16),
+                () -> loadNextLevels()
+        );
+        
     }
 
-    private void loadPrevLevels() {
-        currentPage--;
-        levelSelectGuiLayer.clear();
-        loadLevelButtons(currentPage);
-    }
-
-    private void loadNextLevels() {
-        currentPage++;
-        levelSelectGuiLayer.clear();
-        loadLevelButtons(currentPage);
-    }
 
     private void loadLevelButtons(int page) {
         int row = 2;
@@ -88,6 +89,18 @@ public class LevelSelectScene extends Scene {
                 levelSelectGuiLayer.addGuiComponent(selectLevelButton);
             }
         }
+    }
+
+    private void loadPrevLevels() {
+        currentPage--;
+        levelSelectGuiLayer.clear();
+        loadLevelButtons(currentPage);
+    }
+
+    private void loadNextLevels() {
+        currentPage++;
+        levelSelectGuiLayer.clear();
+        loadLevelButtons(currentPage);
     }
 
     @Override
