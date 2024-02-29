@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import dataStructure.AssetPool;
 import gui.GuiButton;
 import gui.GuiLayer;
+import main.Game;
 import utils.Vec2;
 
 public class LevelSelectScene extends Scene {
@@ -28,11 +29,29 @@ public class LevelSelectScene extends Scene {
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/PlayButton.png", 33, 16),
                 () -> SceneManager.changeScene(Scenes.LEVEL_SCENE));
 
+        GuiButton First_B = new GuiButton( /* gen paly button */
+                "FirstButton",
+                new Vec2(256 - ((16f * SCALE * 3) / 2), 256 - ((16f * SCALE * 3) / 2)), // position((16f * SCALE * 3) / 2)
+                new Vec2(16f * SCALE * 3, 16f * SCALE * 3),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16),
+                () -> SceneManager.changeScene(Scenes.LEVEL_SCENE));
+
+        GuiButton Second_B = new GuiButton( /* gen paly button */
+                "SecondButton",
+                new Vec2(512 - ((16f * SCALE * 3) / 2), 256 - ((16f * SCALE * 3) / 2)), // position((16f * SCALE * 3) / 2)
+                new Vec2(16f * SCALE * 3, 16f * SCALE * 3),
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ContinueButton.png", 16, 16),
+                () -> SceneManager.changeScene(Scenes.LEVEL_SCENE));
+
         guiLayer.addGuiComponent(playButton); // add to guilayer
+        guiLayer.addGuiComponent(First_B);
+        guiLayer.addGuiComponent(Second_B);
     }
 
     @Override
     public void update() {
+        System.out.println(Game.MI.getMouseX());
+        System.out.println(Game.MI.getMouseY());
         guiLayer.update();
     }
 
@@ -47,7 +66,7 @@ public class LevelSelectScene extends Scene {
         g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
 
         // Define the spacing between grid lines
-    int gridSpacing = 32; // You can adjust this value to change the spacing
+    int gridSpacing = 128; // You can adjust this value to change the spacing
     
     // Set the color for the grid lines
     g.setColor(Color.LIGHT_GRAY);
