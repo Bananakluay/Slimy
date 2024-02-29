@@ -186,28 +186,28 @@ public class LevelScene extends Scene {
 
         GuiButton continueButton = new GuiButton( /* gen option button */
                 "ContinueButton",
-                new Vec2(GAME_WIDTH / 2 - (16f * SCALE), (float) (TILES_SIZE * 11.45)), 
+                new Vec2(GAME_WIDTH / 2 - (16f * SCALE) - 5, (float) (TILES_SIZE * 11.45)), 
                 new Vec2((float) (ScaleX * 1.5), (float) (ScaleY * 1.5)),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/NextButton.png", 16, 16), // change png
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BetterContinueButton.png", 16, 16), // change png
                 () -> isRunning = true);
 
-        GuiButton backButton = new GuiButton( /* gen option button */
-                "backButton",
-                new Vec2(GAME_WIDTH / 2 - (75f * SCALE), (float) (TILES_SIZE * 11.45)), 
+        GuiButton HomeButton = new GuiButton( /* gen option button */
+                "HomeButton",
+                new Vec2(GAME_WIDTH / 2 - (75f * SCALE) - 5, (float) (TILES_SIZE * 11.45)), 
                 new Vec2((float) (ScaleX * 1.5), (float) (ScaleY * 1.5)),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16), // change png
+                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/HomeButton.png", 16, 16), // change png
                 () -> SceneManager.changeScene(Scenes.MENU_SCENE));
 
         GuiButton restartButton = new GuiButton( /* gen option button */
                 "restartButton",
-                new Vec2(GAME_WIDTH / 2 - (-42f * SCALE), (float) (TILES_SIZE * 11.45)), 
+                new Vec2(GAME_WIDTH / 2 - (-42f * SCALE) - 5, (float) (TILES_SIZE * 11.45)), 
                 new Vec2((float) (ScaleX * 1.5), (float) (ScaleY * 1.5)),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ReplayButton.png", 16, 16), // change png
                 () -> LevelManager.resetLevel());
 
         guiPauseScene.addGuiComponent(restartButton);
         guiPauseScene.addGuiComponent(musicButton);
-        guiPauseScene.addGuiComponent(backButton);
+        guiPauseScene.addGuiComponent(HomeButton);
         guiPauseScene.addGuiComponent(continueButton);
         guiPauseScene.addGuiComponent(soundButton);
 

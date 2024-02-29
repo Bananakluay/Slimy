@@ -26,11 +26,11 @@ public class OptionScene extends Scene{
         guiLayer = new GuiLayer();
 
         
-        GuiButton optionButton = new GuiButton( /*gen option button*/
-            "optionButton", 
+        GuiButton backButton = new GuiButton( /*gen option button*/
+            "backButton", 
             new Vec2(GAME_WIDTH - (50f*SCALE), GAME_HEIGHT*0.84f), //position
             new Vec2(16f*SCALE*2, 16f*SCALE*2), 
-            AssetPool.getBufferedImageList("TrashGame/res/assets/ui/MusicButton.png", 16, 16), // change png later
+            AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16), // change png later
             ()-> SceneManager.changeScene(Scenes.MENU_SCENE));
 
         ToggleGuiButton soundButton = new ToggleGuiButton(
@@ -44,20 +44,12 @@ public class OptionScene extends Scene{
                     "musicButton",
                     new Vec2((float) (TILES_SIZE * 17.5), TILES_SIZE * 7),
                     new Vec2(16f * SCALE * 1.5f, 16f * SCALE * 1.5f),
-                    AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SoundButton.png", 16, 16),
+                    AssetPool.getBufferedImageList("TrashGame/res/assets/ui/MusicButton.png", 16, 16),
                     () -> System.out.println("musicButton"));
-
-        GuiButton backButton = new GuiButton( /* gen option button */
-                "backButton",
-                new Vec2(GAME_WIDTH - (50f * SCALE), GAME_HEIGHT * 0.84f), // position
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
-                AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToLSMButton.png", 16, 16), // change png
-                () -> SceneManager.changeScene(Scenes.MENU_SCENE));
         
         guiLayer.addGuiComponent(musicButton);
         guiLayer.addGuiComponent(backButton);
         guiLayer.addGuiComponent(soundButton);
-        guiLayer.addGuiComponent(optionButton);
     }
 
     @Override
