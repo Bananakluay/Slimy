@@ -7,6 +7,7 @@ import static utils.Constants.Layer.TRAP;
 
 import java.awt.Graphics;
 import java.util.Arrays;
+import java.util.Random;
 
 import interaction.Behavior;
 import prefabs.player.Player;
@@ -22,10 +23,11 @@ public class ArrowTrap extends Entity implements Behavior {
     int direction; // 0 : left, 1 : right, 2 : up, 3 : down
 
     boolean dubug = false;
-
-    public ArrowTrap(String name, float x, float y, int direction) {
+    Random rand;
+    public ArrowTrap(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y - (TILES_SIZE / 2)), new Vec2(TILES_SIZE, TILES_SIZE / 2)), TRAP);
-        this.direction = direction;
+        rand = new Random();
+        direction = rand.nextInt(4);
         init();
     }
 

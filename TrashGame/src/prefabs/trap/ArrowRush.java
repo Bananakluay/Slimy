@@ -2,9 +2,7 @@ package prefabs.trap;
 
 import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
-import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
-import static utils.Constants.Layer.TRAP;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -44,7 +42,7 @@ public class ArrowRush extends Entity implements Behavior {
                     this.getTransform().scale.y,
                     Arrays.asList(EntityType.PLAYER),
                     this,
-                    false);
+                    true);
         } else {
             detector = new Detector(
                     this.getTransform().position.x,
@@ -53,7 +51,7 @@ public class ArrowRush extends Entity implements Behavior {
                     this.getTransform().scale.x,
                     Arrays.asList(EntityType.PLAYER),
                     this,
-                    false);
+                    true);
         }
 
         addComponent(detector);
@@ -77,6 +75,7 @@ public class ArrowRush extends Entity implements Behavior {
     public void activateOneShot(Entity entity) {
         if (entity instanceof Player) {
             Player player = (Player) entity;
+            player.die();
         }
     }
 
