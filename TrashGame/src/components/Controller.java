@@ -76,8 +76,8 @@ public class Controller extends Component {
                 player.setDirectionY(1);
             }
         }
+        System.out.println(isOnFloor());
         if (isOnFloor() && Game.KI.isHeld(KeyEvent.VK_W)) {
-            rigidbody.addForce(new Vec2(0, -jumpForce));
             jumpDurationCounter = JUMP_DURATION;
             if (rigidbody.velocity.y < 0) {
                 Sound.volume = Volume.LOW;
@@ -92,6 +92,8 @@ public class Controller extends Component {
                 // rigidbody.addForce(new Vec2(0, -jumpForce));
                 jumpDurationCounter--;
             }
+        } else if (Game.KI.onRelease(KeyEvent.VK_W)) {
+            jumpDurationCounter = 0;
         }
 
     }
