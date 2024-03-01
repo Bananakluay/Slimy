@@ -45,7 +45,10 @@ public class LevelManager {
             return;
         }
         LevelScene.setup();
-        new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+        // new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+
+        new Level("TrashGame/res/lvls/map1.png");
+
         running_level = true;
         // SceneManager.fadingIn = true;
         fadingIn = true;
