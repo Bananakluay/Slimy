@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import dataStructure.AssetPool;
 import gui.GuiButton;
 import gui.GuiLayer;
+import level.LevelManager;
 import ui.SelectLevelButton;
 import utils.Vec2;
 
@@ -20,7 +21,6 @@ public class LevelSelectScene extends Scene {
     private int maxPage = 1;
     private int gridSpacing = (int) (GAME_WIDTH / 12);
     private BufferedImage bg = AssetPool.getBufferedImage("TrashGame/res/assets/Background/background.png", 64, 36);
-
     public LevelSelectScene() {
         init();
     }

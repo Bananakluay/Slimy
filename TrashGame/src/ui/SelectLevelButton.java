@@ -19,6 +19,7 @@ public class SelectLevelButton extends GuiButton implements ClickListener {
 
     int levelNumber;
     Font font;
+    private int highestReachedLevel = LevelManager.loadLastPlayedLevel();
 
     public SelectLevelButton(String name, Vec2 position, Vec2 scale, int levelNumber) {
         super(
@@ -76,15 +77,15 @@ public class SelectLevelButton extends GuiButton implements ClickListener {
     @Override
     public void onClick() {
         System.out.println("Level " + levelNumber);
-        if(!isLock()){
-            LevelManager.setLevel(levelNumber-1);
+        if (!isLock()) {
+            LevelManager.setLevel(levelNumber - 1);
             SceneManager.changeScene(Scenes.LEVEL_SCENE);
         }
 
     }
 
     private boolean isLock() {
-        return levelNumber > LevelManager.getHighestReachedLevel();
+        return levelNumber > highestReachedLevel;
     }
 
 }
