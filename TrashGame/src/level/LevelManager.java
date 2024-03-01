@@ -5,9 +5,16 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import main.Game;
 import scene.LevelScene;
+import scene.SceneManager;
 
 public class LevelManager {
+
+    private static boolean fadingOut = false;
+    private static boolean fadingIn = false;
+    private static int fadeSpeed = 3;
+    private static boolean running_level = false;
 
     private static LevelManager levelManager = null;
 
@@ -31,9 +38,17 @@ public class LevelManager {
     }
 
     public static void loadLevels() {
-        LevelScene.clear();
+        if (running_level) {
+            // SceneManager.fadingOut = true;
+            fadingOut = true;
+            running_level = false;
+            return;
+        }
         LevelScene.setup();
         new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+        running_level = true;
+        // SceneManager.fadingIn = true;
+        fadingIn = true;
     }
 
     public static void setLevel(int levelNumber) {
@@ -89,5 +104,41 @@ public class LevelManager {
         if (lvlindex > highestReachedLevel) {
             highestReachedLevel = lvlindex;
         }
+    }
+
+    public static void updateFadeIn() {
+        if (fadingIn) {
+            // Perform fade-out
+            if (Game.getFadeAlpha() - fadeSpeed >= 0) {
+                Game.setFadeAlpha(Game.getFadeAlpha() - fadeSpeed);
+            } else {
+                fadingIn = false;
+
+                // Change the scene here if needed
+            }
+        }
+    }
+
+    public static void updateFadeOut() {
+        if (fadingOut) {
+            // Perform fade-in
+            if (Game.getFadeAlpha() + fadeSpeed <= 255) {
+                Game.setFadeAlpha(Game.getFadeAlpha() + fadeSpeed);
+            } else {
+                System.out.println("Hi");
+                LevelScene.clear();
+                fadingOut = false;
+                loadLevels();
+                // Additional logic if needed after fade-in
+            }
+        }
+    }
+
+    public static boolean isFadingOut() {
+        return fadingOut;
+    }
+
+    public static boolean isFadingIn() {
+        return fadingIn;
     }
 }
