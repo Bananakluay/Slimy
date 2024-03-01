@@ -19,7 +19,6 @@ import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
 import utils.Vec2;
-import utils.Constants.Layer;
 
 public class ArrowRush extends Entity implements Behavior {
 
@@ -28,7 +27,7 @@ public class ArrowRush extends Entity implements Behavior {
     int direction; // 0 : left, 1 : right, 2 : up, 3 : down
 
     public ArrowRush(String name, float x, float y, int direction) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.3f)), Layer.TRAP);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.3f)), 5);
         this.direction = direction;
         init();
     }
