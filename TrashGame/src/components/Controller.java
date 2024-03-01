@@ -23,7 +23,7 @@ public class Controller extends Component {
 
     public boolean isActive = true;
 
-    private final int JUMP_DURATION = 50;
+    private final int JUMP_DURATION = 40;
     private int jumpDurationCounter = 0;
 
     @Override
@@ -78,7 +78,6 @@ public class Controller extends Component {
                 player.setDirectionY(1);
             }
         }
-
 
         // Jump duration
         if (Game.KI.isHeld(KeyEvent.VK_W)) {
