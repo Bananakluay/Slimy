@@ -10,7 +10,8 @@ import scene.LevelScene;
 import scene.SceneManager;
 
 public class LevelManager {
-
+    private static boolean reset = false, resett = true;
+    private static boolean next = false, first = true;
     private static boolean fadingOut = false;
     private static boolean fadingIn = false;
     private static int fadeSpeed = 3;
@@ -30,6 +31,7 @@ public class LevelManager {
     public static LevelManager get() {
         if (levelManager == null)
             levelManager = new LevelManager();
+        first = true;
         return levelManager;
     }
 
@@ -38,17 +40,39 @@ public class LevelManager {
     }
 
     public static void loadLevels() {
-        if (running_level) {
-            // SceneManager.fadingOut = true;
-            fadingOut = true;
-            running_level = false;
-            return;
+        if (reset && resett) {
+            System.out.println("restart");
+            if (running_level) {
+                // SceneManager.fadingOut = true;
+                fadingOut = true;
+                running_level = false;
+                return;
+            }
+            if (!fadingOut) {
+                new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+                running_level = true;
+                fadingIn = true;
+                resett = false;
+                reset = false;
+            }
+        } else if (next) {
+            if (running_level) {
+                fadingOut = true;
+                running_level = false;
+                return;
+            }
+            if (!fadingOut) {
+                new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+                running_level = true;
+                fadingIn = true;
+            }
+        } else if (first) {
+            System.out.println("firsty");
+            new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+            first = false;
+            running_level = true;
+            fadingIn = true;
         }
-        LevelScene.setup();
-        new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
-        running_level = true;
-        // SceneManager.fadingIn = true;
-        fadingIn = true;
     }
 
     public static void setLevel(int levelNumber) {
@@ -58,6 +82,7 @@ public class LevelManager {
     public static void loadNextLevels() {
         lvlindex++;
         if (lvlindex < Map.size()) {
+            next = true;
             loadLevels();
             updateHighestReachedLevel();
         } else {
@@ -93,6 +118,7 @@ public class LevelManager {
     }
 
     public static void resetLevel() {
+        reset = true;
         loadLevels();
     }
 
@@ -113,7 +139,8 @@ public class LevelManager {
                 Game.setFadeAlpha(Game.getFadeAlpha() - fadeSpeed);
             } else {
                 fadingIn = false;
-
+                resett = true;
+                next = false;
                 // Change the scene here if needed
             }
         }
@@ -125,8 +152,8 @@ public class LevelManager {
             if (Game.getFadeAlpha() + fadeSpeed <= 255) {
                 Game.setFadeAlpha(Game.getFadeAlpha() + fadeSpeed);
             } else {
-                System.out.println("Hi");
                 LevelScene.clear();
+                LevelScene.setup();
                 fadingOut = false;
                 loadLevels();
                 // Additional logic if needed after fade-in
