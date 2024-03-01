@@ -23,7 +23,7 @@ public class Controller extends Component {
 
     public boolean isActive = true;
 
-    private final int JUMP_DURATION = 40;
+    private final int JUMP_DURATION = 45;
     private int jumpDurationCounter = 0;
 
     @Override

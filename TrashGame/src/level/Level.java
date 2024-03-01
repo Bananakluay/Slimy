@@ -202,6 +202,7 @@ public class Level {
 
 	public void loadBox() {
 		// RED : 220 | GREEN : 150 | BLUE : 90
+
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
