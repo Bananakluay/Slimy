@@ -14,7 +14,7 @@ import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
 import Interaction.Behavior;
-import Level.LevelManager;
+import level.LevelManager;
 import Scene.LevelScene;
 import utils.Vec2;
 
