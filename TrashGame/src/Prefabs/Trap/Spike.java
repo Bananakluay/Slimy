@@ -21,7 +21,7 @@ public class Spike extends Entity implements Behavior {
     BufferedImage img;
 
     public Spike(String name, float x, float y) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE*0.6f)), TRAP);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.55f)), TRAP);
         init();
     }
 
@@ -29,8 +29,8 @@ public class Spike extends Entity implements Behavior {
 
         Detector detector = new Detector(
                 transform.position.x + SCALE,
-                transform.position.y + (TILES_SIZE*0.4f),
-                transform.scale.x - 2*SCALE,
+                transform.position.y + (TILES_SIZE * 0.45f),
+                transform.scale.x - 2 * SCALE,
                 transform.scale.y,
                 List.of(EntityType.PLAYER),
                 this, false);

@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import dataStructure.AssetPool;
 import gui.GuiButton;
 import gui.GuiLayer;
-import main.Game;
 import ui.SelectLevelButton;
 import utils.Vec2;
 

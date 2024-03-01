@@ -9,6 +9,7 @@ import prefabs.player.character.*;
 import scene.LevelScene;
 import components.Bounds;
 import components.Controller;
+import components.Rigidbody;
 import entity.Entity;
 import level.LevelManager;
 import main.Game;
@@ -88,9 +89,10 @@ public class PlayerManager {
         float x = blueSlime.getTransform().position.x;
         float y = blueSlime.getTransform().position.y;
 
-        spawnSlime(GREEN, x, y - 0.1f, TINY_SLIME);
+        spawnSlime(GREEN, x, y - SCALE, TINY_SLIME);
         spawnSlime(YELLOW, x, y, TINY_SLIME);
-
+        slimes.get(GREEN).getComponent(Rigidbody.class).velocity.y = -10f;
+        slimes.get(YELLOW).getComponent(Rigidbody.class).velocity.y = -10f;
         // Remove Blue
         removeSlime(BLUE);
 
@@ -159,8 +161,6 @@ public class PlayerManager {
             green.setActive(false);
             yellow.setActive(false);
         }
-
-        System.out.println(green.isActive() + " " + yellow.isActive());
 
     }
 
