@@ -149,7 +149,7 @@ public class Level {
 							row * TILES_SIZE);
 					lvlData.put(name, button);
 					LevelScene.getEntityManager().addEntity(button);
-					break;
+					
 				}
 			}
 		}
@@ -216,7 +216,7 @@ public class Level {
 		}
 	}
 
-	int maxButton = 5;
+	int maxButton = 10;
 
 	public void loadGate() {
 		// RED : 100 | GREEN : 100 | BLUE : 100
@@ -239,7 +239,7 @@ public class Level {
 							gate.addListener(button);
 					}
 					LevelScene.getEntityManager().addEntity(gate);
-					break;
+					
 				}
 			}
 		}

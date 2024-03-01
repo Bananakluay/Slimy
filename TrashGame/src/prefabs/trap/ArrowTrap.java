@@ -28,7 +28,7 @@ public class ArrowTrap extends Entity implements Behavior {
     public ArrowTrap(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y - (TILES_SIZE / 2)), new Vec2(TILES_SIZE, TILES_SIZE / 2)), TRAP);
         rand = new Random();
-        direction = rand.nextInt(4);
+        direction = rand.nextInt(2);
         init();
     }
 

@@ -47,7 +47,7 @@ public class LevelManager {
         LevelScene.setup();
         // new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
 
-        new Level("TrashGame/res/lvls/map1.png");
+        new Level("TrashGame/res/lvls/map5.png");   
 
         running_level = true;
         // SceneManager.fadingIn = true;
