@@ -66,6 +66,8 @@ public class Controller extends Component {
         // Jump
         if (isOnFloor()) {
             jumpDurationCounter = JUMP_DURATION;
+            if (Game.KI.isHeld(KeyEvent.VK_W))
+                Sound.JUMP.play(false);
         }
         if (!isOnFloor()) {
             if (rigidbody.velocity.y < 0) {
@@ -76,14 +78,7 @@ public class Controller extends Component {
                 player.setDirectionY(1);
             }
         }
-        System.out.println(isOnFloor());
-        if (isOnFloor() && Game.KI.isHeld(KeyEvent.VK_W)) {
-            jumpDurationCounter = JUMP_DURATION;
-            if (rigidbody.velocity.y < 0) {
-                Sound.volume = Volume.LOW;
-                Sound.JUMP.play(false);
-            }
-        }
+
 
         // Jump duration
         if (Game.KI.isHeld(KeyEvent.VK_W)) {
