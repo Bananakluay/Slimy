@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import dataStructure.AssetPool;
 import gui.GuiButton;
 import gui.GuiLayer;
+import main.Game;
 import ui.SelectLevelButton;
 import utils.Vec2;
 
@@ -17,7 +18,7 @@ public class LevelSelectScene extends Scene {
     private GuiLayer nextPrevGuiLayer;
     private int currentPage = 0;
     private int maxPage = 2;
-    int gridSpacing = 128;
+    int gridSpacing = (int) (GAME_WIDTH / 12);
 
     public LevelSelectScene() {
         init();
@@ -33,6 +34,9 @@ public class LevelSelectScene extends Scene {
     @Override
     public void update() {
         levelSelectGuiLayer.update();
+        //System.out.println(GAME_WIDTH);
+        //System.out.println(Game.MI.getMouseX());
+        //System.out.println(Game.MI.getMouseY());
         if (this.nextPrevGuiLayer != null) {
             nextPrevGuiLayer.update();
         }
@@ -45,7 +49,7 @@ public class LevelSelectScene extends Scene {
     }
 
     private void loadNextPrevButtons() {
-        float posX = GAME_WIDTH / 2 - 16 * SCALE * 3;
+        float posX = (float) (GAME_WIDTH);
         float posY = GAME_HEIGHT - 16 * SCALE * 3;
         float scaleX = 16f * SCALE * 3;
         float scaleY = 16f * SCALE * 3;
@@ -54,14 +58,14 @@ public class LevelSelectScene extends Scene {
 
         GuiButton NextButton = new GuiButton(
                     "NextButton",
-                    new Vec2(1280 - half_scaleX, (posY / 0.95f) - half_scaleY) ,
+                    new Vec2((float) (posX / 1.2 - half_scaleX), (posY / 0.95f) - half_scaleY) ,
                     new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
                     AssetPool.getBufferedImageList("TrashGame/res/assets/ui/NextButton.png", 16, 16),
                     () -> loadNextLevels());
 
         GuiButton prevButton = new GuiButton(
                     "PrevButton",
-                    new Vec2(256 - half_scaleX, (posY / 0.95f) - half_scaleY),
+                    new Vec2(posX / 6 - half_scaleX, (posY / 0.95f) - half_scaleY),
                     new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
                     AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16),
                     () -> loadPrevLevels());
@@ -96,17 +100,24 @@ public class LevelSelectScene extends Scene {
     private void loadLevelButtons(int page) {
         int row = 2;
         int col = 5;
-        float initPosX = 1;
-        float initPosY = 2;
+        float initPosX = gridSpacing * 2 - (16f * SCALE * 3) / 2; 
+        float initPosY = gridSpacing * 2 - (16f * SCALE * 3) / 2; 
+
+        float buttonSpacingX = gridSpacing * 2; 
+        float buttonSpacingY = gridSpacing * 2; 
+    
         for (int j = 0; j < row; j++) {
             for (int i = 0; i < col; i++) {
                 int levelNumber = i + j * col + page * (row * col) + 1;
                 System.out.println(levelNumber);
-                float posX = initPosX * (gridSpacing * (i + 2)) - ((16f * SCALE * 3) / 2) + i * gridSpacing;
-                float posY = initPosY * (gridSpacing * (j + 1)) - ((16f * SCALE * 3) / 2) + j * gridSpacing / 9;
+    
+                
+                float posX = initPosX + i * buttonSpacingX;
+                float posY = initPosY + j * buttonSpacingY;
+    
                 float scaleX = 16f * SCALE * 3;
                 float scaleY = 16f * SCALE * 3;
-
+    
                 SelectLevelButton selectLevelButton = new SelectLevelButton(
                         "SelectLevelButton",
                         new Vec2(posX, posY),
@@ -122,12 +133,15 @@ public class LevelSelectScene extends Scene {
         g.setColor(Color.BLACK);
         g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
 
+        //grid
         g.setColor(Color.LIGHT_GRAY);
-
-        for (int x = 0; x < GAME_WIDTH; x += gridSpacing) {
+        int numLines = 12;
+        int spacing = (int) (GAME_WIDTH / (numLines )); 
+        for (int i = 0; i < numLines; i++) {
+            int x = i * spacing;
             g.drawLine(x, 0, x, GAME_HEIGHT);
-        }
-        for (int y = 0; y < GAME_HEIGHT; y += gridSpacing) {
+        }   
+        for (int y = 0; y <= GAME_HEIGHT; y += gridSpacing) {
             g.drawLine(0, y, GAME_WIDTH, y);
         }
 

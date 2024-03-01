@@ -1,9 +1,14 @@
 package main;
 
+import static utils.Constants.Game.GAME_HEIGHT;
+import static utils.Constants.Game.GAME_WIDTH;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import input.Mouse.MouseManager;
+import level.LevelManager;
 import prefabs.player.PlayerManager;
 import scene.Scene;
 import scene.SceneManager;
@@ -25,6 +30,8 @@ public class Game implements Runnable {
 
 	private final int FPS_SET = 120;
 	private final int UPS_SET = 200;
+
+	private static int fadeAlpha = 0;
 
 	private Game() {
 		// setting scene
@@ -54,14 +61,24 @@ public class Game implements Runnable {
 		// long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 *
 		// 1024); // in MB
 		// System.out.println("Used Memory: " + usedMemory + " MB");
-		
+
 		MI.update();
 		KI.update();
+		LevelManager.updateFadeIn();
+		LevelManager.updateFadeOut();
+		SceneManager.updateFadeIn();
+		SceneManager.updateFadeOut();
 		SceneManager.getCurrentScene().update();
 	}
 
 	public void render(Graphics g) {
 		SceneManager.getCurrentScene().render(g);
+
+		if (SceneManager.isFadingOut() || SceneManager.isFadingIn() || LevelManager.isFadingIn()
+				|| LevelManager.isFadingOut()) {
+			g.setColor(new Color(0, 0, 0, fadeAlpha));
+			g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		}
 	}
 
 	private void startGameLoop() {
@@ -116,5 +133,13 @@ public class Game implements Runnable {
 
 	public static Scene getCurrentScene() {
 		return SceneManager.getCurrentScene();
+	}
+
+	public static int getFadeAlpha() {
+		return fadeAlpha;
+	}
+
+	public static void setFadeAlpha(int alpha) {
+		fadeAlpha = alpha;
 	}
 }
