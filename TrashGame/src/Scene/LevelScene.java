@@ -99,6 +99,7 @@ public class LevelScene extends Scene {
         } else {
             guiPauseScene.update();
         }
+        //System.out.println(entitiyManager.getAllEntities().size());
     }
 
     @Override
@@ -227,6 +228,7 @@ public class LevelScene extends Scene {
         entitiyManager.getAllEntities().clear();
         guiPlayingScene.clear();
         guiPauseScene.clear();
+        clear();
     }
 
     public static EntityManager getEntityManager() {
