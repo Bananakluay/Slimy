@@ -72,14 +72,14 @@ public class OptionScene extends Scene{
                 "music",
                 new Vec2((float) (GAME_WIDTH / 2.1), GAME_HEIGHT * 0.425f),
                 Color.BLACK,
-                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 32 * 3));
+                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", (int) (32 * SCALE)));
         
         GuiText.drawString(
                 g,
                 "sound",
                 new Vec2((float) (GAME_WIDTH / 2.1), GAME_HEIGHT * 0.535f),
                 Color.BLACK,
-                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 32 * 3));
+                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", (int) (32 * SCALE)));
 
         if(guiLayer != null)
             guiLayer.render(g);

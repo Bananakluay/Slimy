@@ -142,7 +142,7 @@ public class LevelScene extends Scene {
                 "PAUSED",
                 new Vec2((GAME_WIDTH / 2) + 10, (float) (GAME_HEIGHT / 2.2)),
                 Color.GRAY,
-                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 32 * 10));
+                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", (int) (32 * SCALE * 3)));
     }
 
     // Gui playing scene----------------------------------------------
