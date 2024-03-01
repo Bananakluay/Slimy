@@ -117,4 +117,12 @@ public class Game implements Runnable {
 	public static Scene getCurrentScene() {
 		return SceneManager.getCurrentScene();
 	}
+
+	public static int getFadeAlpha() {
+		return fadeAlpha;
+	}
+
+	public static void setFadeAlpha(int alpha) {
+		fadeAlpha = alpha;
+	}
 }
