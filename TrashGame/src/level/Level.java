@@ -132,7 +132,7 @@ public class Level {
 	}
 
 	public void loadButton() {
-		// RED : 40 | BLUE : posX Gate | GREEN : posY Gate
+		// RED : 40 | GREEN : posX Gate | BLUE : posY Gate
 		int i = 0;
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
