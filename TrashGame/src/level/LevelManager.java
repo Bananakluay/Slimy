@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import main.Game;
 import scene.LevelScene;
-import scene.SceneManager;
 
 public class LevelManager {
 
@@ -21,7 +20,7 @@ public class LevelManager {
     private static ArrayList<String> Map = new ArrayList<>();
 
     private static int lvlindex = 0;
-    private static int highestReachedLevel = 1;
+    private static int highestReachedLevel = 10;
 
     private LevelManager() {
         init();
@@ -44,6 +43,7 @@ public class LevelManager {
             running_level = false;
             return;
         }
+        LevelScene.clear();
         LevelScene.setup();
         new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
         running_level = true;
