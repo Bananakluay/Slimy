@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import dataStructure.AssetPool;
 import gui.GuiButton;
 import gui.GuiLayer;
+import main.Game;
 import ui.SelectLevelButton;
 import utils.Vec2;
 
@@ -17,7 +18,7 @@ public class LevelSelectScene extends Scene {
     private GuiLayer nextPrevGuiLayer;
     private int currentPage = 0;
     private int maxPage = 2;
-    int gridSpacing = 128;
+    int gridSpacing = (int) (GAME_WIDTH / 12);
 
     public LevelSelectScene() {
         init();
@@ -33,6 +34,9 @@ public class LevelSelectScene extends Scene {
     @Override
     public void update() {
         levelSelectGuiLayer.update();
+        System.out.println(GAME_WIDTH);
+        System.out.println(Game.MI.getMouseX());
+        System.out.println(Game.MI.getMouseY());
         if (this.nextPrevGuiLayer != null) {
             nextPrevGuiLayer.update();
         }
@@ -45,7 +49,7 @@ public class LevelSelectScene extends Scene {
     }
 
     private void loadNextPrevButtons() {
-        float posX = GAME_WIDTH / 2 - 16 * SCALE * 3;
+        float posX = (float) (GAME_WIDTH);
         float posY = GAME_HEIGHT - 16 * SCALE * 3;
         float scaleX = 16f * SCALE * 3;
         float scaleY = 16f * SCALE * 3;
@@ -54,14 +58,14 @@ public class LevelSelectScene extends Scene {
 
         GuiButton NextButton = new GuiButton(
                     "NextButton",
-                    new Vec2(1280 - half_scaleX, (posY / 0.95f) - half_scaleY) ,
+                    new Vec2((float) (posX / 1.2 - half_scaleX), (posY / 0.95f) - half_scaleY) ,
                     new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
                     AssetPool.getBufferedImageList("TrashGame/res/assets/ui/NextButton.png", 16, 16),
                     () -> loadNextLevels());
 
         GuiButton prevButton = new GuiButton(
                     "PrevButton",
-                    new Vec2(256 - half_scaleX, (posY / 0.95f) - half_scaleY),
+                    new Vec2(posX / 6 - half_scaleX, (posY / 0.95f) - half_scaleY),
                     new Vec2((float) (scaleX * 0.75), (float) (scaleY * 0.75)),
                     AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16),
                     () -> loadPrevLevels());
@@ -98,12 +102,14 @@ public class LevelSelectScene extends Scene {
         int col = 5;
         float initPosX = 1;
         float initPosY = 2;
+
         for (int j = 0; j < row; j++) {
             for (int i = 0; i < col; i++) {
                 int levelNumber = i + j * col + page * (row * col) + 1;
                 System.out.println(levelNumber);
-                float posX = initPosX * (gridSpacing * (i + 2)) - ((16f * SCALE * 3) / 2) + i * gridSpacing;
-                float posY = initPosY * (gridSpacing * (j + 1)) - ((16f * SCALE * 3) / 2) + j * gridSpacing / 9;
+
+                float posX = (initPosX * (gridSpacing * (i + 2)) - ((16f * SCALE * 3) / 2) + i * gridSpacing);
+                float posY = (initPosY * (gridSpacing * (j + 1)) - ((16f * SCALE * 3) / 2) + j * gridSpacing / 9);
                 float scaleX = 16f * SCALE * 3;
                 float scaleY = 16f * SCALE * 3;
 
