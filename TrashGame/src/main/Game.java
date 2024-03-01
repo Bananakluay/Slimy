@@ -4,9 +4,9 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import input.Mouse.MouseManager;
-import prefabs.player.PlayerManager;
-import scene.Scene;
-import scene.SceneManager;
+import Prefabs.Player.PlayerManager;
+import Scene.Scene;
+import Scene.SceneManager;
 import input.Keyboard.KeyManager;
 import utils.*;
 

@@ -1,9 +1,10 @@
-package prefabs.objects;
+package Prefabs.Objects;
 
 import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.List;
 
 import components.Detector;
@@ -11,7 +12,7 @@ import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
-import interaction.Behavior;
+import Interaction.Behavior;
 import sound.Sound;
 import utils.Vec2;
 
@@ -32,7 +33,7 @@ public class Button extends Entity implements Behavior {
                 (int) this.getTransform().position.y + TILES_SIZE * 0.8f,
                 TILES_SIZE * 0.8f,
                 TILES_SIZE * 0.2f,
-                List.of(EntityType.PLAYER, EntityType.BOX),
+                Arrays.asList(EntityType.PLAYER, EntityType.BOX),
                 this,
                 false));
         img = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/button.png", 16, 16);

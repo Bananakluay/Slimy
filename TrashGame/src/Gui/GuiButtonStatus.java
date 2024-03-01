@@ -1,4 +1,4 @@
-package gui;
+package Gui;
 
 public enum GuiButtonStatus {
     IDLE,

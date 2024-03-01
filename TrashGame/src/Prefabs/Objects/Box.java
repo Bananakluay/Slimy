@@ -1,4 +1,4 @@
-package prefabs.objects;
+package Prefabs.Objects;
 
 import static utils.Constants.Game.SCALE;
 

@@ -1,5 +1,5 @@
 
-package prefabs.player;
+package Prefabs.Player;
 
 import dataStructure.Transform;
 
@@ -14,6 +14,7 @@ import static entity.EntityType.TILE;
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Player.WALK_SPEED;
 
+import java.util.Arrays;
 import java.util.List;
 
 import components.Animation;
@@ -38,7 +39,7 @@ public class Player extends Entity {
     private void init() {
         type = EntityType.PLAYER;
         direction = new Vec2(0, 0);
-        addComponent(new Bounds(null, List.of(PLAYER)));
+        addComponent(new Bounds(null, Arrays.asList(PLAYER)));
         addComponent(new Rigidbody(1.5f * SCALE, 0.5f * SCALE));
         addComponent(new Physic2D());
         addComponent(new Controller());

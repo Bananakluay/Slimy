@@ -1,4 +1,4 @@
-package prefabs.trap;
+package Prefabs.Trap;
 
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
@@ -6,6 +6,7 @@ import static utils.Constants.Layer.TRAP;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.List;
 
 import components.Animation;
@@ -15,8 +16,8 @@ import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
-import interaction.Behavior;
-import prefabs.player.Player;
+import Interaction.Behavior;
+import Prefabs.Player.Player;
 import sound.Sound;
 import utils.Vec2;
 
@@ -43,7 +44,7 @@ public class BombButton extends Entity implements Behavior {
                 (int) this.getTransform().position.y + TILES_SIZE * 0.8f,
                 TILES_SIZE * 0.8f,
                 TILES_SIZE * 0.2f,
-                List.of(EntityType.PLAYER, EntityType.BOX),
+                Arrays.asList(EntityType.PLAYER, EntityType.BOX),
                 this,
                 true));
         this.addComponent(animation);
@@ -58,7 +59,8 @@ public class BombButton extends Entity implements Behavior {
     public void activateOneShot(Entity entity) {
         if (!entity.hasComponent(Rigidbody.class))
             return;
-        if (entity instanceof Player player) {
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
             player.getComponent(Rigidbody.class).addForce(new Vec2(0, -20));
             player.die();
             isActive = true;

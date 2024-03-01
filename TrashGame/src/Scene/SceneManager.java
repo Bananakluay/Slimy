@@ -1,4 +1,4 @@
-package scene;
+package Scene;
 
 public class SceneManager {
     private static SceneManager sceneManager = null;

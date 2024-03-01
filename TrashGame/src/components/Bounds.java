@@ -15,9 +15,9 @@ import java.util.Set;
 import entity.Entity;
 import entity.EntityType;
 import physics.Collision;
-import prefabs.objects.Platform;
-import prefabs.player.Player;
-import scene.LevelScene;
+import Prefabs.Objects.Platform;
+import Prefabs.Player.Player;
+import Scene.LevelScene;
 import utils.Vec2;
 
 public class Bounds extends Component {
@@ -81,7 +81,10 @@ public class Bounds extends Component {
                 continue;
 
             // handle one way platform
-            if (this.entity instanceof Player player && entity instanceof Platform platform) {
+            if (this.entity instanceof Player && entity instanceof Platform) {
+                Player player = (Player) this.entity;
+                Platform platform = (Platform) entity;
+            
                 if (platform.isMovable(player)) {
                     continue;
                 }

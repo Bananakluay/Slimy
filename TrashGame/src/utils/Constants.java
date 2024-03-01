@@ -43,7 +43,7 @@ public class Constants {
         public static final int B_HEIGHT = (int) (B_HEIGHT_DEFAULT * Game.SCALE);
     }
 
-    public class TileSet {
+    public static class TileSet {
         public static Vec2 GrassesOffset(int value) {
             switch (value) {
                 case 0:

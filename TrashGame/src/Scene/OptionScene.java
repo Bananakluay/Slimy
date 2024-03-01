@@ -1,4 +1,4 @@
-package scene;
+package Scene;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,10 +8,10 @@ import static utils.Constants.Game.GAME_WIDTH;
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 
-import gui.GuiButton;
-import gui.GuiLayer;
-import gui.GuiText;
-import gui.ToggleGuiButton;
+import Gui.GuiButton;
+import Gui.GuiLayer;
+import Gui.GuiText;
+import Gui.ToggleGuiButton;
 import dataStructure.AssetPool;
 import utils.Vec2;
 

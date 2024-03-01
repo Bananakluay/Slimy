@@ -1,6 +1,6 @@
-package gui;
+package Gui;
 
-import static gui.GuiButtonStatus.*;
+import static Gui.GuiButtonStatus.*;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

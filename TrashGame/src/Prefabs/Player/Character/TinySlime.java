@@ -1,11 +1,11 @@
-package prefabs.player.character;
+package Prefabs.Player.Character;
 
 import dataStructure.AssetPool;
 import dataStructure.Transform;
-import prefabs.player.Player;
+import Prefabs.Player.Player;
 import utils.Vec2;
 
-import static prefabs.player.AnimationStatus.*;
+import static Prefabs.Player.AnimationStatus.*;
 import static utils.Constants.Game.*;
 import static utils.Constants.Player.*;
 

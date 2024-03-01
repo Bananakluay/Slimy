@@ -1,20 +1,20 @@
-package prefabs.player;
+package Prefabs.Player;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-import prefabs.player.character.*;
-import scene.LevelScene;
+import Prefabs.Player.Character.*;
+import Scene.LevelScene;
 import components.Bounds;
 import components.Controller;
 import entity.Entity;
 import level.LevelManager;
 import main.Game;
 
-import static prefabs.player.SlimeType.*;
-import static prefabs.player.SlimeMode.*;
+import static Prefabs.Player.SlimeType.*;
+import static Prefabs.Player.SlimeMode.*;
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Player.*;
 

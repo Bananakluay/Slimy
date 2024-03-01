@@ -7,12 +7,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import dataStructure.AssetPool;
-import gui.ClickListener;
-import gui.GuiButton;
-import gui.GuiText;
+import Gui.ClickListener;
+import Gui.GuiButton;
+import Gui.GuiText;
 import level.LevelManager;
-import scene.SceneManager;
-import scene.Scenes;
+import Scene.SceneManager;
+import Scene.Scenes;
 import utils.Vec2;
 
 public class SelectLevelButton extends GuiButton implements ClickListener {

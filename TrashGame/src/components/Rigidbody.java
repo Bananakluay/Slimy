@@ -1,9 +1,9 @@
 package components;
 
 import physics.Collision;
-import prefabs.objects.Box;
-import prefabs.player.Player;
-import prefabs.player.character.TinySlime;
+import Prefabs.Objects.Box;
+import Prefabs.Player.Player;
+import Prefabs.Player.Character.TinySlime;
 import utils.MiniMath;
 import utils.Vec2;
 
@@ -110,11 +110,13 @@ public class Rigidbody extends Component {
 
         if (collision.subject.hasComponent(Rigidbody.class) && collision.object.hasComponent(Rigidbody.class)) {
 
-            if (collision.subject instanceof Player p && collision.object instanceof Box) {
-                if (p instanceof TinySlime) {
+            if (collision.subject instanceof Player && collision.object instanceof Box) {
+                Player player = (Player) collision.subject;
+                if (player instanceof TinySlime) {
                     return;
                 }
             }
+            
             Rigidbody s = collision.subject.getComponent(Rigidbody.class);
             Rigidbody o = collision.object.getComponent(Rigidbody.class);
             if (collision.type == LEFT || collision.type == RIGHT) {

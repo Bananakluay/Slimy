@@ -1,4 +1,4 @@
-package interaction;
+package Interaction;
 
 
 import entity.Entity;

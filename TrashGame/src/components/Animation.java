@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import dataStructure.Transform;
-import prefabs.player.Player;
-import prefabs.trap.BombButton;
+import Prefabs.Player.Player;
+import Prefabs.Trap.BombButton;
 
 @SuppressWarnings("unused")
 public class Animation extends Component {
@@ -110,15 +110,19 @@ public class Animation extends Component {
         int y = (int) (entity.getTransform().position.y + offsetY * scale);
         int w = (int) (width * scale);
         int h = (int) (height * scale);
-        if (this.entity instanceof BombButton b) {
+        if (this.entity instanceof BombButton) {
+            BombButton b = (BombButton) this.entity;
+        
+            // Rest of the code inside the if block remains the same
             // System.out.println(currentAnimation);
-            // System.out.println("Drawing bomb button" + currentAnimation + " " + index + "
-            // "
+            // System.out.println("Drawing bomb button" + currentAnimation + " " + index + " "
             // + animations.get(currentAnimation).frames.size() + " ");
             System.out.println(
                     "Drawing bomb button" + x / TILES_SIZE + " " + y / TILES_SIZE + " " + w + " " + h + " " + scale);
         }
-        if (this.entity instanceof Player player) {
+        
+        if (this.entity instanceof Player) {
+            Player player = (Player) this.entity;
             if (player.getDirection().x < 0) {
                 g.drawImage(
                         animations.get(currentAnimation).frames.get(index),

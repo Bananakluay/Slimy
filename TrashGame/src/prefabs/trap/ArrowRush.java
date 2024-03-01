@@ -1,4 +1,4 @@
-package prefabs.trap;
+package Prefabs.Trap;
 
 import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
@@ -9,9 +9,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
-import interaction.Behavior;
-import prefabs.player.Player;
-import scene.LevelScene;
+import Interaction.Behavior;
+import Prefabs.Player.Player;
+import Scene.LevelScene;
 import components.Detector;
 import components.Rigidbody;
 import dataStructure.AssetPool;

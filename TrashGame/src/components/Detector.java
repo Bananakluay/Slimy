@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import interaction.Behavior;
-import scene.LevelScene;
+import Interaction.Behavior;
+import Scene.LevelScene;
 import entity.Entity;
 import entity.EntityType;
 

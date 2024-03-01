@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import components.Component;
-import scene.LevelScene;
+import Scene.LevelScene;
 
 public class EntityManager {
 

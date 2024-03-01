@@ -1,4 +1,4 @@
-package prefabs.player;
+package Prefabs.Player;
 
 public enum SlimeType {
     LARGE_SLIME,

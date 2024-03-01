@@ -1,4 +1,4 @@
-package prefabs.trap;
+package Prefabs.Trap;
 
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
@@ -6,6 +6,7 @@ import static utils.Constants.Layer.TRAP;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.List;
 
 import components.Detector;
@@ -13,8 +14,8 @@ import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
-import interaction.Behavior;
-import prefabs.player.Player;
+import Interaction.Behavior;
+import Prefabs.Player.Player;
 import utils.Vec2;
 
 public class Spike extends Entity implements Behavior {
@@ -32,7 +33,7 @@ public class Spike extends Entity implements Behavior {
                 transform.position.y + (TILES_SIZE*0.4f),
                 transform.scale.x - 2*SCALE,
                 transform.scale.y,
-                List.of(EntityType.PLAYER),
+                Arrays.asList(EntityType.PLAYER),
                 this, false);
         addComponent(detector);
         img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/spike.png", TILES_SIZE, TILES_SIZE);
@@ -41,10 +42,10 @@ public class Spike extends Entity implements Behavior {
 
     @Override
     public void activateOn(Entity entity) {
-        if (entity instanceof Player player) {
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
             player.die();
         }
-
     }
 
     @Override

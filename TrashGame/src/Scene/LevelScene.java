@@ -1,4 +1,4 @@
-package scene;
+package Scene;
 
 import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
@@ -17,22 +17,22 @@ import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityManager;
 import entity.EntityType;
-import gui.GuiButton;
-import gui.GuiLayer;
-import gui.GuiText;
-import gui.ToggleGuiButton;
+import Gui.GuiButton;
+import Gui.GuiLayer;
+import Gui.GuiText;
+import Gui.ToggleGuiButton;
 import level.LevelManager;
 import main.Game;
-import prefabs.trap.ArrowRush;
-import prefabs.trap.ArrowTrap;
-import prefabs.objects.Box;
-import prefabs.objects.Button;
-import prefabs.objects.Gate;
-import prefabs.objects.Platform;
-import prefabs.player.Player;
-import prefabs.player.PlayerManager;
-import prefabs.trap.BombButton;
-import prefabs.trap.Spike;
+import Prefabs.Trap.ArrowRush;
+import Prefabs.Trap.ArrowTrap;
+import Prefabs.Objects.Box;
+import Prefabs.Objects.Button;
+import Prefabs.Objects.Gate;
+import Prefabs.Objects.Platform;
+import Prefabs.Player.Player;
+import Prefabs.Player.PlayerManager;
+import Prefabs.Trap.BombButton;
+import Prefabs.Trap.Spike;
 import utils.Vec2;
 
 @SuppressWarnings("unused")

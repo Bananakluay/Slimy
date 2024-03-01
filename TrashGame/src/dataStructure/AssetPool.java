@@ -82,31 +82,30 @@ public class AssetPool {
         
     }
     
-    private static void add(String resource, List<BufferedImage> asset){
+    private static void add(String resource, List<BufferedImage> asset) {
         File file = new File(resource);
-        if(asset instanceof List<BufferedImage> b && !AssetPool.bufferImageList.containsKey(resource)){
-            AssetPool.bufferImageList.put(file.getAbsolutePath(), b);
-        }else{
+    
+        if (asset instanceof List && !AssetPool.bufferImageList.containsKey(resource)) {
+            AssetPool.bufferImageList.put(file.getAbsolutePath(), (List<BufferedImage>) asset);
+        } else {
             System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
             System.exit(-1);
         }
     }
-    private static <T> void add(String resource, T asset){
+    
+    private static <T> void add(String resource, T asset) {
         File file = new File(resource);
-        if(asset instanceof BufferedImage b && !AssetPool.bufferImage.containsKey(resource)){
-            AssetPool.bufferImage.put(file.getAbsolutePath(), b);
-
-        }else if(asset instanceof Sprite s && !AssetPool.sprites.containsKey(resource)){
-            AssetPool.sprites.put(file.getAbsolutePath(), s);
-
-        }else if(asset instanceof Font f && !AssetPool.fonts.containsKey(resource)){
-            AssetPool.fonts.put(file.getAbsolutePath(), f);
-
-        }else{
+    
+        if (asset instanceof BufferedImage && !AssetPool.bufferImage.containsKey(resource)) {
+            AssetPool.bufferImage.put(file.getAbsolutePath(), (BufferedImage) asset);
+        } else if (asset instanceof Sprite && !AssetPool.sprites.containsKey(resource)) {
+            AssetPool.sprites.put(file.getAbsolutePath(), (Sprite) asset);
+        } else if (asset instanceof Font && !AssetPool.fonts.containsKey(resource)) {
+            AssetPool.fonts.put(file.getAbsolutePath(), (Font) asset);
+        } else {
             System.out.println("Asset pool already has asset: " + file.getAbsolutePath());
             System.exit(-1);
         }
     }
-
 
 }

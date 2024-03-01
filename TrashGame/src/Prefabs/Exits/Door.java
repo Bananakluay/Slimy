@@ -1,10 +1,11 @@
-package prefabs.exits;
+package Prefabs.Exits;
 
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.List;
 
 import components.Detector;
@@ -12,9 +13,9 @@ import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
 import entity.EntityType;
-import interaction.Behavior;
-import level.LevelManager;
-import scene.LevelScene;
+import Interaction.Behavior;
+import Level.LevelManager;
+import Scene.LevelScene;
 import utils.Vec2;
 
 public class Door extends Entity implements Behavior {
@@ -35,7 +36,7 @@ public class Door extends Entity implements Behavior {
                 transform.position.y + TILES_SIZE * 0.3f,
                 transform.scale.x,
                 transform.scale.y,
-                List.of(EntityType.PLAYER),
+                Arrays.asList(EntityType.PLAYER),
                 this, false);
         addComponent(detector);
         img = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/door.png", 21, 32);

@@ -2,16 +2,16 @@ package components;
 
 import main.Game;
 import physics.Collision;
-import prefabs.player.Player;
+import Prefabs.Player.Player;
 import sound.Sound;
 import sound.Sound.Volume;
 import utils.Vec2;
 
 import java.awt.event.KeyEvent;
 
-import static prefabs.player.AnimationStatus.*;
+import static Prefabs.Player.AnimationStatus.*;
 import static utils.Constants.Player.*;
-import prefabs.player.Player;
+import Prefabs.Player.Player;
 
 @SuppressWarnings("unused")
 public class Controller extends Component {

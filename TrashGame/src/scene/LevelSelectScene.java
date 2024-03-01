@@ -1,4 +1,4 @@
-package scene;
+package Scene;
 
 import static utils.Constants.Game.*;
 
@@ -6,8 +6,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import dataStructure.AssetPool;
-import gui.GuiButton;
-import gui.GuiLayer;
+import Gui.GuiButton;
+import Gui.GuiLayer;
 import ui.SelectLevelButton;
 import utils.Vec2;
 
