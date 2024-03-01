@@ -28,7 +28,7 @@ public class TinySlime extends Player {
     }
 
     private void init() {
-        this.setMass(1.5f * SCALE);
+        this.setMass(10f * SCALE);
         this.setFriction(0.35f);
         this.setMobility(WALK_SPEED * 0.6f, JUMP_FORCE * 0.9f);
 

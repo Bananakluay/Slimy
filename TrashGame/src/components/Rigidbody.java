@@ -119,7 +119,7 @@ public class Rigidbody extends Component {
             Rigidbody o = collision.object.getComponent(Rigidbody.class);
             if (collision.type == LEFT || collision.type == RIGHT) {
                 s.addForce(new Vec2(-velocity.x / o.mass, 0));
-                o.addForce(new Vec2(velocity.x * s.mass * 2 / o.mass, 0));
+                o.addForce(new Vec2(velocity.x * s.mass * 0.8f / o.mass, 0));
 
             }
 
