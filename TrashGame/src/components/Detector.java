@@ -24,7 +24,7 @@ public class Detector extends Component implements Behavior {
     public Map<Integer, Entity> interaction;
     private Behavior behavior;
 
-    private boolean debug = true;
+    private boolean debug = false;
 
     public Detector(float x, float y, float witdth, float height, List<EntityType> types, Behavior behavior,
             boolean isOneShot) {
