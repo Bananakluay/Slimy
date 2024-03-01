@@ -28,7 +28,7 @@ public class ArrowTrap extends Entity implements Behavior {
     public ArrowTrap(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), TRAP);
         rand = new Random();
-        direction = rand.nextInt(4);
+        direction = rand.nextInt(2);
         init();
     }
 
@@ -60,24 +60,13 @@ public class ArrowTrap extends Entity implements Behavior {
                         entity.getPosition().y + entity.getScale().y / 2,
                         direction);
 
-            else if (direction == 1)
+            else 
                 arrowRush = new ArrowRush(
                         "ArrowRush",
                         GAME_WIDTH,
                         entity.getPosition().y + entity.getScale().y / 2,
                         direction);
-            else if (direction == 2)
-                arrowRush = new ArrowRush(
-                        "ArrowRush",
-                        entity.getPosition().x + entity.getScale().x / 2,
-                        -10f,
-                        direction);
-            else
-                arrowRush = new ArrowRush(
-                        "ArrowRush",
-                        entity.getPosition().x + entity.getScale().x / 2,
-                        GAME_HEIGHT,
-                        direction);
+
 
             LevelScene.getEntityManager().addEntity(arrowRush);
 

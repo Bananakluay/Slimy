@@ -57,12 +57,9 @@ public class ArrowRush extends Entity implements Behavior {
         addComponent(detector);
         if (direction == 0)
             img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/dartright.png", TILES_SIZE, TILES_SIZE);
-        else if (direction == 1)
+        else
             img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/dartleft.png", TILES_SIZE, TILES_SIZE);
-        else if (direction == 2)
-            img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/dartup.png", TILES_SIZE / 2, TILES_SIZE);
-        else if (direction == 3)
-            img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/dartdown.png", TILES_SIZE / 2, TILES_SIZE);
+
 
         Rigidbody rb = new Rigidbody(0, 0);
         rb.setExtrmumXSpeed(speed);
