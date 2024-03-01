@@ -89,7 +89,7 @@ public class MenuScene extends Scene {
                 "Slimey",
                 new Vec2(GAME_WIDTH / 2, GAME_HEIGHT * 0.1f),
                 Color.BLACK,
-                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 32 * 10));
+                AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", (int) (32 * SCALE * 4)));
         if (guiLayer != null)
             guiLayer.render(g);
     }

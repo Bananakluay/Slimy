@@ -28,7 +28,7 @@ public class SelectLevelButton extends GuiButton implements ClickListener {
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/SelectLevelButton.png", 17, 16),
                 null);
         this.levelNumber = levelNumber;
-        this.font = AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", 16 * 9);
+        this.font = AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", (int) (16 * SCALE * 3));
     }
 
     @Override
