@@ -6,8 +6,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import main.Game;
-import scene.LevelScene;
-import scene.SceneManager;
+import Scene.LevelScene;
+import Scene.SceneManager;
 
 public class LevelManager {
 
