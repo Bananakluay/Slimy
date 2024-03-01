@@ -149,7 +149,6 @@ public class Level {
 							row * TILES_SIZE);
 					lvlData.put(name, button);
 					LevelScene.getEntityManager().addEntity(button);
-					break;
 				}
 			}
 		}
@@ -184,7 +183,7 @@ public class Level {
 							row * TILES_SIZE);
 
 					trap = bombButton;
-				}else if(color.getGreen() == 2){
+				} else if (color.getGreen() == 2) {
 					String name = "ArrowTrap" + col + "" + row;
 					ArrowTrap spike = new ArrowTrap(
 							name,
@@ -240,7 +239,6 @@ public class Level {
 							gate.addListener(button);
 					}
 					LevelScene.getEntityManager().addEntity(gate);
-					break;
 				}
 			}
 		}
