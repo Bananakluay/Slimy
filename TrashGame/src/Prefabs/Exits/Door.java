@@ -34,7 +34,7 @@ public class Door extends Entity implements Behavior {
                 transform.position.x,
                 transform.position.y + TILES_SIZE * 0.3f,
                 transform.scale.x,
-                transform.scale.y * 1.7f,
+                transform.scale.y,
                 List.of(EntityType.PLAYER),
                 this, false);
         addComponent(detector);
@@ -55,12 +55,13 @@ public class Door extends Entity implements Behavior {
     public void draw(Graphics g) {
         super.draw(g);
         g.drawImage(
-                img.get(1),
-                (int) (this.getTransform().position.x),
-                (int) (this.getTransform().position.y),
-                (int) (21 * SCALE),
-                (int) (32 * SCALE),
-                null);
+        img.get(1),
+        (int) (this.getTransform().position.x),
+        (int) (this.getTransform().position.y),
+        (int) (21 * SCALE),
+        (int) (32 * SCALE),
+        null);
+
     }
 
     @Override

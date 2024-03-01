@@ -24,6 +24,7 @@ public class ArrowTrap extends Entity implements Behavior {
 
     boolean dubug = false;
     Random rand;
+
     public ArrowTrap(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y - (TILES_SIZE / 2)), new Vec2(TILES_SIZE, TILES_SIZE / 2)), TRAP);
         rand = new Random();
@@ -34,7 +35,7 @@ public class ArrowTrap extends Entity implements Behavior {
     public void init() {
         Detector detector = new Detector(
                 transform.position.x,
-                transform.position.y,
+                transform.position.y + (TILES_SIZE),
                 transform.scale.x,
                 transform.scale.y,
                 Arrays.asList(EntityType.PLAYER),

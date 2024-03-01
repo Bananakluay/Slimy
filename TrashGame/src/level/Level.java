@@ -25,6 +25,7 @@ import prefabs.objects.Platform;
 import prefabs.objects.TileBlock;
 import prefabs.player.PlayerManager;
 import prefabs.player.SlimeType;
+import prefabs.trap.ArrowTrap;
 import prefabs.trap.BombButton;
 import prefabs.trap.Spike;
 import scene.LevelScene;
@@ -57,15 +58,15 @@ public class Level {
 
 		loadButton(); // RED : 40 | BLUE : posX Gate | GREEN : posY Gate
 
-		// loadTrap();// GREEN [0 , 10]
+		loadTrap();// RED : 255 | GREEN [0 , 10] | BLUE : 80
 
-		loadBox(); // GREEN : 11
+		loadBox(); // RED : 220 | GREEN : 150 | BLUE : 90
 
-		loadGate(); // GREEN : 254
+		loadGate(); // RED : 100 | GREEN : 100 | BLUE : 100
 
-		loadDoor(); // GREEN : 255
+		loadDoor(); // RED : 255 | GREEN : 255 | BLUE : 255
 
-		loadPlayer(); // BLUE : 100
+		loadPlayer(); // RED : 100 | GREEN : 255 | BLUE : 100
 
 	}
 
@@ -155,7 +156,7 @@ public class Level {
 	}
 
 	public void loadTrap() {
-		// GREEN [0 , 10]
+		// RED : 255 | GREEN [0 , 10] | BLUE : 80
 		// 0 : spike
 		// 1 : bomb button
 
@@ -163,19 +164,18 @@ public class Level {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
 				Color color = new Color(imgLvlData.getRGB(col, row));
-				int colorCode = color.getGreen();
 
 				Entity trap = null;
-
-				if (colorCode == 0) {
+				if (color.getRed() != 255 && color.getBlue() != 80)
+					continue;
+				if (color.getGreen() == 0) {
 					String name = "Spike" + col + "" + row;
 					Spike spike = new Spike(
 							name,
 							col * TILES_SIZE,
 							row * TILES_SIZE);
-
 					trap = spike;
-				} else if (colorCode == 1) {
+				} else if (color.getGreen() == 1) {
 					String name = "BombButton" + col + "" + row;
 					BombButton bombButton = new BombButton(
 							name,
@@ -183,6 +183,13 @@ public class Level {
 							row * TILES_SIZE);
 
 					trap = bombButton;
+				}else if(color.getGreen() == 2){
+					String name = "ArrowTrap" + col + "" + row;
+					ArrowTrap spike = new ArrowTrap(
+							name,
+							col * TILES_SIZE,
+							row * TILES_SIZE);
+					trap = spike;
 				}
 
 				if (trap != null) {
@@ -193,15 +200,14 @@ public class Level {
 	}
 
 	public void loadBox() {
-		// GREEN : 11
+		// RED : 220 | GREEN : 150 | BLUE : 90
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
 				Color color = new Color(imgLvlData.getRGB(col, row));
-				int colorCode = color.getGreen();
 
 				String name = "Box" + col + "" + row;
-				if (colorCode == 11) {
+				if (color.getRed() == 220 && color.getGreen() == 150 && color.getBlue() == 90) {
 					Box box = new Box(name, col * TILES_SIZE, row * TILES_SIZE);
 					LevelScene.getEntityManager().addEntity(box);
 				}
@@ -212,16 +218,15 @@ public class Level {
 	int maxButton = 5;
 
 	public void loadGate() {
-		// GREEN : 254
+		// RED : 100 | GREEN : 100 | BLUE : 100
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
 				Color color = new Color(imgLvlData.getRGB(col, row));
-				int colorCode = color.getGreen();
 
 				String name = "Gate" + col + "" + row;
 
-				if (colorCode == 254) {
+				if (color.getRed() == 100 && color.getGreen() == 100 && color.getBlue() == 100) {
 					Gate gate = new Gate(
 							name,
 							col * TILES_SIZE,
@@ -240,16 +245,15 @@ public class Level {
 	}
 
 	public void loadDoor() {
-		// GREEN : 255
+		// RED : 255 | GREEN : 255 | BLUE : 255
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
 				Color color = new Color(imgLvlData.getRGB(col, row));
-				int colorCode = color.getGreen();
 
 				String name = "ExitsDoor" + col + "" + row;
 
-				if (colorCode == 255) {
+				if (color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 255) {
 					Door door = new Door(
 							name,
 							col * TILES_SIZE,
@@ -263,14 +267,12 @@ public class Level {
 	}
 
 	public void loadPlayer() {
-		// BLUE : 100
+		// RED : 100 | GREEN : 255 | BLUE : 100
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
 
 				Color color = new Color(imgLvlData.getRGB(col, row));
-				int colorCode = color.getBlue();
-
-				if (colorCode == 100) {
+				if (color.getRed() == 100 && color.getGreen() == 255 && color.getBlue() == 100) {
 					LevelScene.getPlayerManager().spawnSlime(
 							"Green",
 							TILES_SIZE * col,

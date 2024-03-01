@@ -25,7 +25,7 @@ public class Rigidbody extends Component {
 
     public boolean leftCollision, rightCollision, topCollision, botCollision;
     public float extremumSpeed = 0.34f * SCALE;
-    
+
     public Rigidbody(float mass, float friction) {
         this.mass = mass;
         this.friction = friction;
@@ -124,8 +124,8 @@ public class Rigidbody extends Component {
             }
 
             if (collision.type == TOP || collision.type == BOTTOM) {
-                s.addForce(new Vec2(0, -velocity.y / o.mass));
-                o.addForce(new Vec2(0, velocity.y / o.mass));
+                s.addForce(new Vec2(0, -velocity.y * 0.2f / o.mass));
+                o.addForce(new Vec2(0, velocity.y * 0.2f / o.mass));
                 if (collision.type == BOTTOM) {
                     s.addForce(new Vec2(o.velocity.x * 0.2f / s.mass, 0));
                 }

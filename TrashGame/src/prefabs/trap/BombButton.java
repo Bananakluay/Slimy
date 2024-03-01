@@ -1,5 +1,6 @@
 package prefabs.trap;
 
+import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 import static utils.Constants.Layer.TRAP;
 
@@ -7,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import components.Animation;
 import components.Detector;
 import components.Rigidbody;
 import dataStructure.AssetPool;
@@ -21,15 +23,21 @@ import utils.Vec2;
 public class BombButton extends Entity implements Behavior {
 
     private List<BufferedImage> imgs;
+    private List<BufferedImage> effect;
     private boolean isActive;
+    private Animation animation;
 
     public BombButton(String name, float x, float y) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), TRAP);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), 12);
+        type = EntityType.TRAP;
+        this.animation = new Animation();
         init();
     }
 
     private void init() {
-        type = EntityType.TRAP;
+        imgs = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/button.png", 16, 16);
+        effect = AssetPool.getBufferedImageList("TrashGame/res/assets/effect/explosion.png", 48, 48);
+
         this.addComponent(new Detector(
                 (int) this.getTransform().position.x + TILES_SIZE * 0.1f,
                 (int) this.getTransform().position.y + TILES_SIZE * 0.8f,
@@ -38,7 +46,11 @@ public class BombButton extends Entity implements Behavior {
                 List.of(EntityType.PLAYER, EntityType.BOX),
                 this,
                 true));
-        imgs = AssetPool.getBufferedImageList("TrashGame/res/assets/Object/button.png", 16, 16);
+        this.addComponent(animation);
+        this.animation.addAnimation("effect", 5, effect, true);
+        this.animation.setSize(48, 48);
+        this.animation.setOffset(-TILES_SIZE / 3, (int) (-TILES_SIZE + 4 * SCALE));
+        this.animation.setScale(4);
 
     }
 
@@ -53,17 +65,22 @@ public class BombButton extends Entity implements Behavior {
         } else {
             entity.getComponent(Rigidbody.class).addForce(new Vec2(-10, -10));
         }
+        this.animation.play("effect");
         Sound.EXPLOSION.play(false);
+        this.onDestroy();
     }
 
     @Override
-    public void activateOn(Entity entity) {}
-    
+    public void activateOn(Entity entity) {
+    }
+
     @Override
-    public void activateOff() {}
+    public void activateOff() {
+    }
 
     @Override
     public void draw(Graphics g) {
+
         super.draw(g);
         if (isActive) {
             g.drawImage(
@@ -83,5 +100,4 @@ public class BombButton extends Entity implements Behavior {
                     null);
         }
     }
-
 }

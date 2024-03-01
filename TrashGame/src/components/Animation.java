@@ -10,11 +10,10 @@ import java.util.List;
 
 import dataStructure.Transform;
 import prefabs.player.Player;
+import prefabs.trap.BombButton;
 
 @SuppressWarnings("unused")
 public class Animation extends Component {
-
-    private Player player;
 
     private HashMap<String, AnimationData> animations;
     private String currentAnimation;
@@ -26,23 +25,19 @@ public class Animation extends Component {
     private int offsetX = 0, offsetY = 0;
 
     private boolean playOneTime = false;
+
     public Animation() {
 
         this.animations = new HashMap<>();
         this.currentAnimation = null;
         this.animationTime = 0f;
-    }
 
-    @Override
-    public void ready() {
-        if (entity instanceof Player) {
-            player = (Player) this.entity;
-        }
     }
 
     public void addAnimation(String name, float duration, List<BufferedImage> frames, boolean playOneTime) {
         AnimationData data = new AnimationData(duration, frames);
         animations.put(name, data);
+        this.playOneTime = playOneTime;
     }
 
     public void play(String animationName) {
@@ -87,6 +82,7 @@ public class Animation extends Component {
                 index++;
                 if (index >= animations.get(currentAnimation).frames.size()) {
                     if (playOneTime) { // Check if playOnce is set and reset animation
+                        System.out.println("playOneTime");
                         currentAnimation = null;
                     } else {
                         index = 0;
@@ -96,15 +92,16 @@ public class Animation extends Component {
         }
     }
 
-    public void draw(Graphics g, Transform transform){
+    public void draw(Graphics g, Transform transform) {
         g.drawImage(
-                animations.get(currentAnimation).frames.get(index), 
-                    (int)transform.position.x, 
-                    (int)transform.position.y, 
-                    (int)transform.scale.x, 
-                    (int)transform.scale.y,
+                animations.get(currentAnimation).frames.get(index),
+                (int) transform.position.x,
+                (int) transform.position.y,
+                (int) transform.scale.x,
+                (int) transform.scale.y,
                 null);
     }
+
     @Override
     public void draw(Graphics g) {
         if (!isAnimating())
@@ -113,25 +110,35 @@ public class Animation extends Component {
         int y = (int) (entity.getTransform().position.y + offsetY * scale);
         int w = (int) (width * scale);
         int h = (int) (height * scale);
-        if(player == null){
-            System.out.println("Player is null");
-            return;
-            
-        } 
-        if (player.getDirection().x < 0){
-            g.drawImage(
-                animations.get(currentAnimation).frames.get(index), 
-                x + w, 
-                y,
-                -w,
-                h, 
-                null);
+        if (this.entity instanceof BombButton b) {
+            // System.out.println(currentAnimation);
+            // System.out.println("Drawing bomb button" + currentAnimation + " " + index + "
+            // "
+            // + animations.get(currentAnimation).frames.size() + " ");
+            System.out.println(
+                    "Drawing bomb button" + x / TILES_SIZE + " " + y / TILES_SIZE + " " + w + " " + h + " " + scale);
         }
-        else{
+        if (this.entity instanceof Player player) {
+            if (player.getDirection().x < 0) {
+                g.drawImage(
+                        animations.get(currentAnimation).frames.get(index),
+                        x + w,
+                        y,
+                        -w,
+                        h,
+                        null);
+            } else {
+                g.drawImage(
+                        animations.get(currentAnimation).frames.get(index),
+                        x, y, w, h,
+                        null);
+            }
+        } else {
             g.drawImage(
-                animations.get(currentAnimation).frames.get(index), 
-                x, y, w, h,
-                null);
+                    animations.get(currentAnimation).frames.get(index),
+                    x, y, w, h,
+                    null);
+            System.out.println("Drawing " + currentAnimation + " " + index + " " + animations.get(currentAnimation).frames.size() + " ");
         }
 
     }

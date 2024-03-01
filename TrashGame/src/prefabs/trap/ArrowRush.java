@@ -2,6 +2,7 @@ package prefabs.trap;
 
 import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
+import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 
 import java.awt.Graphics;
@@ -23,7 +24,7 @@ import utils.Constants.Layer;
 public class ArrowRush extends Entity implements Behavior {
 
     BufferedImage img;
-    float speed = 8f;
+    float speed = SCALE * 2f;
     int direction; // 0 : left, 1 : right, 2 : up, 3 : down
 
     public ArrowRush(String name, float x, float y, int direction) {
@@ -59,13 +60,14 @@ public class ArrowRush extends Entity implements Behavior {
         img = AssetPool.getBufferedImage("TrashGame/res/assets/Character/BlueSlime.png", TILES_SIZE, TILES_SIZE);
 
         Rigidbody rb = new Rigidbody(0, 0);
+        rb.setExtrmumXSpeed(speed);
         this.addComponent(rb);
 
         if (direction == 0)
             rb.velocity.x = speed;
         else if (direction == 1)
             rb.velocity.x = -speed;
-        else if (direction == 2)
+        if (direction == 2)
             rb.velocity.y = speed;
         else if (direction == 3)
             rb.velocity.y = -speed;
