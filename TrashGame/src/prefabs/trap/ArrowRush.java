@@ -23,7 +23,7 @@ import utils.Vec2;
 public class ArrowRush extends Entity implements Behavior {
 
     BufferedImage img;
-    float speed = SCALE * 2;
+    float speed = SCALE * 3;
     int direction; // 0 : left, 1 : right, 2 : up, 3 : down
 
     public ArrowRush(String name, float x, float y, int direction) {
@@ -59,7 +59,6 @@ public class ArrowRush extends Entity implements Behavior {
             img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/dartright.png", TILES_SIZE, TILES_SIZE);
         else
             img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/dartleft.png", TILES_SIZE, TILES_SIZE);
-
 
         Rigidbody rb = new Rigidbody(0, 0);
         rb.setExtrmumXSpeed(speed);

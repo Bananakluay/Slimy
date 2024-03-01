@@ -20,7 +20,7 @@ public class LevelManager {
     private static ArrayList<String> Map = new ArrayList<>();
 
     private static int lvlindex = 0;
-    private static int highestReachedLevel = 30;
+    private static int highestReachedLevel = 1;
 
     private LevelManager() {
         init();
@@ -46,6 +46,7 @@ public class LevelManager {
         LevelScene.clear();
         LevelScene.setup();
         new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
+        updateHighestReachedLevel();
         running_level = true;
         // SceneManager.fadingIn = true;
         fadingIn = true;
