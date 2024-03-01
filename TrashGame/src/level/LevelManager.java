@@ -21,7 +21,7 @@ public class LevelManager {
     private static ArrayList<String> Map = new ArrayList<>();
 
     private static int lvlindex = 0;
-    private static int highestReachedLevel = 1;
+    private static int highestReachedLevel = 30;
 
     private LevelManager() {
         init();

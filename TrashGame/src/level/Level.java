@@ -216,7 +216,7 @@ public class Level {
 		}
 	}
 
-	int maxButton = 5;
+	int maxButton = 10;
 
 	public void loadGate() {
 		// RED : 100 | GREEN : 100 | BLUE : 100
