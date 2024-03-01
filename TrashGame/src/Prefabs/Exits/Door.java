@@ -25,7 +25,7 @@ public class Door extends Entity implements Behavior {
         super(
                 name,
                 new Transform(new Vec2(x - 4 * SCALE, y - TILES_SIZE), new Vec2(TILES_SIZE, TILES_SIZE * 2)),
-                1);
+                -2);
         init();
     }
 
@@ -55,12 +55,12 @@ public class Door extends Entity implements Behavior {
     public void draw(Graphics g) {
         super.draw(g);
         g.drawImage(
-        img.get(1),
-        (int) (this.getTransform().position.x),
-        (int) (this.getTransform().position.y),
-        (int) (21 * SCALE),
-        (int) (32 * SCALE),
-        null);
+                img.get(1),
+                (int) (this.getTransform().position.x),
+                (int) (this.getTransform().position.y),
+                (int) (21 * SCALE),
+                (int) (32 * SCALE),
+                null);
 
     }
 

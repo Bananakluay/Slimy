@@ -5,7 +5,7 @@ import static utils.Constants.Game.SCALE;
 public class Constants {
     public class Game {
         public final static int TILES_DEFAULT_SIZE = 16;
-        public final static float SCALE = 3f;
+        public final static float SCALE = 2f;
         public final static int TILES_IN_WIDTH = 32;
         public final static int TILES_IN_HEIGHT = 18;
         public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);

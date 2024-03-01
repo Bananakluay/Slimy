@@ -159,6 +159,7 @@ public class Level {
 		// RED : 255 | GREEN [0 , 10] | BLUE : 80
 		// 0 : spike
 		// 1 : bomb button
+		// 2 : arrow trap
 
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {

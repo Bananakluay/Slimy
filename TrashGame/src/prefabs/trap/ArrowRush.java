@@ -24,7 +24,7 @@ import utils.Constants.Layer;
 public class ArrowRush extends Entity implements Behavior {
 
     BufferedImage img;
-    float speed = 1;
+    float speed = SCALE * 2;
     int direction; // 0 : left, 1 : right, 2 : up, 3 : down
 
     public ArrowRush(String name, float x, float y, int direction) {
