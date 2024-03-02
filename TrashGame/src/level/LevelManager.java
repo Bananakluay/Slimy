@@ -102,7 +102,7 @@ public class LevelManager {
             next = true;
             loadLevels();
             updateHighestReachedLevel();
-            if(lvlindex + 1 > highestReachedLevel)
+            if (lvlindex + 1 > highestReachedLevel)
                 saveLastPlayedLevel(lvlindex + 1);
         } else {
             System.out.println("Game complete");
@@ -120,8 +120,15 @@ public class LevelManager {
             e.printStackTrace();
         }
         File[] files = file.listFiles();
+        File[] filesSorted = new File[files.length];
 
-        return files;
+        for (int i = 0; i < filesSorted.length; i++)
+            for (int j = 0; j < files.length; j++) {
+                if (files[j].getName().equals("lvl" + (i + 1) + ".png")) {
+                    filesSorted[i] = files[j];
+                }
+            }
+        return filesSorted;
     }
 
     private static void buildAllLevels() {
