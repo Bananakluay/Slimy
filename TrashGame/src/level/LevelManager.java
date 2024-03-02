@@ -183,22 +183,22 @@ public class LevelManager {
     }
 
     public static int loadLastPlayedLevel() {
-    int level = 1;
-    try {
-        DataInputStream dis = new DataInputStream(new FileInputStream(SAVE_FILE_PATH));
-        if (dis.available() >= Integer.BYTES) {
-            level = dis.readInt();
-        } else {
-            System.out.println("Save file is empty or corrupted. Defaulting to level 1.");
+        int level = 1;
+        try {
+            DataInputStream dis = new DataInputStream(new FileInputStream(SAVE_FILE_PATH));
+            if (dis.available() >= Integer.BYTES) {
+                level = dis.readInt();
+            } else {
+                System.out.println("Save file is empty or corrupted. Defaulting to level 1.");
+            }
+            dis.close();
+        } catch (EOFException e) {
+            System.out.println("End of file reached unexpectedly. Defaulting to level 1.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        dis.close();
-    } catch (EOFException e) {
-        System.out.println("End of file reached unexpectedly. Defaulting to level 1.");
-    } catch (IOException e) {
-        e.printStackTrace();
+        return level;
     }
-    return level;
-}
 
     public static boolean isFadingOut() {
         return fadingOut;
