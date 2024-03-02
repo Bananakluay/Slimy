@@ -1,6 +1,5 @@
 package prefabs.trap;
 
-import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
 import static utils.Constants.Game.TILES_SIZE;
 import static utils.Constants.Layer.TRAP;
@@ -49,7 +48,6 @@ public class ArrowTrap extends Entity implements Behavior {
     public void activateOneShot(Entity entity) {
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            System.out.println(player.getName() + " hit arrowtrap");
             ArrowRush arrowRush;
 
             // 0 : left, 1 : right, 2 : up, 3 : down

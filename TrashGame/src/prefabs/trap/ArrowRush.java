@@ -94,16 +94,6 @@ public class ArrowRush extends Entity implements Behavior {
                 (int) (this.getTransform().scale.y),
                 null);
 
-        if (direction == 0 || direction == 1)
-            g.drawRect((int) (this.getTransform().position.x),
-                    (int) (this.getTransform().position.y),
-                    (int) (this.getTransform().scale.x),
-                    (int) (this.getTransform().scale.y));
-        else
-            g.drawRect((int) (this.getTransform().position.x),
-                    (int) (this.getTransform().position.y),
-                    (int) (this.getTransform().scale.y),
-                    (int) (this.getTransform().scale.x));
 
     }
 

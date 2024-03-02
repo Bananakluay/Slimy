@@ -57,12 +57,12 @@ public class Game implements Runnable {
 	}
 
 	public void update() {
-		// System.gc();
-		// Runtime runtime = Runtime.getRuntime();
-		// long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 *
-		// 1024); // in MB
-		// System.out.println("Used Memory: " + usedMemory + " MB");
 
+		// System.gc();
+		Runtime runtime = Runtime.getRuntime();
+		long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 *
+				1024); // in MB
+		System.out.println("Used Memory: " + usedMemory + " MB");
 		MI.update();
 		KI.update();
 

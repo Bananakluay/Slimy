@@ -28,7 +28,7 @@ public class BombButton extends Entity implements Behavior {
     private Animation animation;
 
     public BombButton(String name, float x, float y) {
-        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), 12);
+        super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), TRAP);
         type = EntityType.TRAP;
         this.animation = new Animation();
         init();
