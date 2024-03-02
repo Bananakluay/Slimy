@@ -18,21 +18,8 @@ public class Collision {
         Transform s = subject.getTransform();
         Transform o = object.getTransform();
 
-        // if(s.scale.x == o.scale.x){
-        //     isXScaleSame = true;ddddaw
-        //     s.scale.x += MIN_INCREMENT;
-        // }
-        // if(s.scale.y == o.scale.y){
-        //     isYScaleSame = true;
-        //     s.scale.y += MIN_INCREMENT;
-        // }  
-
         this.type = getCollisionType(s, o);
 
-        // if(isXScaleSame)
-        //     s.scale.x -= MIN_INCREMENT;
-        // if(isYScaleSame)
-        //     s.scale.y -= MIN_INCREMENT;
     }
 
     public CollisionType getCollisionType(Transform s, Transform o){    
@@ -56,18 +43,11 @@ public class Collision {
             o_CenterX += MIN_INCREMENT;
         if(s_CenterY == o_CenterY)
             o_CenterY += MIN_INCREMENT;
-        // if(subject.getName().equals("player") && object.getName().equals("Box2")){
-        //     System.out.println(s_CenterX +" "+ o_CenterX  + " " + s_CenterY +" "+ o_CenterY);
-        // }
-        // if(subject.getName().equals("player") && !object.getName().equals("floor"))
-        //     System.out.println("subject x :"+s_CenterX + "subject y :" + s_CenterY + "object x :"+ o_CenterX + "object y :" + o_CenterY);
 
 
-        
+
         //Q1 (Q4 in normal math graph) of subject
         if(s_CenterX < o_CenterX && s_CenterY < o_CenterY){
-            // if(subject.getName().equals("player") && !object.getName().equals("floor"))
-            //     System.out.println("Q1");
             if(s_right - o_left < s_bot - o_top) //horizontal overlap < vertical overlap
                 return RIGHT;// s --> o
             else
@@ -75,8 +55,6 @@ public class Collision {
         }
         //Q2 (Q3 in normal graph) of subject
         else if(s_CenterX > o_CenterX && s_CenterY < o_CenterY){
-            // if(subject.getName().equals("player") && !object.getName().equals("floor"))
-            //     System.out.println("Q2");
             if(o_right - s_left < s_bot - o_top) //horizontal overlap < vertical overlap
                 return LEFT; //o <-- s
             else    
@@ -84,8 +62,6 @@ public class Collision {
         }
         //Q3 (Q4 in normal graph) of subject
         else if(s_CenterX > o_CenterX && s_CenterY > o_CenterY){
-            // if(subject.getName().equals("player") && !object.getName().equals("floor"))
-            //     System.out.println("Q3");
             if(o_right - s_left < o_bot - s_top) //horizontal overlap < vertical overlap
                 return LEFT;
             else
@@ -93,15 +69,13 @@ public class Collision {
         }
         //Q4 (Q1 in normal graph) of subject
         else if(s_CenterX < o_CenterX && s_CenterY > o_CenterY){
-            // if(subject.getName().equals("player") && !object.getName().equals("floor"))
-            //     System.out.println("Q4");
-            if(s_right - o_left < o_bot - s_top)
+            if(s_right - o_left < o_bot - s_top) //horizontal overlap < vertical overlap
                 return RIGHT;
             else 
                 return TOP;
         }
         else if(s_CenterX == o_CenterX){
-            System.out.println("here");
+            System.out.println("Collision on X axis");
         }
         return NONE;
 

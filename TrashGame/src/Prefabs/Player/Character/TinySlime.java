@@ -34,7 +34,7 @@ public class TinySlime extends Player {
         animation = this.getComponent(Animation.class);
         animation.setSize(TILES_SIZE, TILES_SIZE);
         animation.setScale(1.6f);
-        animation.setOffset((int) (-4 * SCALE), (int) (-11 * SCALE + 1)); // 3.75
+        animation.setOffset((int) (-4 * SCALE), (int) (-11 * SCALE + 1)); 
         animation.addAnimation("IDLE", 100, frames.subList(0, 2), false);
         animation.addAnimation("WALK", 20, frames.subList(3, 5), false);
         animation.addAnimation("JUMP", 100, frames.subList(6, 7), false);

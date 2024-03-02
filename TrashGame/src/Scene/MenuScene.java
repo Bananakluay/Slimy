@@ -74,14 +74,6 @@ public class MenuScene extends Scene {
 
     @Override
     public void gui(Graphics g) {
-        // g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
-        // g.drawImage(
-        // bg.get(0),
-        // 0,
-        // 0,
-        // (int) (256 * 2 * SCALE),
-        // (int) (144 * 2 * SCALE),
-        // null);
         GuiText.drawString(
                 g,
                 "Slimey",

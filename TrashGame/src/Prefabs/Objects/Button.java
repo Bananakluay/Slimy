@@ -47,7 +47,6 @@ public class Button extends Entity implements Behavior {
     @Override
     public void activateOff() {
         isActive = false;
-        // Sound.BLIP_OFF.play(false);
     }
 
     @Override

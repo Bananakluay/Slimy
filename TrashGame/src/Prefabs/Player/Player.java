@@ -25,10 +25,11 @@ import components.Rigidbody;
 @SuppressWarnings("unused")
 public class Player extends Entity {
 
-    Controller controller;
     private boolean isAlive = true;
     private Vec2 direction;
+    
     protected AnimationStatus animationStatus = AnimationStatus.IDLE;
+    Controller controller;
 
     public Player(String name, Transform transform) {
         super(name, transform, Layer.PLAYER);

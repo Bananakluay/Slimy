@@ -22,8 +22,6 @@ public class GuiText {
 
         g.drawString(text, x, y);
 
-        // g.drawRect(fm.stringWidth(text) / 2, fm.getHeight() / 2,
-        // fm.stringWidth(text), fm.getHeight());
     }
 
 }

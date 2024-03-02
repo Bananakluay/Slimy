@@ -29,19 +29,17 @@ public class Bounds extends Component {
     public Rectangle2D.Float interectBounds;
 
     public float interectBoundsoffset = 10 * SCALE;
-    private Set<EntityType> types;
 
     private boolean DEBUG = false;
 
     public Bounds(Color color, List<EntityType> types) {
         this.color = color != null ? color : Color.WHITE;
-        this.types = new HashSet<>();
 
         boundsX = new Rectangle2D.Float();
         boundsY = new Rectangle2D.Float();
 
         interectBounds = new Rectangle2D.Float();
-
+        
     }
 
     @Override

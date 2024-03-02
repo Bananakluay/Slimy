@@ -45,16 +45,21 @@ public class Rigidbody extends Component {
         botCollision = false;
 
         if (entity.hasComponent(Bounds.class)) {
+
             for (Collision collision : entity.getComponent(Bounds.class).checkCollision(velocity)) {
+                // avoid self collision
                 if (collision.object.equals(this.entity))
                     continue;
 
+                // get the transforms
                 Transform s = entity.getTransform();
                 Transform o = collision.object.getTransform();
 
+                // call onCollision for all components
                 for (Component c : this.entity.getAllComponents())
                     c.onCollision(collision);
 
+                // handle collision
                 handleCollision(collision, s, o);
 
                 if (collision.type == LEFT) {
@@ -83,7 +88,7 @@ public class Rigidbody extends Component {
         if (botCollision || topCollision) {
             frictionOnX();
         }
-        // System.out.println(velocity.x + " | " + velocity.y);
+
         // net force
         if (!forces.isEmpty()) {
             for (Vec2 v : forces) {
@@ -95,6 +100,7 @@ public class Rigidbody extends Component {
         }
 
         velocity.x = MiniMath.clamp(velocity.x, -this.extremumSpeed, this.extremumSpeed);
+        
         // if not colliding (can move)
         if (!isCollidingX) {
             entity.getTransform().position.x += velocity.x;
@@ -110,19 +116,24 @@ public class Rigidbody extends Component {
 
         if (collision.subject.hasComponent(Rigidbody.class) && collision.object.hasComponent(Rigidbody.class)) {
 
+            // avoid tiny slime collision
             if (collision.subject instanceof Player p && collision.object instanceof Box) {
                 if (p instanceof TinySlime) {
                     return;
                 }
             }
+
             Rigidbody s = collision.subject.getComponent(Rigidbody.class);
             Rigidbody o = collision.object.getComponent(Rigidbody.class);
+
+            // apply left/right force to both objects
             if (collision.type == LEFT || collision.type == RIGHT) {
                 s.addForce(new Vec2(-velocity.x / o.mass, 0));
                 o.addForce(new Vec2(velocity.x * s.mass * 0.8f / o.mass, 0));
 
             }
 
+            // apply top/bottom force to both objects
             if (collision.type == TOP || collision.type == BOTTOM) {
                 s.addForce(new Vec2(0, -velocity.y * 0.2f / o.mass));
                 o.addForce(new Vec2(0, velocity.y * 0.2f / o.mass));
@@ -137,8 +148,8 @@ public class Rigidbody extends Component {
     private void handleCollision(Collision collision, Transform s, Transform o) {
         if (collision.type == LEFT || collision.type == RIGHT) {
             velocity.x = 0;
-            s.position.x = collision.type == LEFT ? o.position.x + o.scale.x + 0.0001f
-                    : o.position.x - s.scale.x - 0.0001f;
+            s.position.x = collision.type == LEFT ? 
+                o.position.x + o.scale.x + 0.0001f : o.position.x - s.scale.x - 0.0001f;
         } else if (collision.type == TOP) {
             velocity.y = 0;
             s.position.y = o.position.y + o.scale.y;

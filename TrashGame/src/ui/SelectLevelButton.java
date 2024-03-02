@@ -70,8 +70,7 @@ public class SelectLevelButton extends GuiButton implements ClickListener {
             }
 
         }
-        // Graphics2D g2d = (Graphics2D) g;
-        // g2d.draw(bounds);
+
     }
 
     @Override

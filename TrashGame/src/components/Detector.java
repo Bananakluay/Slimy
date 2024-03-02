@@ -56,10 +56,13 @@ public class Detector extends Component implements Behavior {
                 continueMode(entity, intersected);
             }
 
+
+            // Add entities that are not in the scene to entitiesToRemove
             if (LevelScene.getEntityManager().getEntity(entity.getId()) == null) {
                 entitiesToRemove.add(entity);
             }
 
+            // Add entities that are not in the interaction map to entitiesToRemove
             for (Map.Entry<Integer, Entity> e : interaction.entrySet()) {
                 if (LevelScene.getEntityManager().getEntity(e.getKey()) == null) {
                     entitiesToRemove.add(e.getValue());
@@ -67,13 +70,13 @@ public class Detector extends Component implements Behavior {
             }
 
         }
-
+        // Remove entities from the scene
         for (Entity entityToRemove : entitiesToRemove) {
             interaction.remove(entityToRemove.getId());
         }
 
-    }
-
+    }   
+    
     private void oneShotMode(Entity entity, boolean intersected) {
         if (intersected) {
             activated = true;
@@ -103,16 +106,13 @@ public class Detector extends Component implements Behavior {
     }
 
     @Override
-    public void activateOneShot(Entity entity) {
-    }
+    public void activateOneShot(Entity entity) {}
 
     @Override
-    public void activateOn(Entity entity) {
-    }
+    public void activateOn(Entity entity) {}
 
     @Override
-    public void activateOff() {
-    }
+    public void activateOff() {}
 
     public void setBehavior(Behavior behavior) {
         this.behavior = behavior;

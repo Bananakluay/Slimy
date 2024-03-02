@@ -3,6 +3,8 @@ package sound;
 import java.io.*;
 import javax.sound.sampled.*;
 
+//credit https://gist.github.com/figengungor/5673813
+
 public enum Sound {
     JUMP("TrashGame/res/sound/effect/jump.wav"), // jump sound
     DEAD("TrashGame/res/sound/effect/hitHurt.wav"), // dead sound

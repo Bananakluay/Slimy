@@ -99,7 +99,6 @@ public class LevelScene extends Scene {
         } else {
             guiPauseScene.update();
         }
-        //System.out.println(entitiyManager.getAllEntities().size());
     }
 
     @Override
@@ -111,16 +110,12 @@ public class LevelScene extends Scene {
         } else {
             drawBackGround(g);
             renderer.render(g);
+            
+            
             g.setColor(new Color(0, 0, 0, 128));
             g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-            guiPauseScene.render(g);
 
-            // g.setColor(Color.BLACK);
-            // g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
-            // g.drawLine((GAME_WIDTH / 2) - 175, 0, (GAME_WIDTH / 2) - 175, GAME_HEIGHT);
-            // // draw center
-            // g.drawLine((GAME_WIDTH / 2) + 175, 0, (GAME_WIDTH / 2) + 175, GAME_HEIGHT);
-            // // draw center
+            guiPauseScene.render(g);
 
             drawPauseGui(g);
         }

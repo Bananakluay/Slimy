@@ -2,14 +2,12 @@ package scene;
 
 import static utils.Constants.Game.*;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import dataStructure.AssetPool;
 import gui.GuiButton;
 import gui.GuiLayer;
-import level.LevelManager;
 import ui.SelectLevelButton;
 import utils.Vec2;
 
@@ -140,20 +138,6 @@ public class LevelSelectScene extends Scene {
 
     @Override
     public void gui(Graphics g) {
-        // g.setColor(Color.BLACK);
-        // g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
-
-        // // grid
-        // g.setColor(Color.LIGHT_GRAY);
-        // int numLines = 12;
-        // int spacing = (int) (GAME_WIDTH / (numLines));
-        // for (int i = 0; i < numLines; i++) {
-        // int x = i * spacing;
-        // g.drawLine(x, 0, x, GAME_HEIGHT);
-        // }
-        // for (int y = 0; y <= GAME_HEIGHT; y += gridSpacing) {
-        // g.drawLine(0, y, GAME_WIDTH, y);
-        // }
 
         if (levelSelectGuiLayer != null)
             levelSelectGuiLayer.render(g);

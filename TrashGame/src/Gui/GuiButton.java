@@ -44,8 +44,6 @@ public class GuiButton extends GuiComponent {
 
     @Override
     public void render(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        // g2d.draw(bounds);
         switch (status) {
             case IDLE:
                 g.drawImage(imgs[0], (int) position.x, (int) position.y, (int) scale.x, (int) scale.y, null);

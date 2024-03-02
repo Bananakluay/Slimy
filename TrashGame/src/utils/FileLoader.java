@@ -42,7 +42,7 @@ public class FileLoader {
         int nRow = img.getHeight() / tileHeight;
         int nCol = img.getWidth() / tileWidth;
 
-        System.out.println(nRow + " " + nCol);
+        // System.out.println(nRow + " " + nCol);
 
         BufferedImage[] imgList = new BufferedImage[nRow * nCol];
         int index = 0;

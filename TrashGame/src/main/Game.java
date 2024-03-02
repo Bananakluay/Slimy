@@ -57,6 +57,7 @@ public class Game implements Runnable {
 	}
 
 	public void update() {
+		// System.gc();
 		// Runtime runtime = Runtime.getRuntime();
 		// long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 *
 		// 1024); // in MB
@@ -64,10 +65,12 @@ public class Game implements Runnable {
 
 		MI.update();
 		KI.update();
+
 		LevelManager.updateFadeIn();
 		LevelManager.updateFadeOut();
 		SceneManager.updateFadeIn();
 		SceneManager.updateFadeOut();
+
 		SceneManager.getCurrentScene().update();
 	}
 

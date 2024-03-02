@@ -13,6 +13,7 @@ public class Entity {
     public int uid = -1;
     protected EntityType type = EntityType.NONE;
     public static int ID_COUNTER = 0;
+
     protected Transform transform;
 
     private List<Component> components;
@@ -120,12 +121,13 @@ public class Entity {
         return transform.scale;
     }
 
+    public EntityType getType() {
+        return this.type;
+    }
+    
     public void setType(EntityType type) {
         this.type = type;
     }
 
-    public EntityType getType() {
-        return this.type;
-    }
 
 }

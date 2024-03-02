@@ -36,13 +36,6 @@ public final class KeyManager implements KeyListener
         return false;
     }
 
-
-
-    /**
-     * @return true if the specified key
-     * associated with the key event is
-     * being pressed.
-     */
     public boolean onPress(int key){
         for (Key k : keys){
             if (k.getKeyCode() == key && k.getState() == KeyState.PRESSED)
@@ -52,12 +45,6 @@ public final class KeyManager implements KeyListener
         return false;
     }
 
-
-    /**
-     * @return true if the specified key
-     * associated with the key event is
-     * being released.
-     */
     public boolean onRelease(int key){
         for (Key k : keys)
         {
@@ -69,13 +56,9 @@ public final class KeyManager implements KeyListener
     }
 
 
-    // Implemented methods
-
-    // Is invoked once key has gone down, and released
     @Override
     public void keyTyped(KeyEvent e) {}
 
-    // Is invoked while key is held
     @Override
     public void keyPressed(KeyEvent e){
         for (Key k : keys){

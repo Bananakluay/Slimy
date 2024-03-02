@@ -11,26 +11,25 @@ import java.util.Map;
 
 import components.Sprite;
 import utils.FileLoader;
-@SuppressWarnings("rawtypes")
 public class AssetPool {
-    @SuppressWarnings("unchecked")
-    public static Map<String, Sprite> sprites = new HashMap();
+    public static Map<String, Sprite> sprites = new HashMap<>();
     public static Map<String, BufferedImage> bufferImage = new HashMap<>();
-    @SuppressWarnings("unchecked")
-    public static Map<String, List<BufferedImage>> bufferImageList = new HashMap();
+    public static Map<String, List<BufferedImage>> bufferImageList = new HashMap<>();
     public static Map<String, Font> fonts = new HashMap<>();
-    // TODO static Map(String, Level) levelsData = new HashMap(); 
 
-
+    
     public static Font getFont(String resource, int size){
         File file = new File(resource);
         
-        //not found in Asset Pool
+        //Font not found in Asset Pool
         if(!AssetPool.fonts.containsKey(resource)){
+
             Font font = FileLoader.loadFont(resource, size);
             AssetPool.add(resource, font);
             return AssetPool.fonts.get(file.getAbsolutePath());
+
         }else{// found in Asset Pool
+
             //Size not match
             if(fonts.get(resource).getSize() != size){
                 Font font = FileLoader.loadFont(resource, size);
@@ -48,11 +47,13 @@ public class AssetPool {
     }
 
     public static BufferedImage getBufferedImage(String resource, int tileWidth, int tileHeight){
+
         File file = new File(resource);
+        //If the asset is already in the AssetPool, return it
         if(AssetPool.bufferImage.containsKey(resource)){
             return AssetPool.bufferImage.get(file.getAbsolutePath().toString());
         }
-        else{
+        else{//If the asset is not in the AssetPool, load it and add it to the AssetPool
             BufferedImage bufferImg = FileLoader.loadBufferedImage(resource);
             AssetPool.add(resource, bufferImg);
             return AssetPool.bufferImage.get(file.getAbsolutePath());
@@ -60,11 +61,14 @@ public class AssetPool {
     }
 
     public static List<BufferedImage> getBufferedImageList(String resource, int tileWidth, int tileHeight){
+
         File file = new File(resource);
+
+        //If the asset is already in the AssetPool, return it
         if(AssetPool.bufferImageList.containsKey(resource)){
             return AssetPool.bufferImageList.get(file.getAbsolutePath().toString());
         }
-        else{
+        else{//If the asset is not in the AssetPool, load it and add it to the AssetPool
 
             BufferedImage bufferedImage = getBufferedImage(resource, tileWidth, tileHeight);
             int nRow = bufferedImage.getHeight()/tileHeight;
@@ -91,6 +95,7 @@ public class AssetPool {
             System.exit(-1);
         }
     }
+    
     private static <T> void add(String resource, T asset){
         File file = new File(resource);
         if(asset instanceof BufferedImage b && !AssetPool.bufferImage.containsKey(resource)){

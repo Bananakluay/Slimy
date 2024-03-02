@@ -82,7 +82,6 @@ public class Animation extends Component {
                 index++;
                 if (index >= animations.get(currentAnimation).frames.size()) {
                     if (playOneTime) { // Check if playOnce is set and reset animation
-                        System.out.println("playOneTime");
                         currentAnimation = null;
                     } else {
                         index = 0;
@@ -111,12 +110,6 @@ public class Animation extends Component {
         int w = (int) (width * scale);
         int h = (int) (height * scale);
         if (this.entity instanceof BombButton b) {
-            // System.out.println(currentAnimation);
-            // System.out.println("Drawing bomb button" + currentAnimation + " " + index + "
-            // "
-            // + animations.get(currentAnimation).frames.size() + " ");
-            System.out.println(
-                    "Drawing bomb button" + x / TILES_SIZE + " " + y / TILES_SIZE + " " + w + " " + h + " " + scale);
         }
         if (this.entity instanceof Player player) {
             if (player.getDirection().x < 0) {
@@ -138,7 +131,6 @@ public class Animation extends Component {
                     animations.get(currentAnimation).frames.get(index),
                     x, y, w, h,
                     null);
-            System.out.println("Drawing " + currentAnimation + " " + index + " " + animations.get(currentAnimation).frames.size() + " ");
         }
 
     }

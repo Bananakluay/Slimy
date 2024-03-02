@@ -40,9 +40,6 @@ public class EntityManager {
     }
 
     public void ready() {
-        // for (Entity entity : entities) {
-        // entity.ready();
-        // }
         for (Entity entity : entitiesToAdd) {
             entity.ready();
         }

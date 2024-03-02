@@ -2,8 +2,6 @@ package main;
 
 import javax.swing.JPanel;
 
-import scene.SceneManager;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;

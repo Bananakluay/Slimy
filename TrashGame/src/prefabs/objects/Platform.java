@@ -60,9 +60,6 @@ public class Platform extends Entity {
 
     @Override
     public void draw(Graphics g) {
-        // Graphics2D g2d = (Graphics2D) g;
-        // super.draw(g);
-        // g2d.draw(this.getComponent(Bounds.class).boundsX);
         g.drawImage(
                 img,
                 (int) this.getPosition().x,
