@@ -18,7 +18,8 @@ import prefabs.player.Player;
 import utils.Vec2;
 
 public class Spike extends Entity implements Behavior {
-    BufferedImage img;
+    
+    private BufferedImage img;
 
     public Spike(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.55f)), TRAP);

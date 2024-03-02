@@ -16,13 +16,13 @@ import utils.Constants.Layer;
 
 public class TileBlock extends Entity {
 
-    List<BufferedImage> tileImg;
-    List<BufferedImage> outerTileImg;
+    private List<BufferedImage> tileImg;
+    private List<BufferedImage> outerTileImg;
 
-    int colorCode;
+    private int colorCode;
 
-    boolean option;
-    boolean randomOuter = false;
+    private boolean option;
+    private boolean randomOuter = false;
 
     Random rand;
 

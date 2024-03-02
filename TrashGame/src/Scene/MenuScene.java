@@ -21,9 +21,9 @@ import utils.Vec2;
 
 public class MenuScene extends Scene {
     private GuiLayer guiLayer;
-    List<BufferedImage> bg;
-    Animation background;
-    Transform bgTransform;
+    private List<BufferedImage> bg;
+    private Animation background;
+    private Transform bgTransform;
 
     public MenuScene() {
         init();

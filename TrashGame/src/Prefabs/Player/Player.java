@@ -29,7 +29,7 @@ public class Player extends Entity {
     private Vec2 direction;
     
     protected AnimationStatus animationStatus = AnimationStatus.IDLE;
-    Controller controller;
+    private Controller controller;
 
     public Player(String name, Transform transform) {
         super(name, transform, Layer.PLAYER);
@@ -49,7 +49,7 @@ public class Player extends Entity {
     }
 
     public boolean isActive() {
-        return this.getComponent(Controller.class).isActive;
+        return this.getComponent(Controller.class).isActive();
     }
 
     public boolean isAlive() {
@@ -100,7 +100,7 @@ public class Player extends Entity {
     }
 
     public void setActive(boolean value) {
-        this.getComponent(Controller.class).isActive = value;
+        this.getComponent(Controller.class).setActive(value);
     }
 
     public void setMobility(float walkSpeed, float jumpForce) {

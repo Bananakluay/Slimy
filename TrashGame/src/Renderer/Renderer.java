@@ -10,9 +10,9 @@ import entity.Entity;
 
 public class Renderer {
 
-    public Map<Integer, List<Entity>> layers;
-    public Map<Integer, List<Entity>> entitiesToRemove = new HashMap<>();
-    public Map<Integer, List<Entity>> entitiesToAdd = new HashMap<>();
+    private Map<Integer, List<Entity>> layers;
+    private Map<Integer, List<Entity>> entitiesToRemove = new HashMap<>();
+    private Map<Integer, List<Entity>> entitiesToAdd = new HashMap<>();
 
     public Renderer() {
         layers = new HashMap<>();

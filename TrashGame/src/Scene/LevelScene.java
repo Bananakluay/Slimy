@@ -45,7 +45,7 @@ public class LevelScene extends Scene {
     private static GuiLayer guiPlayingScene;
     private static GuiLayer guiPauseScene;
 
-    BufferedImage bg = AssetPool.getBufferedImage("TrashGame/res/assets/Background/background.png", 64, 36);
+    private BufferedImage bg = AssetPool.getBufferedImage("TrashGame/res/assets/Background/background.png", 64, 36);
 
     public LevelScene() {
         LevelManager.get();

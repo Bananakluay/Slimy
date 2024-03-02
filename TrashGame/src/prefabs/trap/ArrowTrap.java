@@ -19,10 +19,10 @@ import utils.Vec2;
 
 public class ArrowTrap extends Entity implements Behavior {
 
-    int direction; // 0 : left, 1 : right, 2 : up, 3 : down
+    private int direction; // 0 : left, 1 : right, 2 : up, 3 : down
 
-    boolean dubug = false;
-    Random rand;
+    private boolean dubug = false;
+    private Random rand;
 
     public ArrowTrap(String name, float x, float y) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE)), TRAP);

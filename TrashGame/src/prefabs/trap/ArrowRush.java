@@ -22,10 +22,10 @@ import utils.Vec2;
 
 public class ArrowRush extends Entity implements Behavior {
 
-    BufferedImage img;
-    float speed = SCALE * 3;
-    int direction; // 0 : left, 1 : right, 2 : up, 3 : down
-    Rigidbody rb;
+    private BufferedImage img;
+    private float speed = SCALE * 3;
+    private int direction; // 0 : left, 1 : right, 2 : up, 3 : down
+    private Rigidbody rb;
 
     public ArrowRush(String name, float x, float y, int direction) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.3f)), 5);

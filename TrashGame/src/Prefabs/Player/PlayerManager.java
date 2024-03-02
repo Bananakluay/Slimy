@@ -108,8 +108,8 @@ public class PlayerManager {
         Entity yellowSlime = slimes.get(YELLOW);
 
         // check is within range
-        if (!greenSlime.getComponent(Bounds.class).interectBounds
-                .intersects(yellowSlime.getComponent(Bounds.class).interectBounds)) {
+        if (!greenSlime.getComponent(Bounds.class).getInterectBounds()
+                .intersects(yellowSlime.getComponent(Bounds.class).getInterectBounds())) {
             return;
         }
 

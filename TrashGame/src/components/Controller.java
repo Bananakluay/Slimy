@@ -21,7 +21,7 @@ public class Controller extends Component {
     private float walkSpeed = WALK_SPEED;
     private float jumpForce = JUMP_FORCE;
 
-    public boolean isActive = true;
+    private boolean isActive = true;
 
     private final int JUMP_DURATION = 40;
     private int jumpDurationCounter = 0;

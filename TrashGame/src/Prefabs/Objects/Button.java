@@ -17,7 +17,7 @@ import utils.Vec2;
 
 public class Button extends Entity implements Behavior {
 
-    List<BufferedImage> img;
+    private List<BufferedImage> img;
     private boolean isActive = false;
 
     public Button(String name, float x, float y) {

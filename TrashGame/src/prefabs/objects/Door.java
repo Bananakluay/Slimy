@@ -1,4 +1,4 @@
-package prefabs.exits;
+package prefabs.objects;
 
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
@@ -14,12 +14,11 @@ import entity.Entity;
 import entity.EntityType;
 import interaction.Behavior;
 import level.LevelManager;
-import scene.LevelScene;
 import utils.Vec2;
 
 public class Door extends Entity implements Behavior {
-    public LevelScene levelScene;
-    List<BufferedImage> img;
+    
+    private List<BufferedImage> img;
 
     public Door(String name, float x, float y) {
         super(

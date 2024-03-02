@@ -48,14 +48,13 @@ public class Detector extends Component implements Behavior {
 
             Bounds bounds = entity.getComponent(Bounds.class);
 
-            boolean intersected = bound.intersects(bounds.boundsX) || bound.intersects(bounds.boundsY);
+            boolean intersected = bound.intersects(bounds.getBoundsX()) || bound.intersects(bounds.getBoundsY());
 
             if (isOneShot && !activated) {
                 oneShotMode(entity, intersected);
             } else if (!isOneShot) {
                 continueMode(entity, intersected);
             }
-
 
             // Add entities that are not in the scene to entitiesToRemove
             if (LevelScene.getEntityManager().getEntity(entity.getId()) == null) {
@@ -75,8 +74,8 @@ public class Detector extends Component implements Behavior {
             interaction.remove(entityToRemove.getId());
         }
 
-    }   
-    
+    }
+
     private void oneShotMode(Entity entity, boolean intersected) {
         if (intersected) {
             activated = true;
@@ -106,13 +105,16 @@ public class Detector extends Component implements Behavior {
     }
 
     @Override
-    public void activateOneShot(Entity entity) {}
+    public void activateOneShot(Entity entity) {
+    }
 
     @Override
-    public void activateOn(Entity entity) {}
+    public void activateOn(Entity entity) {
+    }
 
     @Override
-    public void activateOff() {}
+    public void activateOff() {
+    }
 
     public void setBehavior(Behavior behavior) {
         this.behavior = behavior;

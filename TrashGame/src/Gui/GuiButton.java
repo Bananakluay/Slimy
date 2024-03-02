@@ -3,7 +3,6 @@ package gui;
 import static gui.GuiButtonStatus.*;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;

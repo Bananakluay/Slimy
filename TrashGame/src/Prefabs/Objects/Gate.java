@@ -20,9 +20,9 @@ import utils.Constants.Layer;
 
 public class Gate extends Entity {
 
-    List<BufferedImage> img;
-    List<Button> buttons;
-    boolean allButtonActive = false;
+    private List<BufferedImage> img;
+    private List<Button> buttons;
+    private boolean allButtonActive = false;
     private float timer = 0f; // Default to 0, meaning initially closed
     private final float openingSpeed = 0.01f; // Adjust speed as needed
     private int currentIndex = 0;

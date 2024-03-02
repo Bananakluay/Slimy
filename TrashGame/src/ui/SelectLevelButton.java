@@ -13,13 +13,14 @@ import gui.GuiText;
 import level.LevelManager;
 import scene.SceneManager;
 import scene.Scenes;
+import utils.FileLoader;
 import utils.Vec2;
 
 public class SelectLevelButton extends GuiButton implements ClickListener {
 
-    int levelNumber;
-    Font font;
-    private int highestReachedLevel = LevelManager.loadLastPlayedLevel();
+    private int levelNumber;
+    private Font font;
+    private int highestReachedLevel = FileLoader.loadLastPlayedLevel();
 
     public SelectLevelButton(String name, Vec2 position, Vec2 scale, int levelNumber) {
         super(

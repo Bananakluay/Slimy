@@ -10,8 +10,9 @@ import utils.Vec2;
 public class Entity {
 
     private String name;
-    public int uid = -1;
     protected EntityType type = EntityType.NONE;
+    
+    public int uid = -1;
     public static int ID_COUNTER = 0;
 
     protected Transform transform;

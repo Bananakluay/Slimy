@@ -8,9 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import entity.Entity;
 import entity.EntityType;
@@ -21,14 +19,14 @@ import scene.LevelScene;
 import utils.Vec2;
 
 public class Bounds extends Component {
-    public Color color;
+    private Color color;
 
-    public Rectangle2D.Float boundsX;
-    public Rectangle2D.Float boundsY;
+    private Rectangle2D.Float boundsX;
+    private Rectangle2D.Float boundsY;
 
-    public Rectangle2D.Float interectBounds;
+    private Rectangle2D.Float interectBounds;
 
-    public float interectBoundsoffset = 10 * SCALE;
+    private float interectBoundsoffset = 10 * SCALE;
 
     private boolean DEBUG = false;
 
@@ -95,7 +93,7 @@ public class Bounds extends Component {
         return results;
     }
 
-    public Rectangle2D.Float getBoundsX(float x, float y, float w, float h) {
+    private Rectangle2D.Float getBoundsX(float x, float y, float w, float h) {
         float bx = x;
         float by = y + 2;
         float bw = w;
@@ -104,7 +102,7 @@ public class Bounds extends Component {
         return new Rectangle2D.Float(bx, by, bw, bh);
     }
 
-    protected Rectangle2D.Float getBoundsY(float x, float y, float w, float h) {
+    private Rectangle2D.Float getBoundsY(float x, float y, float w, float h) {
         float bx = x + 2;
         float by = y;
         float bw = w - 4;
@@ -113,6 +111,18 @@ public class Bounds extends Component {
         return new Rectangle2D.Float(bx, by, bw, bh);
     }
 
+    public Rectangle2D.Float getBoundsX() {
+        return boundsX;
+    }
+
+    public Rectangle2D.Float getBoundsY() {
+        return boundsY;
+    }
+
+    public Rectangle2D.Float getInterectBounds() {
+        return interectBounds;
+    }
+    
     public void setColor(Color color) {
         this.color = color;
     }

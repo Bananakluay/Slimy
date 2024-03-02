@@ -17,9 +17,9 @@ import java.util.List;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
 import entity.Entity;
-import prefabs.exits.Door;
 import prefabs.objects.Box;
 import prefabs.objects.Button;
+import prefabs.objects.Door;
 import prefabs.objects.Gate;
 import prefabs.objects.Platform;
 import prefabs.objects.TileBlock;
@@ -50,7 +50,7 @@ public class Level {
 
 	}
 
-	public void init() {
+	private void init() {
 		// generateLevelData();
 		loadTileBlock(); // RED [0 , 21]
 
@@ -70,7 +70,7 @@ public class Level {
 
 	}
 
-	public void loadTileBlock() {
+	private void loadTileBlock() {
 		// RED [0 , 21]
 		List<BufferedImage> tileSet = AssetPool.getBufferedImageList(
 				"TrashGame/res/assets/Tile/wall.png",
@@ -107,7 +107,7 @@ public class Level {
 		}
 	}
 
-	public void loadPlatform() {
+	private void loadPlatform() {
 		// RED [32 , 34]
 
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
@@ -131,7 +131,7 @@ public class Level {
 
 	}
 
-	public void loadButton() {
+	private void loadButton() {
 		// RED : 40 | GREEN : posX Gate | BLUE : posY Gate
 		int i = 0;
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
@@ -154,7 +154,7 @@ public class Level {
 		}
 	}
 
-	public void loadTrap() {
+	private void loadTrap() {
 		// RED : 255 | GREEN [0 , 10] | BLUE : 80
 		// 0 : spike
 		// 1 : bomb button
@@ -199,7 +199,7 @@ public class Level {
 		}
 	}
 
-	public void loadBox() {
+	private void loadBox() {
 		// RED : 220 | GREEN : 150 | BLUE : 90
 
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
@@ -216,9 +216,9 @@ public class Level {
 		}
 	}
 
-	int maxButton = 10;
+	private int maxButton = 10;
 
-	public void loadGate() {
+	private void loadGate() {
 		// RED : 100 | GREEN : 100 | BLUE : 100
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
@@ -244,7 +244,7 @@ public class Level {
 		}
 	}
 
-	public void loadDoor() {
+	private void loadDoor() {
 		// RED : 255 | GREEN : 255 | BLUE : 255
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {
@@ -266,7 +266,7 @@ public class Level {
 		}
 	}
 
-	public void loadPlayer() {
+	private void loadPlayer() {
 		// RED : 100 | GREEN : 255 | BLUE : 100
 		for (int row = 0; row < imgLvlData.getHeight(); row++) {
 			for (int col = 0; col < imgLvlData.getWidth(); col++) {

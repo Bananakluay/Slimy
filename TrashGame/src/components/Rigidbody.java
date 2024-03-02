@@ -17,9 +17,9 @@ import dataStructure.Transform;
 
 public class Rigidbody extends Component {
 
+    public Vec2 velocity;
     public float mass;
     public float friction;
-    public Vec2 velocity;
 
     private List<Vec2> forces = new ArrayList<>();
 
@@ -178,6 +178,14 @@ public class Rigidbody extends Component {
     public void setExtrmumXSpeed(float speed) {
         this.extremumSpeed = speed;
     }
+
+    
+    
+    public void setMass(float mass) {
+        this.mass = mass;
+    }
+
+  
 
     @Override
     public String toString() {

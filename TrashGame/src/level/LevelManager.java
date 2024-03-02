@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import main.Game;
 import scene.LevelScene;
+import utils.FileLoader;
 
 public class LevelManager {
     private static boolean reset = false, resett = true;
@@ -29,8 +30,6 @@ public class LevelManager {
     private static int lvlindex = 0;
     private static int highestReachedLevel = 1;
 
-    private static final String SAVE_FILE_PATH = "TrashGame/src/save/save.dat";
-
     private LevelManager() {
         init();
     }
@@ -44,7 +43,7 @@ public class LevelManager {
 
     private void init() {
         buildAllLevels();
-        highestReachedLevel = loadLastPlayedLevel();
+        highestReachedLevel = FileLoader.loadLastPlayedLevel();
         System.out.println("Highest reached level: " + highestReachedLevel);
     }
 
@@ -103,7 +102,7 @@ public class LevelManager {
             loadLevels();
             updateHighestReachedLevel();
             if (lvlindex + 1 > highestReachedLevel)
-                saveLastPlayedLevel(lvlindex + 1);
+                FileLoader.saveLastPlayedLevel(lvlindex + 1);
         } else {
             System.out.println("Game complete");
         }
@@ -185,35 +184,6 @@ public class LevelManager {
                 // Additional logic if needed after fade-in
             }
         }
-    }
-
-    public static void saveLastPlayedLevel(int level) {
-        try {
-            DataOutputStream dos = new DataOutputStream(new FileOutputStream(SAVE_FILE_PATH));
-            System.out.println("Saving level: " + level);
-            dos.writeInt(level);
-            dos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static int loadLastPlayedLevel() {
-        int level = 1;
-        try {
-            DataInputStream dis = new DataInputStream(new FileInputStream(SAVE_FILE_PATH));
-            if (dis.available() >= Integer.BYTES) {
-                level = dis.readInt();
-            } else {
-                System.out.println("Save file is empty or corrupted. Defaulting to level 1.");
-            }
-            dis.close();
-        } catch (EOFException e) {
-            System.out.println("End of file reached unexpectedly. Defaulting to level 1.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return level;
     }
 
     public static boolean isFadingOut() {
