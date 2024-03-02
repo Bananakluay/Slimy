@@ -39,9 +39,6 @@ public class GuiButton extends GuiComponent{
         }else{
             status = IDLE;
         }
-  
-        // System.out.println(status);
-        
     }
 
     @Override
@@ -56,7 +53,7 @@ public class GuiButton extends GuiComponent{
                 g.drawImage(imgs[1], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
                 break;
             case PRESSED:
-                if (imgs.length >= 3) { // Check if PRESSED state image exists
+                if (imgs.length >= 3) {
                     g.drawImage(imgs[2], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
                 }else{
                     g.drawImage(imgs[1], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
@@ -68,7 +65,7 @@ public class GuiButton extends GuiComponent{
         
     }
 
-    
+
     @Override
     public void onClick() {
         if(clicker != null){
