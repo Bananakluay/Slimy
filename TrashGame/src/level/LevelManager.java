@@ -58,6 +58,9 @@ public class LevelManager {
                 return;
             }
             if (!fadingOut) {
+                System.out.println(lvlindex);
+
+                System.out.println("TrashGame/res/lvls/" + Map.get(lvlindex));
                 new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
                 running_level = true;
                 fadingIn = true;
@@ -71,12 +74,17 @@ public class LevelManager {
                 return;
             }
             if (!fadingOut) {
+                System.out.println(lvlindex);
+
+                System.out.println("TrashGame/res/lvls/" + Map.get(lvlindex));
                 new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
                 running_level = true;
                 fadingIn = true;
             }
         } else if (first) {
             System.out.println("firsty");
+            System.out.println(lvlindex);
+            System.out.println("TrashGame/res/lvls/" + Map.get(lvlindex));
             new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
             first = false;
             running_level = true;

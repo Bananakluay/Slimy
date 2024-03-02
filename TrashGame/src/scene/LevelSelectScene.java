@@ -111,7 +111,7 @@ public class LevelSelectScene extends Scene {
         for (int j = 0; j < row; j++) {
             for (int i = 0; i < col; i++) {
                 int levelNumber = i + j * col + page * (row * col) + 1;
-
+                System.out.println(levelNumber);
                 float posX = initPosX + i * buttonSpacingX;
                 float posY = initPosY + j * buttonSpacingY;
 
