@@ -13,6 +13,7 @@ import utils.Vec2;
 import static utils.Constants.Game.GAME_HEIGHT;
 import static utils.Constants.Game.GAME_WIDTH;
 import static utils.Constants.Game.SCALE;
+import static utils.Constants.Game.TILES_SIZE;
 
 public class WinScene extends Scene{
     private GuiLayer guiLayer;
@@ -27,8 +28,8 @@ public class WinScene extends Scene{
 
         GuiButton backButton = new GuiButton( /* gen option button */
                 "backButton",
-                new Vec2(GAME_WIDTH - (50f * SCALE), GAME_HEIGHT * 0.84f), // position
-                new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+                new Vec2((GAME_WIDTH - (16f * SCALE * 3)) / 2, GAME_HEIGHT * 0.6f), // position
+                new Vec2(16f * SCALE * 3, 16f * SCALE * 3),
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/BackToMenuButton.png", 16, 16),
                 () -> SceneManager.changeScene(Scenes.MENU_SCENE));
                 
@@ -54,8 +55,8 @@ public class WinScene extends Scene{
         GuiText.drawString(
                 g,
                 "YOU WIN!",
-                new Vec2((float) (GAME_WIDTH / 2), GAME_HEIGHT / 2),
-                Color.BLACK,
+                new Vec2((float) (GAME_WIDTH / 2) , (GAME_HEIGHT / 2) - 64),
+                Color.WHITE,
                 AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", (int) (32 * SCALE * 4)));
 
         if (guiLayer != null)
