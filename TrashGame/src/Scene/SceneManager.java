@@ -50,6 +50,10 @@ public class SceneManager {
                 System.out.println("LEVEL SELECT SCENE");
                 currentScene = new LevelSelectScene();
                 break;
+            case WIN_SCENE:
+                System.out.println("LEVEL SELECT SCENE");
+                currentScene = new WinScene();
+                break;
             default:
                 break;
         }

@@ -2,14 +2,17 @@ package scene;
 
 import static utils.Constants.Game.*;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import dataStructure.AssetPool;
 import gui.GuiButton;
 import gui.GuiLayer;
+import gui.GuiText;
 import ui.SelectLevelButton;
 import utils.Vec2;
+import level.LevelManager;
 
 public class LevelSelectScene extends Scene {
 
@@ -91,7 +94,8 @@ public class LevelSelectScene extends Scene {
             currentPage++;
             levelSelectGuiLayer.clear();
             loadLevelButtons(currentPage);
-        } else {
+        } 
+        else {
             levelSelectGuiLayer.clear();
             loadLevelButtons(currentPage);
         }
@@ -125,6 +129,8 @@ public class LevelSelectScene extends Scene {
             }
         }
     }
+
+    
 
     public void drawBackGround(Graphics g) {
         g.drawImage(

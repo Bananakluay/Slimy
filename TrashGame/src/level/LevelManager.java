@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import main.Game;
 import scene.LevelScene;
+import scene.SceneManager;
+import scene.Scenes;
 
 public class LevelManager {
     private static boolean reset = false, resett = true;
@@ -27,7 +29,7 @@ public class LevelManager {
     private static ArrayList<String> Map = new ArrayList<>();
 
     private static int lvlindex = 0;
-    private static int highestReachedLevel = 1;
+    private static int highestReachedLevel = 20;
 
     private static final String SAVE_FILE_PATH = "TrashGame/src/save/save.dat";
 
@@ -105,7 +107,8 @@ public class LevelManager {
             if (lvlindex + 1 > highestReachedLevel)
                 saveLastPlayedLevel(lvlindex + 1);
         } else {
-            System.out.println("Game complete");
+            updateHighestReachedLevel();
+            SceneManager.changeScene(Scenes.WIN_SCENE);
         }
     }
 

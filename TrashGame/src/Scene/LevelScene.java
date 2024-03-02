@@ -156,8 +156,16 @@ public class LevelScene extends Scene {
                 AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ResetButton.png", 16, 16), // change png later
                 () -> LevelManager.resetLevel());
 
+        // GuiButton skipButton = new GuiButton( /* gen option button */
+        //         "skipButton",
+        //         new Vec2((float) (GAME_WIDTH - (38f * SCALE) * 13.25), GAME_HEIGHT * 0.4f), // position
+        //         new Vec2(16f * SCALE * 2, 16f * SCALE * 2),
+        //         AssetPool.getBufferedImageList("TrashGame/res/assets/ui/ResetButton.png", 16, 16), // change png later
+        //         () -> LevelManager.loadNextLevels());
+
         guiPlayingScene.addGuiComponent(pauseButton);
         guiPlayingScene.addGuiComponent(resetButton);
+        // guiPlayingScene.addGuiComponent(skipButton);
     }
 
     // Gui pause scene----------------------------------------------

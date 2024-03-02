@@ -70,7 +70,6 @@ public class SelectLevelButton extends GuiButton implements ClickListener {
             }
 
         }
-
     }
 
     @Override
@@ -84,7 +83,8 @@ public class SelectLevelButton extends GuiButton implements ClickListener {
     }
 
     private boolean isLock() {
-        return levelNumber > highestReachedLevel;
+        //return levelNumber > highestReachedLevel;
+        return levelNumber > LevelManager.getHighestReachedLevel();
     }
 
 }

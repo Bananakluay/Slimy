@@ -21,7 +21,6 @@ public class GuiText {
         y = (y - fm.getHeight() / 2) + fm.getAscent();
 
         g.drawString(text, x, y);
-
     }
 
 }
