@@ -10,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-
 import components.Animation;
 import dataStructure.AssetPool;
 import dataStructure.Transform;
@@ -75,8 +74,7 @@ public class MenuScene extends Scene {
 
     @Override
     public void gui(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
+        // g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
         // g.drawImage(
         // bg.get(0),
         // 0,
@@ -88,7 +86,7 @@ public class MenuScene extends Scene {
                 g,
                 "Slimey",
                 new Vec2(GAME_WIDTH / 2, GAME_HEIGHT * 0.1f),
-                Color.BLACK,
+                Color.WHITE,
                 AssetPool.getFont("TrashGame/res/assets/fonts/m3x6.ttf", (int) (32 * SCALE * 4)));
         if (guiLayer != null)
             guiLayer.render(g);

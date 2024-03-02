@@ -115,12 +115,12 @@ public class LevelScene extends Scene {
             g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
             guiPauseScene.render(g);
 
-            g.setColor(Color.BLACK);
-            g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
-            g.drawLine((GAME_WIDTH / 2) - 175, 0, (GAME_WIDTH / 2) - 175, GAME_HEIGHT);
-            // draw center
-            g.drawLine((GAME_WIDTH / 2) + 175, 0, (GAME_WIDTH / 2) + 175, GAME_HEIGHT);
-            // draw center
+            // g.setColor(Color.BLACK);
+            // g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
+            // g.drawLine((GAME_WIDTH / 2) - 175, 0, (GAME_WIDTH / 2) - 175, GAME_HEIGHT);
+            // // draw center
+            // g.drawLine((GAME_WIDTH / 2) + 175, 0, (GAME_WIDTH / 2) + 175, GAME_HEIGHT);
+            // // draw center
 
             drawPauseGui(g);
         }

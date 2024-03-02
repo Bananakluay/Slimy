@@ -94,7 +94,8 @@ public class LevelManager {
             next = true;
             loadLevels();
             updateHighestReachedLevel();
-            saveLastPlayedLevel(lvlindex + 1);
+            if(lvlindex + 1 > highestReachedLevel)
+                saveLastPlayedLevel(lvlindex + 1);
         } else {
             System.out.println("Game complete");
         }

@@ -10,7 +10,8 @@ import java.util.List;
 
 import main.Game;
 import utils.Vec2;
-public class GuiButton extends GuiComponent{
+
+public class GuiButton extends GuiComponent {
 
     private ClickListener clicker;
     protected BufferedImage[] imgs;
@@ -25,18 +26,18 @@ public class GuiButton extends GuiComponent{
         init();
     }
 
-    public void init(){}
+    public void init() {
+    }
 
-
-    @Override 
+    @Override
     public void update() {
-        if(hovering){
-            if(Game.MI.isHeld(MouseEvent.BUTTON1)){
+        if (hovering) {
+            if (Game.MI.isHeld(MouseEvent.BUTTON1)) {
                 status = PRESSED;
-            }else{
+            } else {
                 status = HOVERING;
             }
-        }else{
+        } else {
             status = IDLE;
         }
     }
@@ -44,31 +45,30 @@ public class GuiButton extends GuiComponent{
     @Override
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(bounds);
+        // g2d.draw(bounds);
         switch (status) {
             case IDLE:
-                g.drawImage(imgs[0], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
+                g.drawImage(imgs[0], (int) position.x, (int) position.y, (int) scale.x, (int) scale.y, null);
                 break;
             case HOVERING:
-                g.drawImage(imgs[1], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
+                g.drawImage(imgs[1], (int) position.x, (int) position.y, (int) scale.x, (int) scale.y, null);
                 break;
             case PRESSED:
                 if (imgs.length >= 3) {
-                    g.drawImage(imgs[2], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
-                }else{
-                    g.drawImage(imgs[1], (int)position.x, (int)position.y,(int)scale.x, (int)scale.y, null);
+                    g.drawImage(imgs[2], (int) position.x, (int) position.y, (int) scale.x, (int) scale.y, null);
+                } else {
+                    g.drawImage(imgs[1], (int) position.x, (int) position.y, (int) scale.x, (int) scale.y, null);
                 }
                 break;
             default:
                 break;
         }
-        
-    }
 
+    }
 
     @Override
     public void onClick() {
-        if(clicker != null){
+        if (clicker != null) {
             clicker.onClick();
         }
     }

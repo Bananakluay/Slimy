@@ -21,6 +21,7 @@ public class LevelSelectScene extends Scene {
     private int maxPage = 1;
     private int gridSpacing = (int) (GAME_WIDTH / 12);
     private BufferedImage bg = AssetPool.getBufferedImage("TrashGame/res/assets/Background/background.png", 64, 36);
+
     public LevelSelectScene() {
         init();
     }
@@ -110,7 +111,6 @@ public class LevelSelectScene extends Scene {
         for (int j = 0; j < row; j++) {
             for (int i = 0; i < col; i++) {
                 int levelNumber = i + j * col + page * (row * col) + 1;
-                System.out.println(levelNumber);
 
                 float posX = initPosX + i * buttonSpacingX;
                 float posY = initPosY + j * buttonSpacingY;
@@ -140,20 +140,20 @@ public class LevelSelectScene extends Scene {
 
     @Override
     public void gui(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
+        // g.setColor(Color.BLACK);
+        // g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
 
-        // grid
-        g.setColor(Color.LIGHT_GRAY);
-        int numLines = 12;
-        int spacing = (int) (GAME_WIDTH / (numLines));
-        for (int i = 0; i < numLines; i++) {
-            int x = i * spacing;
-            g.drawLine(x, 0, x, GAME_HEIGHT);
-        }
-        for (int y = 0; y <= GAME_HEIGHT; y += gridSpacing) {
-            g.drawLine(0, y, GAME_WIDTH, y);
-        }
+        // // grid
+        // g.setColor(Color.LIGHT_GRAY);
+        // int numLines = 12;
+        // int spacing = (int) (GAME_WIDTH / (numLines));
+        // for (int i = 0; i < numLines; i++) {
+        // int x = i * spacing;
+        // g.drawLine(x, 0, x, GAME_HEIGHT);
+        // }
+        // for (int y = 0; y <= GAME_HEIGHT; y += gridSpacing) {
+        // g.drawLine(0, y, GAME_WIDTH, y);
+        // }
 
         if (levelSelectGuiLayer != null)
             levelSelectGuiLayer.render(g);

@@ -5,7 +5,6 @@ import dataStructure.Transform;
 import prefabs.player.Player;
 import utils.Vec2;
 
-import static prefabs.player.AnimationStatus.*;
 import static utils.Constants.Game.*;
 import static utils.Constants.Player.*;
 
@@ -13,7 +12,6 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import components.Animation;
-import components.Controller;
 
 public class TinySlime extends Player {
 
@@ -48,7 +46,6 @@ public class TinySlime extends Player {
     @Override
     public void update() {
         super.update();
-        System.out.println(animationStatus);
         switch (animationStatus) {
             case IDLE:
                 animation.play("IDLE");
