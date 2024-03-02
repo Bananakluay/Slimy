@@ -36,7 +36,6 @@ public class GuiLayer {
             } catch (ConcurrentModificationException ingore) {}
     }
 
-
     public void addGuiComponent(GuiComponent c){
         this.guiComponents.add(c);
     }
