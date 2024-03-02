@@ -41,6 +41,11 @@ public class Controller extends Component {
 
     @Override
     public void update() {
+        if (!player.isAlive()) {
+            player.setAnimation(DEAD);
+            return;
+        }
+
         if (!isActive)
             return;
         // Walk

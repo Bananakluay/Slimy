@@ -38,20 +38,17 @@ public class TinySlime extends Player {
         animation.setScale(1.6f);
         animation.setOffset((int) (-4 * SCALE), (int) (-11 * SCALE + 1)); // 3.75
         animation.addAnimation("IDLE", 100, frames.subList(0, 2), false);
-        animation.addAnimation("WALK", 20, frames.subList(8, 10), false);
-        animation.addAnimation("JUMP", 100, frames.subList(18, 19), false);
-        animation.addAnimation("FALL", 100, frames.subList(21, 22), false);
+        animation.addAnimation("WALK", 20, frames.subList(3, 5), false);
+        animation.addAnimation("JUMP", 100, frames.subList(6, 7), false);
+        animation.addAnimation("FALL", 100, frames.subList(7, 8), false);
+        animation.addAnimation("DEAD", 100, frames.subList(9, 11), false);
         animation.play("IDLE");
     }
 
     @Override
     public void update() {
         super.update();
-
-        if (!this.getComponent(Controller.class).isActive()) {
-            animationStatus = IDLE;
-        }
-
+        System.out.println(animationStatus);
         switch (animationStatus) {
             case IDLE:
                 animation.play("IDLE");
@@ -64,6 +61,9 @@ public class TinySlime extends Player {
                 break;
             case FALLING:
                 animation.play("FALL");
+                break;
+            case DEAD:
+                animation.play("DEAD");
                 break;
             default:
                 break;

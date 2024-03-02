@@ -25,6 +25,7 @@ public class ArrowRush extends Entity implements Behavior {
     BufferedImage img;
     float speed = SCALE * 3;
     int direction; // 0 : left, 1 : right, 2 : up, 3 : down
+    Rigidbody rb;
 
     public ArrowRush(String name, float x, float y, int direction) {
         super(name, new Transform(new Vec2(x, y), new Vec2(TILES_SIZE, TILES_SIZE * 0.3f)), 5);
@@ -60,7 +61,7 @@ public class ArrowRush extends Entity implements Behavior {
         else
             img = AssetPool.getBufferedImage("TrashGame/res/assets/Object/dartleft.png", TILES_SIZE, TILES_SIZE);
 
-        Rigidbody rb = new Rigidbody(0, 0);
+        rb = new Rigidbody(0, 0);
         rb.setExtrmumXSpeed(speed);
         this.addComponent(rb);
 
@@ -79,6 +80,7 @@ public class ArrowRush extends Entity implements Behavior {
         if (entity instanceof Player) {
             Player player = (Player) entity;
             player.die();
+            player.getComponent(Rigidbody.class).addForce(new Vec2(rb.velocity.x, 0));
         }
     }
 
