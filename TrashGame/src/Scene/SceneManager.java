@@ -27,10 +27,14 @@ public class SceneManager {
 
     public static void changeScene(Scenes scene) {
         if (scene == scene.OPTION_SCENE) {
+            currentScene.onDestroy();
+            currentScene = null;
             System.out.println("OPTION Scene");
             currentScene = new OptionScene();
             return;
         } else if (currentScene instanceof OptionScene && scene == scene.MENU_SCENE) {
+            currentScene.onDestroy();
+            currentScene = null;
             System.out.println("Menu Scene");
             currentScene = new MenuScene();
             return;
