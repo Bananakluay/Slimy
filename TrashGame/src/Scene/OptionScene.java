@@ -67,8 +67,6 @@ public class OptionScene extends Scene {
     @Override
     public void gui(Graphics g) {
         drawBackGround(g);
-        g.setColor(Color.BLACK);
-        g.drawLine(GAME_WIDTH / 2, 0, GAME_WIDTH / 2, GAME_HEIGHT); // draw center
 
         GuiText.drawString(
                 g,
