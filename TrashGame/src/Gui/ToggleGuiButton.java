@@ -54,7 +54,7 @@ public class ToggleGuiButton extends GuiComponent{
     @Override
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(bounds);
+        //g2d.draw(bounds);
 
         if(isActive){
             switch (status) {
