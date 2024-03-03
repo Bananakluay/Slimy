@@ -15,11 +15,11 @@ import static utils.Constants.Game.GAME_WIDTH;
 import static utils.Constants.Game.SCALE;
 import static utils.Constants.Game.TILES_SIZE;
 
-public class WinScene extends Scene{
+public class EndScene extends Scene{
     private GuiLayer guiLayer;
     private BufferedImage bg = AssetPool.getBufferedImage("TrashGame/res/assets/Background/background.png", 64, 36);
 
-    public WinScene() {
+    public EndScene() {
         init();
     }
 

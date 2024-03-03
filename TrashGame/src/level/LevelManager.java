@@ -29,12 +29,13 @@ public class LevelManager {
     private static ArrayList<String> Map = new ArrayList<>();
 
     private static int lvlindex = 0;
-    private static int highestReachedLevel = 20;
+    private static int highestReachedLevel = 1;
 
     private static final String SAVE_FILE_PATH = "TrashGame/src/save/save.dat";
 
     private LevelManager() {
         init();
+        System.out.println("size"+ Map.size());
     }
 
     public static LevelManager get() {
@@ -47,6 +48,7 @@ public class LevelManager {
     private void init() {
         buildAllLevels();
         highestReachedLevel = loadLastPlayedLevel();
+
         System.out.println("Highest reached level: " + highestReachedLevel);
     }
 
@@ -61,7 +63,7 @@ public class LevelManager {
             }
             if (!fadingOut) {
                 System.out.println(lvlindex);
-
+                
                 System.out.println("TrashGame/res/lvls/" + Map.get(lvlindex));
                 new Level("TrashGame/res/lvls/" + Map.get(lvlindex));
                 running_level = true;
@@ -108,7 +110,7 @@ public class LevelManager {
                 saveLastPlayedLevel(lvlindex + 1);
         } else {
             updateHighestReachedLevel();
-            SceneManager.changeScene(Scenes.WIN_SCENE);
+            SceneManager.changeScene(Scenes.END_SCENE);
         }
     }
 
@@ -137,6 +139,7 @@ public class LevelManager {
     private static void buildAllLevels() {
         File[] allLevels = GetAllLevels();
         for (File img : allLevels) {
+            System.out.println("img.getname" + img.getName());
             Map.add((String) img.getName());
         }
 
